@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+/* First Mate — "calm ship's-bridge instrument, not cartoon nautical."
+   Tokens are the brief's, verbatim. Always use the token utilities
+   (bg-paper, text-ink-3, font-call, ...) rather than one-off hex values,
+   so a palette tweak stays a one-file change. */
+@theme {
+  --color-ink: #0f2a3d;
+  --color-ink-2: #3a5872;
+  --color-ink-3: #6e869a;
+
+  /* cool chart-paper background — NOT cream */
+  --color-paper: #e9eff1;
+  --color-surface: #fcfdfd;
+  --color-line: #d2dcdf;
+
+  /* navigation blue */
+  --color-deep: #15516f;
+
+  /* brass — HEADS UP flags */
+  --color-signal: #b26a1c;
+  --color-signal-bg: #fbf1e3;
+
+  /* sea teal — the call / confidence */
+  --color-go: #1b6b5f;
+  --color-go-bg: #e5f0ed;
+
+  /* Archivo: brand, UI, labels (sturdy, instrument-like)
+     Newsreader: the operator's call verdicts — the signature move
+     Space Mono: small "instrument readout" labels only. Sparingly. */
+  --font-sans: var(--font-archivo);
+  --font-call: var(--font-newsreader);
+  --font-readout: var(--font-space-mono);
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+/* Visible keyboard focus everywhere — part of the quality floor. */
+:focus-visible {
+  outline: 2px solid var(--color-deep);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
