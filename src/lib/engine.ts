@@ -29,12 +29,15 @@ function cabinRead(ship: CoveredShip, client: ClientProfile): ReadCategory {
     : "on a lower or middle deck, toward the middle of the ship";
 
   if (client.seasick === "yes") {
-    call = `This one matters here — book them ${placement}. Nothing high, nothing forward. That's where the ship moves least.`;
+    call = `This one matters here — book them ${placement}. Nothing high, nothing at either end. That's where the ship moves least.`;
     why =
       "A ship pivots around its center, like a seesaw. The ends rise and fall the most; the middle barely moves. Low and midship is the calmest berth on any hull — it's the first thing you'd tell a nervous first-timer, and the last thing a deck plan will.";
     flags.push(
       `They're prone to seasickness. Avoid ${cabin.motionAvoid} entirely — that's the worst of the pitch and roll.`,
     );
+    for (const also of cabin.motionAlsoAvoid ?? []) {
+      flags.push(also);
+    }
   } else {
     call = `Put them ${placement} — calmest ride, shortest walk to the dining room and the elevators.`;
     why =

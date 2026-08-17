@@ -80,8 +80,15 @@ export type ShipContent = {
      * back to the rule.
      */
     midshipRange?: string;
-    /** Reads as "avoid ___". e.g. "the top decks and the forward third" */
+    /** Reads as "avoid ___ entirely". e.g. "the front and the back of the ship" */
     motionAvoid: string;
+    /**
+     * Further placements to keep a motion-sensitive client out of, where
+     * the reason is something other than pitch and roll — an interior
+     * cabin with no horizon to look at, say. Each entry is a complete
+     * heads-up sentence and becomes its own flag.
+     */
+    motionAlsoAvoid?: string[];
     /** Reads as "that means ___" — pool deck, buffet, nightclub locations. */
     hazardsAboveBelow: string[];
     obstructedViewNotes?: string;

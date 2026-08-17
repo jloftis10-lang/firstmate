@@ -40,11 +40,19 @@ export const carnivalCelebration: ShipContent = {
   ],
 
   cabin: {
-    // midshipRange deliberately omitted. Jimmy's call is the rule, not a
-    // deck range: "lower or middle levels, towards the middle of the ship"
-    // (operator-confirmed, 2026-08-17). The engine states that rather than
-    // the deck numbers I had previously inferred from the deck plan.
-    motionAvoid: "the top decks and anything forward of the atrium",
+    // OPERATOR-CONFIRMED (Jimmy, 2026-08-17): "midship 6-9", off the rule
+    // "lower or middle levels, towards the middle of the ship". This
+    // replaces a range I had inferred from the deck plan.
+    midshipRange: "decks 6 to 9",
+    // OPERATOR-CONFIRMED (Jimmy, 2026-08-17). Corrects the researched
+    // version, which had forward only — the call is both ends.
+    motionAvoid: "the front and the back of the ship",
+    // Recorded as bare calls. Jimmy gave these without a rationale, and
+    // inventing one would put words in the operator's mouth — the "why"
+    // is the moat and has to be his. Ask before filling this in.
+    motionAlsoAvoid: [
+      "Not an interior cabin at the bottom of the ship, and never a porthole room.",
+    ],
     hazardsAboveBelow: [
       "the Lido Marketplace buffet and the pool deck, both aft on 16 and 17",
       "the atrium stage and the late-night comedy club",
