@@ -22,9 +22,12 @@ export type Ship = {
   reviewDue?: string; // freshness date
 
   cabin: {
-    midshipRange: string; // "decks 6–8"
-    motionAvoid: string; // forward third, top decks, etc.
-    hazardsAboveBelow: string[]; // pool deck, buffet, nightclub locations
+    /** Reads as "book them midship, ___". e.g. "decks 8–10" */
+    midshipRange: string;
+    /** Reads as "avoid ___". e.g. "the top decks and the forward third" */
+    motionAvoid: string;
+    /** Reads as "that means ___" — pool deck, buffet, nightclub locations. */
+    hazardsAboveBelow: string[];
     obstructedViewNotes?: string;
     connectingNote?: string;
     elevatorNote?: string;
@@ -64,6 +67,9 @@ export type ClientProfile = {
  * One category of the read. Same three-part shape every time:
  * the call (plain, no hedging), the flags ("Heads up:"), and the why
  * (the operator's reasoning, collapsed by default).
+ *
+ * Flags may use `**double asterisks**` for emphasis; they are rendered as
+ * text, never as HTML.
  *
  * Note what is deliberately absent: any numeric score. A score is more
  * data to weigh and implies a false precision that raises liability.

@@ -9,6 +9,8 @@ const archivo = Archivo({
 
 const newsreader = Newsreader({
   variable: "--font-newsreader",
+  // The lede sets "miss" in italic — the one italic in the design.
+  style: ["normal", "italic"],
   subsets: ["latin"],
 });
 

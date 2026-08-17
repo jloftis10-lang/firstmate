@@ -1,0 +1,221 @@
+import type { ClientProfile, Read, ReadCategory, Ship } from "./types";
+
+/**
+ * The deterministic Confidence Read engine.
+ *
+ * Structured ship data + typed rules in, flagged and reasoned output out.
+ * No LLM anywhere in this file, and no numeric scores — the output is a
+ * plainly-stated call plus the reasoning behind it.
+ *
+ * Every ship-specific detail comes off the Ship record. The reasoning in
+ * the `why` blocks is general operator knowledge and lives here, because
+ * it holds true across hulls.
+ */
+
+/* ------------------------------------------------------------------ *
+ * 01 — Cabin & deck
+ * ------------------------------------------------------------------ */
+
+function cabinRead(ship: Ship, client: ClientProfile): ReadCategory {
+  const { cabin } = ship;
+  const flags: string[] = [];
+  let call: string;
+  let why: string;
+
+  if (client.seasick === "yes") {
+    call = `This one matters here — book them midship and low, ${cabin.midshipRange}. Nothing high, nothing forward. That's where the ship moves least.`;
+    why =
+      "A ship pivots around its center, like a seesaw. The ends rise and fall the most; the middle barely moves. Low and midship is the calmest berth on any hull — it's the first thing you'd tell a nervous first-timer, and the last thing a deck plan will.";
+    flags.push(
+      `They're prone to seasickness. Avoid ${cabin.motionAvoid} entirely — that's the worst of the pitch and roll.`,
+    );
+  } else {
+    call = `Put them midship, ${cabin.midshipRange} — calmest ride, shortest walk to the dining room and the elevators.`;
+    why =
+      "Midship is the sweet spot on any ship: least motion, most central. Even for good sailors it saves them a quarter-mile hike to dinner every night.";
+  }
+
+  if (cabin.hazardsAboveBelow.length > 0) {
+    flags.push(
+      `Check what's directly above and below the cabin. On this ship that means ${joinList(cabin.hazardsAboveBelow)} — chairs get dragged across the floor before 6am, and the bass carries straight down through the deck.`,
+    );
+  }
+
+  if (client.party === "family" && cabin.connectingNote) {
+    flags.push(
+      `If they want connecting rooms, confirm the cabins actually **connect** — an internal door. "Next to each other" on the deck plan is not the same thing, and it's the complaint you'll hear after boarding. ${cabin.connectingNote}`,
+    );
+  }
+
+  if (client.party === "multigen" && cabin.elevatorNote) {
+    flags.push(
+      `Keep the older travelers near a midship elevator bank — but one cabin over, not right beside it. They want the short walk without the ding-and-chatter all evening. ${cabin.elevatorNote}`,
+    );
+  }
+
+  return { call, flags, why };
+}
+
+/* ------------------------------------------------------------------ *
+ * 02 — Money surprises
+ * ------------------------------------------------------------------ */
+
+function moneyRead(ship: Ship, client: ClientProfile): ReadCategory {
+  const { money } = ship;
+  const flags: string[] = [];
+  let call: string;
+  let why: string;
+
+  if (client.itinerary === "sea-days") {
+    const math =
+      money.drinkPackagePrice && money.breakEvenDrinksPerDay
+        ? `at about $${money.drinkPackagePrice} a day it breaks even around ${money.breakEvenDrinksPerDay} drinks, and they'll clear that`
+        : "run the math on a normal day's drinking and it pays for itself";
+    call = `The drink package is worth it on this sailing. Lots of sea days means lots of bar time — ${math}.`;
+    why =
+      "Drink packages only win when people are actually on the ship drinking. Sea-day itineraries keep them aboard, so the break-even is easy to clear. On a port-heavy run it's the opposite.";
+  } else {
+    call =
+      "Skip the blanket drink package here. It's a port-heavy run — they'll be off the ship most days, and it rarely earns back its cost.";
+    why =
+      "A drink package has to be consumed on the ship. When the itinerary pulls them ashore five days out of seven, the daily rate almost never breaks even. Sell it and they feel it was a waste — and they remember who suggested it.";
+  }
+
+  flags.push(
+    `Book specialty dining now, before they board. ${money.specialtyDiningNote} When the client can't get a table they blame you, not the ship.`,
+  );
+
+  if (client.experience === "first") {
+    const rate = money.gratuityPerDayUSD
+      ? ` — around $${money.gratuityPerDayUSD} per person, per day —`
+      : "";
+    flags.push(
+      `Set the gratuity expectation up front. It's auto-added to the folio daily${rate} and first-timers are always surprised by the bill at the end.`,
+    );
+  }
+
+  return { call, flags, why };
+}
+
+/* ------------------------------------------------------------------ *
+ * 03 — Expectation traps
+ * ------------------------------------------------------------------ */
+
+function trapsRead(ship: Ship, client: ClientProfile): ReadCategory {
+  const { traps, cabin } = ship;
+  const flags: string[] = [];
+  let call: string;
+  let why: string;
+
+  if (client.party === "family") {
+    call =
+      "Kid access is the trap on this ship. What the parents picture and what their kids can actually use are two different things — and nobody finds out until day one.";
+    why =
+      "Every line splits kids' programming and thrill rides by age and height, and the cutoffs aren't on the booking page. A parent who was promised the waterpark and gets a crying kid at the rope is a parent who books with someone else next year.";
+    if (traps.kidAgeHeightRules) {
+      flags.push(
+        `Confirm the kids clear the height and age lines **before** you promise anything. ${traps.kidAgeHeightRules} A tall six-year-old still gets turned away at the slide.`,
+      );
+    }
+  } else if (client.party === "multigen") {
+    call =
+      "Watch the walking. This is a big ship, and the distance from a far cabin to the theater or dining room is longer than anyone expects — it wears on older travelers by day three.";
+    why =
+      "Deck plans hide scale. On a vessel this size, 'aft' to 'midship dining' can be a quarter-mile each way. For a multigen group with anyone slower on their feet, cabin placement is really a mobility decision in disguise.";
+    if (cabin.accessibilityNote) {
+      flags.push(
+        `Map their daily route before you book the cabin. ${cabin.accessibilityNote} A great-looking aft suite can mean a punishing walk to everything, every night.`,
+      );
+    }
+  } else {
+    // Deliberately uncounted: the flag list below varies by ship, so the
+    // call must not promise "two things" and then show three.
+    call =
+      "Not many traps on this booking — but don't confirm it before you've glanced at these.";
+    why =
+      "Experienced or not, these catch people on every sailing, because none of them show up clearly at the point of booking.";
+  }
+
+  if (traps.obstructedBalconyDecks) {
+    flags.push(
+      `If you've booked a balcony, confirm it isn't obstructed by a lifeboat — watch ${traps.obstructedBalconyDecks}. The deck plan doesn't always flag it, and an obstructed view is the first thing the client notices.`,
+    );
+  }
+
+  if (client.experience === "first" && traps.embarkationNote) {
+    flags.push(
+      `Walk them through embarkation-day timing. ${traps.embarkationNote} First-timers show up whenever, then wait in a two-hour line — a staggered check-in window is the easiest good impression you'll ever make.`,
+    );
+  }
+
+  for (const other of traps.other ?? []) {
+    flags.push(other);
+  }
+
+  return { call, flags, why };
+}
+
+/* ------------------------------------------------------------------ */
+
+/** Exactly three categories. Do not add a fourth. */
+export function getRead(ship: Ship, client: ClientProfile): Read {
+  return {
+    cabin: cabinRead(ship, client),
+    money: moneyRead(ship, client),
+    traps: trapsRead(ship, client),
+  };
+}
+
+/**
+ * The client-ready summary — warmer register than the operator's read.
+ * This is what the advisor sends, so it carries no jargon and no flags.
+ */
+export function clientSummary(ship: Ship, client: ClientProfile): string {
+  const who =
+    client.party === "family"
+      ? "your crew"
+      : client.party === "multigen"
+        ? "the group"
+        : client.party === "solo"
+          ? "you"
+          : "you two";
+
+  const parts: string[] = [];
+  parts.push(`I've got ${who} set for the ${ship.name}.`);
+
+  parts.push(
+    client.seasick === "yes"
+      ? `I'm putting you midship on a lower deck on purpose — ${ship.cabin.midshipRange} is the steadiest part of the ship, so seasickness shouldn't be an issue.`
+      : `I'm booking you midship, ${ship.cabin.midshipRange}, so you're close to everything and get the smoothest ride.`,
+  );
+
+  parts.push(
+    client.itinerary === "sea-days"
+      ? "With this many sea days, the drink package is genuinely worth it, so I'll add it."
+      : "I'd skip the drink package on this one — you'll be off exploring most days, so it wouldn't pay off.",
+  );
+
+  if (client.party === "family") {
+    parts.push(
+      "I'm double-checking the kids clear the height and age rules for the slides and clubs so there are no surprises on day one.",
+    );
+  }
+
+  if (client.party === "multigen") {
+    parts.push(
+      "I've picked the cabin with the walking in mind, so nobody's hiking the length of the ship to get to dinner.",
+    );
+  }
+
+  parts.push(
+    "I'll also lock in your specialty dining before you sail so you get the nights you want.",
+  );
+
+  return parts.join(" ");
+}
+
+/** "a", "a and b", "a, b and c" */
+function joinList(items: string[]): string {
+  if (items.length <= 1) return items[0] ?? "";
+  return `${items.slice(0, -1).join(", ")} and ${items[items.length - 1]}`;
+}

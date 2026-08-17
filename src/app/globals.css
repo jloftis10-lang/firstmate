@@ -35,8 +35,53 @@
 
 body {
   background: var(--color-paper);
+  background-image: radial-gradient(
+    120% 80% at 50% -10%,
+    #f2f6f7 0%,
+    var(--color-paper) 55%
+  );
   color: var(--color-ink);
   font-family: var(--font-sans);
+}
+
+/* Chevron for the ship select — inlined so it needs no network request. */
+.fm-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%233A5872' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+}
+
+/* "Sounding the depths" — the one deliberately bold moment. */
+@keyframes fm-ping {
+  0% {
+    transform: scale(0.2);
+    opacity: 0.9;
+  }
+  80% {
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+.fm-sonar-ring {
+  animation: fm-ping 1.9s ease-out infinite;
+}
+
+@keyframes fm-rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.fm-rise {
+  animation: fm-rise 0.5s ease both;
 }
 
 /* Visible keyboard focus everywhere — part of the quality floor. */
