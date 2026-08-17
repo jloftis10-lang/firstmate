@@ -22,15 +22,21 @@ function cabinRead(ship: CoveredShip, client: ClientProfile): ReadCategory {
   let call: string;
   let why: string;
 
+  // With a confirmed deck range, name it. Without one, state the rule —
+  // which is what an operator actually says — rather than invent numbers.
+  const placement = cabin.midshipRange
+    ? `midship, ${cabin.midshipRange}`
+    : "on a lower or middle deck, toward the middle of the ship";
+
   if (client.seasick === "yes") {
-    call = `This one matters here — book them midship and low, ${cabin.midshipRange}. Nothing high, nothing forward. That's where the ship moves least.`;
+    call = `This one matters here — book them ${placement}. Nothing high, nothing forward. That's where the ship moves least.`;
     why =
       "A ship pivots around its center, like a seesaw. The ends rise and fall the most; the middle barely moves. Low and midship is the calmest berth on any hull — it's the first thing you'd tell a nervous first-timer, and the last thing a deck plan will.";
     flags.push(
       `They're prone to seasickness. Avoid ${cabin.motionAvoid} entirely — that's the worst of the pitch and roll.`,
     );
   } else {
-    call = `Put them midship, ${cabin.midshipRange} — calmest ride, shortest walk to the dining room and the elevators.`;
+    call = `Put them ${placement} — calmest ride, shortest walk to the dining room and the elevators.`;
     why =
       "Midship is the sweet spot on any ship: least motion, most central. Even for good sailors it saves them a quarter-mile hike to dinner every night.";
   }
@@ -183,10 +189,15 @@ export function clientSummary(ship: CoveredShip, client: ClientProfile): string 
   const parts: string[] = [];
   parts.push(`I've got ${who} set for the ${ship.name}.`);
 
+  const range = ship.content.cabin.midshipRange;
   parts.push(
     client.seasick === "yes"
-      ? `I'm putting you midship on a lower deck on purpose — ${ship.content.cabin.midshipRange} is the steadiest part of the ship, so seasickness shouldn't be an issue.`
-      : `I'm booking you midship, ${ship.content.cabin.midshipRange}, so you're close to everything and get the smoothest ride.`,
+      ? range
+        ? `I'm putting you midship on a lower deck on purpose — ${range} is the steadiest part of the ship, so seasickness shouldn't be an issue.`
+        : "I'm putting you on a lower deck toward the middle of the ship on purpose — that's the steadiest part of the ship, so seasickness shouldn't be an issue."
+      : range
+        ? `I'm booking you midship, ${range}, so you're close to everything and get the smoothest ride.`
+        : "I'm booking you toward the middle of the ship so you're close to everything and get the smoothest ride.",
   );
 
   parts.push(

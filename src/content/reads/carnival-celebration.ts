@@ -40,8 +40,10 @@ export const carnivalCelebration: ShipContent = {
   ],
 
   cabin: {
-    // NOT SOURCED — inferred from the deck plan (cabin decks run 6 upward).
-    midshipRange: "decks 7 to 9",
+    // midshipRange deliberately omitted. Jimmy's call is the rule, not a
+    // deck range: "lower or middle levels, towards the middle of the ship"
+    // (operator-confirmed, 2026-08-17). The engine states that rather than
+    // the deck numbers I had previously inferred from the deck plan.
     motionAvoid: "the top decks and anything forward of the atrium",
     hazardsAboveBelow: [
       "the Lido Marketplace buffet and the pool deck, both aft on 16 and 17",

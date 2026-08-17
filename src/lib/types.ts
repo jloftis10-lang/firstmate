@@ -69,8 +69,17 @@ export type ShipContent = {
   sources?: Source[];
 
   cabin: {
-    /** Reads as "book them midship, ___". e.g. "decks 8–10" */
-    midshipRange: string;
+    /**
+     * Reads as "book them midship, ___" — e.g. "decks 8 to 10".
+     *
+     * Optional on purpose. An operator's real answer is often the rule
+     * rather than the numbers ("lower or middle decks, toward the middle
+     * of the ship"), and that rule is the call. Forcing a deck range here
+     * would manufacture a precision nobody actually has, which is the
+     * same failure as a numeric score. Leave it out and the engine falls
+     * back to the rule.
+     */
+    midshipRange?: string;
     /** Reads as "avoid ___". e.g. "the top decks and the forward third" */
     motionAvoid: string;
     /** Reads as "that means ___" — pool deck, buffet, nightclub locations. */
