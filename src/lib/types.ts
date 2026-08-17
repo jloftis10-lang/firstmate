@@ -42,6 +42,14 @@ export type CruiseLine = {
   ships: { id?: string; name: string; shipClass?: string }[];
 };
 
+/** Where a claim came from, and when it was last looked at. */
+export type Source = {
+  label: string;
+  url: string;
+  /** ISO date the source was checked. Prices and policies go stale fast. */
+  checked: string;
+};
+
 /** The operator's knowledge of a hull. Absent until someone works it up. */
 export type ShipContent = {
   /**
@@ -52,6 +60,13 @@ export type ShipContent = {
    */
   verified: boolean;
   reviewDue?: string; // freshness date
+
+  /**
+   * Where the claims in this record came from. A record with sources is
+   * researched and auditable; a record with none is somebody's memory —
+   * which is fine once `verified` is true and dangerous before.
+   */
+  sources?: Source[];
 
   cabin: {
     /** Reads as "book them midship, ___". e.g. "decks 8–10" */

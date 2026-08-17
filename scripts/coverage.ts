@@ -8,26 +8,43 @@
 import { LINES, SHIPS } from "../src/content/ships";
 
 const verified = SHIPS.filter((s) => s.content?.verified);
-const sample = SHIPS.filter((s) => s.content && !s.content.verified);
+const researched = SHIPS.filter(
+  (s) => s.content && !s.content.verified && s.content.sources?.length,
+);
+const invented = SHIPS.filter(
+  (s) => s.content && !s.content.verified && !s.content.sources?.length,
+);
 
 console.log("");
 console.log(`  ${SHIPS.length} ships · ${LINES.length} lines`);
 console.log(
-  `  ${verified.length} verified · ${sample.length} sample · ${
-    SHIPS.length - verified.length - sample.length
+  `  ${verified.length} verified · ${researched.length} researched · ${
+    invented.length
+  } placeholder · ${
+    SHIPS.length - verified.length - researched.length - invented.length
   } uncharted`,
 );
 console.log("");
 
 if (verified.length > 0) {
-  console.log("  VERIFIED");
+  console.log("  VERIFIED — signed off by an operator");
   for (const s of verified) console.log(`    ✓ ${s.line} · ${s.name}`);
   console.log("");
 }
 
-if (sample.length > 0) {
-  console.log("  SAMPLE — content written, not yet confirmed");
-  for (const s of sample) console.log(`    ~ ${s.line} · ${s.name}`);
+if (researched.length > 0) {
+  console.log("  RESEARCHED — sourced, awaiting sign-off");
+  for (const s of researched) {
+    console.log(
+      `    ? ${s.line} · ${s.name}  (${s.content!.sources!.length} sources)`,
+    );
+  }
+  console.log("");
+}
+
+if (invented.length > 0) {
+  console.log("  PLACEHOLDER — no sources, written to demo the format");
+  for (const s of invented) console.log(`    ! ${s.line} · ${s.name}`);
   console.log("");
 }
 
