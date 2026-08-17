@@ -1,6 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import {
+  isCovered,
+} from "@/lib/types";
 import type {
   ClientProfile,
   Experience,
@@ -8,12 +11,15 @@ import type {
   Party,
   Seasick,
   Ship,
+  CoveredShip,
 } from "@/lib/types";
 import { clientSummary, getRead } from "@/lib/engine";
 import { ReadCard } from "./ReadCard";
 import { ClientSummary } from "./ClientSummary";
 import { Sounding } from "./Sounding";
 import { Wordmark } from "./Wordmark";
+import { ShipPicker } from "./ShipPicker";
+import { NoReadYet } from "./NoReadYet";
 
 const PARTY_OPTIONS: { value: Party; label: string; readout: string }[] = [
   { value: "couple", label: "Couple", readout: "COUPLE" },
@@ -86,7 +92,10 @@ function Segmented<T extends string>({
 }
 
 export function FirstMate({ ships }: { ships: Ship[] }) {
-  const [shipId, setShipId] = useState(ships[0].id);
+  // Default to a ship we can actually read, so the first run shows the product.
+  const [shipId, setShipId] = useState(
+    (ships.find((s) => s.content) ?? ships[0]).id,
+  );
   const [party, setParty] = useState<Party>("couple");
   const [seasick, setSeasick] = useState<Seasick>("no");
   const [experience, setExperience] = useState<Experience>("first");
@@ -120,7 +129,14 @@ export function FirstMate({ ships }: { ships: Ship[] }) {
     }, 1250);
   }
 
+  function reset() {
+    setResult(null);
+    window.scrollTo(0, 0);
+  }
+
   const ship = ships.find((s) => s.id === (result?.shipId ?? shipId))!;
+  const coveredShips = ships.filter((s) => s.content);
+  const coveredCount = coveredShips.length;
 
   return (
     <div className="mx-auto max-w-[640px] px-5 pt-7 pb-20">
@@ -140,26 +156,7 @@ export function FirstMate({ ships }: { ships: Ship[] }) {
             gangway — the way someone who sold these for a living would.
           </p>
 
-          <div className="mb-[22px]">
-            <label
-              htmlFor="ship"
-              className="mb-[9px] block font-readout text-[0.72rem] font-semibold tracking-[0.09em] uppercase text-ink-3"
-            >
-              The ship
-            </label>
-            <select
-              id="ship"
-              value={shipId}
-              onChange={(e) => setShipId(e.target.value)}
-              className="fm-select w-full cursor-pointer rounded-xl border border-line bg-surface px-4 py-3.5 text-base text-ink"
-            >
-              {ships.map((s) => (
-                <option key={s.id} value={s.id}>
-                  {s.line} · {s.name}
-                </option>
-              ))}
-            </select>
-          </div>
+          <ShipPicker ships={ships} value={shipId} onChange={setShipId} />
 
           <Segmented
             label="Who's traveling"
@@ -196,18 +193,21 @@ export function FirstMate({ ships }: { ships: Ship[] }) {
           </button>
 
           <p className="mt-[34px] text-center text-[0.76rem] leading-[1.6] text-ink-3">
-            The reads are sample operator judgment — placeholder text in the
-            right voice, to be replaced with verified, ship-specific knowledge.
+            {coveredCount} of {ships.length} ships carry a read so far. The rest
+            are listed so you can find them, but they&apos;ll say plainly that
+            they aren&apos;t charted yet rather than guess.
+            <br />
+            Existing reads are sample operator judgment — placeholder text in
+            the right voice, to be replaced with verified knowledge.
           </p>
         </section>
+      ) : isCovered(ship) ? (
+        <ReadView ship={ship} client={result} onAgain={reset} />
       ) : (
-        <ReadView
+        <NoReadYet
           ship={ship}
-          client={result}
-          onAgain={() => {
-            setResult(null);
-            window.scrollTo(0, 0);
-          }}
+          covered={coveredShips}
+          onAgain={reset}
         />
       )}
     </div>
@@ -219,7 +219,7 @@ function ReadView({
   client,
   onAgain,
 }: {
-  ship: Ship;
+  ship: CoveredShip;
   client: ClientProfile;
   onAgain: () => void;
 }) {
@@ -253,7 +253,7 @@ function ReadView({
           &nbsp; {bits.join("  ·  ")}
         </p>
 
-        {!ship.verified && (
+        {!ship.content.verified && (
           <p className="mt-2.5 rounded-[9px] border border-signal bg-signal-bg px-3 py-2.5 text-[0.82rem] leading-[1.5] text-ink">
             <span className="mr-2 inline-block rounded-[5px] bg-signal px-1.5 py-[3px] font-readout text-[0.6rem] font-bold tracking-[0.08em] text-white align-[1px]">
               SAMPLE
@@ -269,7 +269,7 @@ function ReadView({
       <ReadCard number="02" category="Money surprises" read={read.money} />
       <ReadCard number="03" category="Expectation traps" read={read.traps} />
 
-      <ClientSummary text={summary} verified={ship.verified} />
+      <ClientSummary text={summary} verified={ship.content.verified} />
 
       <button
         type="button"

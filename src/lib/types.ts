@@ -4,14 +4,46 @@
  * The Confidence Read is produced by a deterministic engine over structured
  * ship data — never by an LLM. An LLM hallucinating a deck number is a
  * lawsuit-shaped risk, and the encoded operator judgment is the moat.
+ *
+ * Two things are deliberately kept apart:
+ *
+ *   - the CATALOG (a ship's line, name and class) — public, factual,
+ *     researchable, and safe to carry for every hull afloat;
+ *   - the READ CONTENT (cabin, money and trap judgment) — the operator
+ *     knowledge, which only exists for ships someone has actually worked.
+ *
+ * A ship in the catalog with no read content returns no read at all. That
+ * is the point: breadth in the picker must never become breadth in the
+ * calls, because a confidence product that is confidently wrong becomes
+ * the exact thing the advisor feared.
  */
 
-/** A structured ship record. One file per ship under src/content/ships. */
-export type Ship = {
+/** Where a line sits in the market — drives grouping in the ship picker. */
+export type LineCategory =
+  | "contemporary"
+  | "premium"
+  | "luxury"
+  | "expedition";
+
+/** A ship as it appears in the picker. Identity only, no judgment. */
+export type ShipIdentity = {
   id: string;
   line: string; // "Royal Caribbean"
   name: string; // "Wonder of the Seas"
   shipClass?: string;
+};
+
+/** One cruise line and its fleet. */
+export type CruiseLine = {
+  id: string;
+  name: string;
+  category: LineCategory;
+  /** `id` is derived from the ship name unless one is given explicitly. */
+  ships: { id?: string; name: string; shipClass?: string }[];
+};
+
+/** The operator's knowledge of a hull. Absent until someone works it up. */
+export type ShipContent = {
   /**
    * False until Jimmy confirms the content against his own operator
    * knowledge. Until it flips true, the UI must visibly mark this ship's
@@ -46,6 +78,18 @@ export type Ship = {
     other?: string[];
   };
 };
+
+/** A catalog ship, with operator content when we have it. */
+export type Ship = ShipIdentity & {
+  content?: ShipContent;
+};
+
+/** A ship we can actually produce a read for. */
+export type CoveredShip = ShipIdentity & { content: ShipContent };
+
+export function isCovered(ship: Ship): ship is CoveredShip {
+  return ship.content !== undefined;
+}
 
 /* The five inputs. Every extra input is friction, and friction kills a
    confidence tool — do not add a sixth without a validated reason. */

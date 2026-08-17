@@ -1,4 +1,4 @@
-import type { Ship } from "@/lib/types";
+import type { ShipContent } from "@/lib/types";
 
 /**
  * SAMPLE CONTENT — verified: false.
@@ -7,11 +7,7 @@ import type { Ship } from "@/lib/types";
  * Deck numbers, prices and rules below are plausible, not confirmed.
  * Replace with real ship-specific knowledge, then flip `verified` to true.
  */
-export const norwegianPrima: Ship = {
-  id: "norwegian-prima",
-  line: "Norwegian",
-  name: "Norwegian Prima",
-  shipClass: "Prima",
+export const norwegianPrima: ShipContent = {
   verified: false,
   reviewDue: "2026-12-31",
 

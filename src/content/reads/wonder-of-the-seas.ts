@@ -1,4 +1,4 @@
-import type { Ship } from "@/lib/types";
+import type { ShipContent } from "@/lib/types";
 
 /**
  * SAMPLE CONTENT — verified: false.
@@ -7,11 +7,7 @@ import type { Ship } from "@/lib/types";
  * Deck numbers, prices and rules below are plausible, not confirmed.
  * Replace with real ship-specific knowledge, then flip `verified` to true.
  */
-export const wonderOfTheSeas: Ship = {
-  id: "wonder-of-the-seas",
-  line: "Royal Caribbean",
-  name: "Wonder of the Seas",
-  shipClass: "Oasis",
+export const wonderOfTheSeas: ShipContent = {
   verified: false,
   reviewDue: "2026-12-31",
 

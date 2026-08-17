@@ -1,4 +1,4 @@
-import type { ClientProfile, Read, ReadCategory, Ship } from "./types";
+import type { ClientProfile, CoveredShip, Read, ReadCategory } from "./types";
 
 /**
  * The deterministic Confidence Read engine.
@@ -16,8 +16,8 @@ import type { ClientProfile, Read, ReadCategory, Ship } from "./types";
  * 01 — Cabin & deck
  * ------------------------------------------------------------------ */
 
-function cabinRead(ship: Ship, client: ClientProfile): ReadCategory {
-  const { cabin } = ship;
+function cabinRead(ship: CoveredShip, client: ClientProfile): ReadCategory {
+  const { cabin } = ship.content;
   const flags: string[] = [];
   let call: string;
   let why: string;
@@ -60,8 +60,8 @@ function cabinRead(ship: Ship, client: ClientProfile): ReadCategory {
  * 02 — Money surprises
  * ------------------------------------------------------------------ */
 
-function moneyRead(ship: Ship, client: ClientProfile): ReadCategory {
-  const { money } = ship;
+function moneyRead(ship: CoveredShip, client: ClientProfile): ReadCategory {
+  const { money } = ship.content;
   const flags: string[] = [];
   let call: string;
   let why: string;
@@ -101,8 +101,8 @@ function moneyRead(ship: Ship, client: ClientProfile): ReadCategory {
  * 03 — Expectation traps
  * ------------------------------------------------------------------ */
 
-function trapsRead(ship: Ship, client: ClientProfile): ReadCategory {
-  const { traps, cabin } = ship;
+function trapsRead(ship: CoveredShip, client: ClientProfile): ReadCategory {
+  const { traps, cabin } = ship.content;
   const flags: string[] = [];
   let call: string;
   let why: string;
@@ -158,7 +158,7 @@ function trapsRead(ship: Ship, client: ClientProfile): ReadCategory {
 /* ------------------------------------------------------------------ */
 
 /** Exactly three categories. Do not add a fourth. */
-export function getRead(ship: Ship, client: ClientProfile): Read {
+export function getRead(ship: CoveredShip, client: ClientProfile): Read {
   return {
     cabin: cabinRead(ship, client),
     money: moneyRead(ship, client),
@@ -170,7 +170,7 @@ export function getRead(ship: Ship, client: ClientProfile): Read {
  * The client-ready summary — warmer register than the operator's read.
  * This is what the advisor sends, so it carries no jargon and no flags.
  */
-export function clientSummary(ship: Ship, client: ClientProfile): string {
+export function clientSummary(ship: CoveredShip, client: ClientProfile): string {
   const who =
     client.party === "family"
       ? "your crew"
@@ -185,8 +185,8 @@ export function clientSummary(ship: Ship, client: ClientProfile): string {
 
   parts.push(
     client.seasick === "yes"
-      ? `I'm putting you midship on a lower deck on purpose — ${ship.cabin.midshipRange} is the steadiest part of the ship, so seasickness shouldn't be an issue.`
-      : `I'm booking you midship, ${ship.cabin.midshipRange}, so you're close to everything and get the smoothest ride.`,
+      ? `I'm putting you midship on a lower deck on purpose — ${ship.content.cabin.midshipRange} is the steadiest part of the ship, so seasickness shouldn't be an issue.`
+      : `I'm booking you midship, ${ship.content.cabin.midshipRange}, so you're close to everything and get the smoothest ride.`,
   );
 
   parts.push(

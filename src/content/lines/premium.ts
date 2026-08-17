@@ -1,0 +1,117 @@
+import type { CruiseLine } from "@/lib/types";
+
+/**
+ * Premium lines — a step up from contemporary, still mainstream enough
+ * that a generalist advisor books them regularly.
+ *
+ * ROSTER SNAPSHOT, not verified fact. See the note in contemporary.ts.
+ */
+export const PREMIUM_LINES: CruiseLine[] = [
+  {
+    id: "princess",
+    name: "Princess Cruises",
+    category: "premium",
+    ships: [
+      { name: "Sun Princess", shipClass: "Sphere" },
+      { name: "Star Princess", shipClass: "Sphere" },
+      { name: "Royal Princess", shipClass: "Royal" },
+      { name: "Regal Princess", shipClass: "Royal" },
+      { name: "Majestic Princess", shipClass: "Royal" },
+      { name: "Sky Princess", shipClass: "Royal" },
+      { name: "Enchanted Princess", shipClass: "Royal" },
+      { name: "Discovery Princess", shipClass: "Royal" },
+      { name: "Grand Princess", shipClass: "Grand" },
+      { name: "Ruby Princess", shipClass: "Grand" },
+      { name: "Emerald Princess", shipClass: "Grand" },
+      { name: "Caribbean Princess", shipClass: "Grand" },
+      { name: "Crown Princess", shipClass: "Grand" },
+      { name: "Coral Princess", shipClass: "Coral" },
+      { name: "Island Princess", shipClass: "Coral" },
+      { name: "Diamond Princess", shipClass: "Diamond" },
+      { name: "Sapphire Princess", shipClass: "Diamond" },
+    ],
+  },
+  {
+    id: "celebrity",
+    name: "Celebrity Cruises",
+    category: "premium",
+    ships: [
+      { name: "Celebrity Edge", shipClass: "Edge" },
+      { name: "Celebrity Apex", shipClass: "Edge" },
+      { name: "Celebrity Beyond", shipClass: "Edge" },
+      { name: "Celebrity Ascent", shipClass: "Edge" },
+      { name: "Celebrity Xcel", shipClass: "Edge" },
+      { name: "Celebrity Solstice", shipClass: "Solstice" },
+      { name: "Celebrity Equinox", shipClass: "Solstice" },
+      { name: "Celebrity Eclipse", shipClass: "Solstice" },
+      { name: "Celebrity Silhouette", shipClass: "Solstice" },
+      { name: "Celebrity Reflection", shipClass: "Solstice" },
+      { name: "Celebrity Millennium", shipClass: "Millennium" },
+      { name: "Celebrity Infinity", shipClass: "Millennium" },
+      { name: "Celebrity Summit", shipClass: "Millennium" },
+      { name: "Celebrity Constellation", shipClass: "Millennium" },
+      { name: "Celebrity Flora", shipClass: "Galapagos" },
+      { name: "Celebrity Xpedition", shipClass: "Galapagos" },
+      { name: "Celebrity Xploration", shipClass: "Galapagos" },
+    ],
+  },
+  {
+    id: "holland-america",
+    name: "Holland America Line",
+    category: "premium",
+    ships: [
+      { name: "Koningsdam", shipClass: "Pinnacle" },
+      { name: "Nieuw Statendam", shipClass: "Pinnacle" },
+      { name: "Rotterdam", shipClass: "Pinnacle" },
+      { name: "Eurodam", shipClass: "Signature" },
+      { name: "Nieuw Amsterdam", shipClass: "Signature" },
+      { name: "Zuiderdam", shipClass: "Vista" },
+      { name: "Oosterdam", shipClass: "Vista" },
+      { name: "Westerdam", shipClass: "Vista" },
+      { name: "Noordam", shipClass: "Vista" },
+      { name: "Volendam", shipClass: "Rotterdam" },
+      { name: "Zaandam", shipClass: "Rotterdam" },
+    ],
+  },
+  {
+    id: "cunard",
+    name: "Cunard",
+    category: "premium",
+    ships: [
+      { name: "Queen Mary 2", shipClass: "Ocean liner" },
+      { name: "Queen Victoria", shipClass: "Vista" },
+      { name: "Queen Elizabeth", shipClass: "Vista" },
+      { name: "Queen Anne", shipClass: "Pinnacle" },
+    ],
+  },
+  {
+    id: "azamara",
+    name: "Azamara",
+    category: "premium",
+    ships: [
+      { name: "Azamara Journey", shipClass: "R" },
+      { name: "Azamara Quest", shipClass: "R" },
+      { name: "Azamara Pursuit", shipClass: "R" },
+      { name: "Azamara Onward", shipClass: "R" },
+    ],
+  },
+  {
+    id: "viking-ocean",
+    name: "Viking",
+    category: "premium",
+    ships: [
+      { name: "Viking Star", shipClass: "Viking Ocean" },
+      { name: "Viking Sea", shipClass: "Viking Ocean" },
+      { name: "Viking Sky", shipClass: "Viking Ocean" },
+      { name: "Viking Sun", shipClass: "Viking Ocean" },
+      { name: "Viking Orion", shipClass: "Viking Ocean" },
+      { name: "Viking Jupiter", shipClass: "Viking Ocean" },
+      { name: "Viking Venus", shipClass: "Viking Ocean" },
+      { name: "Viking Mars", shipClass: "Viking Ocean" },
+      { name: "Viking Neptune", shipClass: "Viking Ocean" },
+      { name: "Viking Saturn", shipClass: "Viking Ocean" },
+      { name: "Viking Vela", shipClass: "Viking Ocean" },
+      { name: "Viking Vesta", shipClass: "Viking Ocean" },
+    ],
+  },
+];

@@ -1,4 +1,4 @@
-import type { Ship } from "@/lib/types";
+import type { ShipContent } from "@/lib/types";
 
 /**
  * SAMPLE CONTENT — verified: false.
@@ -7,11 +7,7 @@ import type { Ship } from "@/lib/types";
  * Deck numbers, prices and rules below are plausible, not confirmed.
  * Replace with real ship-specific knowledge, then flip `verified` to true.
  */
-export const carnivalCelebration: Ship = {
-  id: "carnival-celebration",
-  line: "Carnival",
-  name: "Carnival Celebration",
-  shipClass: "Excel",
+export const carnivalCelebration: ShipContent = {
   verified: false,
   reviewDue: "2026-12-31",
 
@@ -46,8 +42,6 @@ export const carnivalCelebration: Ship = {
     obstructedBalconyDecks: "the lower cabin decks",
     embarkationNote:
       "Arrival appointments are assigned — showing up outside the window means waiting.",
-    other: [
-      "The rollercoaster runs on its own schedule and closes in weather.",
-    ],
+    other: ["The rollercoaster runs on its own schedule and closes in weather."],
   },
 };
