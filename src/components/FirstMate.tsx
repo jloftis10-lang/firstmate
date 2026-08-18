@@ -12,6 +12,7 @@ import type {
   CoveredShip,
 } from "@/lib/types";
 import { clientSummary, getRead } from "@/lib/engine";
+import { sharePath } from "@/lib/share";
 import { ReadCard } from "./ReadCard";
 import { ClientSummary } from "./ClientSummary";
 import { Sounding } from "./Sounding";
@@ -268,7 +269,11 @@ function ReadView({
       <ReadCard number="02" category="Money surprises" read={read.money} />
       <ReadCard number="03" category="Expectation traps" read={read.traps} />
 
-      <ClientSummary text={summary} verified={allVerified} />
+      <ClientSummary
+        text={summary}
+        verified={allVerified}
+        sharePath={sharePath(client)}
+      />
 
       <button
         type="button"

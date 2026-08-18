@@ -6,25 +6,27 @@ type Props = {
   text: string;
   /** When false, the advisor is warned before they send this to a client. */
   verified: boolean;
+  /** Relative path to the client-facing share page for this booking. */
+  sharePath: string;
 };
 
-export function ClientSummary({ text, verified }: Props) {
-  const [copied, setCopied] = useState(false);
+export function ClientSummary({ text, verified, sharePath }: Props) {
+  const [done, setDone] = useState<"text" | "link" | null>(null);
   const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   useEffect(() => () => clearTimeout(timer.current), []);
 
-  async function copy() {
+  async function copy(value: string, kind: "text" | "link") {
     try {
-      await navigator.clipboard.writeText(text);
+      await navigator.clipboard.writeText(value);
     } catch {
       // Clipboard can be blocked (insecure context, denied permission).
       // The text stays on screen and selectable, so the advisor is not stuck.
       return;
     }
-    setCopied(true);
+    setDone(kind);
     clearTimeout(timer.current);
-    timer.current = setTimeout(() => setCopied(false), 1800);
+    timer.current = setTimeout(() => setDone(null), 1800);
   }
 
   return (
@@ -48,18 +50,38 @@ export function ClientSummary({ text, verified }: Props) {
         </p>
       )}
 
-      <button
-        type="button"
-        onClick={copy}
-        aria-live="polite"
-        className={`mt-[13px] w-full cursor-pointer rounded-[11px] border-none p-[13px] text-[0.94rem] font-semibold transition-colors ${
-          copied
-            ? "bg-go text-white"
-            : "bg-[#EAF2F5] text-deep hover:bg-white"
-        }`}
-      >
-        {copied ? "Copied ✓" : "Copy for the client"}
-      </button>
+      <div className="mt-[13px] flex flex-col gap-2 sm:flex-row">
+        <button
+          type="button"
+          onClick={() => copy(text, "text")}
+          aria-live="polite"
+          className={`flex-1 cursor-pointer rounded-[11px] border-none p-[13px] text-[0.94rem] font-semibold transition-colors ${
+            done === "text"
+              ? "bg-go text-white"
+              : "bg-[#EAF2F5] text-deep hover:bg-white"
+          }`}
+        >
+          {done === "text" ? "Copied ✓" : "Copy the text"}
+        </button>
+        <button
+          type="button"
+          onClick={() =>
+            copy(new URL(sharePath, window.location.origin).toString(), "link")
+          }
+          aria-live="polite"
+          className={`flex-1 cursor-pointer rounded-[11px] border p-[13px] text-[0.94rem] font-semibold transition-colors ${
+            done === "link"
+              ? "border-go bg-go text-white"
+              : "border-[#EAF2F5]/40 bg-transparent text-[#EAF2F5] hover:border-[#EAF2F5]"
+          }`}
+        >
+          {done === "link" ? "Link copied ✓" : "Copy a link to send"}
+        </button>
+      </div>
+      <p className="mt-2 text-[0.76rem] leading-[1.5] text-[#9EC4D4]">
+        The link opens a clean page with just this note on it — no flags, no
+        shop talk.
+      </p>
     </div>
   );
 }
