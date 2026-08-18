@@ -54,24 +54,19 @@ you'd say out loud to an advisor on the phone.
 
 ---
 
-## Open questions on the shared risk table
+## Timing on the shared risk table
 
-`src/lib/noise.ts` holds the ranked above/below table. Six of its twelve
-rows already state their timing inside the "what they experience" text —
-buffet is "early breakfast setup", galley is "overnight and early prep",
-nightclub is "late at night", kids areas are "daytime traffic", bar is
-"late crowds", quiet restaurant is "at opening and closing". Four do not:
+`src/lib/noise.ts` carries a time window for every row that needs one.
+Six state it inline in the "what they experience" text — buffet is "early
+breakfast setup", galley "overnight and early prep", nightclub "late at
+night", kids areas "daytime traffic", bar "late crowds", quiet restaurant
+"at opening and closing". The four that didn't now carry an explicit
+`window`, operator-confirmed: pool deck worst early morning, gym all day,
+sports court basketball through the day, theater mostly at night with the
+odd daytime rehearsal.
 
-- **Pool / Lido deck** — the highest-risk row in the table, and the one
-  with no stated timing. Early-morning setup? All day? Evening parties?
-- **Gym** — when does it actually bite? Early morning, all day?
-- **Sports court / running track** — same question.
-- **Theater / show venue** — daytime rehearsals as well as evening shows?
-
-Timing only earns its place in the read if there is a client dimension to
-match it against, and there isn't one today: the five inputs don't ask
-whether someone is a light sleeper or a night owl, and a sixth input needs
-a validated reason. Worth recording, not worth adding an input for yet.
+Spa and other-cabins carry none, and don't need one — they are the two
+low-risk rows.
 
 ## Notes on shape
 

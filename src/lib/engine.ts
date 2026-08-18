@@ -67,7 +67,8 @@ function cabinRead(
       .map(({ h, src }) => {
         const venue = src.venue.charAt(0).toUpperCase() + src.venue.slice(1);
         const where = h.where ? ` (${h.where})` : "";
-        return `**${venue}**${where} — ${src.experience}.`;
+        const when = src.window ? `, ${src.window}` : "";
+        return `**${venue}**${where} — ${src.experience}${when}.`;
       })
       .join(" ");
     flags.push(

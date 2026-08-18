@@ -17,6 +17,15 @@ export type NoiseSource = {
   risk: string;
   /** What the traveler actually experiences, verbatim. */
   experience: string;
+  /**
+   * When it actually bites, where the experience text doesn't already
+   * say. Six of the twelve rows state their timing inline — "early
+   * breakfast setup", "late at night" — and those are left alone rather
+   * than restated here. This field covers the four that didn't.
+   *
+   * OPERATOR-CONFIRMED (Jimmy, 2026-08-17).
+   */
+  window?: string;
 };
 
 export const NOISE_SOURCES: NoiseSource[] = [
@@ -26,6 +35,7 @@ export const NOISE_SOURCES: NoiseSource[] = [
     risk: "Very high",
     experience:
       "chairs scraping, cleaning, footsteps, music, deck parties",
+    window: "worst early morning",
   },
   {
     id: "buffet",
@@ -44,6 +54,7 @@ export const NOISE_SOURCES: NoiseSource[] = [
     venue: "the gym",
     risk: "High",
     experience: "treadmills, dropped weights, classes",
+    window: "all day",
   },
   {
     id: "nightclub",
@@ -56,6 +67,7 @@ export const NOISE_SOURCES: NoiseSource[] = [
     venue: "a sports court or running track",
     risk: "High",
     experience: "bouncing balls, running, stomping",
+    window: "basketball through the day",
   },
   {
     id: "kids",
@@ -68,6 +80,7 @@ export const NOISE_SOURCES: NoiseSource[] = [
     venue: "the theater or a show venue",
     risk: "High",
     experience: "bass, rehearsals, shows",
+    window: "mostly at night, with the odd daytime rehearsal",
   },
   {
     id: "bar",
