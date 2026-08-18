@@ -2,19 +2,61 @@
 
 import { useEffect, useRef, useState } from "react";
 
+import type { ClientProfile } from "@/lib/types";
+import { shareParams } from "@/lib/share";
+
 type Props = {
   text: string;
   /** When false, the advisor is warned before they send this to a client. */
   verified: boolean;
   /** Relative path to the client-facing share page for this booking. */
   sharePath: string;
+  /** The booking, so the email route can rebuild the summary server-side. */
+  client: ClientProfile;
 };
 
-export function ClientSummary({ text, verified, sharePath }: Props) {
+export function ClientSummary({ text, verified, sharePath, client }: Props) {
   const [done, setDone] = useState<"text" | "link" | null>(null);
+  const [emailOpen, setEmailOpen] = useState(false);
+  const [to, setTo] = useState("");
+  const [sendState, setSendState] = useState<
+    { kind: "idle" } | { kind: "sending" } | { kind: "sent" } | { kind: "error"; message: string }
+  >({ kind: "idle" });
   const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   useEffect(() => () => clearTimeout(timer.current), []);
+
+  async function send(e: React.FormEvent) {
+    e.preventDefault();
+    setSendState({ kind: "sending" });
+    try {
+      const res = await fetch("/api/send-summary", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          to,
+          ...Object.fromEntries(shareParams(client)),
+        }),
+      });
+      if (res.ok) {
+        setSendState({ kind: "sent" });
+        setTo("");
+        return;
+      }
+      const data = (await res.json().catch(() => null)) as {
+        error?: string;
+      } | null;
+      setSendState({
+        kind: "error",
+        message: data?.error ?? "The email didn't go through. Try again in a moment.",
+      });
+    } catch {
+      setSendState({
+        kind: "error",
+        message: "The email didn't go through. Try again in a moment.",
+      });
+    }
+  }
 
   async function copy(value: string, kind: "text" | "link") {
     try {
@@ -82,6 +124,52 @@ export function ClientSummary({ text, verified, sharePath }: Props) {
         The link opens a clean page with just this note on it — no flags, no
         shop talk.
       </p>
+
+      {!emailOpen ? (
+        <button
+          type="button"
+          onClick={() => setEmailOpen(true)}
+          className="mt-3 cursor-pointer border-none bg-transparent p-0 font-readout text-[0.72rem] font-bold tracking-[0.05em] uppercase text-[#9EC4D4] hover:text-[#EAF2F5]"
+        >
+          Or email it to them →
+        </button>
+      ) : (
+        <form onSubmit={send} className="mt-3">
+          <div className="flex flex-col gap-2 sm:flex-row">
+            <input
+              type="email"
+              required
+              value={to}
+              onChange={(e) => setTo(e.target.value)}
+              placeholder="client@example.com"
+              aria-label="Client's email address"
+              className="flex-1 rounded-[11px] border border-[#EAF2F5]/40 bg-white/10 px-4 py-3 text-[0.94rem] text-[#F1F7F9] placeholder-[#9EC4D4] outline-none focus:border-[#EAF2F5]"
+            />
+            <button
+              type="submit"
+              disabled={sendState.kind === "sending"}
+              className={`cursor-pointer rounded-[11px] border-none px-6 py-3 text-[0.94rem] font-semibold transition-colors disabled:opacity-60 ${
+                sendState.kind === "sent"
+                  ? "bg-go text-white"
+                  : "bg-[#EAF2F5] text-deep hover:bg-white"
+              }`}
+            >
+              {sendState.kind === "sending"
+                ? "Sending…"
+                : sendState.kind === "sent"
+                  ? "Sent ✓"
+                  : "Send"}
+            </button>
+          </div>
+          <p className="mt-2 text-[0.76rem] leading-[1.5] text-[#9EC4D4]" aria-live="polite">
+            {sendState.kind === "error"
+              ? sendState.message
+              : sendState.kind === "sent"
+                ? "On its way. It reads exactly like the link page."
+                : "Sends this note from First Mate, exactly as it reads above."}
+          </p>
+        </form>
+      )}
     </div>
   );
 }

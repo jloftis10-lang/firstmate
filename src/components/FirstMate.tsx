@@ -273,6 +273,7 @@ function ReadView({
         text={summary}
         verified={allVerified}
         sharePath={sharePath(client)}
+        client={client}
       />
 
       <button
