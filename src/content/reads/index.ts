@@ -3,7 +3,6 @@ import { wonderOfTheSeas } from "./wonder-of-the-seas";
 import { carnivalCelebration } from "./carnival-celebration";
 import { carnivalMardiGras } from "./carnival-mardi-gras";
 import { norwegianPrima } from "./norwegian-prima";
-import { CARNIVAL_FLEET_READS } from "./carnival-fleet";
 import { carnivalJubilee } from "./carnival-jubilee";
 import {
   carnivalHorizon,
@@ -33,6 +32,20 @@ import {
   carnivalPride,
   carnivalSpirit,
 } from "./carnival-spirit-class";
+import {
+  carnivalFirenze,
+  carnivalVenezia,
+} from "./carnival-italian-class";
+import { carnivalLuminosa } from "./carnival-luminosa";
+import { carnivalSplendor } from "./carnival-splendor";
+import {
+  carnivalElation,
+  carnivalParadise,
+} from "./carnival-fantasy-class";
+import {
+  carnivalAdventure,
+  carnivalEncounter,
+} from "./carnival-pacific-class";
 
 /**
  * Operator read content, keyed by ship id.
@@ -48,10 +61,6 @@ import {
  * exactly which of its three calls an advisor can act on.
  */
 export const SHIP_READS: Record<string, ShipContent> = {
-  // Money and traps for the rest of the Carnival fleet, no cabin block.
-  // Listed first so a hand-written file below always wins.
-  ...CARNIVAL_FLEET_READS,
-
   "carnival-jubilee": carnivalJubilee,
   "carnival-vista": carnivalVista,
   "carnival-horizon": carnivalHorizon,
@@ -75,6 +84,16 @@ export const SHIP_READS: Record<string, ShipContent> = {
   "carnival-pride": carnivalPride,
   "carnival-legend": carnivalLegend,
   "carnival-miracle": carnivalMiracle,
+
+  "carnival-venezia": carnivalVenezia,
+  "carnival-firenze": carnivalFirenze,
+  "carnival-luminosa": carnivalLuminosa,
+  "carnival-splendor": carnivalSplendor,
+
+  "carnival-elation": carnivalElation,
+  "carnival-paradise": carnivalParadise,
+  "carnival-adventure": carnivalAdventure,
+  "carnival-encounter": carnivalEncounter,
 
   "wonder-of-the-seas": wonderOfTheSeas,
   "carnival-celebration": carnivalCelebration,

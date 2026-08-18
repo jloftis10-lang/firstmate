@@ -29,7 +29,9 @@ export const CONTEMPORARY_LINES: CruiseLine[] = [
       { name: "Carnival Dream", shipClass: "Dream" },
       { name: "Carnival Magic", shipClass: "Dream" },
       { name: "Carnival Breeze", shipClass: "Dream" },
-      { name: "Carnival Splendor", shipClass: "Splendor" },
+      // A Costa Concordia-class hull completed for Carnival in 2008 —
+      // commonly miscalled a stretched Conquest. Its sisters are all Costa.
+      { name: "Carnival Splendor", shipClass: "Concordia" },
       { name: "Carnival Conquest", shipClass: "Conquest" },
       { name: "Carnival Glory", shipClass: "Conquest" },
       { name: "Carnival Valor", shipClass: "Conquest" },
@@ -48,8 +50,10 @@ export const CONTEMPORARY_LINES: CruiseLine[] = [
       { name: "Carnival Radiance", shipClass: "Sunshine" },
       { name: "Carnival Elation", shipClass: "Fantasy" },
       { name: "Carnival Paradise", shipClass: "Fantasy" },
-      { name: "Carnival Adventure", shipClass: "Pacific" },
-      { name: "Carnival Encounter", shipClass: "Pacific" },
+      // Grand-class Princess hulls (Golden Princess 2001, Star Princess
+      // 2002) via P&O Australia, moved to the Carnival brand in 2025.
+      { name: "Carnival Adventure", shipClass: "Grand (ex-P&O)" },
+      { name: "Carnival Encounter", shipClass: "Grand (ex-P&O)" },
     ],
   },
   {

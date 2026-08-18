@@ -91,41 +91,6 @@ export const AQUA_TUNNEL_TALL_RULES =
   "The Aqua Tunnel slide needs 51 inches on this ship, higher than the 42 inches it runs elsewhere in the fleet.";
 
 /**
- * Money and traps for a Carnival hull nobody has walked yet.
- *
- * Everything here is line-wide policy: the gratuity rate, the Cheers!
- * price, the youth age bands, the Arrival Appointment. All of it is
- * researched and sourced, none of it is operator-confirmed.
- *
- * The cabin block is the fleet-wide baseline: Jimmy's general rules,
- * which he confirmed hold across the fleet. Ship-specific detail —
- * deck defaults, hazard locations, obstructions, elevators — is absent
- * until someone works the hull, and nothing here pretends otherwise.
- */
-export function carnivalFleetContent(opts: {
-  /** Ship or class-specific ride minimums, appended to the fleet rules. */
-  thrillRules?: string;
-  otherTraps?: string[];
-}): ShipContent {
-  const kidRules = [opts.thrillRules, CARNIVAL_SLIDE_RULES, CARNIVAL_KIDS_RULES]
-    .filter(Boolean)
-    .join(" ");
-
-  return {
-    reviewDue: "2027-02-01",
-    sources: CARNIVAL_SOURCES,
-    cabin: carnivalCabinBaseline(),
-    money: CARNIVAL_MONEY,
-    traps: {
-      verified: false,
-      kidAgeHeightRules: kidRules,
-      embarkationNote: CARNIVAL_EMBARKATION,
-      ...(opts.otherTraps ? { other: opts.otherTraps } : {}),
-    },
-  };
-}
-
-/**
  * Minor placement, effective for bookings made from 1 February 2025.
  *
  * This is the one an advisor loses a booking over. Putting a young child
@@ -176,11 +141,14 @@ export const EXCEL_ACCESSIBILITY_NOTE =
 
 /**
  * The fleet-wide cabin baseline — Jimmy's general rules, which he
- * confirmed hold across the Carnival fleet (2026-08-18). Ship-specific
- * detail (deck defaults, hazard locations, obstructions, elevator banks,
- * mobility layout) is deliberately absent until each hull gets worked up:
- * the baseline is the operator's general judgment, not a claim about any
- * particular deck plan.
+ * confirmed hold across the Carnival fleet (2026-08-18).
+ *
+ * Nothing uses this right now: every hull in the fleet has been worked up
+ * to a class file with its own decks, so there is no ship left that needs
+ * the generic answer. It stays because the content is operator-confirmed
+ * general judgment rather than scaffolding — when Carnival announces a
+ * new hull, this is what that ship gets on day one, before anyone has
+ * seen a deck plan.
  */
 export function carnivalCabinBaseline(): NonNullable<ShipContent["cabin"]> {
   return {

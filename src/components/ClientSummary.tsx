@@ -99,8 +99,9 @@ export function ClientSummary({
 
       {!verified && (
         <p className="mt-3 rounded-[9px] border border-signal/50 bg-signal/15 px-3 py-2.5 text-[0.8rem] leading-[1.45] text-[#F6E4CB]">
-          This ship&apos;s content is unverified sample data. Check it against
-          what you know before you send this to a client.
+          Not everything behind this summary is signed off yet — the unsigned
+          parts are researched, not an operator&apos;s call. Check it against
+          what you know before you send it to a client.
         </p>
       )}
 

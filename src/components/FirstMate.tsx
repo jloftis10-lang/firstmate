@@ -142,6 +142,12 @@ export function FirstMate({
   const ship = ships.find((s) => s.id === (result?.shipId ?? shipId))!;
   const coveredShips = ships.filter((s) => s.content);
   const coveredCount = coveredShips.length;
+  // Signed end to end — all three blocks confirmed by an operator. The rest
+  // carry researched content with the unsigned blocks marked, which is a
+  // weaker and different claim, so the footer states both numbers.
+  const signedCount = coveredShips.filter(
+    (s) => blockStates(s.content!).allVerified,
+  ).length;
 
   return (
     <div className="mx-auto max-w-[640px] px-5 pt-7 pb-20">
@@ -202,8 +208,9 @@ export function FirstMate({
             are listed so you can find them, but they&apos;ll say plainly that
             they aren&apos;t charted yet rather than guess.
             <br />
-            Existing reads are sample operator judgment — placeholder text in
-            the right voice, to be replaced with verified knowledge.
+            {signedCount} are signed off end to end. The others are researched
+            rather than confirmed, and every unsigned call is marked as such on
+            the card it appears on.
           </p>
         </section>
       ) : isCovered(ship) ? (
