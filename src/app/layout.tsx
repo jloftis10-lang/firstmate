@@ -21,9 +21,21 @@ const spaceMono = Space_Mono({
 });
 
 export const metadata: Metadata = {
+  // The production domain. Canonicals, OG tags and share links all derive
+  // from this — keep it in step with the Vercel domain settings.
+  metadataBase: new URL("https://cruiseread.com"),
   title: "First Mate",
   description:
     "A second set of eyes on every cruise booking before your client pays.",
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: "First Mate",
+    description:
+      "A second set of eyes on every cruise booking before your client pays.",
+    url: "https://cruiseread.com",
+    siteName: "First Mate",
+    type: "website",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
