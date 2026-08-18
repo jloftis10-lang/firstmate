@@ -7,6 +7,14 @@ import {
   CARNIVAL_SLIDE_RULES,
   CARNIVAL_SOURCES,
 } from "./carnival-common";
+import {
+  BOTTOM_DECK_NOTE,
+  CONNECTING_RULE,
+  MOTION_RULE,
+  PORTHOLE_STEER_CORE,
+  VIBRATION_RULE,
+  withShipNote,
+} from "./operator-rules";
 
 /**
  * Carnival Splendor — a singleton, and not the ship people assume.
@@ -60,14 +68,15 @@ export const carnivalSplendor: ShipContent = {
     verified: false,
     placementNote:
       "Midship on 7 or 8 — Empress and Verandah — is the band to aim for. Above that it gets busy fast: deck 9 is the Lido and carries cabins on it, deck 10 is Panorama cabins sitting directly under the deck 11 spa complex, and deck 11 has the gym, the aerobics studio, a pool and a children's spray park all on one deck. Below, deck 2 sits under the public sandwich on 3 to 5 — the theatre spans three decks there and the dance club is on 5 — so forward and midship deck 2 is the classic under-the-nightclub cabin.",
-    motionAvoid:
-      "Push hard for midship. Extreme forward is the one to rule out; extreme aft is a negative when there's comparable midship inventory, and more so if vibration also matters to them.",
-    vibrationNote:
-      "Lower decks are generally better for motion, not worse — closer to the waterline. The catch is vibration: a low cabin at the back can still pick up the propulsion, so \"go low\" isn't automatically the right call for a sensitive traveller.",
+    motionAvoid: MOTION_RULE,
+    vibrationNote: VIBRATION_RULE,
     categoryWarnings: [
       "This is a Costa-built hull, not a stretched Conquest, whatever a comparison chart tells you. Don't reason about cabin geometry or venue placement from a Conquest deck plan — it's the wrong ship.",
-      "I'd steer them off a porthole room — it's the cheapest category and they've felt small to me. Carnival's own plan marks the two-porthole cabins with a symbol rather than a separate category name, so read the plan, not just the category code.",
-      "The bottom deck is fine if they're on a budget — that's where the cheap interiors are, and low is generally kinder for motion, not harsher.",
+      withShipNote(
+          PORTHOLE_STEER_CORE,
+          "Carnival's own plan marks the two-porthole cabins with a symbol rather than a separate category name, so read the plan, not just the category code.",
+        ),
+      BOTTOM_DECK_NOTE,
       "The Twister slide runs down from deck 14 and lands in the Thunderball Pool on 11. If a client is in a Panorama cabin on 10, that whole apparatus is directly overhead — it's the single noisiest position on this ship.",
     ],
     hazardsAboveBelow: [
@@ -97,8 +106,7 @@ export const carnivalSplendor: ShipContent = {
     ],
     obstructedViewNotes:
       "Carnival's own deck plan publishes one obstructed group on this ship: category 6E, the Cloud 9 Spa oceanviews on the Panorama deck — cabins 1001, 1002, 1003 and 1004. A different list naming 6201 to 6206, 7201 to 7206 and 9201 to 9203 as \"4J obstructed\" circulates online, but category 4J doesn't exist on Carnival's current plan for this ship, so treat that list as stale rather than a second set of cabins to avoid.",
-    connectingNote:
-      "Never read connecting status off the category or off two cabin numbers being next to each other — only an explicit connecting pair counts.",
+    connectingNote: CONNECTING_RULE,
     minorPlacementRule: CARNIVAL_MINOR_PLACEMENT,
     elevatorNote:
       "Fourteen elevators. I couldn't establish how they split forward, midship and aft, so don't steer anyone to a bank on my say-so — pick the end of the ship where they'll actually spend the week.",

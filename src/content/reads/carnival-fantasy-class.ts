@@ -7,6 +7,12 @@ import {
   CARNIVAL_SLIDE_RULES,
   CARNIVAL_SOURCES,
 } from "./carnival-common";
+import {
+  CONNECTING_RULE,
+  MOTION_RULE,
+  VIBRATION_RULE,
+  withShipNote,
+} from "./operator-rules";
 
 /**
  * Fantasy class: Elation and Paradise (1998) — the last two survivors,
@@ -69,10 +75,8 @@ function fantasyClassContent(ship: "elation" | "paradise"): ShipContent {
       verified: false,
       placementNote:
         "Empress or Atlantic — decks 7 and 8 — midship. The thing to unlearn on this class is that high means quiet: the Lido is on deck 10 and there are two cabin decks ABOVE it, Verandah on 11 and Grand on 14. So booking above the pool puts them above the pool, not away from it. Deck 11 is the one to be most careful with: the forward cabins there share the deck with Camp Ocean, and the entire WaterWorks complex is aft on the same deck.",
-      motionAvoid:
-        "Push hard for midship. Extreme forward is the one to rule out; extreme aft is a negative when there's comparable midship inventory, and more so if vibration also matters to them. This is a small, old hull — motion is more noticeable here than on the big new ships, so the midship rule matters more, not less.",
-      vibrationNote:
-        "Lower decks are generally better for motion, not worse — closer to the waterline. The catch is vibration: a low cabin at the back can still pick up the propulsion, so \"go low\" isn't automatically the right call for a sensitive traveller.",
+      motionAvoid: withShipNote(MOTION_RULE, "This is a small, old hull — motion is more noticeable here than on the big new ships, so the midship rule matters more, not less."),
+      vibrationNote: VIBRATION_RULE,
       categoryWarnings: [
         "Cabin numbers here are letter-prefixed by deck — R, M, U, E, A, V, G — not the four-digit numbers the rest of the fleet uses. If you're used to reading the deck off the first digit, that habit will put someone on the wrong deck. Read the letter.",
         "Category PT is a cabin with two portholes instead of a picture window. No modern Carnival ship has this category at all, so a client who's sailed recently won't be expecting it, and it's a genuinely different room from an oceanview. Check the code before you call anything a window cabin.",
@@ -97,8 +101,7 @@ function fantasyClassContent(ship: "elation" | "paradise"): ShipContent {
       ],
       obstructedViewNotes:
         "Category OB, eight junior suites on the Verandah deck: V21, V23, V25, V27, V30, V34, V38 and V42. The obstruction is rescue boats, water-shuttle boats and their davits sitting directly in front of the balcony, and Carnival's own description says the view is obstructed sitting or standing — not the usual \"stand up and it clears\". There are crew stairs in the mix too. That's a real veto for anyone booking a junior suite for the view.",
-      connectingNote:
-        "Never read connecting status off the category or off two cabin numbers being next to each other — only an explicit connecting pair counts.",
+      connectingNote: CONNECTING_RULE,
       minorPlacementRule: CARNIVAL_MINOR_PLACEMENT,
       accessibilityNote:
         "A small hull, so distances are short — that part helps. What doesn't is the age: this class predates most of the accessible-design conventions the newer ships were built to, and I found nothing reliable on the elevator layout here at all. Treat a mobility booking on this class as needing the accessible deck plan checked cabin by cabin rather than reasoned from a rule.",

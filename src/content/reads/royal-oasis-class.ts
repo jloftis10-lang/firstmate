@@ -9,6 +9,12 @@ import {
   ROYAL_MONEY,
   ROYAL_SOURCES,
 } from "./royal-common";
+import {
+  CONNECTING_RULE,
+  MOTION_RULE,
+  VIBRATION_RULE,
+  withShipNote,
+} from "./operator-rules";
 
 /**
  * Oasis class: Oasis (2009), Allure (2010), Harmony (2016), Symphony
@@ -99,10 +105,8 @@ function oasisClassContent(ship: OasisShip): ShipContent {
       verified: false,
       placementNote:
         "Midship, and the deck to actually rule out is 14 — it sits directly beneath the deck 15 pool, and crews drag deck chairs across it early. Cabins run from deck 3 up to 12, skip 13 entirely, then pick up again from 14 to 17 where the loft suites are. The pool deck on 15 and the sports and Windjammer deck on 16 sit above the main cabin block but below the suite decks, so \"high up\" means different things on this ship depending which end of it you're on.",
-      motionAvoid:
-        "Push hard for midship. Extreme forward is the one to rule out; extreme aft is a negative when there's comparable midship inventory, and more so if vibration also matters to them.",
-      vibrationNote:
-        "Lower decks are generally better for motion, not worse — closer to the waterline. The catch is vibration: a low cabin at the back can still pick up the propulsion, so \"go low\" isn't automatically the right call for a sensitive traveller. These hulls carry four stabilisers rather than the usual two and the sheer size damps a lot — but the low-and-midship rule still applies, it just starts from a calmer baseline.",
+      motionAvoid: MOTION_RULE,
+      vibrationNote: withShipNote(VIBRATION_RULE, "These hulls carry four stabilisers rather than the usual two and the sheer size damps a lot — but the low-and-midship rule still applies, it just starts from a calmer baseline."),
       categoryWarnings: [
         "The neighbourhood balconies are the decision on this class, and the two are not the same product. Boardwalk balconies face the open-air AquaTheater — shows run as late as 10:30 and the bass carries, and the lower the deck the worse it is. Central Park is genuinely quieter; nothing is staged there, just evening live music.",
         "About Central Park: you'll hear that those cabins get restaurant noise from the park below. I could not find a single source that documents it, so I'd stop repeating it — talking a client out of a good cabin on a rumour costs them the booking they wanted.",
@@ -129,8 +133,7 @@ function oasisClassContent(ship: OasisShip): ShipContent {
       ],
       obstructedViewNotes:
         "Deck 6 is the lifeboat band and it's the best-documented obstruction on the class: six boats a side forward block the downward view from roughly 6136 to 6224 on port and 6536 to 6624 on starboard, and three a side aft affect 6282 and aft on port, 6682 and aft on starboard. The hump cabins are exempt. There's a second group of Boardwalk-side obstructed cabins up on deck 14, but the two published lists of those disagree with each other, so confirm those on the booking screen rather than from me.",
-      connectingNote:
-        "Never read connecting status off the category or off two cabin numbers being next to each other — only an explicit connecting pair counts.",
+      connectingNote: CONNECTING_RULE,
       minorPlacementRule: ROYAL_MINOR_PLACEMENT,
       elevatorNote:
         "This is the one to plan around on a ship this size: the banks are forward and aft, roughly a dozen cars each, and there is no midship bank at all. On an 1,100-foot hull that means a real walk from a midship cabin to a lift no matter which way they turn. Six more cars serve the top suite decks separately. For anyone slower on their feet, book them near one end and match it to where they'll spend the week.",

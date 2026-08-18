@@ -8,6 +8,12 @@ import {
   NCL_MONEY,
   NCL_SOURCES,
 } from "./ncl-common";
+import {
+  CONNECTING_RULE,
+  MOTION_RULE,
+  VIBRATION_RULE,
+  withShipNote,
+} from "./operator-rules";
 
 /**
  * The three NCL singletons: Sun (2001), Sky (1999), Spirit (1998).
@@ -87,10 +93,8 @@ function sunContent(): ShipContent {
       verified: false,
       placementNote:
         "Midship on 9 or 10. Deck 11 is the one to steer off on this ship, and it's squeezed from both directions: it carries cabins alongside the pools and the gym on its own deck, and deck 12 directly above holds the basketball and volleyball court, the golf net, the Spinnaker Lounge and four specialty restaurants. That's a genuinely bad sandwich. Cabins run decks 4 to 11.",
-      motionAvoid:
-        "Push hard for midship. Extreme forward is the one to rule out; extreme aft is a negative when there's comparable midship inventory, and more so if vibration also matters to them. Nothing is documented about how this hull rides and I'm not going to infer it from the tonnage.",
-      vibrationNote:
-        "Lower decks are generally better for motion, not worse — closer to the waterline. The catch is vibration: a low cabin at the back can still pick up the propulsion, so \"go low\" isn't automatically the right call for a sensitive traveller.",
+      motionAvoid: withShipNote(MOTION_RULE, "Nothing is documented about how this hull rides and I'm not going to infer it from the tonnage."),
+      vibrationNote: VIBRATION_RULE,
       categoryWarnings: [
         "Deck 11 is the trap here. It looks like a good high deck with balconies, and it has a sports court and four restaurants directly overhead plus the pools and the gym on its own level. If a client wants quiet, put them on 9 or 10 midship instead.",
         "There are no purpose-built solo studios on this ship.",
@@ -113,8 +117,7 @@ function sunContent(): ShipContent {
       ],
       obstructedViewNotes:
         "No obstructed-cabin list is published for this ship. NCL's generic guarantee language covers it — views may be fully obstructed, partially obstructed, porthole or picture window — which is a warning about guarantee bookings rather than a list of cabins. Pick the cabin rather than taking a guarantee if the view matters.",
-      connectingNote:
-        "Never read connecting status off the category or off two cabin numbers being next to each other — only an explicit connecting pair counts.",
+      connectingNote: CONNECTING_RULE,
       minorPlacementRule: NCL_MINOR_PLACEMENT,
       elevatorNote:
         "Around eight lifts. I couldn't establish the bank layout or find congestion reports.",
@@ -147,10 +150,8 @@ function skyContent(): ShipContent {
       verified: false,
       placementNote:
         "Midship on 8 or 9. Cabins run decks 4 to 10, and deck 11 is a pure Lido deck with no staterooms — pools, the Garden Café, the outdoor café and the Spinnaker Lounge, which doubles as a show venue. That puts everything on deck 10, the top cabin deck. Below that you're sandwiched between cabin decks.",
-      motionAvoid:
-        "Push hard for midship. Extreme forward is the one to rule out; extreme aft is a negative when there's comparable midship inventory, and more so if vibration also matters to them. Nothing is documented about how this hull rides.",
-      vibrationNote:
-        "Lower decks are generally better for motion, not worse — closer to the waterline. The catch is vibration: a low cabin at the back can still pick up the propulsion, so \"go low\" isn't automatically the right call for a sensitive traveller.",
+      motionAvoid: withShipNote(MOTION_RULE, "Nothing is documented about how this hull rides."),
+      vibrationNote: VIBRATION_RULE,
       categoryWarnings: [
         "This ship's balconies were an afterthought, literally. She was laid down as a Costa hull, abandoned half-built when the yard collapsed, bought by NCL and redesigned with two extra cabin decks — and she launched in 1999 with 812 staterooms and not a single balcony. The couple of hundred balconies she has now were retrofitted, so check the specific cabin's dimensions rather than assuming a standard balcony.",
         "The cabin mix here is weighted much more heavily to insides and oceanviews than a client will expect from a modern ship. If a balcony is part of their picture of a cruise, price it early — there aren't many.",
@@ -174,8 +175,7 @@ function skyContent(): ShipContent {
       ],
       obstructedViewNotes:
         "No obstructed-cabin list is published for this ship. NCL's generic guarantee language is all there is — views may be fully obstructed, partially obstructed, porthole or picture window. Pick the cabin rather than taking a guarantee if the view matters.",
-      connectingNote:
-        "Never read connecting status off the category or off two cabin numbers being next to each other — only an explicit connecting pair counts.",
+      connectingNote: CONNECTING_RULE,
       minorPlacementRule: NCL_MINOR_PLACEMENT,
       elevatorNote:
         "Around eight lifts. I couldn't establish the bank layout or find congestion reports.",
@@ -209,10 +209,8 @@ function spiritContent(): ShipContent {
       verified: false,
       placementNote:
         "Midship on 9 or 10. Cabins run 5 through 11 and deck 12 is a pure Lido deck with no staterooms — the pool, the Garden Café, the Spinnaker observation lounge which runs as a disco at night, and the spa. So deck 11 takes all of that from above, and the disco is the part that matters after midnight. Lower down, deck 7 holds the 798-seat theatre and the Bliss Ultra Lounge, and the deck 6 cabins sit alongside the dining rooms.",
-      motionAvoid:
-        "Push hard for midship. Extreme forward is the one to rule out; extreme aft is a negative when there's comparable midship inventory, and more so if vibration also matters to them. Nothing is documented about how this hull rides.",
-      vibrationNote:
-        "Lower decks are generally better for motion, not worse — closer to the waterline. The catch is vibration: a low cabin at the back can still pick up the propulsion, so \"go low\" isn't automatically the right call for a sensitive traveller.",
+      motionAvoid: withShipNote(MOTION_RULE, "Nothing is documented about how this hull rides."),
+      vibrationNote: VIBRATION_RULE,
       categoryWarnings: [
         "The cabins on this ship are small — most standard rooms run about 150 to 170 square feet, which is tight even by the standards of a 1998 build. That's a Star Cruises inheritance: she was built as SuperStar Leo for the Asian market, where the expectations were different. Set the size expectation explicitly, because square footage is the complaint that follows people home.",
         "Deck 11 is the one to steer off. The Spinnaker lounge on 12 runs as a disco at night, directly above those cabins.",
@@ -237,8 +235,7 @@ function spiritContent(): ShipContent {
       ],
       obstructedViewNotes:
         "No obstructed-cabin list is published for this ship. NCL's generic guarantee language is all there is. Pick the cabin rather than taking a guarantee if the view matters.",
-      connectingNote:
-        "Never read connecting status off the category or off two cabin numbers being next to each other — only an explicit connecting pair counts.",
+      connectingNote: CONNECTING_RULE,
       minorPlacementRule: NCL_MINOR_PLACEMENT,
       elevatorNote:
         "Around nine lifts, including the glass ones in the atrium — a Star Cruises design touch that survived the rebuild. I couldn't establish the bank layout.",

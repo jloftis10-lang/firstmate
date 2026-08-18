@@ -8,6 +8,13 @@ import {
   CARNIVAL_SLIDE_RULES,
   CARNIVAL_SOURCES,
 } from "./carnival-common";
+import {
+  BOTTOM_DECK_NOTE,
+  CONNECTING_RULE,
+  MOTION_RULE,
+  PORTHOLE_STEER,
+  VIBRATION_RULE,
+} from "./operator-rules";
 
 /**
  * Venezia and Firenze — the "Fun Italian Style" hulls, built as Costa
@@ -88,14 +95,12 @@ function italianClassContent(ship: "venezia" | "firenze"): ShipContent {
       verified: false,
       placementNote:
         "Midship, and lower than instinct says. Cabins are spread across twelve of the fourteen decks here, and — this is the part that catches people — the pool decks carry cabins too. Decks 10, 11 and 12 all mix staterooms in with the pools, the sports court, WaterWorks and the ropes course, so booking high on this ship books them into the middle of the noise rather than above it. Deck 5 is the other one to check: it carries cabins along the promenade with the theatre and the lounges. Decks 6 to 8 midship are the quiet band.",
-      motionAvoid:
-        "Push hard for midship. Extreme forward is the one to rule out; extreme aft is a negative when there's comparable midship inventory, and more so if vibration also matters to them.",
-      vibrationNote:
-        "Lower decks are generally better for motion, not worse — closer to the waterline. The catch is vibration: a low cabin at the back can still pick up the propulsion, so \"go low\" isn't automatically the right call for a sensitive traveller.",
+      motionAvoid: MOTION_RULE,
+      vibrationNote: VIBRATION_RULE,
       categoryWarnings: [
         "The category names don't match the rest of Carnival. Terrazza is what Havana is elsewhere — the same private-area idea under a different name — and there's a Small Interior category that has no equivalent on a Carnival-built ship. Interiors start around 150 square feet. Read the category description here rather than assuming you know it from the code.",
-        "I'd steer them off a porthole room — it's the cheapest category and they've felt small to me. Check the actual square footage for the specific cabin before you rule it in or out.",
-        "The bottom deck is fine if they're on a budget — that's where the cheap interiors are, and low is generally kinder for motion, not harsher.",
+        PORTHOLE_STEER,
+        BOTTOM_DECK_NOTE,
         "Third-party deck plans for this hull are unreliable. Costa's original deck numbering still circulates alongside Carnival's, and at least one big deck-plan site publishes decks numbered into the twenties for this ship. Work from Carnival's own plan, not a search result, or you'll place someone on a deck that doesn't exist.",
         "Bathrooms have glass shower doors rather than the curtain the rest of the fleet uses. It's a small thing that reads as an upgrade — worth mentioning to a client who's sailed Carnival before.",
       ],
@@ -128,8 +133,7 @@ function italianClassContent(ship: "venezia" | "firenze"): ShipContent {
       obstructedViewNotes: isVenezia
         ? "Two separate groups on Venezia. The deck 3 oceanviews are the bigger one — 3219, 3221, 3222, 3225, 3226, 3229, 3230, 3233, 3234, 3237, 3238 and 3242 are sold as obstructed, with the lifeboat deck sitting on 4 above them. Separately, balconies 9205 and 9206 are standard balconies with an obstructed view. Confirm on the booking screen; this came from a deck-plan aggregator rather than Carnival's own sheet."
         : "No obstruction list surfaced for Firenze specifically. Venezia's is documented — a band of deck 3 oceanviews under the deck 4 lifeboats, plus balconies 9205 and 9206 — and these are near-sisters, so check the same positions. I'm not claiming the same cabins are affected here, because nobody has published that.",
-      connectingNote:
-        "Never read connecting status off the category or off two cabin numbers being next to each other — only an explicit connecting pair counts.",
+      connectingNote: CONNECTING_RULE,
       minorPlacementRule: CARNIVAL_MINOR_PLACEMENT,
       elevatorNote: isVenezia
         ? "Sixteen elevators, and they're destination-dispatch — you pick your deck on a touchscreen in the lobby and it assigns you a car, with no buttons inside. That's worth warning about in advance for anyone who finds new systems stressful, and it changes how you'd brief a client who expects to just press a button. I couldn't establish how the banks split forward, midship and aft."

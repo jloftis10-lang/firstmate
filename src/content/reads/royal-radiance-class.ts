@@ -9,6 +9,12 @@ import {
   ROYAL_MONEY,
   ROYAL_SOURCES,
 } from "./royal-common";
+import {
+  CONNECTING_RULE,
+  MOTION_RULE,
+  VIBRATION_RULE,
+  withShipNote,
+} from "./operator-rules";
 
 /**
  * Radiance class: Radiance (2001), Brilliance (2002), Serenade (2003),
@@ -79,10 +85,8 @@ function radianceClassContent(
       verified: false,
       placementNote:
         "Midship on 8 or 9. Cabins sit on decks 2, 3, 4 and 7 to 10, and the pool and Solarium are up on 11 — above the cabins rather than mixed in with them, which is the older and cleaner arrangement. That makes deck 10 the deck to avoid: every stateroom on it sits under public space, and the aft end under the buffet is the one travelers complain about most. Below deck 10 you're sandwiched between cabin decks.",
-      motionAvoid:
-        "Push hard for midship. Extreme forward is the one to rule out; extreme aft is a negative when there's comparable midship inventory, and more so if vibration also matters to them.",
-      vibrationNote:
-        "Lower decks are generally better for motion, not worse — closer to the waterline. The catch is vibration: a low cabin at the back can still pick up the propulsion, so \"go low\" isn't automatically the right call for a sensitive traveller. Worth knowing on this class: these are gas-turbine ships driving azipods, and the builders made a point of how little vibration that produces compared with a conventional diesel. That's manufacturer material rather than an independent measurement, so I'd treat it as encouraging rather than settled.",
+      motionAvoid: MOTION_RULE,
+      vibrationNote: withShipNote(VIBRATION_RULE, "Worth knowing on this class: these are gas-turbine ships driving azipods, and the builders made a point of how little vibration that produces compared with a conventional diesel. That's manufacturer material rather than an independent measurement, so I'd treat it as encouraging rather than settled."),
       categoryWarnings: [
         "The deck 7 balconies have an unusual quirk worth explaining rather than avoiding. A metal roof extends eight to ten feet out from the base of the balcony to cover the lifeboats below — so the view out to sea is fine, but looking straight down you see roof. Some clients won't care; a photographer will.",
         isSerenade
@@ -110,8 +114,7 @@ function radianceClassContent(
       ],
       obstructedViewNotes:
         "Two specific pairs are documented: 7170 and 7670, partially blocked by the ship's structure, and 9252 and 9652, blocked by the window-washing platform. Separately, all the indented deck 7 balconies carry the lifeboat roof described above, which is a different thing from a blocked view. A much broader claim circulates that a long run of deck 7 cabins is lifeboat-obstructed, but it comes from a low-quality source and contradicts the better-sourced list, so I'd check the booking screen rather than believe either of us.",
-      connectingNote:
-        "Never read connecting status off the category or off two cabin numbers being next to each other — only an explicit connecting pair counts.",
+      connectingNote: CONNECTING_RULE,
       minorPlacementRule: ROYAL_MINOR_PLACEMENT,
       elevatorNote:
         "Nine elevators, which is few by modern standards but this is a much smaller ship. The Centrum bank is glass and faces out over the ocean on the port side — genuinely worth riding rather than something to endure. I couldn't establish the car counts per bank or find any congestion reports.",

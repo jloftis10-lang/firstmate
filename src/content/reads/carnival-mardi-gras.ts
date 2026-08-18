@@ -12,6 +12,13 @@ import {
   EXCEL_FORWARD_OBSTRUCTION,
   EXCEL_OBSTRUCTED_DECKS,
 } from "./carnival-common";
+import {
+  BOTTOM_DECK_NOTE,
+  CONNECTING_RULE,
+  MOTION_RULE,
+  PORTHOLE_STEER,
+  VIBRATION_RULE,
+} from "./operator-rules";
 
 /**
  * RESEARCHED, NOT OPERATOR-CONFIRMED — verified: false.
@@ -89,12 +96,10 @@ export const carnivalMardiGras: ShipContent = {
       "Prioritise midship first. Deck 9 is a strong default on this class because it's the lowest full stateroom deck — but judge the actual cabin rather than working to a fixed deck range.",
     // SHIP MOTION only. Softened from a blanket veto on both ends:
     // forward is the real problem, aft is a relative negative.
-    motionAvoid:
-      "Push hard for midship. Extreme forward is the one to rule out; extreme aft is a negative when there's comparable midship inventory, and more so if vibration also matters to them.",
+    motionAvoid: MOTION_RULE,
     // PROPULSION VIBRATION — a separate concept from motion, and the
     // correction that mattered most in Jimmy's review.
-    vibrationNote:
-      "Lower decks are generally better for motion, not worse — closer to the waterline. The catch is vibration: a low cabin at the back can still pick up the propulsion, so \"go low\" isn't automatically the right call for a sensitive traveller.",
+    vibrationNote: VIBRATION_RULE,
     // OPERATOR-CONFIRMED (Jimmy, 2026-08-17). Both are value/comfort
     // calls rather than motion ones, so they show on every read.
     //
@@ -106,11 +111,11 @@ export const carnivalMardiGras: ShipContent = {
       // DOWNGRADED (Jimmy, 2026-08-17): the size-and-price comparison
       // could not be established for these hulls, so this reads as an
       // operator's steer plus a check rather than a stated ship fact.
-      "I'd steer them off a porthole room — it's the cheapest category and they've felt small to me. Check the actual square footage for the specific cabin before you rule it in or out.",
+      PORTHOLE_STEER,
       // CORRECTED (Jimmy, 2026-08-17): the motion claim here was
       // backwards. Lower is generally BETTER for motion. The vibration
       // point survives, and now lives in cabin.vibrationNote.
-      "The bottom deck is fine if they're on a budget — that's where the cheap interiors are, and low is generally kinder for motion, not harsher.",
+      BOTTOM_DECK_NOTE,
       EXCEL_COVE_NOTE,
     ],
     hazardsAboveBelow: [
@@ -123,8 +128,7 @@ export const carnivalMardiGras: ShipContent = {
     // of mine that named tender boats — wrong. The obstruction is the
     // solid steel forward railing, and it spans six decks not one.
     obstructedViewNotes: EXCEL_FORWARD_OBSTRUCTION,
-    connectingNote:
-      "Never read connecting status off the category or off two cabin numbers being next to each other — only an explicit connecting pair counts.",
+    connectingNote: CONNECTING_RULE,
     minorPlacementRule: CARNIVAL_MINOR_PLACEMENT,
     elevatorNote: EXCEL_ELEVATOR_NOTE,
     accessibilityNote: EXCEL_ACCESSIBILITY_NOTE,

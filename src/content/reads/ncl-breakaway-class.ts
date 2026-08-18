@@ -9,6 +9,11 @@ import {
   NCL_MONEY,
   NCL_SOURCES,
 } from "./ncl-common";
+import {
+  CONNECTING_RULE,
+  MOTION_RULE,
+  VIBRATION_RULE,
+} from "./operator-rules";
 
 /**
  * Breakaway class: Breakaway (2013), Getaway (2014).
@@ -106,10 +111,8 @@ function breakawayContent(ship: BreakawayShip): ShipContent {
               : ""
           } Deck 8 is The Waterfront, the outdoor promenade, and a few balconies there are overlooked from it.`
         : "Midship, decks 10 to 13. Cabins run from deck 5 and then 8 up to 14, and deck 15 is doing two jobs at once — it's the pool deck, the Garden Café and the aqua park, and it also carries the Haven cabins. That makes deck 14 the one sitting under all the noise. Deck 8 is The Waterfront, the outdoor promenade, and a few balconies there are directly overlooked from it.",
-      motionAvoid:
-        "Push hard for midship. Extreme forward is the one to rule out; extreme aft is a negative when there's comparable midship inventory, and more so if vibration also matters to them.",
-      vibrationNote:
-        "Lower decks are generally better for motion, not worse — closer to the waterline. The catch is vibration: a low cabin at the back can still pick up the propulsion, so \"go low\" isn't automatically the right call for a sensitive traveller.",
+      motionAvoid: MOTION_RULE,
+      vibrationNote: VIBRATION_RULE,
       categoryWarnings: [
         "The Waterfront on deck 8 is the class's best feature and the source of its one odd cabin problem. A small run of deck 8 balconies is directly overlooked by people walking the promenade — one passenger called it a fishbowl and kept the curtains closed all week. Separately, some deck 9 aft cabins look down onto the Waterfront's steel roof rather than the water. Neither is sold as obstructed, so it's a deck-plan check rather than a category check.",
         "Club Balcony Suite is the renamed mini-suite. It is not a Haven category and carries no Haven access, and it sits in the lower service-charge band. Clients hear \"suite\" and picture the private complex — be explicit that it isn't that.",
@@ -162,8 +165,7 @@ function breakawayContent(ship: BreakawayShip): ShipContent {
           : ship === "escape"
             ? "The deck 8 oceanviews and balconies on this hull carry partial to full lifeboat obstruction. Beyond that no per-cabin list is published for this ship — and be careful with what circulates, because at least one summary was caught copying Breakaway's cabin numbers onto this ship wholesale. Check the specific cabin."
             : "No per-cabin obstruction list is published for this hull. The class pattern is worth checking against the plan anyway: lifeboat obstruction on the lower balcony decks, and a few deck 8 balconies overlooked from The Waterfront promenade.",
-      connectingNote:
-        "Never read connecting status off the category or off two cabin numbers being next to each other — only an explicit connecting pair counts.",
+      connectingNote: CONNECTING_RULE,
       minorPlacementRule: NCL_MINOR_PLACEMENT,
       elevatorNote: isPlus
         ? "Around sixteen lifts split evenly forward and aft. The documented complaint on this class is lopsided demand rather than the count: the buffet, the Observation Lounge and the theatre all sit forward, so the forward bank takes the load and it's worst on port days. If your client is in an aft cabin they'll be walking forward a lot."

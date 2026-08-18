@@ -9,6 +9,12 @@ import {
   ROYAL_MONEY,
   ROYAL_SOURCES,
 } from "./royal-common";
+import {
+  CONNECTING_RULE,
+  MOTION_RULE,
+  VIBRATION_RULE,
+  withShipNote,
+} from "./operator-rules";
 
 /**
  * Vision class: Grandeur (1996), Enchantment (1997), Rhapsody (1997),
@@ -93,10 +99,8 @@ function visionClassContent(
               ? "On this ship specifically, deck 4 midship takes the casino noise and the late restaurant clear-down, and the theatre runs to about 11pm. Deck 3 forward is reported as the quietest part of the ship."
               : ""
       }`,
-      motionAvoid:
-        "Push hard for midship. Extreme forward is the one to rule out; extreme aft is a negative when there's comparable midship inventory, and more so if vibration also matters to them.",
-      vibrationNote:
-        "Lower decks are generally better for motion, not worse — closer to the waterline. The catch is vibration: a low cabin at the back can still pick up the propulsion, so \"go low\" isn't automatically the right call for a sensitive traveller. On this class the documented vibration is specific rather than general: deck 2 aft, from the engines, worst when the ship is manoeuvring or accelerating.",
+      motionAvoid: MOTION_RULE,
+      vibrationNote: withShipNote(VIBRATION_RULE, "On this class the documented vibration is specific rather than general: deck 2 aft, from the engines, worst when the ship is manoeuvring or accelerating."),
       categoryWarnings: [
         "The cabins here are genuinely small and that's the expectation to set. Standard oceanviews run about 126 square feet and interiors start around 135 — well below what a client will have seen on a newer ship. The spacious oceanview at about 193 square feet is the one worth paying up for if they need room.",
         "Balconies are scarce on this class — somewhere between a fifth and a quarter of cabins, with about forty per cent interior. Sources disagree on the exact split, but the direction is not in doubt. If a balcony is part of the client's picture of a cruise, price it early, because it runs out.",
@@ -137,8 +141,7 @@ function visionClassContent(
       ],
       obstructedViewNotes:
         "Deck 3 is the lifeboat band on this class — the oceanviews there are obstructed by tenders, lifeboats, davits and steel framing, and at least one passenger account describes opening the curtain onto the stern of a lifeboat. No cabin-by-cabin list is published for any ship in this class that I could reach, so the deck is the warning and the booking screen is the check.",
-      connectingNote:
-        "Never read connecting status off the category or off two cabin numbers being next to each other — only an explicit connecting pair counts.",
+      connectingNote: CONNECTING_RULE,
       minorPlacementRule: ROYAL_MINOR_PLACEMENT,
       elevatorNote:
         "Nine elevators, which is few — but this is a small ship and the walk is short. I couldn't establish the bank layout or find any congestion reports.",

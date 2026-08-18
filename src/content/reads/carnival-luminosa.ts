@@ -6,6 +6,11 @@ import {
   CARNIVAL_MONEY,
   CARNIVAL_SOURCES,
 } from "./carnival-common";
+import {
+  CONNECTING_RULE,
+  MOTION_RULE,
+  VIBRATION_RULE,
+} from "./operator-rules";
 
 /**
  * Carnival Luminosa — its own file, because it's its own thing.
@@ -74,10 +79,8 @@ export const carnivalLuminosa: ShipContent = {
     verified: false,
     placementNote:
       "Midship on 6 or 7. Cabins sit on decks 4 to 8 and the Lido is on 9, cleanly above the top cabin deck rather than mixed in with it — so unlike most of the fleet, the pool really is overhead here, and deck 8 is where it lands. Deck 4 is the other end of the same problem: it sits directly over the theatre and the nightclub on 3. The middle of that five-deck band is genuinely the quiet part, which is a cleaner answer than most Carnival hulls give you.",
-    motionAvoid:
-      "Push hard for midship. Extreme forward is the one to rule out; extreme aft is a negative when there's comparable midship inventory, and more so if vibration also matters to them.",
-    vibrationNote:
-      "Lower decks are generally better for motion, not worse — closer to the waterline. The catch is vibration: a low cabin at the back can still pick up the propulsion, so \"go low\" isn't automatically the right call for a sensitive traveller.",
+    motionAvoid: MOTION_RULE,
+    vibrationNote: VIBRATION_RULE,
     categoryWarnings: [
       "This is a European-built hull and the cabins show it — they run larger than the fleet average, with more storage and noticeably better soundproofing. That's a genuine selling point on a ship that's otherwise showing its age, and it's the thing to lead with.",
       "Check the balcony railing before you promise a view. Some cabins here have solid metal railings rather than the clear panels, which means a seated client sees metal. It's per-cabin, so it needs the deck plan rather than a rule.",
@@ -111,8 +114,7 @@ export const carnivalLuminosa: ShipContent = {
     ],
     obstructedViewNotes:
       "There's a real published category for it here: 4K, an interior with a window, on deck 4 — floor-to-ceiling glass with a lifeboat in front of it. Confirmed examples are 4282, 4288, 4296 and 4302, and that isn't the full list. The category name is the giveaway, so read the code rather than the deck.",
-    connectingNote:
-      "Never read connecting status off the category or off two cabin numbers being next to each other — only an explicit connecting pair counts.",
+    connectingNote: CONNECTING_RULE,
     minorPlacementRule: CARNIVAL_MINOR_PLACEMENT,
     accessibilityNote:
       "A compressed stack — entertainment on 2 and 3, cabins on 4 to 8, everything outdoors on 9 to 11 — so there's less of the Excel-class problem where dining and the pool sit eight decks apart. I found two irreconcilable elevator counts for this ship and no reliable bank layout, so check the deck plan for the specific cabin rather than trusting a rule, and confirm scooter clearance against Carnival's accessible deck plan.",

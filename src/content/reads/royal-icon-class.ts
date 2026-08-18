@@ -9,6 +9,12 @@ import {
   ROYAL_MONEY,
   ROYAL_SOURCES,
 } from "./royal-common";
+import {
+  CONNECTING_RULE,
+  MOTION_RULE,
+  VIBRATION_RULE,
+  withShipNote,
+} from "./operator-rules";
 
 /**
  * Icon class: Icon (2024), Star (2025), Legend (2026).
@@ -75,10 +81,8 @@ function iconClassContent(ship: "icon" | "star" | "legend"): ShipContent {
       verified: false,
       placementNote:
         "Midship, and deck 14 is the one to rule out — it sits under Chill Island's pools, and at the aft end under both The Hideaway, which is an adults-only DJ space, and the Windjammer. Cabins are spread across eleven decks from 3 up to 17. The thing that surprises people coming off an Oasis ship: up top the pools and the suite cabins are on the SAME decks, separated forward-to-aft rather than stacked, so being high here doesn't mean being above it all.",
-      motionAvoid:
-        "Push hard for midship. Extreme forward is the one to rule out; extreme aft is a negative when there's comparable midship inventory, and more so if vibration also matters to them. I found nothing documented about how these specific hulls ride — they're very large and new, but I'm not going to infer a calmer ride from tonnage alone.",
-      vibrationNote:
-        "Lower decks are generally better for motion, not worse — closer to the waterline. The catch is vibration: a low cabin at the back can still pick up the propulsion, so \"go low\" isn't automatically the right call for a sensitive traveller.",
+      motionAvoid: withShipNote(MOTION_RULE, "I found nothing documented about how these specific hulls ride — they're very large and new, but I'm not going to infer a calmer ride from tonnage alone."),
+      vibrationNote: VIBRATION_RULE,
       categoryWarnings: [
         isLegend
           ? "Do NOT sell this ship on the Infinite Balcony. Legend replaces it in the new Family Ocean View Balcony category with a traditional verandah — about 285 square feet inside plus a 50-foot balcony — and many of those are adjoining, so they combine into something like a mini-suite for a big group. That's arguably a better family product than Icon's, but it is a different one, and a client who saw an Icon video will be expecting the drop-down window."
@@ -105,8 +109,7 @@ function iconClassContent(ship: "icon" | "star" | "legend"): ShipContent {
       ],
       obstructedViewNotes:
         "The obstructions cluster on deck 8, above the lifeboats, and in parts of deck 10 — one first-hand review describes a deck 10 Central Park balcony sitting directly over a venue and partly blocked by it. No cabin-by-cabin list is published anywhere I could reach, so read the category code and check the specific cabin on the booking screen.",
-      connectingNote:
-        "Never read connecting status off the category or off two cabin numbers being next to each other — only an explicit connecting pair counts. This class does publish connecting balcony pairs in the Surfside family area, which is the easiest place on the ship to put a family across two rooms.",
+      connectingNote: withShipNote(CONNECTING_RULE, "This class does publish connecting balcony pairs in the Surfside family area, which is the easiest place on the ship to put a family across two rooms."),
       minorPlacementRule: ROYAL_MINOR_PLACEMENT,
       elevatorNote:
         "Twenty-two elevators, and they're destination-dispatch — you pick your deck at a panel and it assigns you a car, with no buttons inside. Worth briefing anyone who'd find that stressful. Three sources give three different answers on how the banks are arranged, so I won't tell you where they are; check the deck plan.",

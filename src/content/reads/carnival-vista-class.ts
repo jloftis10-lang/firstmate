@@ -7,6 +7,13 @@ import {
   CARNIVAL_SLIDE_RULES,
   CARNIVAL_SOURCES,
 } from "./carnival-common";
+import {
+  BOTTOM_DECK_NOTE,
+  CONNECTING_RULE,
+  MOTION_RULE,
+  PORTHOLE_STEER,
+  VIBRATION_RULE,
+} from "./operator-rules";
 
 /**
  * Vista class: Vista, Horizon, Panorama. One rule family, worked up by
@@ -75,13 +82,11 @@ function vistaClassContent(ship: "vista" | "horizon" | "panorama"): ShipContent 
       // wrong-on-vertical-inspection case this product exists to catch.
       placementNote:
         "Deck 8, midship to aft, is the cleanest starting point on this class when nothing special is in play — it's sandwiched between cabin decks 7 and 9. Deck 9 looks ideal on paper but the Lido pools and buffet on 10 sit directly over parts of it, so check the vertical before booking 9. Cabins run all the way down to deck 1 here, unlike the newer ships.",
-      motionAvoid:
-        "Push hard for midship. Extreme forward is the one to rule out; extreme aft is a negative when there's comparable midship inventory, and more so if vibration also matters to them.",
-      vibrationNote:
-        "Lower decks are generally better for motion, not worse — closer to the waterline. The catch is vibration: a low cabin at the back can still pick up the propulsion, so \"go low\" isn't automatically the right call for a sensitive traveller.",
+      motionAvoid: MOTION_RULE,
+      vibrationNote: VIBRATION_RULE,
       categoryWarnings: [
-        "I'd steer them off a porthole room — it's the cheapest category and they've felt small to me. Check the actual square footage for the specific cabin before you rule it in or out.",
-        "The bottom deck is fine if they're on a budget — that's where the cheap interiors are, and low is generally kinder for motion, not harsher.",
+        PORTHOLE_STEER,
+        BOTTOM_DECK_NOTE,
         `On this class, check what shares the corridor before you confirm: the Havana complex aft on 5${
           ship === "vista" ? " (the Havana Bar turns Latin disco after midnight)" : ""
         }, Circle C and the entertainment complex on 6${
@@ -102,8 +107,7 @@ function vistaClassContent(ship: "vista" | "horizon" | "panorama"): ShipContent 
       ],
       obstructedViewNotes:
         "Four specific cabins, the same on all three ships: Junior Suites 9205 and 9206 and Spa Suites 14205 and 14206. A solid steel panel or bulkhead blocks the seated view — not a lifeboat.",
-      connectingNote:
-        "Never read connecting status off the category or off two cabin numbers being next to each other — only an explicit connecting pair counts.",
+      connectingNote: CONNECTING_RULE,
       minorPlacementRule: CARNIVAL_MINOR_PLACEMENT,
       elevatorNote:
         "Eight elevators forward, four midship, four aft — match the bank to where they'll spend the week. Forward suits the theatre and spa and has twice the cars; aft suits Havana and the aft pool and dining; midship balances the walking but sits where everyone converges. For mobility with no strong destination pattern, lean forward for the extra cars.",

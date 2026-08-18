@@ -9,6 +9,12 @@ import {
   ROYAL_MONEY,
   ROYAL_SOURCES,
 } from "./royal-common";
+import {
+  CONNECTING_RULE,
+  MOTION_RULE,
+  VIBRATION_RULE,
+  withShipNote,
+} from "./operator-rules";
 
 /**
  * Quantum class: Quantum, Anthem, Ovation (2014–2016).
@@ -93,10 +99,8 @@ function quantumClassContent(
       placementNote: isSpectrum
         ? "Midship, decks 8 to 10. Spectrum breaks the class pattern: where the other four stop their cabins below the pool deck, this one carries staterooms up on 15 and 16 as part of a gated suites-only complex forward. So the usual \"nothing above deck 13\" reassurance doesn't hold here — check where the specific cabin sits rather than applying the class rule."
         : "Midship, decks 8 to 10. This class has a genuinely clean stack: deck 14 is the Solarium, the main pool and the Windjammer, and it carries no cabins at all. That makes deck 13 the one deck taking pool and buffet noise from directly above, and leaves everything from 8 to 10 sandwiched between other cabins. Deck 3 has oceanviews down low if budget matters.",
-      motionAvoid:
-        "Push hard for midship. Extreme forward is the one to rule out; extreme aft is a negative when there's comparable midship inventory, and more so if vibration also matters to them.",
-      vibrationNote:
-        "Lower decks are generally better for motion, not worse — closer to the waterline. The catch is vibration: a low cabin at the back can still pick up the propulsion, so \"go low\" isn't automatically the right call for a sensitive traveller. I found aft-vibration reports for this class but only from sources that got other facts on these ships plainly wrong, so I'd treat it as the general rule rather than a claim about these hulls.",
+      motionAvoid: MOTION_RULE,
+      vibrationNote: withShipNote(VIBRATION_RULE, "I found aft-vibration reports for this class but only from sources that got other facts on these ships plainly wrong, so I'd treat it as the general rule rather than a claim about these hulls."),
       categoryWarnings: [
         VIRTUAL_BALCONY_NOTE,
         "This class has real solo cabins — around 28 of them across studio interior, oceanview and balcony categories, with no single supplement. The interior studios are small at about 101 square feet with a double bed, but for a solo client that's a genuinely better deal than paying double occupancy anywhere else in the fleet. Lead with it.",
@@ -121,8 +125,7 @@ function quantumClassContent(
       ],
       obstructedViewNotes:
         "Royal sells obstruction as its own booking category here rather than burying it — there are published obstructed oceanview and obstructed balcony codes, and the obstruction is lifeboats and structure on the indented sections where the hull narrows. That category code is the reliable check. Cabin-number lists for this class do circulate, but the sites publishing them contradict each other and get other facts about these ships wrong, so I'm not repeating their numbers. Read the code on the specific cabin.",
-      connectingNote:
-        "Never read connecting status off the category or off two cabin numbers being next to each other — only an explicit connecting pair counts. This class does publish connecting categories for both oceanview and virtual-balcony interiors, which makes multi-room family bookings easier here than on some hulls.",
+      connectingNote: withShipNote(CONNECTING_RULE, "This class does publish connecting categories for both oceanview and virtual-balcony interiors, which makes multi-room family bookings easier here than on some hulls."),
       minorPlacementRule: ROYAL_MINOR_PLACEMENT,
       accessibilityNote:
         "Two things help here: the pool deck sits above all the cabins rather than among them, so there's no wandering through a pool crowd to get home, and the atrium elevators are glass and easy to orient by. I couldn't establish the elevator count or the bank layout — two figures surfaced and neither is confirmed — so check the deck plan for the specific cabin. Travelers do report the aft bank being the least busy.",

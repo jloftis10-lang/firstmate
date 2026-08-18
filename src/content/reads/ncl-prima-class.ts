@@ -9,6 +9,12 @@ import {
   NCL_MONEY,
   NCL_SOURCES,
 } from "./ncl-common";
+import {
+  CONNECTING_RULE,
+  MOTION_RULE,
+  VIBRATION_RULE,
+  withShipNote,
+} from "./operator-rules";
 
 /**
  * Prima class: Prima (2022), Viva (2023).
@@ -88,10 +94,8 @@ function primaClassContent(
           ? " This is the stretched version of the class: about 75 feet longer with more cabins, but the same deck structure, so the deck logic is unchanged."
           : ""
       }`,
-      motionAvoid:
-        "Push hard for midship. Extreme forward is the one to rule out; extreme aft is a negative when there's comparable midship inventory, and more so if vibration also matters to them. I found nothing documented about how this specific hull rides, so that's the general rule rather than a claim about these ships.",
-      vibrationNote:
-        "Lower decks are generally better for motion, not worse — closer to the waterline. The catch is vibration: a low cabin at the back can still pick up the propulsion, so \"go low\" isn't automatically the right call for a sensitive traveller.",
+      motionAvoid: withShipNote(MOTION_RULE, "I found nothing documented about how this specific hull rides, so that's the general rule rather than a claim about these ships."),
+      vibrationNote: VIBRATION_RULE,
       categoryWarnings: [
         isPlus
           ? "The slides on this ship run down the sides of the hull past the balconies. Check the specific cabin against the deck plan before you confirm a family in a large-balcony category — on the original two ships of this class the slide structure passes straight through some balconies, and the family suites with the bigger balconies are the ones reported worst affected."
@@ -124,8 +128,7 @@ function primaClassContent(
       ],
       obstructedViewNotes:
         "NCL doesn't publish a full obstructed list for this class, and says so obliquely in its own guarantee language — the Club Balcony Suite guarantee warns the balcony may be fully or partially obstructed. What is documented is the slide structure running down the hull past the balconies between decks 8 and 16. Lists of specific cabin numbers do circulate but they come from a single SEO site that admits in the same article that NCL doesn't flag most of them, so I'm not repeating those numbers. Check the specific cabin on the deck plan.",
-      connectingNote:
-        "Never read connecting status off the category or off two cabin numbers being next to each other — only an explicit connecting pair counts. Connecting cabins exist on this class but I couldn't find any published inventory, so treat it as something to confirm rather than assume.",
+      connectingNote: withShipNote(CONNECTING_RULE, "Connecting cabins exist on this class but I couldn't find any published inventory, so treat it as something to confirm rather than assume."),
       minorPlacementRule: NCL_MINOR_PLACEMENT,
       elevatorNote:
         "Sixteen elevators, two of them reserved for The Haven — and the layout is the issue rather than the count. The banks are forward and aft with no true midship bank, they're placed at what several passengers describe as dead ends, and there's no continuous fore-and-aft interior corridor, so getting from one end to the other means crossing through an atrium. One reviewer thought there were plenty of lifts; several thought the walk to reach them was the problem. Both can be true.",

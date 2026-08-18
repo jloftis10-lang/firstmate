@@ -7,6 +7,13 @@ import {
   CARNIVAL_SLIDE_RULES,
   CARNIVAL_SOURCES,
 } from "./carnival-common";
+import {
+  BOTTOM_DECK_NOTE,
+  CONNECTING_RULE,
+  MOTION_RULE,
+  PORTHOLE_STEER,
+  VIBRATION_RULE,
+} from "./operator-rules";
 
 /**
  * Spirit class: Spirit, Pride, Legend, Miracle (2001–2004).
@@ -68,13 +75,11 @@ function spiritClassContent(): ShipContent {
       verified: false,
       placementNote:
         "Midship, decks 5 to 7. Cabins run deck 1 to deck 8 and the Lido sits on 9 — directly over the top cabin deck, not mixed in with it the way it is on the Conquest and Sunshine hulls. So deck 8 is the one that takes the pool noise from above, and it's the deck a client is most likely to ask for. Deck 2 is the other one to check: the main dining room and the galley are on it.",
-      motionAvoid:
-        "Push hard for midship. Extreme forward is the one to rule out; extreme aft is a negative when there's comparable midship inventory, and more so if vibration also matters to them.",
-      vibrationNote:
-        "Lower decks are generally better for motion, not worse — closer to the waterline. The catch is vibration: a low cabin at the back can still pick up the propulsion, so \"go low\" isn't automatically the right call for a sensitive traveller.",
+      motionAvoid: MOTION_RULE,
+      vibrationNote: VIBRATION_RULE,
       categoryWarnings: [
-        "I'd steer them off a porthole room — it's the cheapest category and they've felt small to me. Check the actual square footage for the specific cabin before you rule it in or out.",
-        "The bottom deck is fine if they're on a budget — that's where the cheap interiors are, and low is generally kinder for motion, not harsher.",
+        PORTHOLE_STEER,
+        BOTTOM_DECK_NOTE,
         "Deck 8 is the top cabin deck and the pool deck is straight above it. A client asking for a high deck is asking for the noisiest one on this ship — offer them midship on 6 or 7 instead and tell them why.",
         "These are narrow hulls, built to fit the old Panama Canal locks. That's a real difference from the rest of the fleet, but I have no evidence it changes how the ship rides or how big the cabins are — so don't sell it as an advantage or warn about it as a drawback.",
       ],
@@ -97,8 +102,7 @@ function spiritClassContent(): ShipContent {
       ],
       obstructedViewNotes:
         "No cabin-level obstruction list surfaced for this class. What Carnival does say generally is that the obstructed balconies are on the indented sections of the hull, where lifeboats and structure sit at railing height. Read the category code on the specific cabin — the deck alone won't tell you.",
-      connectingNote:
-        "Never read connecting status off the category or off two cabin numbers being next to each other — only an explicit connecting pair counts.",
+      connectingNote: CONNECTING_RULE,
       minorPlacementRule: CARNIVAL_MINOR_PLACEMENT,
       accessibilityNote:
         "A smaller hull with a single Lido deck, so there's much less of the Excel-class problem where dining is low and the pool is eight decks up — though that's my read of the layout rather than a sourced claim. I found nothing reliable on the elevator banks here, so check the deck plan for the specific cabin, and confirm scooter clearance against Carnival's accessible deck plan.",

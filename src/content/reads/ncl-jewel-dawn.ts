@@ -8,6 +8,12 @@ import {
   NCL_MONEY,
   NCL_SOURCES,
 } from "./ncl-common";
+import {
+  CONNECTING_RULE,
+  MOTION_RULE,
+  VIBRATION_RULE,
+  withShipNote,
+} from "./operator-rules";
 
 /**
  * Jewel class: Jewel (2005), Jade (2006), Pearl (2006), Gem (2007).
@@ -90,10 +96,8 @@ function jewelClassContent(
       verified: false,
       placementNote:
         "Midship on 9 or 10. Cabins sit on decks 4, 5, 8, 9, 10, 11 and 14, and deck 12 is a pure Lido deck with no staterooms on it — which makes deck 11 the one taking everything from above. And it's a lot on this class: two pools, a waterslide, the Garden Café buffet, Splash Academy, the teen club and the spa are all on 12. Deck 8 is the lifeboat deck. Deck 14 is The Haven.",
-      motionAvoid:
-        "Push hard for midship. Extreme forward is the one to rule out; extreme aft is a negative when there's comparable midship inventory, and more so if vibration also matters to them. Nothing hull-specific is documented for this class, so that's the general rule.",
-      vibrationNote:
-        "Lower decks are generally better for motion, not worse — closer to the waterline. The catch is vibration: a low cabin at the back can still pick up the propulsion, so \"go low\" isn't automatically the right call for a sensitive traveller.",
+      motionAvoid: withShipNote(MOTION_RULE, "Nothing hull-specific is documented for this class, so that's the general rule."),
+      vibrationNote: VIBRATION_RULE,
       categoryWarnings: [
         "Deck 11 is the one to steer off on this class. Everything noisy is on 12 directly above it — two pools, the slide, the buffet, both kids' clubs and the spa — and chair scraping first thing is exactly the complaint you'd expect.",
         SAIL_AWAY_WARNING,
@@ -120,8 +124,7 @@ function jewelClassContent(
         },
       ],
       obstructedViewNotes: DECK_8_OBSTRUCTION,
-      connectingNote:
-        "Never read connecting status off the category or off two cabin numbers being next to each other — only an explicit connecting pair counts.",
+      connectingNote: CONNECTING_RULE,
       minorPlacementRule: NCL_MINOR_PLACEMENT,
       elevatorNote:
         "Around twelve lifts on this class, which is reasonable for the size. I couldn't establish the bank layout. One thing reported on Pearl specifically and worth checking on any of them: the aft lifts only run down as far as deck 7.",
@@ -158,10 +161,8 @@ function dawnClassContent(ship: "dawn" | "star"): ShipContent {
       verified: false,
       placementNote:
         "Midship on 9 or 10. The thing that separates this class from its Jewel-class cousins: deck 12 here is both the Lido deck and a cabin deck, so staterooms sit alongside the pools rather than safely below them — the forward end of 12 carries the bigger suites. Deck 11 has the bridge and the spa on it as well as cabins. Deck 8 is the lifeboat deck. Deck 14 is just the two Garden Villas.",
-      motionAvoid:
-        "Push hard for midship. Extreme forward is the one to rule out; extreme aft is a negative when there's comparable midship inventory, and more so if vibration also matters to them. Nothing hull-specific is documented for this class.",
-      vibrationNote:
-        "Lower decks are generally better for motion, not worse — closer to the waterline. The catch is vibration: a low cabin at the back can still pick up the propulsion, so \"go low\" isn't automatically the right call for a sensitive traveller.",
+      motionAvoid: withShipNote(MOTION_RULE, "Nothing hull-specific is documented for this class."),
+      vibrationNote: VIBRATION_RULE,
       categoryWarnings: [
         "Deck 12 carries cabins and the pool deck at the same time on this class. That's the opposite of the Jewel ships, where 12 is pure Lido — so if you've learned one, don't apply it to the other. A deck 12 cabin here is beside the action, not above or below it.",
         SAIL_AWAY_WARNING,
@@ -184,8 +185,7 @@ function dawnClassContent(ship: "dawn" | "star"): ShipContent {
         },
       ],
       obstructedViewNotes: DECK_8_OBSTRUCTION,
-      connectingNote:
-        "Never read connecting status off the category or off two cabin numbers being next to each other — only an explicit connecting pair counts.",
+      connectingNote: CONNECTING_RULE,
       minorPlacementRule: NCL_MINOR_PLACEMENT,
       elevatorNote:
         "Around eight lifts, which is few for a ship this size — expect waiting at peak. I couldn't establish the bank layout.",

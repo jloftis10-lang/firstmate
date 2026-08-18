@@ -9,6 +9,12 @@ import {
   NCL_MONEY,
   NCL_SOURCES,
 } from "./ncl-common";
+import {
+  CONNECTING_RULE,
+  MOTION_RULE,
+  VIBRATION_RULE,
+  withShipNote,
+} from "./operator-rules";
 
 /**
  * Norwegian Epic (2010) — a one-off, and the ship in this fleet most
@@ -77,10 +83,8 @@ export const norwegianEpic: ShipContent = {
     verified: false,
     placementNote:
       "Midship on 11 or 12. Cabins run decks 8 to 14 with the solo studios on 11 and 12, and the Haven sits right up on 16 and 17 — above the pool deck on 15 rather than below it, which is unusual. Deck 14 is the one to avoid for noise, sitting under the pool and the aqua park. Decks 8 and 9 are the lifeboat decks and need checking for view. One piece of good news: the kids' club moved from deck 12 down to deck 6 in the 2025 dry dock, so the old advice about avoiding deck 12 for Splash Academy noise is now out of date.",
-    motionAvoid:
-      "Push hard for midship. Extreme forward is the one to rule out; extreme aft is a negative when there's comparable midship inventory, and more so if vibration also matters to them. You'll hear that this ship rides badly because it's tall and boxy — member reviews flatly contradict each other on it and there's no real source either way, so I wouldn't repeat it.",
-    vibrationNote:
-      "Lower decks are generally better for motion, not worse — closer to the waterline. The catch is vibration: a low cabin at the back can still pick up the propulsion, so \"go low\" isn't automatically the right call for a sensitive traveller. One Epic-specific quirk worth passing on: in any real swell the sliding bathroom doors tend to roll open on their own, which sets off the motion-activated lights in the night.",
+    motionAvoid: withShipNote(MOTION_RULE, "You'll hear that this ship rides badly because it's tall and boxy — member reviews flatly contradict each other on it and there's no real source either way, so I wouldn't repeat it."),
+    vibrationNote: withShipNote(VIBRATION_RULE, "One Epic-specific quirk worth passing on: in any real swell the sliding bathroom doors tend to roll open on their own, which sets off the motion-activated lights in the night."),
     categoryWarnings: [
       "The bathroom is the thing to explain before anyone books this ship. It's in three parts — toilet behind one sliding frosted door, shower behind another, and the sink out in the living area between them. The glass is frosted rather than opaque, so there's a visible silhouette and no sound insulation, and a pull curtain is all the extra privacy there is. Couples mostly shrug. Adult friends sharing, siblings, a parent and a teenager — that's the booking that goes wrong, and it's worth asking who's actually sharing before you sell it.",
       "It has not been fixed and won't be. The 2025 dry dock left the bathrooms exactly as they were, because the separate drainage runs would mean gutting every stateroom. If a client has heard the ship was refurbished, be clear about what that did and didn't cover.",
@@ -102,8 +106,7 @@ export const norwegianEpic: ShipContent = {
     ],
     obstructedViewNotes:
       "Decks 8 and 9 are the lifeboat decks and this ship has an unusually specific published picture. On deck 8, the cabins from 8026 forward on port and 8027 forward on starboard are clear, as are 8190 and aft on port and 8191 and aft on starboard — most of the rest look down onto the tops of the lifeboats. On deck 9 the clear ones are 9044 forward and 9270 aft on port, 9047 forward and 9269 aft on starboard, with the rest looking at the boats extending from deck 7. Separately, a run of deck 9 balconies is open to view from the cabins above — that's a privacy issue rather than an obstruction, and it's the one people don't think to ask about.",
-    connectingNote:
-      "Never read connecting status off the category or off two cabin numbers being next to each other — only an explicit connecting pair counts.",
+    connectingNote: CONNECTING_RULE,
     minorPlacementRule: NCL_MINOR_PLACEMENT,
     elevatorNote:
       "This is a documented structural problem rather than a grumble: there are no midship elevators and no midship stairs anywhere on the ship. Two banks, forward and aft, and the aft bank doesn't serve deck 5 at all — which is a busy deck. Congestion is heavily reported. Book near the end of the ship they'll actually use.",

@@ -7,6 +7,13 @@ import {
   CARNIVAL_SLIDE_RULES,
   CARNIVAL_SOURCES,
 } from "./carnival-common";
+import {
+  BOTTOM_DECK_NOTE,
+  CONNECTING_RULE,
+  MOTION_RULE,
+  PORTHOLE_STEER,
+  VIBRATION_RULE,
+} from "./operator-rules";
 
 /**
  * Sunshine class: Sunshine, Sunrise, Radiance.
@@ -74,13 +81,11 @@ function sunshineClassContent(
       verified: false,
       placementNote:
         "Midship first. This is an older, smaller hull than the Dream or Vista ships and the stack is more compressed — the Lido on deck 9 carries cabins itself, and deck 10 mixes the spa and the waterpark in with more cabins. So the top two cabin decks are both busy decks, not quiet ones. Decks 6 to 8 midship are the sensible default; treat anything on 9 or 10 as needing a look at what's next door before you confirm it.",
-      motionAvoid:
-        "Push hard for midship. Extreme forward is the one to rule out; extreme aft is a negative when there's comparable midship inventory, and more so if vibration also matters to them.",
-      vibrationNote:
-        "Lower decks are generally better for motion, not worse — closer to the waterline. The catch is vibration: a low cabin at the back can still pick up the propulsion, so \"go low\" isn't automatically the right call for a sensitive traveller.",
+      motionAvoid: MOTION_RULE,
+      vibrationNote: VIBRATION_RULE,
       categoryWarnings: [
-        "I'd steer them off a porthole room — it's the cheapest category and they've felt small to me. Check the actual square footage for the specific cabin before you rule it in or out.",
-        "The bottom deck is fine if they're on a budget — that's where the cheap interiors are, and low is generally kinder for motion, not harsher.",
+        PORTHOLE_STEER,
+        BOTTOM_DECK_NOTE,
         "These three are rebuilt Destiny-class hulls, not sisters that came out of the yard together, and they were rebuilt years apart. Don't assume a cabin or a venue that exists on one exists on the others — check the actual ship rather than the class.",
         "A client asking for a high deck to get away from the crowd is asking for the wrong thing here. On this hull, high means the pool deck and the waterpark. Midship on 7 or 8 gets them what they actually want.",
       ],
@@ -100,8 +105,7 @@ function sunshineClassContent(
         ship === "sunshine"
           ? "No obstruction list surfaced for this hull. Carnival's own knowledge base documents them on Radiance — a steel balcony railing across the forward spa cabins on deck 10, and the forward cabins on decks 6 and 7 looking onto a shared observation platform. These are rebuilt sisters, so check the same positions here, but I'm not claiming the same cabins are affected."
           : "Forward-facing cabins are the problem on this hull, in two places. The forward spa cabins on deck 10 are blocked by a solid steel balcony railing, and the forward cabins on decks 6 and 7 — roughly 6201 to 6206 and 7201 to 7206 — look onto a shared observation platform rather than open sea. The deck 6 and 7 numbers came through a secondary source, so confirm them on the booking screen before you promise a view.",
-      connectingNote:
-        "Never read connecting status off the category or off two cabin numbers being next to each other — only an explicit connecting pair counts.",
+      connectingNote: CONNECTING_RULE,
       minorPlacementRule: CARNIVAL_MINOR_PLACEMENT,
       accessibilityNote:
         "Everything is closer together on this hull than on the big new ships, which generally helps — the Lido isn't a separate expedition upward, it's a cabin deck. The Excel-class problem of dining low and pool high is much less pronounced here, though that's my read of the deck mix rather than a sourced claim. Confirm scooter clearance against Carnival's accessible deck plan as usual.",

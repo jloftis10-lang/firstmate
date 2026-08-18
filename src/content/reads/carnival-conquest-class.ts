@@ -7,6 +7,13 @@ import {
   CARNIVAL_SLIDE_RULES,
   CARNIVAL_SOURCES,
 } from "./carnival-common";
+import {
+  BOTTOM_DECK_NOTE,
+  CONNECTING_RULE,
+  MOTION_RULE,
+  PORTHOLE_STEER,
+  VIBRATION_RULE,
+} from "./operator-rules";
 
 /**
  * Conquest class: Conquest, Glory, Valor, Liberty, Freedom (2002–2007).
@@ -65,13 +72,11 @@ function conquestClassContent(): ShipContent {
       verified: false,
       placementNote:
         "Midship on decks 7 or 8 is the default here, and it's the one travelers keep landing on independently — away from the engines, away from the pool, away from the atrium. Cabins run from deck 1 up to deck 10, and both of the top two carry public space alongside the staterooms: the Lido on 9, and the Twister slide and the outdoor screen on 10. So a cabin on 9 or 10 is either beside or beneath something loud depending where it sits — that one needs the deck plan, not a rule.",
-      motionAvoid:
-        "Push hard for midship. Extreme forward is the one to rule out; extreme aft is a negative when there's comparable midship inventory, and more so if vibration also matters to them.",
-      vibrationNote:
-        "Lower decks are generally better for motion, not worse — closer to the waterline. The catch is vibration: a low cabin at the back can still pick up the propulsion, so \"go low\" isn't automatically the right call for a sensitive traveller.",
+      motionAvoid: MOTION_RULE,
+      vibrationNote: VIBRATION_RULE,
       categoryWarnings: [
-        "I'd steer them off a porthole room — it's the cheapest category and they've felt small to me. Check the actual square footage for the specific cabin before you rule it in or out.",
-        "The bottom deck is fine if they're on a budget — that's where the cheap interiors are, and low is generally kinder for motion, not harsher.",
+        PORTHOLE_STEER,
+        BOTTOM_DECK_NOTE,
         "There are no Cove balconies on this class — that's a Dream, Vista and Excel category. If a client has seen one and wants it, the nearest thing here is an aft-view extended balcony on decks 6 to 8, about 185 square feet inside with a 60-foot balcony and the wake behind them. It's a good cabin, it's just not the same cabin, and it's aft — so weigh it against vibration if they're sensitive.",
         "Deck 6 carries a category that Carnival sells as obstructed outright. Read the category letter, not just the deck.",
       ],
@@ -93,8 +98,7 @@ function conquestClassContent(): ShipContent {
       ],
       obstructedViewNotes:
         "Deck 6 has an inside-with-window category that Carnival sells as obstructed, and the balcony obstructions on this class are lifeboats and structure sitting at railing height on the indented sections of the hull. No cabin-by-cabin list surfaced, so the honest instruction is to read the category code on the specific cabin rather than trusting the deck.",
-      connectingNote:
-        "Never read connecting status off the category or off two cabin numbers being next to each other — only an explicit connecting pair counts.",
+      connectingNote: CONNECTING_RULE,
       minorPlacementRule: CARNIVAL_MINOR_PLACEMENT,
       elevatorNote:
         "Eighteen elevators, including four glass ones at the atrium — and those four stop at deck 2, not deck 1. That's the one to remember: a client on deck 1 has to use a different bank. I couldn't establish how the rest split forward, midship and aft, so don't steer anyone to a bank on my say-so.",

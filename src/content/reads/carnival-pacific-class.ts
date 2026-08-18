@@ -6,6 +6,12 @@ import {
   CARNIVAL_MONEY,
   CARNIVAL_SOURCES,
 } from "./carnival-common";
+import {
+  CONNECTING_RULE,
+  MOTION_RULE,
+  PORTHOLE_STEER,
+  VIBRATION_RULE,
+} from "./operator-rules";
 
 /**
  * Carnival Adventure and Carnival Encounter — Grand-class Princess hulls
@@ -78,14 +84,12 @@ function pacificClassContent(ship: "adventure" | "encounter"): ShipContent {
       verified: false,
       placementNote:
         "Midship, and below deck 14. Cabins run from about deck 5 up to 15, and the top two of those are the busy ones: deck 14 carries staterooms alongside the Lido pools, the family pool and the buffet, and deck 15 carries more alongside the spa, the fitness centre and Camp Ocean — with the adventure park and the waterslides on 16 directly above them. Decks 9 to 12 midship are the band to work in. Deck 10 has its own catch, below.",
-      motionAvoid:
-        "Push hard for midship. Extreme forward is the one to rule out; extreme aft is a negative when there's comparable midship inventory, and more so if vibration also matters to them.",
-      vibrationNote:
-        "Lower decks are generally better for motion, not worse — closer to the waterline. The catch is vibration: a low cabin at the back can still pick up the propulsion, so \"go low\" isn't automatically the right call for a sensitive traveller.",
+      motionAvoid: MOTION_RULE,
+      vibrationNote: VIBRATION_RULE,
       categoryWarnings: [
         "Deck 10 balconies are the ones to explain in advance. They're the Princess Caribe design — bigger than the decks above at about 81 square feet, but only half covered, so the balconies on deck 11 look down onto the open half. It's a privacy trade, not an obstruction, and clients who wanted the bigger balcony are usually happy once they know. The ones who weren't told are not.",
         "The cabins are still Princess rooms under Carnival category codes. Balcony size and coverage vary by deck in a way they don't on a Carnival-built ship — the aft balconies on some decks are much bigger than others. Check the specific cabin's dimensions rather than trusting the category to be uniform.",
-        "I'd steer them off a porthole room — it's the cheapest category and they've felt small to me. Check the actual square footage for the specific cabin before you rule it in or out.",
+        PORTHOLE_STEER,
         "Deck 8 carries a whole obstructed-oceanview category. If you're booking an oceanview on this ship, read the code before the deck.",
       ],
       hazardsAboveBelow: [
@@ -110,8 +114,7 @@ function pacificClassContent(ship: "adventure" | "encounter"): ShipContent {
       ],
       obstructedViewNotes:
         "Deck 8 is the one. It carries category 5A, an oceanview sold as obstructed, blocked by lifeboats and ship structure — cabin numbers on that deck run from 8101 up to 8733, and no complete list of which ones are affected is published anywhere I could reach. One source claims a block around 8401 to 8412 is clear of the lifeboats, which is worth checking but not worth promising. Note this is separate from the deck 10 balcony coverage issue — different deck, different problem, don't merge them.",
-      connectingNote:
-        "Never read connecting status off the category or off two cabin numbers being next to each other — only an explicit connecting pair counts.",
+      connectingNote: CONNECTING_RULE,
       minorPlacementRule: CARNIVAL_MINOR_PLACEMENT,
       elevatorNote:
         "Three lift lobbies — forward, midship and aft, the Grand-class layout. Two of the three connect the accessible corridors, so the bank matters more here than on a ship where they're interchangeable. I couldn't establish the car counts. The glazed panoramic lifts only run at the atrium on decks 5 to 7 and up at deck 14 over the pool; the atrium itself is only three decks tall, so it's not the landmark it is on a Carnival-built ship.",

@@ -7,6 +7,13 @@ import {
   CARNIVAL_SLIDE_RULES,
   CARNIVAL_SOURCES,
 } from "./carnival-common";
+import {
+  BOTTOM_DECK_NOTE,
+  CONNECTING_RULE,
+  MOTION_RULE,
+  PORTHOLE_STEER,
+  VIBRATION_RULE,
+} from "./operator-rules";
 
 /**
  * Dream class: Dream, Magic, Breeze (2009–2012).
@@ -74,13 +81,11 @@ function dreamClassContent(ship: "dream" | "magic" | "breeze"): ShipContent {
       verified: false,
       placementNote:
         "Midship first, as always. The thing that's different about this class: deck 10 is the Lido deck and a cabin deck at the same time, so a client who books deck 10 for the view can end up beside the pool rather than below it. Cabins run down to deck 1 and up to deck 12, with the spa cabins on 12 sitting under the waterpark and sport deck. Treat decks 10 and 12 as the two that need a vertical check, and decks 7 to 9 midship as the quiet middle of the stack.",
-      motionAvoid:
-        "Push hard for midship. Extreme forward is the one to rule out; extreme aft is a negative when there's comparable midship inventory, and more so if vibration also matters to them.",
-      vibrationNote:
-        "Lower decks are generally better for motion, not worse — closer to the waterline. The catch is vibration: a low cabin at the back can still pick up the propulsion, so \"go low\" isn't automatically the right call for a sensitive traveller.",
+      motionAvoid: MOTION_RULE,
+      vibrationNote: VIBRATION_RULE,
       categoryWarnings: [
-        "I'd steer them off a porthole room — it's the cheapest category and they've felt small to me. Check the actual square footage for the specific cabin before you rule it in or out.",
-        "The bottom deck is fine if they're on a budget — that's where the cheap interiors are, and low is generally kinder for motion, not harsher.",
+        PORTHOLE_STEER,
+        BOTTOM_DECK_NOTE,
         "Cove balconies here run about 185 square feet inside with a 45-foot partly-enclosed veranda, and the aft-view extended balconies get the wake — both are worth pricing against a standard balcony rather than assuming the standard one wins.",
         "Deck 10 cabins sit on the Lido deck itself rather than under it. That's not automatically bad — it's a short walk to everything — but it's the wrong pick for anyone who wants quiet, and it surprises people who read \"deck 10\" as \"high and away from it all\".",
       ],
@@ -104,8 +109,7 @@ function dreamClassContent(ship: "dream" | "magic" | "breeze"): ShipContent {
         ship === "breeze"
           ? "On Breeze specifically: Junior Suites 9205 and 9206 are blocked by a steel bulkhead, and the forward cabins on decks 6, 7, 9 and 10 look onto a shared observation platform rather than open sea. That list came from traveler write-ups rather than Carnival's own obstruction sheet, so confirm it on the booking screen before you promise anything. No equivalent list surfaced for Dream or Magic — that's a gap in the research, not evidence they're clean."
           : "No obstruction list surfaced for this hull. Breeze has a documented one (a steel bulkhead at 9205/9206, plus forward cabins on 6, 7, 9 and 10 facing an observation platform), and these are sister ships, so check the same positions on the booking screen — but I'm not claiming the same cabins are affected here.",
-      connectingNote:
-        "Never read connecting status off the category or off two cabin numbers being next to each other — only an explicit connecting pair counts.",
+      connectingNote: CONNECTING_RULE,
       minorPlacementRule: CARNIVAL_MINOR_PLACEMENT,
       elevatorNote:
         "Eighteen elevators on this class, which is a lot of cars — but I couldn't establish how they split forward, midship and aft, so don't steer anyone to a bank on my say-so. The rule that still holds: pick the end of the ship where they'll actually spend the week.",

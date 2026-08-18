@@ -12,6 +12,13 @@ import {
   EXCEL_FORWARD_OBSTRUCTION,
   EXCEL_OBSTRUCTED_DECKS,
 } from "./carnival-common";
+import {
+  BOTTOM_DECK_NOTE,
+  CONNECTING_RULE,
+  MOTION_RULE,
+  PORTHOLE_STEER,
+  VIBRATION_RULE,
+} from "./operator-rules";
 
 /**
  * Third Excel-class hull. The cabin block mirrors the class rules Jimmy
@@ -30,13 +37,11 @@ export const carnivalJubilee: ShipContent = {
     verified: true,
     placementNote:
       "Prioritise midship first. Deck 9 is a strong default on this class because it's the lowest full stateroom deck — but judge the actual cabin rather than working to a fixed deck range.",
-    motionAvoid:
-      "Push hard for midship. Extreme forward is the one to rule out; extreme aft is a negative when there's comparable midship inventory, and more so if vibration also matters to them.",
-    vibrationNote:
-      "Lower decks are generally better for motion, not worse — closer to the waterline. The catch is vibration: a low cabin at the back can still pick up the propulsion, so \"go low\" isn't automatically the right call for a sensitive traveller.",
+    motionAvoid: MOTION_RULE,
+    vibrationNote: VIBRATION_RULE,
     categoryWarnings: [
-      "I'd steer them off a porthole room — it's the cheapest category and they've felt small to me. Check the actual square footage for the specific cabin before you rule it in or out.",
-      "The bottom deck is fine if they're on a budget — that's where the cheap interiors are, and low is generally kinder for motion, not harsher.",
+      PORTHOLE_STEER,
+      BOTTOM_DECK_NOTE,
       EXCEL_COVE_NOTE,
     ],
     // No deck locations claimed — nobody has worked this hull's plan.
@@ -46,8 +51,7 @@ export const carnivalJubilee: ShipContent = {
       { source: "nightclub" },
     ],
     obstructedViewNotes: EXCEL_FORWARD_OBSTRUCTION,
-    connectingNote:
-      "Never read connecting status off the category or off two cabin numbers being next to each other — only an explicit connecting pair counts.",
+    connectingNote: CONNECTING_RULE,
     minorPlacementRule: CARNIVAL_MINOR_PLACEMENT,
     elevatorNote: EXCEL_ELEVATOR_NOTE,
     accessibilityNote: EXCEL_ACCESSIBILITY_NOTE,

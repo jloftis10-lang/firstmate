@@ -9,6 +9,12 @@ import {
   ROYAL_MONEY,
   ROYAL_SOURCES,
 } from "./royal-common";
+import {
+  CONNECTING_RULE,
+  MOTION_RULE,
+  VIBRATION_RULE,
+  withShipNote,
+} from "./operator-rules";
 
 /**
  * Voyager class (Voyager, Explorer, Adventure, Navigator, Mariner) and
@@ -122,10 +128,8 @@ function voyagerFamilyContent(ship: VoyagerShip): ShipContent {
       placementNote: `Decks 7, 8 and 9 midship — every source I found converges on that band, and the reason is structural: they're sandwiched between other cabin decks with no public rooms above or below. Deck 10 is the one to avoid, because deck 11 above it is the pool, the Windjammer and the gym. Note that deck 11 carries a few cabins of its own rather than being pure pool deck, and there are more forward on 12. Low down, decks 2 and 3 also carry cabins — right by the ice rink on 2 and the theatre balcony and disco on 3. ${
         isFreedom ? "Freedom class is the enlarged version of this hull, but the deck logic is the same." : ""
       }`,
-      motionAvoid:
-        "Push hard for midship. Extreme forward is the one to rule out; extreme aft is a negative when there's comparable midship inventory, and more so if vibration also matters to them.",
-      vibrationNote:
-        "Lower decks are generally better for motion, not worse — closer to the waterline. The catch is vibration: a low cabin at the back can still pick up the propulsion, so \"go low\" isn't automatically the right call for a sensitive traveller. Aft vibration gets reported on these hulls, particularly under the Windjammer, but only by sources I wouldn't lean on — treat it as the general rule, not a measured fact about these ships.",
+      motionAvoid: MOTION_RULE,
+      vibrationNote: withShipNote(VIBRATION_RULE, "Aft vibration gets reported on these hulls, particularly under the Windjammer, but only by sources I wouldn't lean on — treat it as the general rule, not a measured fact about these ships."),
       categoryWarnings: [
         "The Promenade-view interiors are the category to explain properly. They're on decks 6, 7 and 8, with bay windows looking down onto the Royal Promenade — no sea view, but light and a view of something. The downsides are noise from parades and events below, and the Promenade lighting never really going off. The first night is the loudest, and higher is better: deck 8 beats 7 beats 6.",
         "One thing about those cabins I could not resolve, and you should raise it rather than guess: sources disagree on whether the bay window is one-way glass or whether the Promenade can see straight in. They can't both be right. If your client would care, have them ask at check-in rather than find out.",
@@ -160,8 +164,7 @@ function voyagerFamilyContent(ship: VoyagerShip): ShipContent {
       ],
       obstructedViewNotes:
         "Deck 6 is the lifeboat band on both classes — that much is consistent. What isn't consistent is which cabins: the two published lists contradict each other on whether the affected sections are forward or aft, and neither source is one I'd rely on, so I'm not repeating their numbers. Read the category on the specific cabin. Separately and better sourced, there's a second kind of obstruction on deck 10 that isn't lifeboats at all: the pool deck above overhangs some cabins and shades them, and a few sit directly beneath whirlpools that extend out over the ship's side. Those are worth checking on the deck plan before you place anyone on 10.",
-      connectingNote:
-        "Never read connecting status off the category or off two cabin numbers being next to each other — only an explicit connecting pair counts.",
+      connectingNote: CONNECTING_RULE,
       minorPlacementRule: ROYAL_MINOR_PLACEMENT,
       accessibilityNote:
         "Around fourteen elevators on these hulls. One source claims there are only two banks, forward and midship, with no aft bank at all — that would matter enormously for a mobility booking, and I could not verify it against a deck plan, so check it for the specific ship rather than taking my word either way. The dining and entertainment core is low and the pool is on 11, so there's a real vertical trip in the day. Confirm the accessible deck plan for the specific cabin.",
