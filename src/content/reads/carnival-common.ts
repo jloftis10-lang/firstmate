@@ -120,3 +120,52 @@ export function carnivalFleetContent(opts: {
     },
   };
 }
+
+/**
+ * Minor placement, effective for bookings made from 1 February 2025.
+ *
+ * This is the one an advisor loses a booking over. Putting a young child
+ * NEXT DOOR to the guardian no longer satisfies it — the cabins have to
+ * actually connect, or the child has to be in the guardian's cabin. An
+ * adjacent pair that looks fine on a deck plan fails.
+ */
+export const CARNIVAL_MINOR_PLACEMENT =
+  "Carnival requires anyone 14 or under to be in the same cabin as their 25-or-over guardian, or in a cabin that genuinely connects to it. Adjacent is not enough — for bookings made from February 2025 this is a rule, not a preference. Guests 15 to 17 have more room to move.";
+
+/**
+ * Excel-class forward-view obstruction.
+ *
+ * The obstruction is a solid steel forward railing, and it runs across
+ * six decks rather than one. Reports on Mardi Gras say the forward view
+ * can disappear entirely when seated and open up when standing.
+ */
+export const EXCEL_FORWARD_OBSTRUCTION =
+  "On this class the forward-facing balconies are the problem, and it's the solid steel forward railing rather than a lifeboat. Passengers report the view can vanish while they're sitting down and come back when they stand.";
+
+/** The decks the forward-view obstruction actually spans. */
+export const EXCEL_OBSTRUCTED_DECKS =
+  "the 8L forward-view extended balconies on decks 9, 10, 11, 12, 14 and 15, the forward-wrap Excel Corner Suites on those same decks, and the forward-facing Cloud 9 Spa balconies on deck 17";
+
+/**
+ * Cove balconies sit under the lifeboats but are NOT sold as obstructed,
+ * and reviews describe a good sea view from them. Worth saying out loud
+ * because "under the lifeboats" sounds like an obstruction and isn't.
+ */
+export const EXCEL_COVE_NOTE =
+  "Deck 5 Cove balconies sit below the lifeboat level, which sounds worse than it is — they aren't sold as obstructed and the sea view holds up. Don't talk a client out of one on the assumption it's blocked.";
+
+/**
+ * Elevators on the Excel ships. The useful call is not "which bank is
+ * best" but "where will this client actually spend the week".
+ */
+export const EXCEL_ELEVATOR_NOTE =
+  "Forward, midship and aft banks, and the midship one is where everybody converges — steer them forward or aft at busy times. Forward suits the theatre and the spa, aft suits Summer Landing and the aft dining; pick the end that matches where they'll actually spend the week.";
+
+/**
+ * Excel-class mobility. The friction is the vertical split, not stairs:
+ * indoor dining and shows sit on 6–8, the outdoor action on 16–18, so a
+ * slower traveler ends up making the same elevator trip several times a
+ * day at exactly the busiest moments.
+ */
+export const EXCEL_ACCESSIBILITY_NOTE =
+  "The indoor dining and shows sit on decks 6 to 8 and the outdoor action is up on 16 to 18, so anyone slower on their feet makes that elevator trip several times a day, and the queues at peak are the single biggest complaint on these ships. If they use a wheelchair or a scooter, treat that as a different job entirely: not every Excel cabin takes a scooter, standard doorways run about 22 inches, and there are lips into the bathroom, shower and balcony — get the cabin confirmed against Carnival's accessible deck plan before you book it.";

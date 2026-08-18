@@ -3,8 +3,14 @@ import {
   BOLT_RULES,
   CARNIVAL_EMBARKATION,
   CARNIVAL_KIDS_RULES,
+  CARNIVAL_MINOR_PLACEMENT,
   CARNIVAL_MONEY,
   CARNIVAL_SOURCES,
+  EXCEL_ACCESSIBILITY_NOTE,
+  EXCEL_COVE_NOTE,
+  EXCEL_ELEVATOR_NOTE,
+  EXCEL_FORWARD_OBSTRUCTION,
+  EXCEL_OBSTRUCTED_DECKS,
 } from "./carnival-common";
 
 /**
@@ -28,13 +34,43 @@ export const carnivalCelebration: ShipContent = {
   sources: [
     ...CARNIVAL_SOURCES,
     {
-      label: "Celebration deck layout — Lido aft on decks 16–17, cabin decks from 6",
-      url: "https://www.cruisemapper.com/deckplans/Carnival-Celebration-2106",
+      label: "Excel-class forward-view obstruction — 8L decks 9/10/11/12/14/15",
+      url: "https://cruiseweb.com/cruise-lines/carnival-cruise-line/ship-mardi-gras",
       checked: "2026-08-17",
     },
     {
-      label: "Celebration obstructed views — deck 9 and forward wrap-around balconies",
-      url: "https://www.cruisecritic.com/cruise/carnival/carnival-celebration/cabins",
+      label: "Excel Corner Suites — forward wrap, steel railing obstruction",
+      url: "https://www.cruisedeckplans.com/ships/Carnival-Mardi-Gras",
+      checked: "2026-08-17",
+    },
+    {
+      label: "Cloud 9 Spa forward-view deck 17 partially obstructed",
+      url: "https://www.icruise.com/cabins/carnival-cruises-carnival-celebration-cabin-17202.html",
+      checked: "2026-08-17",
+    },
+    {
+      label: "Deck 5 Cove balcony under lifeboats, view not obstructed",
+      url: "https://cruiseline.com/ship/carnival-celebration/cabin/5425",
+      checked: "2026-08-17",
+    },
+    {
+      label: "Minor placement rule for bookings from 1 Feb 2025",
+      url: "https://help.carnival.com/app/answers/detail/a_id/10972",
+      checked: "2026-08-17",
+    },
+    {
+      label: "Midship elevator congestion, forward/aft preferred at peak",
+      url: "https://cruiseline.com/ship/carnival-celebration/review/547711",
+      checked: "2026-08-17",
+    },
+    {
+      label: "Scooter compatibility and accessible deck plan",
+      url: "https://www.carnival.com/en-US/about-carnival/special-needs/pre-cruise-forms",
+      checked: "2026-08-17",
+    },
+    {
+      label: "Celebration deck layout — Lido aft on decks 16–17, cabin decks from 6",
+      url: "https://www.cruisemapper.com/deckplans/Carnival-Celebration-2106",
       checked: "2026-08-17",
     },
   ],
@@ -57,27 +93,29 @@ export const carnivalCelebration: ShipContent = {
     categoryWarnings: [
       "Never a porthole room. They're the absolute cheapest category on the ship and smaller than an interior — cheaper than one, too.",
       "The bottom deck is fine if they're on a budget — that's where the cheap interiors are. Just know the tradeoff: the lower you go the more vibration and motion you feel.",
+      EXCEL_COVE_NOTE,
     ],
     hazardsAboveBelow: [
       { source: "lido", where: "decks 16 and 17, aft" },
       { source: "buffet", where: "Lido Marketplace, aft on 16 and 17" },
       { source: "nightclub", where: "the atrium stage and the comedy club" },
     ],
-    obstructedViewNotes:
-      "Deck 9 is the one to check, and the forward wrap-around balconies are cut by solid steel railing rather than glass.",
+    // OPERATOR-RESEARCHED (Jimmy, 2026-08-17). Corrects an earlier record
+    // of mine that named tender boats — wrong. The obstruction is the
+    // solid steel forward railing, and it spans six decks not one.
+    obstructedViewNotes: EXCEL_FORWARD_OBSTRUCTION,
     connectingNote:
-      "Connecting cabins go quickly on family sailings — book them early or the group ends up split across a corridor.",
-    elevatorNote:
-      "The forward and midship banks get crowded either side of the dinner seatings.",
-    accessibilityNote:
-      "The themed zones are spread bow to stern, so 'walk to the next thing' is longer than it looks on paper.",
+      "Never read connecting status off the category or off two cabin numbers being next to each other — only an explicit connecting pair counts.",
+    minorPlacementRule: CARNIVAL_MINOR_PLACEMENT,
+    elevatorNote: EXCEL_ELEVATOR_NOTE,
+    accessibilityNote: EXCEL_ACCESSIBILITY_NOTE,
   },
 
   money: CARNIVAL_MONEY,
 
   traps: {
     kidAgeHeightRules: `${BOLT_RULES} ${CARNIVAL_KIDS_RULES}`,
-    obstructedBalconyDecks: "deck 9 and the forward wrap-around balconies",
+    obstructedBalconyDecks: EXCEL_OBSTRUCTED_DECKS,
     embarkationNote: CARNIVAL_EMBARKATION,
     other: ["BOLT runs on its own schedule, charges per ride, and closes in weather."],
   },

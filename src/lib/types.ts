@@ -114,6 +114,13 @@ export type ShipContent = {
     hazardsAboveBelow: { source: string; where?: string }[];
     obstructedViewNotes?: string;
     connectingNote?: string;
+    /**
+     * A line rule about where minors may be berthed. Fires on family
+     * bookings. Kept separate from connectingNote because it is policy,
+     * not ship layout — an advisor can satisfy it or fail it, and failing
+     * it is a booking that gets rejected or reshuffled at the pier.
+     */
+    minorPlacementRule?: string;
     elevatorNote?: string;
     accessibilityNote?: string;
   };

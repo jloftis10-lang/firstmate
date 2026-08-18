@@ -76,15 +76,30 @@ function cabinRead(
     );
   }
 
-  if (client.party === "family" && cabin.connectingNote) {
-    flags.push(
-      `If they want connecting rooms, confirm the cabins actually **connect** — an internal door. "Next to each other" on the deck plan is not the same thing, and it's the complaint you'll hear after boarding. ${cabin.connectingNote}`,
-    );
+  // A connecting door cuts both ways, so this fires for EVERY booking, not
+  // just families. Operator-confirmed (Jimmy, 2026-08-17): great when your
+  // own people are on the other side of it, wrong when it's strangers.
+  if (cabin.connectingNote) {
+    if (client.party === "family") {
+      flags.push(
+        `Connecting cabins are the right call here — but never infer it from the category or from two cabin numbers sitting next to each other. Only an explicit connecting pair counts. ${cabin.connectingNote}`,
+      );
+    } else {
+      flags.push(
+        "Keep them out of a connecting cabin. That door is a bonus when your own people are on the other side of it and a problem when it's strangers — check the deck plan before you confirm.",
+      );
+    }
+  }
+
+  // Policy, not layout: an adjacent cabin can fail this where a connecting
+  // one passes, which is exactly the distinction an advisor loses track of.
+  if (client.party === "family" && cabin.minorPlacementRule) {
+    flags.push(cabin.minorPlacementRule);
   }
 
   if (client.party === "multigen" && cabin.elevatorNote) {
     flags.push(
-      `Keep the older travelers near a midship elevator bank — but one cabin over, not right beside it. They want the short walk without the ding-and-chatter all evening. ${cabin.elevatorNote}`,
+      `Book them near an elevator bank — that's the call for anyone slower on their feet. ${cabin.elevatorNote}`,
     );
   }
 
@@ -185,9 +200,18 @@ function trapsRead(
       "Experienced or not, these catch people on every sailing, because none of them show up clearly at the point of booking.";
   }
 
-  if (traps.obstructedBalconyDecks) {
+  // The CAUSE comes off the ship record rather than being hardcoded here.
+  // It was "obstructed by a lifeboat" in engine prose while cabin
+  // .obstructedViewNotes sat unread in four ship files — so the operator's
+  // actual answer never reached the advisor. Decks are appended only when
+  // we have them.
+  const obstruction = cabin?.obstructedViewNotes;
+  const obstructedDecks = traps.obstructedBalconyDecks;
+  if (obstruction || obstructedDecks) {
+    const cause = obstruction ? ` ${obstruction}` : "";
+    const decks = obstructedDecks ? ` Watch ${obstructedDecks}.` : "";
     flags.push(
-      `If you've booked a balcony, confirm it isn't obstructed by a lifeboat — watch ${traps.obstructedBalconyDecks}. The deck plan doesn't always flag it, and an obstructed view is the first thing the client notices.`,
+      `If you've booked a balcony, confirm the view isn't blocked.${cause}${decks} The deck plan doesn't always flag it, and an obstructed view is the first thing the client notices.`,
     );
   }
 
