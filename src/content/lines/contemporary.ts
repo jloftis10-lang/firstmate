@@ -39,7 +39,10 @@ export const CONTEMPORARY_LINES: CruiseLine[] = [
       { name: "Carnival Pride", shipClass: "Spirit" },
       { name: "Carnival Legend", shipClass: "Spirit" },
       { name: "Carnival Miracle", shipClass: "Spirit" },
-      { name: "Carnival Luminosa", shipClass: "Spirit" },
+      // Built as Costa Luminosa (2009) to a Vista/Spirit hybrid design and
+      // transferred in 2022. Routinely listed as Spirit class, and bigger
+      // in tonnage and beam than the four hulls that actually are.
+      { name: "Carnival Luminosa", shipClass: "Vista/Spirit hybrid" },
       { name: "Carnival Sunshine", shipClass: "Sunshine" },
       { name: "Carnival Sunrise", shipClass: "Sunshine" },
       { name: "Carnival Radiance", shipClass: "Sunshine" },

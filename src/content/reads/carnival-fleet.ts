@@ -12,10 +12,17 @@ import {
  * block. The read shows "Cabin & deck" as uncharted for every ship here,
  * which is the honest position: nobody has walked them.
  *
- * The Excel and Vista-class hulls are not in this map. They have their own
- * files because they carry operator-confirmed cabin content. When a ship
- * here gets its cabin block worked up, promote it out of this map into
- * its own file the same way.
+ * The classes that have been worked up are not in this map — Excel, Vista,
+ * Dream, Sunshine, Conquest and Spirit each have their own file. Those
+ * files carry a real cabin block; this map carries the fleet baseline.
+ * When a ship here gets its decks worked up, promote it out into a class
+ * file the same way.
+ *
+ * Luminosa stays here on purpose. It's usually listed as Spirit class and
+ * isn't one — it was built as Costa Luminosa to a Vista/Spirit hybrid
+ * design, bigger than the four real Spirit-class hulls, and nobody has
+ * researched its deck plan. Inheriting the Spirit-class file would be
+ * claiming deck numbers that don't describe this ship.
  */
 
 /** Ex-Costa hulls — the Aqua Tunnel minimum is higher here. */
@@ -28,23 +35,8 @@ export const CARNIVAL_FLEET_READS: Record<string, ShipContent> = {
   "carnival-venezia": COSTA_BUILT(),
   "carnival-firenze": COSTA_BUILT(),
 
-  "carnival-dream": STANDARD(),
-  "carnival-magic": STANDARD(),
-  "carnival-breeze": STANDARD(),
   "carnival-splendor": STANDARD(),
-  "carnival-conquest": STANDARD(),
-  "carnival-glory": STANDARD(),
-  "carnival-valor": STANDARD(),
-  "carnival-liberty": STANDARD(),
-  "carnival-freedom": STANDARD(),
-  "carnival-spirit": STANDARD(),
-  "carnival-pride": STANDARD(),
-  "carnival-legend": STANDARD(),
-  "carnival-miracle": STANDARD(),
   "carnival-luminosa": STANDARD(),
-  "carnival-sunshine": STANDARD(),
-  "carnival-sunrise": STANDARD(),
-  "carnival-radiance": STANDARD(),
   "carnival-elation": STANDARD(),
   "carnival-paradise": STANDARD(),
   "carnival-adventure": STANDARD(),

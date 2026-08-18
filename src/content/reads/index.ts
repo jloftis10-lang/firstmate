@@ -10,6 +10,29 @@ import {
   carnivalPanorama,
   carnivalVista,
 } from "./carnival-vista-class";
+import {
+  carnivalBreeze,
+  carnivalDream,
+  carnivalMagic,
+} from "./carnival-dream-class";
+import {
+  carnivalRadiance,
+  carnivalSunrise,
+  carnivalSunshine,
+} from "./carnival-sunshine-class";
+import {
+  carnivalConquest,
+  carnivalFreedom,
+  carnivalGlory,
+  carnivalLiberty,
+  carnivalValor,
+} from "./carnival-conquest-class";
+import {
+  carnivalLegend,
+  carnivalMiracle,
+  carnivalPride,
+  carnivalSpirit,
+} from "./carnival-spirit-class";
 
 /**
  * Operator read content, keyed by ship id.
@@ -20,8 +43,9 @@ import {
  * call over content nobody has worked is the failure mode this product
  * exists to prevent.
  *
- * Every entry is currently `verified: false`, so every read carries a
- * SAMPLE marker until the content is confirmed.
+ * Verification is per block, not per entry. A block nobody has signed off
+ * carries a SAMPLE marker in the read, so a partly-worked ship shows
+ * exactly which of its three calls an advisor can act on.
  */
 export const SHIP_READS: Record<string, ShipContent> = {
   // Money and traps for the rest of the Carnival fleet, no cabin block.
@@ -32,6 +56,26 @@ export const SHIP_READS: Record<string, ShipContent> = {
   "carnival-vista": carnivalVista,
   "carnival-horizon": carnivalHorizon,
   "carnival-panorama": carnivalPanorama,
+
+  "carnival-dream": carnivalDream,
+  "carnival-magic": carnivalMagic,
+  "carnival-breeze": carnivalBreeze,
+
+  "carnival-sunshine": carnivalSunshine,
+  "carnival-sunrise": carnivalSunrise,
+  "carnival-radiance": carnivalRadiance,
+
+  "carnival-conquest": carnivalConquest,
+  "carnival-glory": carnivalGlory,
+  "carnival-valor": carnivalValor,
+  "carnival-liberty": carnivalLiberty,
+  "carnival-freedom": carnivalFreedom,
+
+  "carnival-spirit": carnivalSpirit,
+  "carnival-pride": carnivalPride,
+  "carnival-legend": carnivalLegend,
+  "carnival-miracle": carnivalMiracle,
+
   "wonder-of-the-seas": wonderOfTheSeas,
   "carnival-celebration": carnivalCelebration,
   "carnival-mardi-gras": carnivalMardiGras,
