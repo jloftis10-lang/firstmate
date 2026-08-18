@@ -75,10 +75,10 @@ export const carnivalCelebration: ShipContent = {
   ],
 
   cabin: {
-    // Jimmy's own calls, but the block also carries researched detail he
-    // has accepted rather than recalled. Flip only when the whole block
-    // is something he'd say on the phone.
-    verified: false,
+    // Signed off by Jimmy, 2026-08-18, after his review corrections:
+    // deck range dropped for placement guidance, motion split from
+    // vibration, the forward/aft veto softened, porthole downgraded.
+    verified: true,
     // CORRECTED (Jimmy, 2026-08-17). "Decks 6 to 9" was wrong: on Excel
     // class decks 6 and 7 are essentially public space, 8 is mixed, and 9
     // is the first full stateroom deck. No fixed range is claimed now —
