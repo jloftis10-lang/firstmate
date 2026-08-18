@@ -58,13 +58,15 @@ you'd say out loud to an advisor on the phone.
 
 `src/lib/noise.ts` holds the ranked above/below table. Six of its twelve
 rows already state their timing inside the "what they experience" text —
-buffet is "early breakfast setup", nightclub is "late at night", quiet
-restaurant is "at opening and closing". Four do not:
+buffet is "early breakfast setup", galley is "overnight and early prep",
+nightclub is "late at night", kids areas are "daytime traffic", bar is
+"late crowds", quiet restaurant is "at opening and closing". Four do not:
 
+- **Pool / Lido deck** — the highest-risk row in the table, and the one
+  with no stated timing. Early-morning setup? All day? Evening parties?
 - **Gym** — when does it actually bite? Early morning, all day?
 - **Sports court / running track** — same question.
 - **Theater / show venue** — daytime rehearsals as well as evening shows?
-- **Bar / lounge** — from when in the evening?
 
 Timing only earns its place in the read if there is a client dimension to
 match it against, and there isn't one today: the five inputs don't ask
