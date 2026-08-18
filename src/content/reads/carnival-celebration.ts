@@ -79,13 +79,21 @@ export const carnivalCelebration: ShipContent = {
     // has accepted rather than recalled. Flip only when the whole block
     // is something he'd say on the phone.
     verified: false,
-    // OPERATOR-CONFIRMED (Jimmy, 2026-08-17): "midship 6-9", off the rule
-    // "lower or middle levels, towards the middle of the ship". This
-    // replaces a range I had inferred from the deck plan.
-    midshipRange: "decks 6 to 9",
-    // OPERATOR-CONFIRMED (Jimmy, 2026-08-17). Corrects the researched
-    // version, which had forward only — the call is both ends.
-    motionAvoid: "the front and the back of the ship",
+    // CORRECTED (Jimmy, 2026-08-17). "Decks 6 to 9" was wrong: on Excel
+    // class decks 6 and 7 are essentially public space, 8 is mixed, and 9
+    // is the first full stateroom deck. No fixed range is claimed now —
+    // the guidance goes in placementNote and the call falls back to the
+    // rule, which is what he actually says out loud.
+    placementNote:
+      "Prioritise midship first. Deck 9 is a strong default on this class because it's the lowest full stateroom deck — but judge the actual cabin rather than working to a fixed deck range.",
+    // SHIP MOTION only. Softened from a blanket veto on both ends:
+    // forward is the real problem, aft is a relative negative.
+    motionAvoid:
+      "Push hard for midship. Extreme forward is the one to rule out; extreme aft is a negative when there's comparable midship inventory, and more so if vibration also matters to them.",
+    // PROPULSION VIBRATION — a separate concept from motion, and the
+    // correction that mattered most in Jimmy's review.
+    vibrationNote:
+      "Lower decks are generally better for motion, not worse — closer to the waterline. The catch is vibration: a low cabin at the back can still pick up the propulsion, so \"go low\" isn't automatically the right call for a sensitive traveller.",
     // OPERATOR-CONFIRMED (Jimmy, 2026-08-17). Both are value/comfort
     // calls rather than motion ones, so they show on every read.
     //
@@ -94,8 +102,14 @@ export const carnivalCelebration: ShipContent = {
     // tradeoff, not a veto: it is fine on a budget, and the drawbacks are
     // vibration, motion and the crowd it draws.
     categoryWarnings: [
-      "Never a porthole room. They're the absolute cheapest category on the ship and smaller than an interior — cheaper than one, too.",
-      "The bottom deck is fine if they're on a budget — that's where the cheap interiors are. Just know the tradeoff: the lower you go the more vibration and motion you feel.",
+      // DOWNGRADED (Jimmy, 2026-08-17): the size-and-price comparison
+      // could not be established for these hulls, so this reads as an
+      // operator's steer plus a check rather than a stated ship fact.
+      "I'd steer them off a porthole room — it's the cheapest category and they've felt small to me. Check the actual square footage for the specific cabin before you rule it in or out.",
+      // CORRECTED (Jimmy, 2026-08-17): the motion claim here was
+      // backwards. Lower is generally BETTER for motion. The vibration
+      // point survives, and now lives in cabin.vibrationNote.
+      "The bottom deck is fine if they're on a budget — that's where the cheap interiors are, and low is generally kinder for motion, not harsher.",
       EXCEL_COVE_NOTE,
     ],
     hazardsAboveBelow: [
@@ -117,10 +131,13 @@ export const carnivalCelebration: ShipContent = {
   money: CARNIVAL_MONEY,
 
   traps: {
-    verified: false,
+    // Signed off by Jimmy, 2026-08-17, after the embarkation and BOLT fixes.
+    verified: true,
     kidAgeHeightRules: `${BOLT_RULES} ${CARNIVAL_KIDS_RULES}`,
     obstructedBalconyDecks: EXCEL_OBSTRUCTED_DECKS,
     embarkationNote: CARNIVAL_EMBARKATION,
-    other: ["BOLT runs on its own schedule, charges per ride, and closes in weather."],
+    // "Per ride" and "closes in weather" removed — Jimmy could not find
+    // sources for either. The extra cost is the part Carnival confirms.
+    other: ["BOLT costs extra on top of the fare."],
   },
 };

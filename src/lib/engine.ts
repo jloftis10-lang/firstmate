@@ -39,14 +39,21 @@ function cabinRead(
     // deck plan and the seesaw rule both miss. Aft mechanism is
     // operator-confirmed (Jimmy, 2026-08-17).
     why =
-      "A ship pivots around its center, like a seesaw: the ends rise and fall the most, the middle barely moves. But the two ends are bad for different reasons. Forward is the pitch — that's the motion people picture. Aft is the engines: you feel the vibration back there and the room itself can shake, which is a different complaint from motion and catches the people who assumed a low cabin at the back would be fine. Midship is the only spot that avoids both.";
-    flags.push(
-      `They're prone to seasickness. Avoid ${cabin.motionAvoid} entirely.`,
-    );
+      "A ship pivots around its center, like a seesaw: the ends rise and fall the most, the middle barely moves. But the two ends are bad for different reasons. Forward is the pitch — that's the motion people picture. Aft is the engines: you feel the vibration back there and the room itself can shake, which is a different complaint from motion and catches the people who assumed a low cabin at the back would be fine. Lower is generally better for motion too — closer to the waterline, less of the ship swinging around you. Midship is where you avoid both at once.";
+    flags.push(`They're prone to seasickness. ${cabin.motionAvoid}`);
+    // Separate flag on purpose: vibration is not motion, and a traveler
+    // sensitive to one is not automatically sensitive to the other.
+    if (cabin.vibrationNote) {
+      flags.push(cabin.vibrationNote);
+    }
   } else {
     call = `Put them ${placement} — calmest ride, shortest walk to the dining room and the elevators.`;
     why =
       "Midship is the sweet spot on any ship: least motion, most central. Even for good sailors it saves them a quarter-mile hike to dinner every night.";
+  }
+
+  if (cabin.placementNote) {
+    flags.push(cabin.placementNote);
   }
 
   // Category warnings are not motion advice — they apply to everyone.
@@ -124,7 +131,7 @@ function moneyRead(
     const math =
       money.drinkPackagePrice && money.breakEvenDrinksPerDay
         ? `at about $${money.drinkPackagePrice} a day it breaks even around ${money.breakEvenDrinksPerDay} drinks, and they'll clear that`
-        : "run the math on a normal day's drinking and it pays for itself";
+        : "what it takes to break even depends entirely on what they actually drink, so run it against their habits rather than a rule of thumb";
     call = `The drink package is worth it on this sailing. Lots of sea days means lots of bar time — ${math}.`;
     why =
       "Drink packages only win when people are actually on the ship drinking. Sea-day itineraries keep them aboard, so the break-even is easy to clear. On a port-heavy run it's the opposite.";

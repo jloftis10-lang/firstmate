@@ -89,8 +89,30 @@ export type ShipContent = {
      * back to the rule.
      */
     midshipRange?: string;
-    /** Reads as "avoid ___ entirely". e.g. "the front and the back of the ship" */
+    /**
+     * Placement guidance that doesn't reduce to a deck range — "deck 9 is
+     * the lowest full stateroom deck, so it's a strong default, but judge
+     * the actual cabin rather than the number". Rendered as its own flag.
+     */
+    placementNote?: string;
+    /**
+     * SHIP MOTION only: pitch and roll, the thing a seesaw explains.
+     * A complete sentence, rendered as written — not wrapped in "avoid ___
+     * entirely", because a blanket veto on both ends is wrong. Forward is
+     * the real problem; aft is a relative negative, not a disqualifier.
+     */
     motionAvoid: string;
+    /**
+     * PROPULSION VIBRATION — deliberately a separate concept from motion,
+     * and the distinction matters more than it looks.
+     *
+     * Lower and midship is generally BETTER for motion, closer to the
+     * waterline with less to swing. But a low aft cabin can still pick up
+     * engine vibration and shake, which is a different complaint with a
+     * different cause. Collapsing the two produces the exact wrong advice:
+     * "go low" is right for motion and can be wrong for vibration.
+     */
+    vibrationNote?: string;
     /**
      * What an advisor should know about particular cabin categories or
      * deck bands, for reasons other than pitch and roll — size, value,

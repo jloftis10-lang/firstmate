@@ -40,35 +40,39 @@ export const CARNIVAL_SOURCES: Source[] = [
 ];
 
 /**
- * $17.00 per person per day for standard staterooms from 2 April 2026
- * (suites are $19.00 — the engine carries the standard figure, which is
- * what the overwhelming majority of bookings pay).
+ * $17.00 per person per day for standard staterooms, $19.00 for suites,
+ * posted to the Sail & Sign account if it isn't prepaid.
  *
- * The Cheers! figure is the pre-purchased rate including the 20% service
- * charge; bought onboard it is about $6/day more.
+ * No effective date is claimed. An earlier version said "from 2 April
+ * 2026" and no Carnival source supports that — it came from an unrelated
+ * FAQ update.
  *
- * Break-even is deliberately the CONSERVATIVE end of the range. Sources
- * put it at roughly 6 cocktails or about 8 mixed alcoholic drinks a day.
- * Overselling the package is the specific failure the framework warns
- * about — a barely-used package is lost trust — so the record carries the
- * number that makes the advisor more cautious, not less.
+ * Cheers! is $83.94 per person per day pre-cruise and $89.94 onboard,
+ * both including the 20% service charge.
+ *
+ * There is deliberately NO break-even figure. Break-even is not a
+ * property of the ship or the line — someone drinking beer and coffee
+ * has a completely different one from someone ordering $15 cocktails.
+ * A fixed number here would undercut the real calculation, which is
+ * package cost against that client's expected consumption.
  */
 export const CARNIVAL_MONEY: ShipContent["money"] = {
-  verified: false,
+  // Signed off by Jimmy, 2026-08-17, after dropping the unsupported
+  // effective date and the fixed break-even figure.
+  verified: true,
   drinkPackagePrice: 84,
-  breakEvenDrinksPerDay: 8,
   specialtyDiningNote:
-    "Specialty dining opens for booking pre-cruise under Manage My Booking, and the good nights go first.",
+    "It's reservable pre-cruise through Cruise Manager, and times are first-come first-served, so lock in the nights that matter early.",
   gratuityPerDayUSD: 17,
 };
 
 /** Camp Ocean 2–11, Circle C 12–14, Club O2 15–17. BOLT needs 52 inches. */
 export const CARNIVAL_KIDS_RULES =
-  "Camp Ocean splits 2–11 into age bands (Penguins 2–5, Sting Rays 6–8, Sharks 9–11), then Circle C at 12–14 and Club O2 at 15–17.";
+  "Camp Ocean splits 2–11 into age bands (Penguins 2–5, Sting Rays 6–8, Sharks 9–11), then Circle C at 12–14 and Club O2 at 15–17. Turtles covers 6 months to under 2 at certain times.";
 
 /** BOLT is on the Excel-class ships only. */
 export const BOLT_RULES =
-  "BOLT, the rollercoaster, needs 52 inches minimum — and caps at 77 inches and 300 pounds.";
+  "BOLT, the rollercoaster, needs 52 inches minimum and caps at 77 inches, 300 pounds per person and 440 pounds per vehicle. Anyone under 12 has to ride with someone 15 or over.";
 
 /**
  * The Arrival Appointment is the single biggest embarkation trap on
@@ -76,7 +80,7 @@ export const BOLT_RULES =
  * guests who turn up early are held outside the terminal.
  */
 export const CARNIVAL_EMBARKATION =
-  "Carnival assigns a 30-minute Arrival Appointment, usually somewhere between 10:30am and 3pm, and guests who show up before their window are not let into the terminal.";
+  "Guests pick an Arrival Appointment during online check-in and need to turn up inside that window — anyone arriving early may be held until their assigned time.";
 
 /** Fleet-wide waterslide minimums. Twister is 42"; most run 42–48". */
 export const CARNIVAL_SLIDE_RULES =
@@ -131,7 +135,7 @@ export function carnivalFleetContent(opts: {
  * adjacent pair that looks fine on a deck plan fails.
  */
 export const CARNIVAL_MINOR_PLACEMENT =
-  "Carnival requires anyone 14 or under to be in the same cabin as their 25-or-over guardian, or in a cabin that genuinely connects to it. Adjacent is not enough — for bookings made from February 2025 this is a rule, not a preference. Guests 15 to 17 have more room to move.";
+  "For bookings made from 1 February 2025, anyone 14 or under has to be in the same cabin as their qualifying guardian or in one that genuinely connects — adjacent doesn't satisfy it. Guests 15 to 17 can be up to three cabins away. One exception worth knowing: a parent aged 21 to 24 can sail with their own children, so don't insist on a 25-plus guardian in that case.";
 
 /**
  * Excel-class forward-view obstruction.
@@ -141,7 +145,7 @@ export const CARNIVAL_MINOR_PLACEMENT =
  * can disappear entirely when seated and open up when standing.
  */
 export const EXCEL_FORWARD_OBSTRUCTION =
-  "On this class the forward-facing balconies are the problem, and it's the solid steel forward railing rather than a lifeboat. Passengers report the view can vanish while they're sitting down and come back when they stand.";
+  "On this class the forward-facing balconies are the problem, and it's the solid steel forward railing rather than a lifeboat — Carnival sells the category as partially obstructed. Passengers also report the view disappearing while they're seated and opening up when they stand, though that's a traveler observation rather than a published spec.";
 
 /** The decks the forward-view obstruction actually spans. */
 export const EXCEL_OBSTRUCTED_DECKS =
@@ -169,4 +173,4 @@ export const EXCEL_ELEVATOR_NOTE =
  * day at exactly the busiest moments.
  */
 export const EXCEL_ACCESSIBILITY_NOTE =
-  "The indoor dining and shows sit on decks 6 to 8 and the outdoor action is up on 16 to 18, so anyone slower on their feet makes that elevator trip several times a day, and the queues at peak are the single biggest complaint on these ships. If they use a wheelchair or a scooter, treat that as a different job entirely: not every Excel cabin takes a scooter, standard doorways run about 22 inches, and there are lips into the bathroom, shower and balcony — get the cabin confirmed against Carnival's accessible deck plan before you book it.";
+  "Most of the indoor dining and entertainment sits around decks 6 to 8, while the Lido, pool and sport decks run from about 16 up to 19 where BOLT is — so anyone slower on their feet repeats that lift trip several times a day, and peak queues are the standing complaint on these ships. If they use a wheelchair or a scooter, treat it as a different job entirely: not every Excel cabin takes a scooter, standard and ambulatory-accessible cabins run about a 22-inch entry door with lips into the bathroom, shower and balcony, and a larger scooter needs a fully accessible cabin. Confirm it against Carnival's accessible deck plan before you book.";
