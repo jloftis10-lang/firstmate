@@ -83,19 +83,16 @@ export type ShipContent = {
     /** Reads as "avoid ___ entirely". e.g. "the front and the back of the ship" */
     motionAvoid: string;
     /**
-     * Further placements to keep a motion-sensitive client out of, where
-     * the reason is something other than pitch and roll — an interior
-     * cabin with no horizon to look at, say. Each entry is a complete
-     * heads-up sentence and becomes its own flag.
+     * What an advisor should know about particular cabin categories or
+     * deck bands, for reasons other than pitch and roll — size, value,
+     * noise, who else books there. Shown on every read, not just seasick
+     * ones, because none of it depends on motion sensitivity.
+     *
+     * Each entry is a complete heads-up sentence. Entries may carry a
+     * tradeoff rather than a veto: "fine on a budget, but ___" is real
+     * operator advice and more useful than a flat never.
      */
-    motionAlsoAvoid?: string[];
-    /**
-     * A cabin CATEGORY to steer any client away from, for reasons that
-     * have nothing to do with motion — size, value, what the client is
-     * actually picturing. Shown on every read, not just seasick ones.
-     * A complete heads-up sentence.
-     */
-    categoryWarning?: string;
+    categoryWarnings?: string[];
     /** Reads as "that means ___" — pool deck, buffet, nightclub locations. */
     hazardsAboveBelow: string[];
     obstructedViewNotes?: string;

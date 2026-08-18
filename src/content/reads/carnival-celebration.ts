@@ -47,16 +47,17 @@ export const carnivalCelebration: ShipContent = {
     // OPERATOR-CONFIRMED (Jimmy, 2026-08-17). Corrects the researched
     // version, which had forward only — the call is both ends.
     motionAvoid: "the front and the back of the ship",
-    // Still a bare call — Jimmy gave this one without a rationale, and
-    // inventing one would put words in the operator's mouth. Ask before
-    // filling it in.
-    motionAlsoAvoid: ["Not an interior cabin at the bottom of the ship either."],
-    // OPERATOR-CONFIRMED (Jimmy, 2026-08-17): porthole rooms are the
-    // cheapest category and smaller than an interior. That is a value and
-    // size warning, not a motion one, so it sits here and shows on every
-    // read rather than only for a seasick client.
-    categoryWarning:
+    // OPERATOR-CONFIRMED (Jimmy, 2026-08-17). Both are value/comfort
+    // calls rather than motion ones, so they show on every read.
+    //
+    // The bottom-deck entry CORRECTS an earlier record of mine that said
+    // "never an interior cabin at the bottom". Jimmy's actual call is a
+    // tradeoff, not a veto: it is fine on a budget, and the drawbacks are
+    // vibration, motion and the crowd it draws.
+    categoryWarnings: [
       "Never a porthole room. They're the absolute cheapest category on the ship and smaller than an interior — cheaper than one, too.",
+      "The bottom deck is fine if they're on a budget — that's where the cheap interiors are. Just know the tradeoff: the lower you go the more vibration and motion you feel, and it tends to draw a louder, party crowd.",
+    ],
     hazardsAboveBelow: [
       "the Lido Marketplace buffet and the pool deck, both aft on 16 and 17",
       "the atrium stage and the late-night comedy club",

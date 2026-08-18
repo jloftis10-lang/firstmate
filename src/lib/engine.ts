@@ -38,9 +38,6 @@ function cabinRead(ship: CoveredShip, client: ClientProfile): ReadCategory {
     flags.push(
       `They're prone to seasickness. Avoid ${cabin.motionAvoid} entirely.`,
     );
-    for (const also of cabin.motionAlsoAvoid ?? []) {
-      flags.push(also);
-    }
   } else {
     call = `Put them ${placement} — calmest ride, shortest walk to the dining room and the elevators.`;
     why =
@@ -48,8 +45,8 @@ function cabinRead(ship: CoveredShip, client: ClientProfile): ReadCategory {
   }
 
   // Category warnings are not motion advice — they apply to everyone.
-  if (cabin.categoryWarning) {
-    flags.push(cabin.categoryWarning);
+  for (const warning of cabin.categoryWarnings ?? []) {
+    flags.push(warning);
   }
 
   if (cabin.hazardsAboveBelow.length > 0) {
