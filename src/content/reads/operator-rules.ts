@@ -114,8 +114,15 @@ export const CONNECTING_RULE =
  * class, for the same structural reason: those hulls put the Promenade
  * on 5 and the Lido on 9, which squeezes the clean band to one deck.
  * That is a recurring Carnival layout, NOT a fleet-wide constant — Dream
- * class answers 7 and 8, and Excel answers differently again. Check the
- * hull; don't assume deck 7.
+ * class answers 7 and 8, Spirit class answers 5 to 7, and Excel answers
+ * differently again. Check the hull; don't assume deck 7.
+ *
+ * AND THE SCAN GOES BOTH WAYS. The Fantasy class is the counterexample
+ * that proves it: on Elation and Paradise the Lido is deck 10 and the
+ * Verandah cabins on 11 sit ABOVE it. Every other hull in this repo puts
+ * the pool above or beside the cabins, so the habit of only asking
+ * "what's above this cabin" would miss the noise entirely there. Ask
+ * both questions on every hull.
  *
  * Each class still has to be worked out against its own deck plan — this
  * is the question to ask, and the answer differs per hull. It earns its
