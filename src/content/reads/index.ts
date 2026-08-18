@@ -5,6 +5,11 @@ import { carnivalMardiGras } from "./carnival-mardi-gras";
 import { norwegianPrima } from "./norwegian-prima";
 import { CARNIVAL_FLEET_READS } from "./carnival-fleet";
 import { carnivalJubilee } from "./carnival-jubilee";
+import {
+  carnivalHorizon,
+  carnivalPanorama,
+  carnivalVista,
+} from "./carnival-vista-class";
 
 /**
  * Operator read content, keyed by ship id.
@@ -24,6 +29,9 @@ export const SHIP_READS: Record<string, ShipContent> = {
   ...CARNIVAL_FLEET_READS,
 
   "carnival-jubilee": carnivalJubilee,
+  "carnival-vista": carnivalVista,
+  "carnival-horizon": carnivalHorizon,
+  "carnival-panorama": carnivalPanorama,
   "wonder-of-the-seas": wonderOfTheSeas,
   "carnival-celebration": carnivalCelebration,
   "carnival-mardi-gras": carnivalMardiGras,

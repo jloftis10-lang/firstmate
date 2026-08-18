@@ -12,7 +12,7 @@ import {
  * block. The read shows "Cabin & deck" as uncharted for every ship here,
  * which is the honest position: nobody has walked them.
  *
- * The three Excel hulls are not in this map. They have their own
+ * The Excel and Vista-class hulls are not in this map. They have their own
  * files because they carry operator-confirmed cabin content. When a ship
  * here gets its cabin block worked up, promote it out of this map into
  * its own file the same way.
@@ -28,9 +28,6 @@ export const CARNIVAL_FLEET_READS: Record<string, ShipContent> = {
   "carnival-venezia": COSTA_BUILT(),
   "carnival-firenze": COSTA_BUILT(),
 
-  "carnival-vista": STANDARD(),
-  "carnival-horizon": STANDARD(),
-  "carnival-panorama": STANDARD(),
   "carnival-dream": STANDARD(),
   "carnival-magic": STANDARD(),
   "carnival-breeze": STANDARD(),
