@@ -1,51 +1,53 @@
 import type { ShipContent } from "@/lib/types";
 
 /**
- * SAMPLE CONTENT — verified: false.
+ * RESEARCHED, NOT OPERATOR-CONFIRMED — verified: false.
  *
- * Placeholder operator judgment in the right voice, not verified fact.
- * Deck numbers, prices and rules below are plausible, not confirmed.
- * Replace with real ship-specific knowledge, then flip `verified` to true.
+ * Replaces an entirely invented earlier record, same as Wonder of the
+ * Seas. NO CABIN BLOCK — the previous one was fabricated and is gone.
+ *
+ * Norwegian is the reason `drinkPackageNote` exists. The line usually
+ * bundles the beverage package into Free at Sea, so the engine's
+ * worth-it-or-not call is the wrong question on most NCL fares. Without
+ * that note the read would confidently tell an advisor to skip a package
+ * their client has already been given.
  */
 export const norwegianPrima: ShipContent = {
   verified: false,
-  reviewDue: "2026-12-31",
+  reviewDue: "2027-02-01",
 
-  cabin: {
-    midshipRange: "decks 9 to 11",
-    motionAvoid: "the highest decks and the forward staterooms",
-    hazardsAboveBelow: [
-      { source: "lido", where: "the pool deck" },
-      { source: "buffet" },
-      { source: "theater", where: "the theatre" },
-      { source: "nightclub", where: "the nightclub, after hours" },
-    ],
-    obstructedViewNotes:
-      "Balcony sightlines on some lower decks are cut by lifeboats.",
-    connectingNote:
-      "Connecting staterooms are limited on this class — book them early or the family gets separated.",
-    elevatorNote:
-      "The midship bank is the practical one; the forward bank means a long walk to dinner.",
-    accessibilityNote:
-      "The outdoor promenade and stepped terraces mean more stairs than a flat-deck ship.",
-  },
+  sources: [
+    {
+      label: "Norwegian daily service charge 2026",
+      url: "https://deeparrival.com/cruise/cruise-lines/norwegian/gratuities/",
+      checked: "2026-08-17",
+    },
+    {
+      label: "Free at Sea beverage package structure",
+      url: "https://deeparrival.com/cruise/cruise-lines/norwegian/drink-packages/",
+      checked: "2026-08-17",
+    },
+    {
+      label: "Splash Academy and Entourage age bands",
+      url: "https://eatsleepcruise.com/whats-included-on-norwegian-cruise-line/",
+      checked: "2026-08-17",
+    },
+  ],
 
   money: {
-    drinkPackagePrice: 109,
-    breakEvenDrinksPerDay: 7,
+    // No standalone daily rate quoted here on purpose: on most Free at Sea
+    // fares the package is included and the guest pays only the service
+    // charge, so a headline price would misrepresent the decision.
+    drinkPackageNote:
+      "Check what the fare already includes before you sell a package. On most Free at Sea bookings the premium package comes with it and the client pays only the 20% service charge — so the question isn't whether it's worth it, it's whether they already have it.",
     specialtyDiningNote:
-      "Specialty restaurants are the draw on this ship and book out fast.",
+      "Specialty dining is the draw on this ship and the Free at Sea dining credits get used early, so the good nights go fast.",
+    // $20.00 per guest for Club Balcony Suite and below; $25.00 in The Haven.
     gratuityPerDayUSD: 20,
   },
 
   traps: {
     kidAgeHeightRules:
-      "The go-kart track and the drop slides both carry height and age minimums.",
-    obstructedBalconyDecks: "the lower balcony decks",
-    embarkationNote:
-      "Check-in times are assigned in advance — arriving early does not move you up.",
-    other: [
-      "The go-kart track charges per session and books out at peak times.",
-    ],
+      "Splash Academy runs 3 to 12, and Entourage is the teen space for 13 to 17.",
   },
 };

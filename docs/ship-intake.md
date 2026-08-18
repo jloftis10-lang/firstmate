@@ -54,6 +54,23 @@ you'd say out loud to an advisor on the phone.
 
 ---
 
+## Open questions on the shared risk table
+
+`src/lib/noise.ts` holds the ranked above/below table. Six of its twelve
+rows already state their timing inside the "what they experience" text —
+buffet is "early breakfast setup", nightclub is "late at night", quiet
+restaurant is "at opening and closing". Four do not:
+
+- **Gym** — when does it actually bite? Early morning, all day?
+- **Sports court / running track** — same question.
+- **Theater / show venue** — daytime rehearsals as well as evening shows?
+- **Bar / lounge** — from when in the evening?
+
+Timing only earns its place in the read if there is a client dimension to
+match it against, and there isn't one today: the five inputs don't ask
+whether someone is a light sleeper or a night owl, and a sixth input needs
+a validated reason. Worth recording, not worth adding an input for yet.
+
 ## Notes on shape
 
 - **Deck ranges** read back as "book them midship, ___" — so

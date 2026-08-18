@@ -1,51 +1,59 @@
 import type { ShipContent } from "@/lib/types";
 
 /**
- * SAMPLE CONTENT — verified: false.
+ * RESEARCHED, NOT OPERATOR-CONFIRMED — verified: false.
  *
- * Placeholder operator judgment in the right voice, not verified fact.
- * Deck numbers, prices and rules below are plausible, not confirmed.
- * Replace with real ship-specific knowledge, then flip `verified` to true.
+ * Replaces an earlier record that was entirely invented: plausible
+ * operator language over facts nobody had checked. Everything below now
+ * comes from the sources listed, all of it Royal Caribbean line policy.
+ *
+ * NO CABIN BLOCK. The previous version had one, and every word of it was
+ * mine — deck ranges, hazard locations, lifeboat obstructions, all made
+ * up. It is gone rather than dressed up, and the read now reports the
+ * cabin category as uncharted for this ship. Same split as the Carnival
+ * fleet: policy is researchable, cabin advice needs an operator.
  */
 export const wonderOfTheSeas: ShipContent = {
   verified: false,
-  reviewDue: "2026-12-31",
+  reviewDue: "2027-02-01",
 
-  cabin: {
-    midshipRange: "decks 8 to 10",
-    motionAvoid: "the top decks and the forward third of the ship",
-    hazardsAboveBelow: [
-      { source: "lido", where: "the pool deck, up top" },
-      { source: "buffet", where: "the Windjammer, up top" },
-      { source: "nightclub", where: "the Music Hall" },
-      { source: "bar", where: "the late-night lounges" },
-    ],
-    obstructedViewNotes:
-      "A run of balconies on the lower promenade decks looks straight into a lifeboat.",
-    connectingNote:
-      "Central Park and Boardwalk balcony cabins face inward — quieter, but no ocean. Families often assume they get a sea view.",
-    elevatorNote:
-      "The midship elevator banks are the busiest on the ship at dinner hour.",
-    accessibilityNote:
-      "This is a very long ship — aft cabin to midship dining is a genuine hike.",
-  },
+  sources: [
+    {
+      label: "Royal Caribbean daily gratuity rates 2026",
+      url: "https://deeparrival.com/cruise/cruise-lines/royal-caribbean/gratuities/",
+      checked: "2026-08-17",
+    },
+    {
+      label: "Deluxe Beverage Package pricing",
+      url: "https://allaboarddeals.com/blog/royal-caribbean-deluxe-beverage-package",
+      checked: "2026-08-17",
+    },
+    {
+      label: "Adventure Ocean age bands",
+      url: "https://travelingears.com/royal-caribbean-kids-clubs/",
+      checked: "2026-08-17",
+    },
+  ],
 
   money: {
-    drinkPackagePrice: 95,
-    breakEvenDrinksPerDay: 6,
+    // Fleet median. The package spans roughly $70–125 depending on ship
+    // and sailing, so the figure is indicative rather than exact.
+    drinkPackagePrice: 84,
+    // No sourced break-even figure for this line — omitted rather than
+    // carried over from Carnival's. The engine falls back to prose.
+    drinkPackageNote:
+      "The 18% gratuity on the package is charged on top of the headline price, so the real daily cost is about a fifth higher than the quoted rate.",
     specialtyDiningNote:
-      "The good nights at the specialty restaurants sell out before sailing.",
-    gratuityPerDayUSD: 18,
+      "The specialty restaurants take bookings before sailing and the good nights go first.",
+    // $16.00 for interior, ocean view and balcony; $18.50 for suites.
+    gratuityPerDayUSD: 16,
   },
 
   traps: {
     kidAgeHeightRules:
-      "The waterslides and the kids'-club tiers both run on height and age cutoffs.",
-    obstructedBalconyDecks: "the lower promenade decks",
-    embarkationNote:
-      "Check-in runs in staggered windows — turning up early just means a longer line.",
+      "Adventure Ocean runs 3 to 11 in bands — Aquanauts 3–5, Explorers 6–8, Voyagers 9–12 — with a separate nursery for 6 to 36 months.",
     other: [
-      "The headline shows take reservations that open before sailing and fill fast.",
+      "Adventure Ocean registration happens on embarkation day, and the nursery and late-night sitting fill up fast.",
     ],
   },
 };

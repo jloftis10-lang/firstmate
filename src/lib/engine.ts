@@ -119,6 +119,12 @@ function moneyRead(
       "A drink package has to be consumed on the ship. When the itinerary pulls them ashore five days out of seven, the daily rate almost never breaks even. Sell it and they feel it was a waste — and they remember who suggested it.";
   }
 
+  // Raised before the dining flag: if the package is already in the fare,
+  // the worth-it call above is the wrong question entirely.
+  if (money.drinkPackageNote) {
+    flags.push(money.drinkPackageNote);
+  }
+
   flags.push(
     `Book specialty dining now, before they board. ${money.specialtyDiningNote} When the client can't get a table they blame you, not the ship.`,
   );

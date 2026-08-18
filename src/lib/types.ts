@@ -120,6 +120,14 @@ export type ShipContent = {
   money?: {
     drinkPackagePrice?: number;
     breakEvenDrinksPerDay?: number;
+    /**
+     * Anything that changes the package maths on this line before the
+     * break-even even applies — a package bundled into the fare, a
+     * mandatory-for-all-adults rule, a service charge levied separately.
+     * Without this the engine's worth-it call is confidently wrong on any
+     * line that does not sell the package as a simple daily rate.
+     */
+    drinkPackageNote?: string;
     specialtyDiningNote: string;
     gratuityPerDayUSD?: number;
   };
