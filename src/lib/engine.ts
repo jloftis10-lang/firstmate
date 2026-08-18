@@ -48,9 +48,16 @@ function cabinRead(
       flags.push(cabin.vibrationNote);
     }
   } else {
-    call = `Put them ${placement} — calmest ride, shortest walk to the dining room and the elevators.`;
+    call = `Put them ${placement} — calmest ride, and the middle of the ship is the shortest walk to most of it.`;
+    // The call used to promise "shortest walk to the dining room and the
+    // elevators". The elevator half is NOT universally true and the
+    // Oasis-class review caught it: those six hulls concentrate all 24
+    // lifts forward and aft with no midship bank, so a midship cabin
+    // there means MORE walking, not less. Motion and centrality are
+    // general; lift proximity is a property of the hull, so it belongs in
+    // cabin.elevatorNote rather than in a call that fires on every ship.
     why =
-      "Midship is the sweet spot on any ship: least motion, most central. Even for good sailors it saves them a quarter-mile hike to dinner every night.";
+      "Midship is the sweet spot on any ship: least motion, most central. Even for good sailors it saves them a hike to dinner every night. One caveat that catches people on the biggest ships: midship does not automatically mean near a lift. Some hulls put all their elevator banks forward and aft, so the calmest cabin can also be the longest walk to a lift — where that's true, the elevator note on this card says so.";
   }
 
   if (cabin.placementNote) {
