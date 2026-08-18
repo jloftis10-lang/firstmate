@@ -154,10 +154,8 @@ function primaClassContent(
               "The Haven here is the largest in the fleet, including two-storey duplex suites that exist nowhere else. If a client is Haven-shopping across NCL, this class is the top of the range.",
             ]
           : []),
-        NCL_HAVEN_WARNING,
-        NCL_FREESTYLE,
-        ...NCL_FLEET_TRAPS,
       ],
+      linePolicy: [NCL_HAVEN_WARNING, NCL_FREESTYLE, ...NCL_FLEET_TRAPS],
     },
   };
 }

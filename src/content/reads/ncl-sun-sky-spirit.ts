@@ -134,9 +134,8 @@ function sunContent(): ShipContent {
       other: [
         NO_HAVEN,
         "The absence list: no go-karts, no Waterfront, no Ocean Boulevard, no ropes course, no laser tag, no big waterslide complex. There is a forward observation lounge — the Spinnaker, up on 12 — so the ship isn't short of a view bar.",
-        NCL_FREESTYLE,
-        ...NCL_FLEET_TRAPS,
       ],
+      linePolicy: [NCL_FREESTYLE, ...NCL_FLEET_TRAPS],
     },
   };
 }
@@ -193,9 +192,8 @@ function skyContent(): ShipContent {
         NO_HAVEN,
         "The absence list: no go-karts, no Waterfront, no Ocean Boulevard, no ropes course, no laser tag, no big waterslide complex. There is a forward observation lounge, the Spinnaker on 11, which also serves as a show venue.",
         "This is the oldest-feeling ship in the fleet and it started life as somebody else's. That's not a reason to avoid it — it's a reason to set the expectation against the right comparison, which is a small older ship, not a Prima.",
-        NCL_FREESTYLE,
-        ...NCL_FLEET_TRAPS,
       ],
+      linePolicy: [NCL_FREESTYLE, ...NCL_FLEET_TRAPS],
     },
   };
 }
@@ -254,9 +252,8 @@ function spiritContent(): ShipContent {
         "The 2020 refit was substantial — over $100 million and 40 days — but it was about venues, not cabins. Fourteen new spaces including a third main dining room, the Garden Café, Onda by Scarpetta and a doubled spa. Only sixteen cabins were added and nothing was renumbered, so the rooms themselves are still the 1998 rooms with new décor.",
         "One thing that refit took away: the children's water park was removed and replaced with Spice H2O, which is adults-only and carries an extra fee. If a family is booking this ship off an older review expecting a kids' splash area, it isn't there any more.",
         "The absence list: no go-karts, no Waterfront, no Ocean Boulevard, no ropes course, no laser tag, no big waterslide complex. There is a forward observation lounge, the Spinnaker on 12.",
-        NCL_FREESTYLE,
-        ...NCL_FLEET_TRAPS,
       ],
+      linePolicy: [NCL_FREESTYLE, ...NCL_FLEET_TRAPS],
     },
   };
 }

@@ -287,7 +287,12 @@ function ReadView({
 
       <ReadCard number="01" category="Cabin & deck" read={read.cabin} />
       <ReadCard number="02" category="Money surprises" read={read.money} />
-      <ReadCard number="03" category="Expectation traps" read={read.traps} />
+      <ReadCard
+        number="03"
+        category="Expectation traps"
+        read={read.traps}
+        lineName={ship.line}
+      />
 
       <ClientSummary
         text={summary}

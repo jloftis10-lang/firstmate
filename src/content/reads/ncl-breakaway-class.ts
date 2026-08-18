@@ -197,10 +197,8 @@ function breakawayContent(ship: BreakawayShip): ShipContent {
               "Joy spent its first two years in the Chinese market and was rebuilt for North America in 2019 — private karaoke rooms, two of three casinos, tea rooms and the Asian-market restaurants went, and the Observation Lounge came in. Reviews and photos from before 2019 describe a materially different ship.",
             ]
           : []),
-        NCL_HAVEN_WARNING,
-        NCL_FREESTYLE,
-        ...NCL_FLEET_TRAPS,
       ],
+      linePolicy: [NCL_HAVEN_WARNING, NCL_FREESTYLE, ...NCL_FLEET_TRAPS],
     },
   };
 }

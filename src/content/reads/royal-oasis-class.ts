@@ -153,8 +153,8 @@ function oasisClassContent(ship: OasisShip): ShipContent {
       other: [
         ...(amplified ? [amplified] : []),
         "Royal Genie service is Star Class only. Sky and Sea Class get a different and smaller set of perks, and the tier names are close enough that clients conflate them constantly. Be explicit about which one they've actually bought.",
-        ...ROYAL_FLEET_TRAPS,
       ],
+      linePolicy: [...ROYAL_FLEET_TRAPS],
     },
   };
 }

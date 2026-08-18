@@ -168,8 +168,8 @@ function visionClassContent(
               "Because of the 2005 stretch, cabin numbers here don't map to the sister ships. Anything you've learned about a cabin number on Rhapsody or Grandeur does not transfer.",
             ]
           : []),
-        ...ROYAL_FLEET_TRAPS,
       ],
+      linePolicy: [...ROYAL_FLEET_TRAPS],
     },
   };
 }

@@ -123,9 +123,7 @@ export const norwegianEpic: ShipContent = {
     embarkationNote: NCL_EMBARKATION,
     other: [
       "Splash Academy and Entourage moved from deck 12 to deck 6 in the 2025 dry dock. Any advice you've got about avoiding deck 12 for kids' club noise is now describing the wrong deck.",
-      NCL_HAVEN_WARNING,
-      NCL_FREESTYLE,
-      ...NCL_FLEET_TRAPS,
     ],
+    linePolicy: [NCL_HAVEN_WARNING, NCL_FREESTYLE, ...NCL_FLEET_TRAPS],
   },
 };

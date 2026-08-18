@@ -144,9 +144,8 @@ function jewelClassContent(
       other: [
         "Be careful how you describe The Haven on this class. It's real — deck 14, keycard access, private courtyard, splash pool, whirlpool, a small gym and a private sundeck above. But there is no Haven restaurant and no Haven bar. Guests eat breakfast at Moderno and lunch at Cagney's, and dinner is wherever everyone else eats. A client who has read about the Haven on Bliss or Prima will expect a restaurant, and there isn't one.",
         "The absence list on this class: no go-karts, no Waterfront promenade, no Ocean Boulevard, no ropes course, no laser tag, no big waterslide complex. There is a modest family pool slide on 12. And there is a forward observation lounge — the Spinnaker — so don't tell a client the ship has no view lounge.",
-        NCL_FREESTYLE,
-        ...NCL_FLEET_TRAPS,
       ],
+      linePolicy: [NCL_FREESTYLE, ...NCL_FLEET_TRAPS],
     },
   };
 }
@@ -207,9 +206,8 @@ function dawnClassContent(ship: "dawn" | "star"): ShipContent {
         ship === "dawn"
           ? "The absence list: no go-karts, no Waterfront, no Ocean Boulevard, no ropes course, no laser tag, no big waterslide complex. There is a forward lounge, but on this ship it was renamed the Bliss Lounge and sits on deck 7 rather than up top — so don't say there's no view bar, and don't call it the Spinnaker either."
           : "The absence list: no go-karts, no Waterfront, no Ocean Boulevard, no ropes course, no laser tag, no big waterslide complex. There is a forward lounge, so don't tell a client the ship has no view bar.",
-        NCL_FREESTYLE,
-        ...NCL_FLEET_TRAPS,
       ],
+      linePolicy: [NCL_FREESTYLE, ...NCL_FLEET_TRAPS],
     },
   };
 }

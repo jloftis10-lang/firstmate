@@ -170,7 +170,24 @@ export type ShipContent = {
     kidAgeHeightRules?: string;
     obstructedBalconyDecks?: string;
     embarkationNote?: string;
+    /** Traps specific to THIS ship or class. Shown as flags, like the rest. */
     other?: string[];
+    /**
+     * Traps that are true of every sailing on the line, not of this ship.
+     *
+     * Kept apart from `other` because they behave differently in use. A
+     * ship-specific trap is news; the line's Wi-Fi pricing is reference
+     * material the advisor has already read on the last four ships. Mixed
+     * together they crowded the ship-specific flags off the top of the
+     * card — Royal and Norwegian records were running eight or nine flags,
+     * and the ones that mattered were buried among the ones that didn't.
+     *
+     * The read renders these behind a disclosure rather than as flags, so
+     * they stay available without competing with what's actually
+     * particular to this booking. This is presentation only: nothing is
+     * dropped, and it does not change what an advisor can see.
+     */
+    linePolicy?: string[];
   };
 };
 
@@ -235,6 +252,13 @@ export type ReadCategory = {
   why: string;
   /** Whether an operator has signed this category off. Drives the marker. */
   verified: boolean;
+  /**
+   * Line-wide reference shown behind a disclosure, below the flags. Only
+   * the traps category populates it today. See `ShipContent.traps
+   * .linePolicy` for why it is separated from the flags rather than
+   * listed among them.
+   */
+  linePolicy?: string[];
 };
 
 /**

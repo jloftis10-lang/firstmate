@@ -134,8 +134,8 @@ function iconClassContent(ship: "icon" | "star" | "legend"): ShipContent {
               "Icon and Star are close sisters but their published cabin lists don't match cabin-for-cabin, so don't transfer a specific room number between them. Legend differs more substantially again.",
             ]),
         "Royal Genie service is Star Class only within Royal Suite Class — Sky and Sea Class get less, and the tier names are close enough that clients conflate them.",
-        ...ROYAL_FLEET_TRAPS,
       ],
+      linePolicy: [...ROYAL_FLEET_TRAPS],
     },
   };
 }

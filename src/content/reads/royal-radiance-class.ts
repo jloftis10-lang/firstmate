@@ -134,8 +134,8 @@ function radianceClassContent(
       other: [
         "Set the expectation about what isn't here, because it's a long list: no FlowRider, no ice rink, no waterslides, no bumper cars, no Central Park or Boardwalk, no North Star. What there is: a rock wall, a sports court, mini-golf, an arcade and Adventure Ocean. A family that booked Royal Caribbean expecting the ads will be disappointed by a ship that isn't trying to be that.",
         "What this class is actually for is scenery — Alaska, the Panama Canal, Europe. Sell the glass, the Solarium roof and the aft balconies. On the right itinerary it beats the big ships outright; on a Caribbean sea-day run it doesn't.",
-        ...ROYAL_FLEET_TRAPS,
       ],
+      linePolicy: [...ROYAL_FLEET_TRAPS],
     },
   };
 }

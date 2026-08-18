@@ -182,8 +182,8 @@ function voyagerFamilyContent(ship: VoyagerShip): ShipContent {
       other: [
         REFIT[ship],
         "These eight ships were refitted at different times to different specifications, so the class name tells you very little about what's actually aboard. Check the specific hull's facilities rather than quoting the class — this is the single most common way to be wrong about these ships.",
-        ...ROYAL_FLEET_TRAPS,
       ],
+      linePolicy: [...ROYAL_FLEET_TRAPS],
     },
   };
 }

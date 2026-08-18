@@ -151,8 +151,8 @@ function quantumClassContent(
               "If a client brings up the 2016 storm, here's the ground truth so you're not caught out: Anthem sailed into severe weather off the US east coast in February 2016, took damage to public areas and cabins, lost the use of one azipod and turned back. Reported figures vary a lot — the Coast Guard finding and the plaintiff filings are far apart on how far she listed — and nothing came out of it about the hull design or where to book a cabin. It's a weather-routing story, not a ship story.",
             ]
           : []),
-        ...ROYAL_FLEET_TRAPS,
       ],
+      linePolicy: [...ROYAL_FLEET_TRAPS],
     },
   };
 }

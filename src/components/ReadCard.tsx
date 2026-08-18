@@ -9,11 +9,15 @@ type Props = {
   category: string;
   /** null when nobody has worked this block up for this ship yet. */
   read: ReadCategory | null;
+  /** Names the line in the line-policy disclosure — "Same on every Carnival sailing". */
+  lineName?: string;
 };
 
-export function ReadCard({ number, category, read }: Props) {
+export function ReadCard({ number, category, read, lineName }: Props) {
   const [open, setOpen] = useState(false);
+  const [policyOpen, setPolicyOpen] = useState(false);
   const bodyId = useId();
+  const policyId = useId();
 
   // An uncharted category keeps its slot rather than disappearing. If it
   // vanished, the advisor would read three cards as three checks and two
@@ -71,6 +75,55 @@ export function ReadCard({ number, category, read }: Props) {
             </li>
           ))}
         </ul>
+      )}
+
+      {/* Line policy — true of every sailing on the line, not of this ship.
+          Collapsed so it stops crowding out the flags that ARE particular
+          to this booking, which is what the advisor opened the card for. */}
+      {read.linePolicy && read.linePolicy.length > 0 && (
+        <div className="mt-3.5 border-t border-[#E3EAEC] pt-3">
+          <button
+            type="button"
+            onClick={() => setPolicyOpen((v) => !v)}
+            aria-expanded={policyOpen}
+            aria-controls={policyId}
+            className="flex cursor-pointer items-center gap-[7px] font-readout text-[0.72rem] font-bold tracking-[0.05em] uppercase text-ink-3 hover:text-deep"
+          >
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="3"
+              aria-hidden="true"
+              className={`transition-transform duration-200 ${policyOpen ? "rotate-90" : ""}`}
+            >
+              <polyline points="9 6 15 12 9 18" />
+            </svg>
+            {read.linePolicy.length} more, same on every{" "}
+            {lineName ?? "sailing on this line"} sailing
+          </button>
+          <div
+            id={policyId}
+            className={`grid transition-[grid-template-rows] duration-300 ease-out ${
+              policyOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+            }`}
+          >
+            <div className="overflow-hidden">
+              <ul className="list-none pt-2">
+                {read.linePolicy.map((item, i) => (
+                  <li
+                    key={i}
+                    className="mt-2 rounded-[10px] border border-[#E3EAEC] bg-canvas px-[13px] py-[11px] text-[0.9rem] leading-[1.45] text-ink-2"
+                  >
+                    <Emphasis text={item} />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
       )}
 
       {/* The why — the moat, collapsed by default. */}

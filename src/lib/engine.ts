@@ -241,7 +241,17 @@ function trapsRead(
     flags.push(other);
   }
 
-  return { call, flags, why, verified: traps.verified };
+  // Line policy stays out of the flag list on purpose — see the field
+  // comment on ShipContent.traps.linePolicy. It is reference the advisor
+  // has read on every other ship of the line, and mixing it in buried the
+  // ship-specific flags that are the reason they ran the check.
+  return {
+    call,
+    flags,
+    why,
+    verified: traps.verified,
+    ...(traps.linePolicy?.length ? { linePolicy: traps.linePolicy } : {}),
+  };
 }
 
 /* ------------------------------------------------------------------ */
