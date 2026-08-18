@@ -1,87 +1,130 @@
 import type { ShipContent, Source } from "@/lib/types";
 import {
-  AQUA_TUNNEL_TALL_RULES,
   CARNIVAL_EMBARKATION,
   CARNIVAL_KIDS_RULES,
   CARNIVAL_MINOR_PLACEMENT,
   CARNIVAL_MONEY,
+  CARNIVAL_ROPES_COURSE_RULES,
   CARNIVAL_SLIDE_RULES,
   CARNIVAL_SOURCES,
+  ITALIAN_SLIDE_RULES,
 } from "./carnival-common";
 import {
   BOTTOM_DECK_NOTE,
   CONNECTING_RULE,
   MOTION_RULE,
   PORTHOLE_STEER,
+  QUIET_DEFAULT_RULE,
   VIBRATION_RULE,
 } from "./operator-rules";
 
 /**
  * Venezia and Firenze — the "Fun Italian Style" hulls, built as Costa
- * Venezia (2019) and Costa Firenze (2021) and transferred in 2023 and 2024.
+ * Venezia (2019) and Costa Firenze (2021), transferred 2023 and 2024.
  *
- * MY RESEARCH, NOT OPERATOR-CONFIRMED. Cabin and traps are `verified: false`.
+ * SIGNED OFF by Jimmy, 2026-08-18, against Carnival's own current deck-plan
+ * PDFs for both ships. This pair turned out FAR more standardised than my
+ * workup assumed, and the best surprise is that Firenze doesn't need to
+ * inherit anything by sistership inference: Carnival independently
+ * publishes the identical obstruction list for both hulls.
  *
- * These are the two ships in the fleet where an advisor's Carnival
- * instincts are most likely to be wrong, and the reasons are all
- * heritage: the category names don't map (Terrazza, not Havana; there's a
- * "Small Interior"), the pool deck is small and covered, the casino is
- * laid out for smokers, and the bathrooms have glass doors instead of the
- * curtain. None of that is a defect — it's a different product wearing a
- * familiar funnel, and the mismatch is what generates the complaint.
+ * The single most valuable find is a booking constraint, not a layout
+ * fact: **every guest in a Terrazza stateroom must be 12 or older.**
+ * Carnival states it for both ships. A family with an eight-year-old
+ * cannot be put in one, and that is exactly the kind of expensive
+ * mistake this product exists to catch.
  *
- * Firenze has very little independently published detail. Almost
- * everything in circulation about it is inferred from Venezia. Where a
- * claim below is Venezia-sourced it says so rather than quietly covering
- * both hulls.
+ * What his pass corrected in my version:
  *
- * Deliberately NOT encoded:
- *   - SkyRide. Two Carnival-adjacent sources conflict: one SportSquare
- *     table appears to list it for these ships, another says it's a
- *     Vista-class exclusive. The traps block warns not to promise it
- *     rather than resolving a conflict I can't resolve.
- *   - the elevator bank split. Venezia's total (16) surfaced, the split
- *     didn't, and Firenze's total didn't either.
- *   - Firenze's obstructed-cabin list. Venezia's surfaced; Firenze's
- *     didn't, and sistership inference is not a cabin number.
+ *   - The quiet default was "decks 11 to 14", which I couldn't justify
+ *     under the cabins-above-and-below test and said so. It's decks 7
+ *     and 8 midship.
+ *   - **Deck 8 is a cabin deck, not the promenade.** Deck 5 carries the
+ *     large public promenade strip. I had this squarely wrong and it was
+ *     load-bearing for the whole placement note.
+ *   - Deck 12 is recreation and carries NO cabins. I had it as one of
+ *     three mixed cabin decks. There is a separate forward cabin section
+ *     on deck 14.
+ *   - The Venezia obstruction list I had — deck 3 oceanviews 3219 to
+ *     3242 under the lifeboats — is NOT Carnival's official set and is
+ *     removed. Carnival's actual list is Ocean Suites 9205 and 9206 plus
+ *     6L/6M Deluxe Ocean Views 1460, 1473, 2452 and 2475.
+ *   - "No obstruction list for Firenze" was wrong. Same list, published
+ *     independently.
+ *   - "Small Interior" is not a current Carnival category — it looks like
+ *     legacy Costa or third-party terminology. Removed, along with the
+ *     unattached ~150 sq ft interior figure.
+ *   - SkyRide is RESOLVED, not unresolved: Carnival's SkyRide page lists
+ *     Vista, Horizon and Panorama only. Neither of these has it. Both DO
+ *     have SportSquare and a ropes course.
+ *   - The legacy-Costa deck-numbering warning is dropped. Carnival and
+ *     the major deck-plan sites now all use decks 1-12, 14 and 15, and
+ *     the "decks into the twenties" problem couldn't be reproduced. If
+ *     the offending source turns up it can come back.
+ *
+ * Note what is deliberately NOT claimed about 1460, 1473, 2452 and 2475:
+ * Carnival says they're obstructed and does not say by what. The record
+ * repeats the fact and invents no mechanism.
  */
 
 const ITALIAN_SOURCES: Source[] = [
   {
-    label: "Venezia deck plans — cabins on decks 10, 11 and 12 with the pools",
-    url: "https://www.cruisemapper.com/deckplans/Carnival-Venezia-1651",
+    label:
+      "Carnival Venezia deck plan (PDF) — obstruction list, deck 5 promenade, deck 12 recreation",
+    url: "https://www.carnival.com/-/media/64a4430808b84b98a70a95d379f713ff.ashx",
     checked: "2026-08-18",
   },
   {
-    label: "Firenze deck 12 — 33 staterooms alongside WaterWorks and mini-golf",
-    url: "https://gangwaze.com/cruise-lines/carnival-cruise-lines/carnival-firenze/deck-plans/deck-12",
+    label:
+      "Carnival Firenze deck plan (PDF) — the same published obstruction list",
+    url: "https://www.carnival.com/-/media/ab149f1c2d2b4688b2aa8898dc19e522.ashx",
     checked: "2026-08-18",
   },
   {
-    label: "Venezia obstructed oceanviews on deck 3, and balconies 9205/9206",
-    url: "https://www.cruisedeckplans.com/ships/category-detail.php?c=3486",
+    label: "Terrazza staterooms require every guest to be 12 or older",
+    url: "https://www.carnival.com/cruise-ships/carnival-firenze",
     checked: "2026-08-18",
   },
   {
-    label: "Aqua Tunnel is 51 inches on Venezia and Firenze, 42 elsewhere",
-    url: "https://help.carnival.com/app/answers/detail/a_id/1122/~/policies-for-shipboard-water-sports",
+    label: "SkyRide ship list — Vista, Horizon and Panorama only",
+    url: "https://www.carnival.com/onboard/skyride",
     checked: "2026-08-18",
   },
   {
-    label: "Venezia's destination-dispatch elevators",
-    url: "https://www.cruisehive.com/carnival-cruise-line-provides-insight-on-new-elevator-usage/124525",
-    checked: "2026-08-18",
-  },
-  {
-    label: "Terrazza replaces Havana; Venezia cabin categories",
-    url: "https://cruiseradio.net/carnival-venezia-cabins-suites-complete-guide/",
+    label: "Ropes course ship list — both Italian hulls carry one",
+    url: "https://www.carnival.com/onboard/ropes-course",
     checked: "2026-08-18",
   },
 ];
 
-/** Gondola Glide carries the same tall minimum as the Aqua Tunnel. */
-const GONDOLA_GLIDE_RULES =
-  "The Gondola Glide also runs 51 inches and caps at 300 pounds, so on these two ships a child who clears the slides everywhere else in the fleet can still be turned away here.";
+/**
+ * Decks 7 and 8 midship — the same cabin-sandwich logic that has now held
+ * across five Carnival classes.
+ *
+ * OPERATOR-CONFIRMED (Jimmy, 2026-08-18).
+ */
+const ITALIAN_CLASS_QUIET_DEFAULT = `Midship on deck 7 or 8. ${QUIET_DEFAULT_RULE} Those two are the clean band here: deck 6 needs a check below it because deck 5 is heavily public, and deck 9 needs a check above it because deck 10 turns into mixed Lido and public territory.`;
+
+/**
+ * The upper decks, corrected. Deck 12 carries no cabins; deck 14 has a
+ * separate forward section that needs an activity check.
+ */
+const ITALIAN_UPPER_DECKS =
+  "Above deck 9 it gets busy: decks 10 and 11 mix cabins in with major public activity, deck 12 is recreation and carries no cabins at all, and there's a separate forward cabin section up on 14 that needs its own check against what's around it. Deck 5, not deck 8, is where the big public promenade strip runs.";
+
+/**
+ * The Terrazza occupancy rule. This is a hard constraint, not a
+ * preference — a booking that breaks it fails.
+ *
+ * OPERATOR-CONFIRMED (Jimmy, 2026-08-18). Carnival states it for both
+ * ships.
+ */
+const TERRAZZA_RULE =
+  "**Every guest in a Terrazza stateroom has to be 12 or older.** That's Carnival's rule on both these ships, and it is a hard stop — a family with an eight-year-old cannot book one at any price. Terrazza plays a similar role to Havana on the rest of the fleet, but it's its own Italian-style accommodation family rather than a rename, so check what's actually included rather than assuming Havana's perks transfer.";
+
+/** Carnival publishes the same obstruction set for both ships. */
+const ITALIAN_OBSTRUCTION =
+  "Carnival publishes the same list for both ships, which is worth knowing because it means you don't have to reason from one to the other: Ocean Suites 9205 and 9206, plus the 6L and 6M Deluxe Ocean Views 1460, 1473, 2452 and 2475. Carnival says those four are obstructed and doesn't say by what, so I'm not going to guess a mechanism for you. Worth noting 9205 and 9206 turn up as obstructed on the Dream and Vista classes too — it's a recurring Carnival structural pattern rather than a coincidence.";
 
 function italianClassContent(ship: "venezia" | "firenze"): ShipContent {
   const isVenezia = ship === "venezia";
@@ -91,76 +134,67 @@ function italianClassContent(ship: "venezia" | "firenze"): ShipContent {
     sources: [...CARNIVAL_SOURCES, ...ITALIAN_SOURCES],
 
     cabin: {
-      // MY RESEARCH. Not signed off.
-      verified: false,
-      placementNote:
-        "Midship, and lower than instinct says. Cabins are spread across twelve of the fourteen decks here, and — this is the part that catches people — the pool decks carry cabins too. Decks 10, 11 and 12 all mix staterooms in with the pools, the sports court, WaterWorks and the ropes course, so booking high on this ship books them into the middle of the noise rather than above it. Deck 5 is the other one to check: it carries cabins along the promenade with the theatre and the lounges. Decks 6 to 8 midship are the quiet band.",
+      // Signed off by Jimmy, 2026-08-18, against Carnival's own deck-plan
+      // PDFs for both hulls. Corrections listed at the top of the file.
+      verified: true,
+      placementNote: `${ITALIAN_CLASS_QUIET_DEFAULT} ${ITALIAN_UPPER_DECKS}`,
       motionAvoid: MOTION_RULE,
       vibrationNote: VIBRATION_RULE,
       categoryWarnings: [
-        "The category names don't match the rest of Carnival. Terrazza is what Havana is elsewhere — the same private-area idea under a different name — and there's a Small Interior category that has no equivalent on a Carnival-built ship. Interiors start around 150 square feet. Read the category description here rather than assuming you know it from the code.",
+        TERRAZZA_RULE,
         PORTHOLE_STEER,
         BOTTOM_DECK_NOTE,
-        "Third-party deck plans for this hull are unreliable. Costa's original deck numbering still circulates alongside Carnival's, and at least one big deck-plan site publishes decks numbered into the twenties for this ship. Work from Carnival's own plan, not a search result, or you'll place someone on a deck that doesn't exist.",
-        "Bathrooms have glass shower doors rather than the curtain the rest of the fleet uses. It's a small thing that reads as an upgrade — worth mentioning to a client who's sailed Carnival before.",
+        "Bathrooms have glass shower doors rather than the curtain the rest of the fleet uses. Small thing, reads as an upgrade, worth mentioning to a client who's sailed Carnival before.",
+        "This is an Italian-concept ship and the category names follow that rather than Carnival's usual set. Read the category description on the booking screen rather than assuming you know what a code means from another hull.",
       ],
       hazardsAboveBelow: [
         {
           source: "lido",
           where:
-            "deck 10, which carries cabins itself — so it's a next-door problem there as much as an overhead one",
+            "the deck 10 and 11 band, where cabins are mixed in with the pools and public space rather than sitting below them",
         },
         {
           source: "kids",
           where:
-            "WaterWorks and the ropes course on deck 12, over the deck 11 cabins, with Camp Ocean on 11 alongside them",
+            "the WaterWorks and recreation complex up on deck 12, above the deck 11 cabins",
         },
         {
           source: "sports",
-          where: "the sports court and jogging track on decks 11 and 12",
+          where:
+            "SportSquare and the ropes course in that same upper recreation area",
         },
         {
-          source: "theater",
+          source: "bar",
           where:
-            "the theatre spans decks 4 and 5, and deck 5 carries cabins along the same corridor",
-        },
-        {
-          source: "nightclub",
-          where:
-            "the late-night comedy and dancing lounge on deck 4, below the deck 5 cabins",
+            "the big public promenade strip on deck 5, under the deck 6 cabins",
         },
       ],
-      obstructedViewNotes: isVenezia
-        ? "Two separate groups on Venezia. The deck 3 oceanviews are the bigger one — 3219, 3221, 3222, 3225, 3226, 3229, 3230, 3233, 3234, 3237, 3238 and 3242 are sold as obstructed, with the lifeboat deck sitting on 4 above them. Separately, balconies 9205 and 9206 are standard balconies with an obstructed view. Confirm on the booking screen; this came from a deck-plan aggregator rather than Carnival's own sheet."
-        : "No obstruction list surfaced for Firenze specifically. Venezia's is documented — a band of deck 3 oceanviews under the deck 4 lifeboats, plus balconies 9205 and 9206 — and these are near-sisters, so check the same positions. I'm not claiming the same cabins are affected here, because nobody has published that.",
+      obstructedViewNotes: ITALIAN_OBSTRUCTION,
       connectingNote: CONNECTING_RULE,
       minorPlacementRule: CARNIVAL_MINOR_PLACEMENT,
       elevatorNote: isVenezia
-        ? "Sixteen elevators, and they're destination-dispatch — you pick your deck on a touchscreen in the lobby and it assigns you a car, with no buttons inside. That's worth warning about in advance for anyone who finds new systems stressful, and it changes how you'd brief a client who expects to just press a button. I couldn't establish how the banks split forward, midship and aft."
-        : "I couldn't establish the elevator count or the bank split for this hull. Venezia uses destination-dispatch elevators — you pick a deck on a lobby touchscreen instead of pressing a button in the car — and it's worth checking whether this ship does too before you brief a nervous traveller.",
+        ? "Sixteen elevators — researched rather than confirmed off Carnival's own material, so treat the count as indicative. What matters more is that they're destination-dispatch: you pick your deck on a panel outside and the system assigns you a car, with no buttons inside. The instruction that actually saves grief is to enter a destination for EVERY person in the group rather than once for the whole party — entering it once is the reported cause of most of the crowding and confusion."
+        : "The elevators here are destination-dispatch — you pick your deck on a panel outside and the system assigns a car, with no buttons inside. Enter a destination for EVERY person in the group rather than once for the party; doing it once is the reported cause of most of the crowding. I have no reliable car count for this ship and I'm not going to assume it matches Venezia just because they're sisters.",
       accessibilityNote:
-        "The dining and theatre core sits on decks 4 and 5 and the outdoor attractions run 11 and 12, so there's a real vertical trip in the day even though cabins are interleaved through the middle. On Venezia, factor the destination-dispatch elevators into the brief — a system that assigns you a car is harder to improvise with if someone is slow to board. Confirm scooter clearance against Carnival's accessible deck plan as usual.",
+        "The destination-dispatch elevators are the thing to prepare a slower traveller for — a system that assigns you a car is harder to improvise with if someone is slow to board, and the whole group needs to enter destinations individually. Beyond that, the dining and theatre core is low while the outdoor attractions are high, so there's a real vertical trip in the day. Confirm scooter clearance against Carnival's accessible deck plan as usual.",
     },
 
     money: CARNIVAL_MONEY,
 
     traps: {
-      // MY RESEARCH. Not signed off.
-      verified: false,
-      kidAgeHeightRules: `${AQUA_TUNNEL_TALL_RULES} ${GONDOLA_GLIDE_RULES} ${CARNIVAL_SLIDE_RULES} ${CARNIVAL_KIDS_RULES}`,
-      ...(isVenezia
-        ? {
-            obstructedBalconyDecks:
-              "the deck 3 oceanviews under the lifeboat deck (3219 through 3242 on the published list), plus balconies 9205 and 9206",
-          }
-        : {}),
+      // Signed off by Jimmy, 2026-08-18, after resolving SkyRide and
+      // correcting the slide exception.
+      verified: true,
+      kidAgeHeightRules: `${ITALIAN_SLIDE_RULES} ${CARNIVAL_SLIDE_RULES} ${CARNIVAL_ROPES_COURSE_RULES} ${CARNIVAL_KIDS_RULES}`,
+      obstructedBalconyDecks:
+        "Ocean Suites 9205 and 9206, plus Deluxe Ocean Views 1460, 1473, 2452 and 2475",
       embarkationNote: CARNIVAL_EMBARKATION,
       other: [
-        "This is an Italian-concept ship, not a standard Carnival one, and that's the expectation to set before they board. The pool deck is small by Carnival standards with far less lounger space, the main pool is covered, and sail-away is a more subdued affair. A client who booked it expecting the usual Carnival deck party will be disappointed by something that isn't a fault.",
-        "The Guy's Burger and BlueIguana counters a repeat Carnival client will look for aren't here — the food concepts were replaced with Italian equivalents. Name the venues that are actually onboard rather than letting them assume.",
-        "The casino is laid out around smoking, with only a small non-smoking alternative. If anyone in the party is sensitive to it, that's worth raising before deposit rather than at the pier.",
-        "Don't promise SkyRide on this ship. Sources conflict on whether these two have it, and I couldn't resolve it — check the ship's own page before you say either way.",
-        "Neither BOLT nor a Carnival-built waterpark layout applies here. The ropes course is real on both, and Firenze's is branded SkyCourse.",
+        "Terrazza staterooms require every guest to be 12 or older. If there's a younger child in the party, that category is off the table entirely — check it before you quote, not after.",
+        "No SkyRide on this ship. Carnival's own SkyRide list is Vista, Horizon and Panorama, and that's the whole list. Both of these hulls do have SportSquare and a ropes course, so sell those instead.",
+        "This is an Italian-concept ship rather than a standard Carnival one, and that's the expectation to set before they board. The pool deck is smaller with less lounger space, the main pool is covered, and sail-away is more subdued. A client who booked expecting the usual Carnival deck party will be disappointed by something that isn't a fault.",
+        "The Guy's Burger and BlueIguana counters a repeat Carnival client will look for aren't here — the food concepts are Italian equivalents. Name the venues that are actually onboard rather than letting them assume.",
+        "The casino is laid out around smoking with only a small non-smoking alternative. If anyone in the party is sensitive to it, raise it before deposit rather than at the pier.",
       ],
     },
   };

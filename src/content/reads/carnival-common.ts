@@ -107,9 +107,18 @@ export const CARNIVAL_EMBARKATION =
 export const CARNIVAL_SLIDE_RULES =
   "The WaterWorks slides run a 42-inch minimum on most of the fleet, and up to 48 inches depending on the slide.";
 
-/** Venezia and Firenze carry a higher Aqua Tunnel minimum than the rest. */
-export const AQUA_TUNNEL_TALL_RULES =
-  "The Aqua Tunnel slide needs 51 inches on this ship, higher than the 42 inches it runs elsewhere in the fleet.";
+/**
+ * The Venezia and Firenze slide exception, and it has to sit ABOVE the
+ * fleet rule rather than beside it — the Aqua Tunnel runs 42 inches on
+ * some other Carnival ships and 51 on these two. An advisor working from
+ * the fleet number will be nine inches wrong, which is the difference
+ * between a seven-year-old riding and being turned away.
+ *
+ * OPERATOR-CONFIRMED (Jimmy, 2026-08-18, against Carnival's current
+ * water-sports policy).
+ */
+export const ITALIAN_SLIDE_RULES =
+  "Ship-specific exception, and it overrides the fleet rule: on this ship the Aqua Tunnel needs 51 inches, not the 42 it runs on some other Carnival hulls, and the Gondola Glide needs 51 too. Both cap at 300 pounds. A child who cleared the slides on their last Carnival cruise can be turned away here, so quote these numbers rather than the fleet ones.";
 
 /**
  * Minor placement, effective for bookings made from 1 February 2025.
