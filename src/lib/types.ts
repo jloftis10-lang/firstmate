@@ -18,6 +18,7 @@
  * the exact thing the advisor feared.
  */
 
+import type { ActivityAvailability } from "./availability";
 import type { ObstructionKind } from "./obstruction";
 
 /** Where a line sits in the market — drives grouping in the ship picker. */
@@ -62,6 +63,17 @@ export type ShipContent = {
    * which is fine once `verified` is true and dangerous before.
    */
   sources?: Source[];
+
+  /**
+   * What is CURRENTLY not running on this hull — see
+   * `src/lib/availability.ts` for why this is separated from everything
+   * else in the record rather than written into `traps.other`.
+   *
+   * Per ship, never per class: a class factory must not spread one hull's
+   * broken attraction across its sisters. An empty or absent list means
+   * nobody checked, NOT that everything is working.
+   */
+  availability?: ActivityAvailability[];
 
   /**
    * The three blocks are independently optional. Operator knowledge does

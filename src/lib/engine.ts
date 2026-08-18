@@ -1,5 +1,6 @@
 import type { ClientProfile, CoveredShip, Read, ReadCategory } from "./types";
 import { noiseRank, noiseSource } from "./noise";
+import { availabilitySentence } from "./availability";
 import { obstructionSentence } from "./obstruction";
 
 /**
@@ -194,6 +195,18 @@ function trapsRead(
   const flags: string[] = [];
   let call: string;
   let why: string;
+
+  // WHAT IS ACTUALLY RUNNING goes first, ahead of even the party call's
+  // own flag. It is the most perishable claim in the record and the one
+  // most likely to embarrass an advisor who quoted it — an attraction
+  // that is out of service today is a refund conversation, not a
+  // heads-up. It matters most on exactly the reads that would otherwise
+  // bury it: the family read leads with height and age rules for rides,
+  // and an advisor should learn the ride is shut before reading who is
+  // tall enough for it. Empty when nobody has checked, which is NOT the
+  // same as everything working — see src/lib/availability.ts.
+  const availability = availabilitySentence(ship.content.availability ?? []);
+  if (availability) flags.push(availability);
 
   if (client.party === "family") {
     call =
