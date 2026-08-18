@@ -1,4 +1,5 @@
 import type { ClientProfile, CoveredShip, Read, ReadCategory } from "./types";
+import { noiseRank, noiseSource } from "./noise";
 
 /**
  * The deterministic Confidence Read engine.
@@ -53,9 +54,24 @@ function cabinRead(
     flags.push(warning);
   }
 
-  if (cabin.hazardsAboveBelow.length > 0) {
+  // Worst first, using the shared risk ranking. The venue wording and the
+  // "what they'll actually hear" text come from the taxonomy, so this
+  // reads the same on every hull and only the locations differ.
+  const hazards = cabin.hazardsAboveBelow
+    .map((h) => ({ h, src: noiseSource(h.source) }))
+    .filter((x): x is { h: (typeof cabin.hazardsAboveBelow)[number]; src: NonNullable<ReturnType<typeof noiseSource>> } => Boolean(x.src))
+    .sort((a, b) => noiseRank(a.h.source) - noiseRank(b.h.source));
+
+  if (hazards.length > 0) {
+    const detail = hazards
+      .map(({ h, src }) => {
+        const venue = src.venue.charAt(0).toUpperCase() + src.venue.slice(1);
+        const where = h.where ? ` (${h.where})` : "";
+        return `**${venue}**${where} — ${src.experience}.`;
+      })
+      .join(" ");
     flags.push(
-      `Check what's directly above and below the cabin. On this ship that means ${joinList(cabin.hazardsAboveBelow)} — chairs get dragged across the floor before 6am, and the bass carries straight down through the deck.`,
+      `Check what's directly above and below the cabin, worst first: ${detail}`,
     );
   }
 
@@ -256,8 +272,3 @@ export function clientSummary(ship: CoveredShip, client: ClientProfile): string 
   return parts.join(" ");
 }
 
-/** "a", "a and b", "a, b and c" */
-function joinList(items: string[]): string {
-  if (items.length <= 1) return items[0] ?? "";
-  return `${items.slice(0, -1).join(", ")} and ${items[items.length - 1]}`;
-}

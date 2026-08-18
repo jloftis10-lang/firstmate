@@ -56,11 +56,12 @@ export const carnivalCelebration: ShipContent = {
     // vibration, motion and the crowd it draws.
     categoryWarnings: [
       "Never a porthole room. They're the absolute cheapest category on the ship and smaller than an interior — cheaper than one, too.",
-      "The bottom deck is fine if they're on a budget — that's where the cheap interiors are. Just know the tradeoff: the lower you go the more vibration and motion you feel, and it tends to draw a louder, party crowd.",
+      "The bottom deck is fine if they're on a budget — that's where the cheap interiors are. Just know the tradeoff: the lower you go the more vibration and motion you feel.",
     ],
     hazardsAboveBelow: [
-      "the Lido Marketplace buffet and the pool deck, both aft on 16 and 17",
-      "the atrium stage and the late-night comedy club",
+      { source: "lido", where: "decks 16 and 17, aft" },
+      { source: "buffet", where: "Lido Marketplace, aft on 16 and 17" },
+      { source: "nightclub", where: "the atrium stage and the comedy club" },
     ],
     obstructedViewNotes:
       "Deck 9 is the one to check, and the forward wrap-around balconies are cut by solid steel railing rather than glass.",

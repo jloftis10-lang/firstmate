@@ -15,8 +15,10 @@ export const norwegianPrima: ShipContent = {
     midshipRange: "decks 9 to 11",
     motionAvoid: "the highest decks and the forward staterooms",
     hazardsAboveBelow: [
-      "the pool deck and the buffet",
-      "the theatre and the nightclub after hours",
+      { source: "lido", where: "the pool deck" },
+      { source: "buffet" },
+      { source: "theater", where: "the theatre" },
+      { source: "nightclub", where: "the nightclub, after hours" },
     ],
     obstructedViewNotes:
       "Balcony sightlines on some lower decks are cut by lifeboats.",

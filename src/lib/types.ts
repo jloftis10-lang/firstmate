@@ -100,8 +100,18 @@ export type ShipContent = {
      * operator advice and more useful than a flat never.
      */
     categoryWarnings?: string[];
-    /** Reads as "that means ___" — pool deck, buffet, nightclub locations. */
-    hazardsAboveBelow: string[];
+    /**
+     * Which of the NOISE_SOURCES this ship has near cabins, and where.
+     *
+     * `source` is a NoiseSource id; the venue wording, the risk level and
+     * what the traveler actually experiences all come from that shared
+     * table, so a ship record never restates general judgment. `where` is
+     * the only ship-specific part — omit it when the decks aren't known
+     * rather than guessing at them.
+     *
+     * Order here does not matter; the engine sorts by risk.
+     */
+    hazardsAboveBelow: { source: string; where?: string }[];
     obstructedViewNotes?: string;
     connectingNote?: string;
     elevatorNote?: string;

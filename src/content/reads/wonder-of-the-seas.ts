@@ -15,8 +15,10 @@ export const wonderOfTheSeas: ShipContent = {
     midshipRange: "decks 8 to 10",
     motionAvoid: "the top decks and the forward third of the ship",
     hazardsAboveBelow: [
-      "the pool deck and the Windjammer buffet up top",
-      "the Music Hall and the late-night lounges",
+      { source: "lido", where: "the pool deck, up top" },
+      { source: "buffet", where: "the Windjammer, up top" },
+      { source: "nightclub", where: "the Music Hall" },
+      { source: "bar", where: "the late-night lounges" },
     ],
     obstructedViewNotes:
       "A run of balconies on the lower promenade decks looks straight into a lifeboat.",
