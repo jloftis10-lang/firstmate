@@ -1,5 +1,4 @@
 import type { ShipContent } from "@/lib/types";
-import { wonderOfTheSeas } from "./wonder-of-the-seas";
 import { carnivalCelebration } from "./carnival-celebration";
 import { carnivalMardiGras } from "./carnival-mardi-gras";
 import { norwegianPrima } from "./norwegian-prima";
@@ -46,6 +45,48 @@ import {
   carnivalAdventure,
   carnivalEncounter,
 } from "./carnival-pacific-class";
+import {
+  iconOfTheSeas,
+  legendOfTheSeas,
+  starOfTheSeas,
+} from "./royal-icon-class";
+import {
+  allureOfTheSeas,
+  harmonyOfTheSeas,
+  oasisOfTheSeas,
+  symphonyOfTheSeas,
+  utopiaOfTheSeas,
+  wonderOfTheSeas,
+} from "./royal-oasis-class";
+import {
+  anthemOfTheSeas,
+  odysseyOfTheSeas,
+  ovationOfTheSeas,
+  quantumOfTheSeas,
+  spectrumOfTheSeas,
+} from "./royal-quantum-class";
+import {
+  adventureOfTheSeas,
+  explorerOfTheSeas,
+  freedomOfTheSeas,
+  independenceOfTheSeas,
+  libertyOfTheSeas,
+  marinerOfTheSeas,
+  navigatorOfTheSeas,
+  voyagerOfTheSeas,
+} from "./royal-voyager-freedom";
+import {
+  brillianceOfTheSeas,
+  jewelOfTheSeas,
+  radianceOfTheSeas,
+  serenadeOfTheSeas,
+} from "./royal-radiance-class";
+import {
+  enchantmentOfTheSeas,
+  grandeurOfTheSeas,
+  rhapsodyOfTheSeas,
+  visionOfTheSeas,
+} from "./royal-vision-class";
 
 /**
  * Operator read content, keyed by ship id.
@@ -95,7 +136,42 @@ export const SHIP_READS: Record<string, ShipContent> = {
   "carnival-adventure": carnivalAdventure,
   "carnival-encounter": carnivalEncounter,
 
+  "icon-of-the-seas": iconOfTheSeas,
+  "star-of-the-seas": starOfTheSeas,
+  "legend-of-the-seas": legendOfTheSeas,
+
+  "oasis-of-the-seas": oasisOfTheSeas,
+  "allure-of-the-seas": allureOfTheSeas,
+  "harmony-of-the-seas": harmonyOfTheSeas,
+  "symphony-of-the-seas": symphonyOfTheSeas,
   "wonder-of-the-seas": wonderOfTheSeas,
+  "utopia-of-the-seas": utopiaOfTheSeas,
+
+  "quantum-of-the-seas": quantumOfTheSeas,
+  "anthem-of-the-seas": anthemOfTheSeas,
+  "ovation-of-the-seas": ovationOfTheSeas,
+  "spectrum-of-the-seas": spectrumOfTheSeas,
+  "odyssey-of-the-seas": odysseyOfTheSeas,
+
+  "voyager-of-the-seas": voyagerOfTheSeas,
+  "explorer-of-the-seas": explorerOfTheSeas,
+  "adventure-of-the-seas": adventureOfTheSeas,
+  "navigator-of-the-seas": navigatorOfTheSeas,
+  "mariner-of-the-seas": marinerOfTheSeas,
+  "freedom-of-the-seas": freedomOfTheSeas,
+  "liberty-of-the-seas": libertyOfTheSeas,
+  "independence-of-the-seas": independenceOfTheSeas,
+
+  "radiance-of-the-seas": radianceOfTheSeas,
+  "brilliance-of-the-seas": brillianceOfTheSeas,
+  "serenade-of-the-seas": serenadeOfTheSeas,
+  "jewel-of-the-seas": jewelOfTheSeas,
+
+  "grandeur-of-the-seas": grandeurOfTheSeas,
+  "enchantment-of-the-seas": enchantmentOfTheSeas,
+  "rhapsody-of-the-seas": rhapsodyOfTheSeas,
+  "vision-of-the-seas": visionOfTheSeas,
+
   "carnival-celebration": carnivalCelebration,
   "carnival-mardi-gras": carnivalMardiGras,
   "norwegian-prima": norwegianPrima,

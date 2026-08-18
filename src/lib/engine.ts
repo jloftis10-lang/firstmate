@@ -117,6 +117,15 @@ function cabinRead(
  * 02 — Money surprises
  * ------------------------------------------------------------------ */
 
+/**
+ * Money, written the way a folio shows it. A whole-dollar rate reads as
+ * "$17"; anything with cents needs both digits, because "$18.5 per person
+ * per day" looks like a typo in front of a client.
+ */
+function usd(amount: number): string {
+  return Number.isInteger(amount) ? `$${amount}` : `$${amount.toFixed(2)}`;
+}
+
 function moneyRead(
   ship: CoveredShip,
   client: ClientProfile,
@@ -154,7 +163,7 @@ function moneyRead(
 
   if (client.experience === "first") {
     const rate = money.gratuityPerDayUSD
-      ? ` — around $${money.gratuityPerDayUSD} per person, per day —`
+      ? ` — around ${usd(money.gratuityPerDayUSD)} per person, per day —`
       : "";
     flags.push(
       `Set the gratuity expectation up front. It's auto-added to the folio daily${rate} and first-timers are always surprised by the bill at the end.`,
