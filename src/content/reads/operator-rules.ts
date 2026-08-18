@@ -93,6 +93,31 @@ export const CONNECTING_RULE =
   "Never read connecting status off the category or off two cabin numbers being next to each other — only an explicit connecting pair counts.";
 
 /**
+ * What "quiet deck" actually means — the test, not the answer.
+ *
+ * A quiet default deck is one with CABINS ABOVE AND CABINS BELOW. It is
+ * NOT "a deck with a lot of cabins on it", which is the mistake that
+ * produced three wrong defaults in a row before Jimmy named the rule:
+ *
+ *   - Excel class: corrected at the Excel review.
+ *   - Dream class: I had decks 7 to 9. Deck 9 fails the test because
+ *     deck 10 above it becomes Lido. Corrected to 7 and 8.
+ *   - Sunshine class: I had decks 6 to 8. Deck 6 fails below (the public
+ *     Promenade is on 5) and deck 8 fails above (Lido on 9). Corrected
+ *     to deck 7 alone.
+ *
+ * Each class still has to be worked out against its own deck plan — this
+ * is the question to ask, and the answer differs per hull. It earns its
+ * place here because it caught the same error three times, and because
+ * it produces a defensible default without inventing a score.
+ *
+ * OPERATOR-CONFIRMED (Jimmy, 2026-08-18). His framing, generalised from
+ * three class reviews.
+ */
+export const QUIET_DEFAULT_RULE =
+  "A deck is only a safe default if it has cabins above it AND cabins below it — plenty of cabins on the deck itself proves nothing.";
+
+/**
  * Attach a ship-specific observation to a confirmed general rule.
  *
  * The pattern throughout the class files is "the confirmed rule, then

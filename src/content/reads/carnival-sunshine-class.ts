@@ -4,6 +4,7 @@ import {
   CARNIVAL_KIDS_RULES,
   CARNIVAL_MINOR_PLACEMENT,
   CARNIVAL_MONEY,
+  CARNIVAL_ROPES_COURSE_RULES,
   CARNIVAL_SLIDE_RULES,
   CARNIVAL_SOURCES,
 } from "./carnival-common";
@@ -12,124 +13,193 @@ import {
   CONNECTING_RULE,
   MOTION_RULE,
   PORTHOLE_STEER,
+  QUIET_DEFAULT_RULE,
   VIBRATION_RULE,
 } from "./operator-rules";
 
 /**
- * Sunshine class: Sunshine, Sunrise, Radiance.
+ * Sunshine class: Sunshine, Sunrise, Radiance — three Destiny-class hulls
+ * rebuilt and renamed years apart, not sisters out of the same yard.
  *
- * MY RESEARCH, NOT OPERATOR-CONFIRMED. Cabin and traps are both
- * `verified: false`.
+ * SIGNED OFF by Jimmy, 2026-08-18, against Carnival's own deck plans and
+ * facility pages. His pass caught one outright factual error and
+ * tightened three more:
  *
- * These aren't a class in the built-together sense — they're three
- * Destiny-class hulls (Destiny, Triumph, Victory) rebuilt and renamed
- * years apart. That matters more than usual: the rebuilds added different
- * things at different times, so "what's onboard" varies by ship in a way
- * it doesn't within a real class.
+ *   - **I said Sunshine has no SportSquare, ropes course or mini-golf.
+ *     That was simply wrong.** Carnival's own 2012 announcement for the
+ *     Destiny-to-Sunshine rebuild says the 2013 work added SportSquare
+ *     with a ropes course, mini-golf, basketball and a jogging track
+ *     alongside WaterWorks — and Carnival's current facility pages list
+ *     all three ships. There is no per-ship exception here at all. The
+ *     whole "Sunshine missed out" story is deleted.
+ *   - The quiet default is deck 7 midship ALONE, not 6 to 8. Deck 6
+ *     fails below it (the public Promenade sits on 5) and deck 8 fails
+ *     above it (Lido on 9).
+ *   - Sunshine's obstruction data does exist — Carnival publishes both
+ *     walkway-view and obstructed-view picture-window categories. My
+ *     record claimed there was none.
+ *   - Radiance has two official obstructions I missed entirely: ocean
+ *     views 2428 and 2429.
  *
- * The exception that actually bites: WaterWorks came with Sunshine's 2013
- * rebuild, but SportSquare and mini-golf were added only in the later
- * Radiance (2018) and Sunrise (2019) rebuilds. Sunshine doesn't have them.
+ * The three ships are NOT identical up top and the record no longer
+ * pretends otherwise. Sunshine's deck 10 is Spa and WaterWorks; on
+ * Sunrise and Radiance deck 10 is Panorama with the main spa up on 11.
+ * The behaviour is the same — mixed-use, activity-adjacent — even though
+ * the label isn't.
  *
- * Deliberately NOT encoded:
- *   - elevator counts. Two figures surfaced (ten ship-wide, and four glass
- *     cars at the atrium) and nothing reconciles them, so the record says
- *     nothing rather than picking one.
- *   - porthole square footage. Sources gave both 170 and 220 sq ft for
- *     what may or may not be the same category. The general porthole steer
- *     stands on its own without a number attached.
- *   - the exact cabin numbers for the deck 10 spa obstructions. The source
- *     rendered them in a four-digit form that doesn't match Carnival's
- *     usual numbering, so they're described by position instead.
- *   - theater, nightclub and galley placement. Nothing class-specific
- *     surfaced, and the Dream-class prose must not be borrowed onto these
- *     hulls just because they're both mid-size Carnival ships.
+ * Deliberately still absent, and Jimmy agreed with both: the elevator
+ * count, because the figures in circulation don't distinguish passenger
+ * lifts from the atrium glass subset; and porthole square footage, where
+ * the same category surfaces as both 170 and 220 sq ft. That is exactly
+ * where the architecture should refuse to manufacture certainty.
  */
 
 const SUNSHINE_CLASS_SOURCES: Source[] = [
   {
-    label: "Radiance obstructed staterooms — Carnival's own knowledge base",
+    label:
+      "Carnival Sunshine — SportSquare, ropes course and mini-golf added in the 2013 rebuild (checked by Jimmy)",
+    url: "https://www.carnival.com/cruise-ships/carnival-sunshine",
+    checked: "2026-08-18",
+  },
+  {
+    label:
+      "Carnival Radiance deck plan — Cloud 9 Spa balconies 1001/1002 and ocean views 2428/2429 obstructed (checked by Jimmy)",
+    url: "https://www.carnival.com/cruise-ships/carnival-radiance",
+    checked: "2026-08-18",
+  },
+  {
+    label: "Radiance obstructed staterooms and the 4J walkway-view category",
     url: "https://help.goccl.com/app/answers/detail/a_id/5523",
     checked: "2026-08-18",
   },
   {
-    label: "Sunshine's 2013 rebuild — WaterWorks, Twister, deck 10",
-    url: "https://www.seatrade-cruise.com/refurb-design-interiors/carnival-sunshine-has-over-the-water-slide-milkshake-bar-and-more",
+    label: "SportSquare and ropes-course ship lists — all three hulls carry both",
+    url: "https://help.carnival.com/app/answers/detail/a_id/1158",
     checked: "2026-08-18",
   },
   {
-    label: "Sunshine deck plans — cabins on the Lido and spa decks",
-    url: "https://www.icruise.com/deckplans/carnival-cruises-carnival-sunshine-deckplans-lido-deck.html",
+    label: "Sunrise's 2019 transformation added SportSquare with a suspended ropes course",
+    url: "https://www.carnival.com/cruise-ships/carnival-sunrise",
     checked: "2026-08-18",
   },
 ];
 
-/** SportSquare and mini-golf came with the later two rebuilds only. */
-const REBUILT_WITH_SPORTSQUARE = new Set(["sunrise", "radiance"]);
+/**
+ * Deck 7 midship, and only deck 7 — the one deck on this class that
+ * passes the cabins-above-and-below test.
+ *
+ * Deck 6 sits immediately above the heavily public Promenade on deck 5.
+ * Deck 8 sits immediately below Lido deck 9. Both are perfectly bookable,
+ * they just each need one check rather than being waved through.
+ *
+ * OPERATOR-CONFIRMED (Jimmy, 2026-08-18). Read off Carnival's own deck
+ * geometry, not a Carnival recommendation.
+ */
+const SUNSHINE_CLASS_QUIET_DEFAULT = `Midship on deck 7. ${QUIET_DEFAULT_RULE} On this class deck 7 is the only one that passes cleanly: deck 6 sits directly above the public Promenade on 5, and deck 8 sits directly below Lido deck 9. Book 6 and you check what's below; book 8 and you check what's above; book 7 and you're between cabins both ways.`;
+
+/**
+ * Decks 9 and 10 both mix accommodation with activity on all three
+ * ships. The labels differ — Sunshine's 10 is Spa and WaterWorks, the
+ * other two call theirs Panorama with the spa up on 11 — but the
+ * booking behaviour is identical, so the rule is shared and the naming
+ * is handled per ship.
+ */
+const MIXED_UPPER_DECKS =
+  "Decks 9 and 10 are both mixed-use on this class and neither is a normal quiet cabin deck. Deck 9 is Lido — forward cabins share it with the pool, the buffet and the public space. Deck 10 carries cabins alongside high-activity areas too. Neither is a no, but both need a same-deck and vertical check on the specific cabin rather than a blanket yes.";
+
+/**
+ * The forward walkway-view rooms are a category rule, not a cabin list.
+ * Carnival sells them as picture-window rooms whose view is partly taken
+ * by the outdoor observation deck and walkway. GoCCL identifies 7201 as
+ * a 4J obstructed-view cabin and the class plan shows the arrangement,
+ * but the full forward ranges are NOT hard-coded — Jimmy explicitly held
+ * those back pending the exact obstruction page.
+ */
+const FORWARD_4J_WALKWAY_VIEW =
+  "Watch the forward picture-window rooms in the 4J band on decks 6 and 7 — they're the walkway-view category, where the outdoor observation deck and walkway take part of the view and people on the walkway can see back in. 7201 is a confirmed example. I'm deliberately not listing the full forward range as verified until the exact obstruction page is in hand, so read the category code on the specific cabin.";
+
+/** Carnival's own published obstructions, per hull. */
+const OBSTRUCTED: Record<"sunshine" | "sunrise" | "radiance", string> = {
+  sunshine:
+    "Carnival publishes obstruction data for this ship — both an Interior with Picture Window (Walkway View) category and an Interior with Picture Window (Obstructed View) category, with deck 6 rooms such as 6101 documented as obstructed-window walkway rooms. The exact cabin-level list hasn't been imported here yet, so check the plan for the specific cabin rather than assuming it's clean.",
+  sunrise:
+    "Carnival publishes obstruction data for this ship, but the cabin-level list hasn't been imported here yet. Radiance's official entries are a useful guide to where to look — the forward Cloud 9 Spa balconies and the lower-deck ocean views — but I'm not claiming the same numbers apply here.",
+  radiance:
+    "Carnival's current deck plan lists Cloud 9 Spa Balcony cabins 1001 and 1002 as obstructed, with the obstruction described as a steel railing, and separately lists ocean views 2428 and 2429 as obstructed.",
+};
 
 function sunshineClassContent(
   ship: "sunshine" | "sunrise" | "radiance",
 ): ShipContent {
-  const hasSportSquare = REBUILT_WITH_SPORTSQUARE.has(ship);
+  const deck10 =
+    ship === "sunshine"
+      ? "On this ship deck 10 is the Spa and WaterWorks deck."
+      : "On this ship deck 10 is called Panorama and the main spa sits up on 11 — a different label from Sunshine's, but the same mixed-use behaviour.";
 
   return {
     reviewDue: "2027-02-01",
     sources: [...CARNIVAL_SOURCES, ...SUNSHINE_CLASS_SOURCES],
 
     cabin: {
-      // MY RESEARCH. Not signed off.
-      verified: false,
-      placementNote:
-        "Midship first. This is an older, smaller hull than the Dream or Vista ships and the stack is more compressed — the Lido on deck 9 carries cabins itself, and deck 10 mixes the spa and the waterpark in with more cabins. So the top two cabin decks are both busy decks, not quiet ones. Decks 6 to 8 midship are the sensible default; treat anything on 9 or 10 as needing a look at what's next door before you confirm it.",
+      // Signed off by Jimmy, 2026-08-18, against Carnival's own deck
+      // plans. Corrections listed at the top of the file.
+      verified: true,
+      placementNote: `${SUNSHINE_CLASS_QUIET_DEFAULT} ${MIXED_UPPER_DECKS} ${deck10}`,
       motionAvoid: MOTION_RULE,
       vibrationNote: VIBRATION_RULE,
       categoryWarnings: [
         PORTHOLE_STEER,
         BOTTOM_DECK_NOTE,
-        "These three are rebuilt Destiny-class hulls, not sisters that came out of the yard together, and they were rebuilt years apart. Don't assume a cabin or a venue that exists on one exists on the others — check the actual ship rather than the class.",
-        "A client asking for a high deck to get away from the crowd is asking for the wrong thing here. On this hull, high means the pool deck and the waterpark. Midship on 7 or 8 gets them what they actually want.",
+        FORWARD_4J_WALKWAY_VIEW,
+        "These three are rebuilt Destiny-class hulls, not sisters that came out of the yard together, and they were rebuilt years apart. The upper decks don't even carry the same names — check the actual ship's plan rather than reasoning from a sister.",
+        "A client asking for a high deck to get away from the crowd is asking for the wrong thing here. On this hull, high means the pool deck and the waterpark. Deck 7 midship gets them what they actually want.",
       ],
       hazardsAboveBelow: [
         {
           source: "lido",
           where:
-            "deck 9 — the pool deck carries cabins itself, so it's a corridor-and-next-door problem there rather than only an overhead one",
+            "deck 9 — the pool deck carries forward cabins itself, so it's a same-deck problem there as well as an overhead one for deck 8",
+        },
+        {
+          source: "buffet",
+          where: "also on deck 9, alongside those forward cabins",
         },
         {
           source: "kids",
           where:
-            "the WaterWorks complex on deck 10, in among the spa cabins on the same deck",
+            "the WaterWorks complex on the deck above the Lido, mixed in with the cabins on that deck",
+        },
+        {
+          source: "sports",
+          where:
+            "SportSquare, the ropes course and mini-golf up top on all three ships",
         },
       ],
-      obstructedViewNotes:
-        ship === "sunshine"
-          ? "No obstruction list surfaced for this hull. Carnival's own knowledge base documents them on Radiance — a steel balcony railing across the forward spa cabins on deck 10, and the forward cabins on decks 6 and 7 looking onto a shared observation platform. These are rebuilt sisters, so check the same positions here, but I'm not claiming the same cabins are affected."
-          : "Forward-facing cabins are the problem on this hull, in two places. The forward spa cabins on deck 10 are blocked by a solid steel balcony railing, and the forward cabins on decks 6 and 7 — roughly 6201 to 6206 and 7201 to 7206 — look onto a shared observation platform rather than open sea. The deck 6 and 7 numbers came through a secondary source, so confirm them on the booking screen before you promise a view.",
+      obstructedViewNotes: OBSTRUCTED[ship],
       connectingNote: CONNECTING_RULE,
       minorPlacementRule: CARNIVAL_MINOR_PLACEMENT,
       accessibilityNote:
-        "Everything is closer together on this hull than on the big new ships, which generally helps — the Lido isn't a separate expedition upward, it's a cabin deck. The Excel-class problem of dining low and pool high is much less pronounced here, though that's my read of the deck mix rather than a sourced claim. Confirm scooter clearance against Carnival's accessible deck plan as usual.",
+        "These upper decks mix accommodation and recreation far more than the Excel ships do — cabins sit on and around decks 9 and 10 rather than all sitting well below the outdoor attractions. For a slower traveller that cuts the vertical trip if they're booked high, but it buys that with same-deck traffic and overhead activity, so proximity here is a tradeoff rather than a straight win. That comparison is our inference from the deck geometry rather than a Carnival statement. Confirm scooter clearance against Carnival's accessible deck plan as usual.",
     },
 
     money: CARNIVAL_MONEY,
 
     traps: {
-      // MY RESEARCH. Not signed off.
-      verified: false,
-      kidAgeHeightRules: `${CARNIVAL_SLIDE_RULES} The Twister slide runs a 42-inch minimum. ${CARNIVAL_KIDS_RULES}`,
-      ...(ship === "sunshine"
-        ? {}
-        : {
+      // Signed off by Jimmy, 2026-08-18, after reversing my claim that
+      // Sunshine lacks a sports complex. It has one and always has.
+      verified: true,
+      kidAgeHeightRules: `${CARNIVAL_SLIDE_RULES} The Twister slide runs a 42-inch minimum. ${CARNIVAL_ROPES_COURSE_RULES} ${CARNIVAL_KIDS_RULES}`,
+      ...(ship === "radiance"
+        ? {
             obstructedBalconyDecks:
-              "the forward spa cabins on deck 10, and the forward cabins on decks 6 and 7 facing the shared observation platform",
-          }),
+              "Cloud 9 Spa balconies 1001 and 1002, blocked by a steel railing, plus ocean views 2428 and 2429",
+          }
+        : {}),
       embarkationNote: CARNIVAL_EMBARKATION,
       other: [
+        "All three ships have SportSquare with a ropes course and mini-golf, plus WaterWorks. Sunshine got its set in the 2013 rebuild, Radiance in 2018 and Sunrise in 2019 — different years, same facilities today. Don't let an older review tell you one of them went without.",
         "Neither BOLT nor SkyRide is on this class — those are the Excel and Vista ships. Don't let a client arrive expecting the rollercoaster or the sky ride.",
-        hasSportSquare
-          ? "SportSquare and mini-golf came with this ship's rebuild. Sunshine didn't get them, so don't quote this ship's facilities off a Sunshine review."
-          : "No SportSquare and no mini-golf on this one — those came with the later Radiance and Sunrise rebuilds, not Sunshine's. WaterWorks is here; the sports complex isn't.",
-        "All three of these were rebuilt from older hulls at different times, so photos and reviews of one sister can be wrong about another. Check what's actually on the ship they're booked on.",
+        "All three were rebuilt from older hulls at different times and their upper decks carry different names, so photos and deck plans of one sister can be wrong about another. Check the ship they're actually booked on.",
       ],
     },
   };
