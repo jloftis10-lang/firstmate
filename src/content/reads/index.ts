@@ -1,7 +1,6 @@
 import type { ShipContent } from "@/lib/types";
 import { carnivalCelebration } from "./carnival-celebration";
 import { carnivalMardiGras } from "./carnival-mardi-gras";
-import { norwegianPrima } from "./norwegian-prima";
 import { carnivalJubilee } from "./carnival-jubilee";
 import {
   carnivalHorizon,
@@ -87,6 +86,34 @@ import {
   rhapsodyOfTheSeas,
   visionOfTheSeas,
 } from "./royal-vision-class";
+import {
+  norwegianAqua,
+  norwegianLuna,
+  norwegianPrima,
+  norwegianViva,
+} from "./ncl-prima-class";
+import { norwegianEpic } from "./ncl-epic";
+import {
+  norwegianBliss,
+  norwegianBreakaway,
+  norwegianEncore,
+  norwegianEscape,
+  norwegianGetaway,
+  norwegianJoy,
+} from "./ncl-breakaway-class";
+import {
+  norwegianDawn,
+  norwegianGem,
+  norwegianJade,
+  norwegianJewel,
+  norwegianPearl,
+  norwegianStar,
+} from "./ncl-jewel-dawn";
+import {
+  norwegianSky,
+  norwegianSpirit,
+  norwegianSun,
+} from "./ncl-sun-sky-spirit";
 
 /**
  * Operator read content, keyed by ship id.
@@ -172,7 +199,30 @@ export const SHIP_READS: Record<string, ShipContent> = {
   "rhapsody-of-the-seas": rhapsodyOfTheSeas,
   "vision-of-the-seas": visionOfTheSeas,
 
+  "norwegian-prima": norwegianPrima,
+  "norwegian-viva": norwegianViva,
+  "norwegian-aqua": norwegianAqua,
+  "norwegian-luna": norwegianLuna,
+
+  "norwegian-epic": norwegianEpic,
+  "norwegian-breakaway": norwegianBreakaway,
+  "norwegian-getaway": norwegianGetaway,
+  "norwegian-escape": norwegianEscape,
+  "norwegian-joy": norwegianJoy,
+  "norwegian-bliss": norwegianBliss,
+  "norwegian-encore": norwegianEncore,
+
+  "norwegian-jewel": norwegianJewel,
+  "norwegian-jade": norwegianJade,
+  "norwegian-pearl": norwegianPearl,
+  "norwegian-gem": norwegianGem,
+  "norwegian-dawn": norwegianDawn,
+  "norwegian-star": norwegianStar,
+
+  "norwegian-sun": norwegianSun,
+  "norwegian-sky": norwegianSky,
+  "norwegian-spirit": norwegianSpirit,
+
   "carnival-celebration": carnivalCelebration,
   "carnival-mardi-gras": carnivalMardiGras,
-  "norwegian-prima": norwegianPrima,
 };
