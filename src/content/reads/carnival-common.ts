@@ -97,12 +97,10 @@ export const AQUA_TUNNEL_TALL_RULES =
  * price, the youth age bands, the Arrival Appointment. All of it is
  * researched and sourced, none of it is operator-confirmed.
  *
- * There is deliberately NO cabin block. Cabin advice is the part that
- * needs someone who has actually sailed the ship — deck bands, what sits
- * above and below, which balconies are cut by a lifeboat — and inventing
- * it per hull is exactly the failure this product exists to prevent. The
- * read reports the cabin category as uncharted until an operator fills
- * it in.
+ * The cabin block is the fleet-wide baseline: Jimmy's general rules,
+ * which he confirmed hold across the fleet. Ship-specific detail —
+ * deck defaults, hazard locations, obstructions, elevators — is absent
+ * until someone works the hull, and nothing here pretends otherwise.
  */
 export function carnivalFleetContent(opts: {
   /** Ship or class-specific ride minimums, appended to the fleet rules. */
@@ -116,6 +114,7 @@ export function carnivalFleetContent(opts: {
   return {
     reviewDue: "2027-02-01",
     sources: CARNIVAL_SOURCES,
+    cabin: carnivalCabinBaseline(),
     money: CARNIVAL_MONEY,
     traps: {
       verified: false,
@@ -174,3 +173,31 @@ export const EXCEL_ELEVATOR_NOTE =
  */
 export const EXCEL_ACCESSIBILITY_NOTE =
   "Most of the indoor dining and entertainment sits around decks 6 to 8, while the Lido, pool and sport decks run from about 16 up to 19 where BOLT is — so anyone slower on their feet repeats that lift trip several times a day, and peak queues are the standing complaint on these ships. If they use a wheelchair or a scooter, treat it as a different job entirely: not every Excel cabin takes a scooter, standard and ambulatory-accessible cabins run about a 22-inch entry door with lips into the bathroom, shower and balcony, and a larger scooter needs a fully accessible cabin. Confirm it against Carnival's accessible deck plan before you book.";
+
+/**
+ * The fleet-wide cabin baseline — Jimmy's general rules, which he
+ * confirmed hold across the Carnival fleet (2026-08-18). Ship-specific
+ * detail (deck defaults, hazard locations, obstructions, elevator banks,
+ * mobility layout) is deliberately absent until each hull gets worked up:
+ * the baseline is the operator's general judgment, not a claim about any
+ * particular deck plan.
+ */
+export function carnivalCabinBaseline(): NonNullable<ShipContent["cabin"]> {
+  return {
+    verified: false,
+    placementNote:
+      "Prioritise midship first, on a lower or middle deck. This is the fleet rule — nobody has worked this hull's decks up yet, so judge the specific cabin against it.",
+    motionAvoid:
+      "Push hard for midship. Extreme forward is the one to rule out; extreme aft is a negative when there's comparable midship inventory, and more so if vibration also matters to them.",
+    vibrationNote:
+      "Lower decks are generally better for motion, not worse — closer to the waterline. The catch is vibration: a low cabin at the back can still pick up the propulsion, so \"go low\" isn't automatically the right call for a sensitive traveller.",
+    categoryWarnings: [
+      "I'd steer them off a porthole room — it's the cheapest category and they've felt small to me. Check the actual square footage for the specific cabin before you rule it in or out.",
+      "The bottom deck is fine if they're on a budget — that's where the cheap interiors are, and low is generally kinder for motion, not harsher.",
+    ],
+    hazardsAboveBelow: [],
+    connectingNote:
+      "Never read connecting status off the category or off two cabin numbers being next to each other — only an explicit connecting pair counts.",
+    minorPlacementRule: CARNIVAL_MINOR_PLACEMENT,
+  };
+}

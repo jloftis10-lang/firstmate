@@ -4,6 +4,7 @@ import { carnivalCelebration } from "./carnival-celebration";
 import { carnivalMardiGras } from "./carnival-mardi-gras";
 import { norwegianPrima } from "./norwegian-prima";
 import { CARNIVAL_FLEET_READS } from "./carnival-fleet";
+import { carnivalJubilee } from "./carnival-jubilee";
 
 /**
  * Operator read content, keyed by ship id.
@@ -22,6 +23,7 @@ export const SHIP_READS: Record<string, ShipContent> = {
   // Listed first so a hand-written file below always wins.
   ...CARNIVAL_FLEET_READS,
 
+  "carnival-jubilee": carnivalJubilee,
   "wonder-of-the-seas": wonderOfTheSeas,
   "carnival-celebration": carnivalCelebration,
   "carnival-mardi-gras": carnivalMardiGras,
