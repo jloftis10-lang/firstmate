@@ -145,7 +145,21 @@ export const ROYAL_MINOR_PLACEMENT =
 export const ROYAL_EMBARKATION =
   "Check-in opens 45 days before sailing and arrival windows are picked then, in half-hour slots from about 10:30am to 2:30pm — first-come first-served, so the client who checks in on day 45 gets the early boarding and the one who waits gets 2pm. Turn up inside the window: early arrivals wait outside the terminal and late ones board with a later group. How hard it's enforced varies by port.";
 
-/** FlowRider, rock wall, Perfect Storm slides. Class-specific ones live in the class files. */
+/**
+ * FlowRider, rock wall, Perfect Storm slides. Class-specific ones live in
+ * the class files.
+ *
+ * SUPERSEDED, NOT YET RETIRED. `royal-attractions.ts` now holds these as
+ * per-attraction constants that a hull maps onto, which is the better
+ * model: it can say Navigator has the Blaster and Riptide while Adventure
+ * has Typhoon and Cyclone, where this generic paragraph names rides a
+ * ship may not carry. Voyager/Freedom uses the table.
+ *
+ * This stays because Oasis, Icon, Quantum, Radiance and Vision are SIGNED
+ * against this exact wording, and rewriting signed text to adopt a better
+ * structure would silently change what an operator approved. Each class
+ * migrates at its next review, not before.
+ */
 export const ROYAL_ATTRACTION_RULES =
   "The FlowRider needs 52 inches to bodyboard and 58 inches to stand up on a flowboard, which catches families out — a child can ride it lying down and not standing. The rock wall is age 6 and up with a signed waiver, and 6 to 12 need supervision. Where there are Perfect Storm slides they run a 48-inch minimum with under-12s supervised.";
 
