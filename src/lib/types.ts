@@ -89,6 +89,13 @@ export type ShipContent = {
      * heads-up sentence and becomes its own flag.
      */
     motionAlsoAvoid?: string[];
+    /**
+     * A cabin CATEGORY to steer any client away from, for reasons that
+     * have nothing to do with motion — size, value, what the client is
+     * actually picturing. Shown on every read, not just seasick ones.
+     * A complete heads-up sentence.
+     */
+    categoryWarning?: string;
     /** Reads as "that means ___" — pool deck, buffet, nightclub locations. */
     hazardsAboveBelow: string[];
     obstructedViewNotes?: string;

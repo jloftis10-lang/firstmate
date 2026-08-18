@@ -43,12 +43,16 @@ export const carnivalMardiGras: ShipContent = {
     // OPERATOR-CONFIRMED (Jimmy, 2026-08-17). Corrects the researched
     // version, which had forward only — the call is both ends.
     motionAvoid: "the front and the back of the ship",
-    // Recorded as bare calls. Jimmy gave these without a rationale, and
-    // inventing one would put words in the operator's mouth — the "why"
-    // is the moat and has to be his. Ask before filling this in.
-    motionAlsoAvoid: [
-      "Not an interior cabin at the bottom of the ship, and never a porthole room.",
-    ],
+    // Still a bare call — Jimmy gave this one without a rationale, and
+    // inventing one would put words in the operator's mouth. Ask before
+    // filling it in.
+    motionAlsoAvoid: ["Not an interior cabin at the bottom of the ship either."],
+    // OPERATOR-CONFIRMED (Jimmy, 2026-08-17): porthole rooms are the
+    // cheapest category and smaller than an interior. That is a value and
+    // size warning, not a motion one, so it sits here and shows on every
+    // read rather than only for a seasick client.
+    categoryWarning:
+      "Never a porthole room. They're the absolute cheapest category on the ship and smaller than an interior — cheaper than one, too.",
     hazardsAboveBelow: [
       "the Lido deck and the buffet",
       "the atrium and the late-night venues",
