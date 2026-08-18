@@ -13,9 +13,21 @@ type Props = {
   sharePath: string;
   /** The booking, so the email route can rebuild the summary server-side. */
   client: ClientProfile;
+  /**
+   * Whether this deployment has email configured. When false the option
+   * isn't offered at all — showing it would walk the advisor through
+   * typing an address only to be told the feature is off.
+   */
+  emailEnabled: boolean;
 };
 
-export function ClientSummary({ text, verified, sharePath, client }: Props) {
+export function ClientSummary({
+  text,
+  verified,
+  sharePath,
+  client,
+  emailEnabled,
+}: Props) {
   const [done, setDone] = useState<"text" | "link" | null>(null);
   const [emailOpen, setEmailOpen] = useState(false);
   const [to, setTo] = useState("");
@@ -125,7 +137,7 @@ export function ClientSummary({ text, verified, sharePath, client }: Props) {
         shop talk.
       </p>
 
-      {!emailOpen ? (
+      {!emailEnabled ? null : !emailOpen ? (
         <button
           type="button"
           onClick={() => setEmailOpen(true)}

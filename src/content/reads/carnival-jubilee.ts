@@ -25,7 +25,9 @@ export const carnivalJubilee: ShipContent = {
   sources: [...CARNIVAL_SOURCES],
 
   cabin: {
-    verified: false,
+    // Signed off by Jimmy, 2026-08-18 — the class block he'd already
+    // signed on Celebration and Mardi Gras, extended to the third sister.
+    verified: true,
     placementNote:
       "Prioritise midship first. Deck 9 is a strong default on this class because it's the lowest full stateroom deck — but judge the actual cabin rather than working to a fixed deck range.",
     motionAvoid:
@@ -54,9 +56,8 @@ export const carnivalJubilee: ShipContent = {
   money: CARNIVAL_MONEY,
 
   traps: {
-    // Same content Jimmy signed on the other two Excel hulls; unsigned
-    // here because his sign-off named those ships.
-    verified: false,
+    // Signed off by Jimmy, 2026-08-18.
+    verified: true,
     kidAgeHeightRules: `${BOLT_RULES} ${CARNIVAL_KIDS_RULES}`,
     obstructedBalconyDecks: EXCEL_OBSTRUCTED_DECKS,
     embarkationNote: CARNIVAL_EMBARKATION,

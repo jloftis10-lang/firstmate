@@ -64,7 +64,11 @@ function vistaClassContent(ship: "vista" | "horizon" | "panorama"): ShipContent 
     sources: [...CARNIVAL_SOURCES, ...VISTA_CLASS_SOURCES],
 
     cabin: {
-      verified: false,
+      // Signed off by Jimmy, 2026-08-18, across the whole class — the
+      // workup is his own research and he treats the three as one rule
+      // family. Per-ship exceptions (IMAX, Vista's Havana disco) are
+      // handled in the content, not by withholding the signature.
+      verified: true,
       // The class's biggest insight: deck 9 is the trap that looks like
       // the answer. All cabins, but the Lido complex on 10 sits directly
       // over parts of it — exactly the looks-right-on-a-filter,
@@ -110,7 +114,8 @@ function vistaClassContent(ship: "vista" | "horizon" | "panorama"): ShipContent 
     money: CARNIVAL_MONEY,
 
     traps: {
-      verified: false,
+      // Signed off by Jimmy, 2026-08-18.
+      verified: true,
       kidAgeHeightRules: `${SKYRIDE_RULES} ${CARNIVAL_SLIDE_RULES} ${CARNIVAL_KIDS_RULES}`,
       obstructedBalconyDecks:
         "Junior Suites 9205 and 9206 and Spa Suites 14205 and 14206 — a solid panel, the same four cabins on all three ships",

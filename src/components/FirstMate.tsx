@@ -90,7 +90,13 @@ function Segmented<T extends string>({
   );
 }
 
-export function FirstMate({ ships }: { ships: Ship[] }) {
+export function FirstMate({
+  ships,
+  emailEnabled,
+}: {
+  ships: Ship[];
+  emailEnabled: boolean;
+}) {
   // Default to a ship we can actually read, so the first run shows the product.
   const [shipId, setShipId] = useState(
     (ships.find((s) => s.content) ?? ships[0]).id,
@@ -201,7 +207,12 @@ export function FirstMate({ ships }: { ships: Ship[] }) {
           </p>
         </section>
       ) : isCovered(ship) ? (
-        <ReadView ship={ship} client={result} onAgain={reset} />
+        <ReadView
+          ship={ship}
+          client={result}
+          onAgain={reset}
+          emailEnabled={emailEnabled}
+        />
       ) : (
         <NoReadYet
           ship={ship}
@@ -217,10 +228,12 @@ function ReadView({
   ship,
   client,
   onAgain,
+  emailEnabled,
 }: {
   ship: CoveredShip;
   client: ClientProfile;
   onAgain: () => void;
+  emailEnabled: boolean;
 }) {
   const read = getRead(ship, client);
   const summary = clientSummary(ship, client);
@@ -274,6 +287,7 @@ function ReadView({
         verified={allVerified}
         sharePath={sharePath(client)}
         client={client}
+        emailEnabled={emailEnabled}
       />
 
       <button
