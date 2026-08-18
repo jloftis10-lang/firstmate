@@ -34,14 +34,24 @@ export type AttractionId =
   | "blaster"
   | "riptide"
   | "tidal-wave"
-  | "rock-wall";
+  | "rock-wall"
+  | "mini-golf"
+  | "sports-court";
 
 export type Attraction = {
   id: AttractionId;
   /** As Royal names it, because that's what's on the sign at the queue. */
   name: string;
-  /** The restriction sentence, complete and quotable. */
-  rule: string;
+  /**
+   * The restriction sentence, complete and quotable.
+   *
+   * OPTIONAL, because "what's aboard" and "what has a height rule" are
+   * different questions. Mini-golf and the sports court belong in a
+   * hull's inventory — on a Radiance ship they're most of the answer —
+   * but they gate nobody, and inventing a restriction to fill the field
+   * would be worse than leaving it empty.
+   */
+  rule?: string;
 };
 
 export const ROYAL_ATTRACTIONS: Record<AttractionId, Attraction> = {
@@ -75,6 +85,14 @@ export const ROYAL_ATTRACTIONS: Record<AttractionId, Attraction> = {
     name: "the rock wall",
     rule: "the rock wall is age 6 and up with a signed waiver, and 6 to 12 need supervision",
   },
+  "mini-golf": {
+    id: "mini-golf",
+    name: "the nine-hole mini-golf course",
+  },
+  "sports-court": {
+    id: "sports-court",
+    name: "the sports court",
+  },
 };
 
 /**
@@ -86,7 +104,9 @@ export const ROYAL_ATTRACTIONS: Record<AttractionId, Attraction> = {
  * that might name a ride it doesn't carry.
  */
 export function attractionRules(ids: AttractionId[]): string {
-  const found = ids.map((id) => ROYAL_ATTRACTIONS[id]).filter(Boolean);
+  const found = ids
+    .map((id) => ROYAL_ATTRACTIONS[id])
+    .filter((a) => a?.rule) as Required<Attraction>[];
   if (found.length === 0) return "";
   const rules = found.map((a) => a.rule);
   const last = rules.pop() as string;
