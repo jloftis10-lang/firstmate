@@ -105,10 +105,21 @@ export const CONNECTING_RULE =
  *   - Sunshine class: I had decks 6 to 8. Deck 6 fails below (the public
  *     Promenade is on 5) and deck 8 fails above (Lido on 9). Corrected
  *     to deck 7 alone.
+ *   - Conquest class: I had decks 7 or 8, and flagged it myself as
+ *     probably wrong before the review. Same geometry as Sunshine —
+ *     Promenade on 5 under deck 6, Lido on 9 over deck 8. Corrected to
+ *     deck 7 alone.
+ *
+ * Deck 7 has now come out as the answer on both Sunshine and Conquest
+ * class, for the same structural reason: those hulls put the Promenade
+ * on 5 and the Lido on 9, which squeezes the clean band to one deck.
+ * That is a recurring Carnival layout, NOT a fleet-wide constant — Dream
+ * class answers 7 and 8, and Excel answers differently again. Check the
+ * hull; don't assume deck 7.
  *
  * Each class still has to be worked out against its own deck plan — this
  * is the question to ask, and the answer differs per hull. It earns its
- * place here because it caught the same error three times, and because
+ * place here because it caught the same error four times, and because
  * it produces a defensible default without inventing a score.
  *
  * OPERATOR-CONFIRMED (Jimmy, 2026-08-18). His framing, generalised from

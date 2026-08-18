@@ -12,55 +12,103 @@ import {
   CONNECTING_RULE,
   MOTION_RULE,
   PORTHOLE_STEER,
+  QUIET_DEFAULT_RULE,
   VIBRATION_RULE,
 } from "./operator-rules";
 
 /**
  * Conquest class: Conquest, Glory, Valor, Liberty, Freedom (2002–2007).
  *
- * MY RESEARCH, NOT OPERATOR-CONFIRMED. Cabin and traps are both
- * `verified: false`.
+ * SIGNED OFF by Jimmy, 2026-08-18, against Carnival's current deck plans
+ * and facility lists. This class came out cleaner than the Sunshine one.
  *
- * Two things worth an operator's attention when this gets reviewed:
+ * What his pass changed:
  *
- *   1. There are no Cove balconies on this class. That's a Dream, Vista
- *      and Excel category. What this class has instead is the aft-view
- *      extended balcony on decks 6 to 8 — a different cabin with a
- *      different pitch (the wake, not the low-and-sheltered feel).
- *   2. The atrium's four glass elevators reach deck 2, not deck 1. If a
- *      client is booked on deck 1 and mobility matters, the pretty
- *      elevators don't get them home.
+ *   - Quiet default is deck 7 midship alone, not "7 or 8". Same geometry
+ *     as Sunshine class: the public Promenade sits on 5 under deck 6, and
+ *     Lido sits on 9 over deck 8. I flagged this as probably wrong before
+ *     the review and it was.
+ *   - Cabins reach deck 11 forward. I had the range ending at 10.
+ *   - The obstruction rule is the 4J walkway-view CATEGORY, which appears
+ *     in several places in the class geometry — not a deck 6 phenomenon,
+ *     which is how I had it. Plus two officially named ocean views.
+ *   - The outdoor screen is not pinned to a deck. Carnival's own Conquest
+ *     material puts Seaside Theatre with Lido deck 9 while deck-plan
+ *     sources treat it as part of deck 10's Panorama area; it faces
+ *     across a multi-level space, so the record describes the complex
+ *     rather than picking a deck.
  *
- * Deliberately NOT encoded:
- *   - the forward/midship/aft elevator split. Eighteen cars total is all
- *     that surfaced.
- *   - any cabin-number obstruction roster. Only the category-level fact
- *     surfaced (deck 6 carries an explicitly obstructed inside-with-window
- *     category), which is enough to warn on and not enough to name cabins.
+ * What survived unchanged, including one thing I said I trusted least:
+ * the activity list. Carnival's current facility pages confirm mini-golf
+ * on all five and confirm that none of the five carries SportSquare, the
+ * ropes course, SkyRide or BOLT. The advisor-facing distinction — a
+ * traditional sports deck is not SportSquare — is exactly right.
  */
 
 const CONQUEST_CLASS_SOURCES: Source[] = [
   {
-    label: "Conquest deck plans — cabins mixed onto the Lido and Panorama decks",
-    url: "https://www.cruisemapper.com/deckplans/Carnival-Conquest-616/deck09-1748",
+    label:
+      "Carnival Conquest deck plan — cabin decks 1, 2, 6-11 forward; 4J and 6B obstructed categories (checked by Jimmy)",
+    url: "https://www.carnival.com/cruise-ships/carnival-conquest",
     checked: "2026-08-18",
   },
   {
-    label: "Elevators — 18 total, four glass at the atrium reaching deck 2",
-    url: "https://www.cruisecritic.com/cruise/carnival/carnival-conquest",
+    label:
+      "Conquest-class obstructed-view and porthole record (CQ/GL/VA/LI/FD)",
+    url: "https://help.goccl.com/app/answers/detail/a_id/5523",
     checked: "2026-08-18",
   },
   {
-    label: "Aft-view extended balconies, decks 6 to 8",
-    url: "https://www.shermanstravel.com/advice/how-to-choose-a-cabin-on-carnival-conquest",
+    label:
+      "8M/8N Aft-View Extended Balcony dimensions — confirmed on Liberty and Freedom",
+    url: "https://www.carnival.com/cruise-ships/carnival-liberty",
     checked: "2026-08-18",
   },
   {
-    label: "Twister waterslide — 42 inch minimum, 300 pound maximum",
-    url: "https://www.carnival.com/onboard/waterworks",
+    label: "Mini-golf availability list — all five Conquest-class ships",
+    url: "https://www.carnival.com/onboard/mini-golf",
+    checked: "2026-08-18",
+  },
+  {
+    label: "SportSquare and ropes-course lists — none of the five appear",
+    url: "https://help.carnival.com/app/answers/detail/a_id/1158",
     checked: "2026-08-18",
   },
 ];
+
+/**
+ * Deck 7 midship, and only deck 7.
+ *
+ * Identical geometry to the Sunshine class and for the same reason: the
+ * public Promenade sits on 5 and the Lido on 9, which squeezes the clean
+ * cabins-above-and-below band down to a single deck.
+ *
+ * OPERATOR-CONFIRMED (Jimmy, 2026-08-18). Read off Carnival's own deck
+ * geometry, not a Carnival recommendation.
+ */
+const CONQUEST_CLASS_QUIET_DEFAULT = `Midship on deck 7. ${QUIET_DEFAULT_RULE} On this class deck 7 is the one that passes: deck 6 sits over the public-heavy Promenade on 5, and deck 8 sits directly under Lido deck 9. Book 6 and you check what's below, book 8 and you check what's above, book 7 and you're between cabins both ways. The same geometry holds across all five ships.`;
+
+/**
+ * Decks 9 and 10 are one multi-level Lido and public complex with
+ * forward staterooms mixed into both — not two separately classifiable
+ * decks. The outdoor screen deliberately isn't pinned to either: it
+ * faces across the space and Carnival's own material and the deck plans
+ * disagree about which deck to file it under.
+ */
+const LIDO_PUBLIC_COMPLEX =
+  "Decks 9 and 10 work as one multi-level Lido and public complex, and both carry forward staterooms mixed into it — pool, dining, the water features and the outdoor screen all face across that space rather than sitting neatly on one deck. So a cabin on 9 or 10 is a same-deck traffic question, not just an overhead one, and it needs the specific cabin checked rather than a rule about the deck.";
+
+/**
+ * The obstruction rule is a category, not a deck. 4J is Carnival's
+ * interior-with-picture-window sold as obstructed or walkway view, and
+ * it turns up in several positions in this class's geometry.
+ *
+ * Two ocean views are named officially. GoCCL maintains a dedicated
+ * Conquest-class obstructed-view record that would be worth importing
+ * cabin-by-cabin — that import hasn't happened yet and the record says so.
+ */
+const CONQUEST_OBSTRUCTION =
+  "Read the category, not the deck. 4J is the interior with a picture window that Carnival sells as obstructed or walkway view, and it appears in several places in this class's layout rather than being a deck 6 thing — which is how I originally had it, wrongly. Two ocean views are named outright on the current plans: 6B cabins 2446 and 2449, both obstructed. Carnival's advisor knowledge base keeps a dedicated obstructed-view record for the whole class that hasn't been imported here cabin-by-cabin yet, so for anything outside those two, check the code on the specific cabin.";
 
 function conquestClassContent(): ShipContent {
   return {
@@ -68,55 +116,60 @@ function conquestClassContent(): ShipContent {
     sources: [...CARNIVAL_SOURCES, ...CONQUEST_CLASS_SOURCES],
 
     cabin: {
-      // MY RESEARCH. Not signed off.
-      verified: false,
-      placementNote:
-        "Midship on decks 7 or 8 is the default here, and it's the one travelers keep landing on independently — away from the engines, away from the pool, away from the atrium. Cabins run from deck 1 up to deck 10, and both of the top two carry public space alongside the staterooms: the Lido on 9, and the Twister slide and the outdoor screen on 10. So a cabin on 9 or 10 is either beside or beneath something loud depending where it sits — that one needs the deck plan, not a rule.",
+      // Signed off by Jimmy, 2026-08-18. One claim inside this block is
+      // marked in its own text as researched rather than confirmed — the
+      // glass-elevator behaviour. Everything else is off Carnival's plans.
+      verified: true,
+      placementNote: `${CONQUEST_CLASS_QUIET_DEFAULT} Cabins sit on decks 1, 2, 6, 7, 8, 9, 10 and forward on 11 — not a continuous run, so don't reason from decks 3 to 5 existing as cabin decks here. ${LIDO_PUBLIC_COMPLEX}`,
       motionAvoid: MOTION_RULE,
       vibrationNote: VIBRATION_RULE,
       categoryWarnings: [
         PORTHOLE_STEER,
         BOTTOM_DECK_NOTE,
-        "There are no Cove balconies on this class — that's a Dream, Vista and Excel category. If a client has seen one and wants it, the nearest thing here is an aft-view extended balcony on decks 6 to 8, about 185 square feet inside with a 60-foot balcony and the wake behind them. It's a good cabin, it's just not the same cabin, and it's aft — so weigh it against vibration if they're sensitive.",
-        "Deck 6 carries a category that Carnival sells as obstructed outright. Read the category letter, not just the deck.",
+        "There are no Cove balconies on this class — that's a Dream, Vista and Excel category, and this one doesn't have it. If a client has seen one and wants it, the nearest thing here is the aft-view extended balcony in the 8M and 8N categories: about 185 square feet inside with a 60-foot balcony, 245 total, with the wake behind them. Good cabin, different product, and it's aft — so weigh it against vibration if they're sensitive. Those dimensions are confirmed on Liberty and Freedom and taken as class-wide pending a per-ship check.",
+        "Deck 8 is the one that looks safe and isn't quite. It's a fine cabin deck, but Lido sits directly above it, so it needs the same overhead check you'd give any deck under a pool — it just doesn't advertise the problem the way deck 9 does.",
       ],
       hazardsAboveBelow: [
         {
           source: "lido",
           where:
-            "deck 9 — the pool deck also carries cabins, so depending on the cabin it's overhead noise, next-door noise, or both",
+            "the deck 9 and 10 complex — pool and public space on both, with forward cabins mixed into each, and deck 8 sitting underneath it all",
+        },
+        {
+          source: "buffet",
+          where: "the dining in that same multi-level deck 9 and 10 space",
         },
         {
           source: "kids",
-          where: "Camp Ocean and mini-golf up on the sun deck",
+          where: "Camp Ocean forward on the sun deck, up on 12",
         },
         {
-          source: "theater",
-          where:
-            "the outdoor screen on deck 10, alongside the cabins on that deck rather than above them",
+          source: "sports",
+          where: "mini-golf aft on 12, on the same sun deck as Camp Ocean",
         },
       ],
-      obstructedViewNotes:
-        "Deck 6 has an inside-with-window category that Carnival sells as obstructed, and the balcony obstructions on this class are lifeboats and structure sitting at railing height on the indented sections of the hull. No cabin-by-cabin list surfaced, so the honest instruction is to read the category code on the specific cabin rather than trusting the deck.",
+      obstructedViewNotes: CONQUEST_OBSTRUCTION,
       connectingNote: CONNECTING_RULE,
       minorPlacementRule: CARNIVAL_MINOR_PLACEMENT,
       elevatorNote:
-        "Eighteen elevators, including four glass ones at the atrium — and those four stop at deck 2, not deck 1. That's the one to remember: a client on deck 1 has to use a different bank. I couldn't establish how the rest split forward, midship and aft, so don't steer anyone to a bank on my say-so.",
+        "Eighteen elevators, corroborated across current deck-plan sources — but no reliable bank split, so no forward-or-aft recommendation from me. One nuance worth carrying, and this part is researched rather than confirmed off Carnival's plan: the four glass atrium cars run from deck 2 upward, so a client on deck 1 can't use them. Deck 1 is NOT cut off — the regular banks serve it — but somebody on 1 shouldn't assume every midship lift they see on the map reaches their deck.",
       accessibilityNote:
-        "The deck-1 elevator gap is the thing to check first — the atrium's glass cars don't reach it, so a deck 1 cabin is the wrong pick for anyone who tires on stairs or uses a scooter. Otherwise the layout is less vertically split than the Excel ships: pool, dining and cabins share the upper decks rather than sitting at opposite ends of the ship. That last part is my read of the deck contents, not a sourced claim. Confirm scooter clearance against Carnival's accessible deck plan as usual.",
+        "The glass-atrium detail is the one to check first for a mobility booking: those four cars start at deck 2, so a deck 1 cabin means using the regular banks rather than the ones people navigate by. Deck 1 does have service — it just isn't the obvious service. Otherwise the layout is less vertically split than the Excel ships, with pool, dining and cabins sharing the upper decks rather than sitting at opposite ends of the ship; that comparison is our inference from the deck contents rather than a Carnival statement. Confirm scooter clearance against Carnival's accessible deck plan as usual.",
     },
 
     money: CARNIVAL_MONEY,
 
     traps: {
-      // MY RESEARCH. Not signed off.
-      verified: false,
+      // Signed off by Jimmy, 2026-08-18, unchanged from my workup —
+      // Carnival's current facility lists confirm all of it.
+      verified: true,
       kidAgeHeightRules: `${CARNIVAL_SLIDE_RULES} The Twister slide runs a 42-inch minimum and a 300-pound maximum. ${CARNIVAL_KIDS_RULES}`,
       obstructedBalconyDecks:
-        "the obstructed inside-with-window category on deck 6, plus balconies on the indented hull sections where lifeboats and structure sit at railing height",
+        "the 4J walkway-view interiors wherever they appear in the layout, plus ocean views 2446 and 2449",
       embarkationNote: CARNIVAL_EMBARKATION,
       other: [
-        "None of BOLT, SkyRide, SkyCourse or SportSquare is on this class — those are the Excel, Vista and Dream ships. There is a basic mini-golf course, not the two-level sports complex. Set that expectation before a family books it for the kids.",
+        "Don't confuse this class's sports deck with SportSquare. These ships have traditional recreation — mini-golf aft on 12, court-type games, Camp Ocean forward — and Carnival's current facility lists confirm that none of the five carries SportSquare, the ropes course, SkyRide or BOLT. A newer advisor looking at a sun deck full of activity can easily assume the branded complex is there. It isn't.",
+        "Mini-golf is on all five ships — Carnival's own availability list names Conquest, Freedom, Glory, Liberty and Valor. That one you can promise.",
       ],
     },
   };
