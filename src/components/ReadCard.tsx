@@ -7,12 +7,35 @@ import { Emphasis } from "./Emphasis";
 type Props = {
   number: string;
   category: string;
-  read: ReadCategory;
+  /** null when nobody has worked this block up for this ship yet. */
+  read: ReadCategory | null;
 };
 
 export function ReadCard({ number, category, read }: Props) {
   const [open, setOpen] = useState(false);
   const bodyId = useId();
+
+  // An uncharted category keeps its slot rather than disappearing. If it
+  // vanished, the advisor would read three cards as three checks and two
+  // cards as two checks, with no way to tell a clean bill of health from
+  // a gap in the content.
+  if (read === null) {
+    return (
+      <div className="mb-3.5 rounded-2xl border border-dashed border-line bg-surface/60 p-5 pb-[18px]">
+        <div className="mb-3 flex items-center gap-2 font-readout text-[0.72rem] font-bold tracking-[0.09em] uppercase text-ink-3">
+          <span className="text-line">{number}</span> {category}
+        </div>
+        <p className="border-l-[3px] border-line pl-[15px] font-call text-[1.1rem] leading-[1.34] text-ink-2">
+          Not worked up for this ship yet.
+        </p>
+        <p className="mt-3 text-[0.88rem] leading-[1.5] text-ink-3">
+          An empty card is not a clean bill of health — it means nobody has
+          checked this one yet. Treat this part of the booking the way you
+          would without First Mate.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="mb-3.5 rounded-2xl border border-line bg-surface p-5 pb-[18px] shadow-[0_1px_2px_rgba(15,42,61,.05),0_8px_24px_rgba(15,42,61,.06)]">

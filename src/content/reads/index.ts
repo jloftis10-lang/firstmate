@@ -3,6 +3,7 @@ import { wonderOfTheSeas } from "./wonder-of-the-seas";
 import { carnivalCelebration } from "./carnival-celebration";
 import { carnivalMardiGras } from "./carnival-mardi-gras";
 import { norwegianPrima } from "./norwegian-prima";
+import { CARNIVAL_FLEET_READS } from "./carnival-fleet";
 
 /**
  * Operator read content, keyed by ship id.
@@ -17,6 +18,10 @@ import { norwegianPrima } from "./norwegian-prima";
  * SAMPLE marker until the content is confirmed.
  */
 export const SHIP_READS: Record<string, ShipContent> = {
+  // Money and traps for the rest of the Carnival fleet, no cabin block.
+  // Listed first so a hand-written file below always wins.
+  ...CARNIVAL_FLEET_READS,
+
   "wonder-of-the-seas": wonderOfTheSeas,
   "carnival-celebration": carnivalCelebration,
   "carnival-mardi-gras": carnivalMardiGras,

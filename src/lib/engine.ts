@@ -16,8 +16,12 @@ import type { ClientProfile, CoveredShip, Read, ReadCategory } from "./types";
  * 01 — Cabin & deck
  * ------------------------------------------------------------------ */
 
-function cabinRead(ship: CoveredShip, client: ClientProfile): ReadCategory {
-  const { cabin } = ship.content;
+function cabinRead(
+  ship: CoveredShip,
+  client: ClientProfile,
+): ReadCategory | null {
+  const cabin = ship.content.cabin;
+  if (!cabin) return null;
   const flags: string[] = [];
   let call: string;
   let why: string;
@@ -74,8 +78,12 @@ function cabinRead(ship: CoveredShip, client: ClientProfile): ReadCategory {
  * 02 — Money surprises
  * ------------------------------------------------------------------ */
 
-function moneyRead(ship: CoveredShip, client: ClientProfile): ReadCategory {
-  const { money } = ship.content;
+function moneyRead(
+  ship: CoveredShip,
+  client: ClientProfile,
+): ReadCategory | null {
+  const money = ship.content.money;
+  if (!money) return null;
   const flags: string[] = [];
   let call: string;
   let why: string;
@@ -115,8 +123,12 @@ function moneyRead(ship: CoveredShip, client: ClientProfile): ReadCategory {
  * 03 — Expectation traps
  * ------------------------------------------------------------------ */
 
-function trapsRead(ship: CoveredShip, client: ClientProfile): ReadCategory {
+function trapsRead(
+  ship: CoveredShip,
+  client: ClientProfile,
+): ReadCategory | null {
   const { traps, cabin } = ship.content;
+  if (!traps) return null;
   const flags: string[] = [];
   let call: string;
   let why: string;
@@ -136,7 +148,7 @@ function trapsRead(ship: CoveredShip, client: ClientProfile): ReadCategory {
       "Watch the walking. This is a big ship, and the distance from a far cabin to the theater or dining room is longer than anyone expects — it wears on older travelers by day three.";
     why =
       "Deck plans hide scale. On a vessel this size, 'aft' to 'midship dining' can be a quarter-mile each way. For a multigen group with anyone slower on their feet, cabin placement is really a mobility decision in disguise.";
-    if (cabin.accessibilityNote) {
+    if (cabin?.accessibilityNote) {
       flags.push(
         `Map their daily route before you book the cabin. ${cabin.accessibilityNote} A great-looking aft suite can mean a punishing walk to everything, every night.`,
       );
@@ -197,38 +209,49 @@ export function clientSummary(ship: CoveredShip, client: ClientProfile): string 
   const parts: string[] = [];
   parts.push(`I've got ${who} set for the ${ship.name}.`);
 
-  const range = ship.content.cabin.midshipRange;
-  parts.push(
-    client.seasick === "yes"
-      ? range
-        ? `I'm putting you midship on a lower deck on purpose — ${range} is the steadiest part of the ship, so seasickness shouldn't be an issue.`
-        : "I'm putting you on a lower deck toward the middle of the ship on purpose — that's the steadiest part of the ship, so seasickness shouldn't be an issue."
-      : range
-        ? `I'm booking you midship, ${range}, so you're close to everything and get the smoothest ride.`
-        : "I'm booking you toward the middle of the ship so you're close to everything and get the smoothest ride.",
-  );
+  // Each sentence is gated on the block that backs it. This is what the
+  // advisor sends a paying client — it must never assert a placement or a
+  // package call that no operator content supports.
+  const cabin = ship.content.cabin;
+  if (cabin) {
+    const range = cabin.midshipRange;
+    parts.push(
+      client.seasick === "yes"
+        ? range
+          ? `I'm putting you midship on a lower deck on purpose — ${range} is the steadiest part of the ship, so seasickness shouldn't be an issue.`
+          : "I'm putting you on a lower deck toward the middle of the ship on purpose — that's the steadiest part of the ship, so seasickness shouldn't be an issue."
+        : range
+          ? `I'm booking you midship, ${range}, so you're close to everything and get the smoothest ride.`
+          : "I'm booking you toward the middle of the ship so you're close to everything and get the smoothest ride.",
+    );
+  }
 
-  parts.push(
-    client.itinerary === "sea-days"
-      ? "With this many sea days, the drink package is genuinely worth it, so I'll add it."
-      : "I'd skip the drink package on this one — you'll be off exploring most days, so it wouldn't pay off.",
-  );
+  const money = ship.content.money;
+  if (money) {
+    parts.push(
+      client.itinerary === "sea-days"
+        ? "With this many sea days, the drink package is genuinely worth it, so I'll add it."
+        : "I'd skip the drink package on this one — you'll be off exploring most days, so it wouldn't pay off.",
+    );
+  }
 
-  if (client.party === "family") {
+  if (client.party === "family" && ship.content.traps?.kidAgeHeightRules) {
     parts.push(
       "I'm double-checking the kids clear the height and age rules for the slides and clubs so there are no surprises on day one.",
     );
   }
 
-  if (client.party === "multigen") {
+  if (client.party === "multigen" && cabin) {
     parts.push(
       "I've picked the cabin with the walking in mind, so nobody's hiking the length of the ship to get to dinner.",
     );
   }
 
-  parts.push(
-    "I'll also lock in your specialty dining before you sail so you get the nights you want.",
-  );
+  if (money) {
+    parts.push(
+      "I'll also lock in your specialty dining before you sail so you get the nights you want.",
+    );
+  }
 
   return parts.join(" ");
 }

@@ -76,3 +76,47 @@ export const BOLT_RULES =
  */
 export const CARNIVAL_EMBARKATION =
   "Carnival assigns a 30-minute Arrival Appointment, usually somewhere between 10:30am and 3pm, and guests who show up before their window are not let into the terminal.";
+
+/** Fleet-wide waterslide minimums. Twister is 42"; most run 42–48". */
+export const CARNIVAL_SLIDE_RULES =
+  "The WaterWorks slides run a 42-inch minimum on most of the fleet, and up to 48 inches depending on the slide.";
+
+/** Venezia and Firenze carry a higher Aqua Tunnel minimum than the rest. */
+export const AQUA_TUNNEL_TALL_RULES =
+  "The Aqua Tunnel slide needs 51 inches on this ship, higher than the 42 inches it runs elsewhere in the fleet.";
+
+/**
+ * Money and traps for a Carnival hull nobody has walked yet.
+ *
+ * Everything here is line-wide policy: the gratuity rate, the Cheers!
+ * price, the youth age bands, the Arrival Appointment. All of it is
+ * researched and sourced, none of it is operator-confirmed.
+ *
+ * There is deliberately NO cabin block. Cabin advice is the part that
+ * needs someone who has actually sailed the ship — deck bands, what sits
+ * above and below, which balconies are cut by a lifeboat — and inventing
+ * it per hull is exactly the failure this product exists to prevent. The
+ * read reports the cabin category as uncharted until an operator fills
+ * it in.
+ */
+export function carnivalFleetContent(opts: {
+  /** Ship or class-specific ride minimums, appended to the fleet rules. */
+  thrillRules?: string;
+  otherTraps?: string[];
+}): ShipContent {
+  const kidRules = [opts.thrillRules, CARNIVAL_SLIDE_RULES, CARNIVAL_KIDS_RULES]
+    .filter(Boolean)
+    .join(" ");
+
+  return {
+    verified: false,
+    reviewDue: "2027-02-01",
+    sources: CARNIVAL_SOURCES,
+    money: CARNIVAL_MONEY,
+    traps: {
+      kidAgeHeightRules: kidRules,
+      embarkationNote: CARNIVAL_EMBARKATION,
+      ...(opts.otherTraps ? { other: opts.otherTraps } : {}),
+    },
+  };
+}

@@ -68,7 +68,14 @@ export type ShipContent = {
    */
   sources?: Source[];
 
-  cabin: {
+  /**
+   * The three blocks are independently optional. Operator knowledge does
+   * not arrive all at once — line-wide money and trap policy can be
+   * researched while the cabin call still needs someone who has walked
+   * the ship. A missing block is reported as uncharted in the read, never
+   * quietly filled in.
+   */
+  cabin?: {
     /**
      * Reads as "book them midship, ___" — e.g. "decks 8 to 10".
      *
@@ -100,13 +107,13 @@ export type ShipContent = {
     elevatorNote?: string;
     accessibilityNote?: string;
   };
-  money: {
+  money?: {
     drinkPackagePrice?: number;
     breakEvenDrinksPerDay?: number;
     specialtyDiningNote: string;
     gratuityPerDayUSD?: number;
   };
-  traps: {
+  traps?: {
     kidAgeHeightRules?: string;
     obstructedBalconyDecks?: string;
     embarkationNote?: string;
@@ -123,7 +130,10 @@ export type Ship = ShipIdentity & {
 export type CoveredShip = ShipIdentity & { content: ShipContent };
 
 export function isCovered(ship: Ship): ship is CoveredShip {
-  return ship.content !== undefined;
+  const c = ship.content;
+  // Content with no blocks at all is not coverage — it would render three
+  // "uncharted" cards and tell the advisor nothing.
+  return c !== undefined && (c.cabin !== undefined || c.money !== undefined || c.traps !== undefined);
 }
 
 /* The five inputs. Every extra input is friction, and friction kills a
@@ -159,9 +169,15 @@ export type ReadCategory = {
   why: string;
 };
 
-/** Exactly three categories. Do not add a fourth. */
+/**
+ * Exactly three categories. Do not add a fourth.
+ *
+ * A null category means nobody has worked that block up for this ship
+ * yet. The read shows it as uncharted rather than dropping it, so the
+ * advisor can see what is missing instead of assuming it was checked.
+ */
 export type Read = {
-  cabin: ReadCategory;
-  money: ReadCategory;
-  traps: ReadCategory;
+  cabin: ReadCategory | null;
+  money: ReadCategory | null;
+  traps: ReadCategory | null;
 };
