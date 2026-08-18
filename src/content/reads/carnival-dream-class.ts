@@ -4,6 +4,7 @@ import {
   CARNIVAL_KIDS_RULES,
   CARNIVAL_MINOR_PLACEMENT,
   CARNIVAL_MONEY,
+  CARNIVAL_ROPES_COURSE_RULES,
   CARNIVAL_SLIDE_RULES,
   CARNIVAL_SOURCES,
 } from "./carnival-common";
@@ -18,54 +19,116 @@ import {
 /**
  * Dream class: Dream, Magic, Breeze (2009–2012).
  *
- * MY RESEARCH, NOT OPERATOR-CONFIRMED. Both cabin and traps are
- * `verified: false` — Jimmy has not walked these hulls in this workup, and
- * the deck-plan detail below came from secondary aggregators because
- * cruisemapper, cruisedeckplans and carnival.com are all unreachable from
- * this environment. Everything here is a lead for his review, not a call
- * an advisor should act on yet.
+ * SIGNED OFF by Jimmy, 2026-08-18, after he checked my workup against
+ * Carnival's own current deck-plan PDFs and advisor knowledge base. That
+ * pass corrected six things and upgraded two more from "researched" to
+ * primary-sourced, so this record is materially different from what I
+ * first wrote:
  *
- * The class insight, if it holds up: unlike the newer ships, deck 10 is
- * BOTH the Lido deck and a cabin deck. The pool isn't above those cabins,
- * it's beside them — which is a different conversation from the Vista
- * class's "deck 9 sits under the Lido on 10".
+ *   - Deck 10 is mixed-use, not simply "a cabin deck beside the pool".
+ *     The cabins concentrate FORWARD; the Lido, pool and buffet take more
+ *     of the midship and aft space.
+ *   - The cabin decks are 1, 2, 6, 7, 8, 9, 10, 11 and 12 — not a
+ *     continuous run from 1 to 12, which is what I had.
+ *   - The quiet default is decks 7 and 8, NOT 7 to 9. Deck 9 needs a
+ *     vertical check because deck 10 above it turns into Lido space
+ *     through much of the ship. This was the biggest placement fix.
+ *   - Deck 12's spa cabins sit BESIDE the upper recreation areas, not
+ *     under them. On Magic and Breeze deck 12 itself carries the Spa,
+ *     Sports, SkyCourse and WaterWorks areas. What actually sits under
+ *     recreation is part of deck 11.
+ *   - 9205 and 9206 are obstructed on ALL THREE ships, published by
+ *     Carnival, obstructed by steel bulkhead and ship structure. I had
+ *     recorded it as a Breeze-only claim from traveler write-ups and
+ *     flagged it as possibly contaminated from the Vista-class list.
+ *     It isn't contamination — it's a recurring Carnival design pattern
+ *     across classes, and Vista carries the same numbers legitimately.
+ *   - Carnival DOES publish obstruction lists for Dream and Magic. My
+ *     record said none existed, which was flatly wrong.
  *
- * The within-class exception: Magic and Breeze carry SportSquare and the
- * SkyCourse ropes course; Dream is absent from Carnival's own SportSquare
- * ship list. Same shape as Panorama's missing IMAX — don't let it leak.
- *
- * Deliberately NOT encoded, because the sourcing didn't hold up:
- *   - the forward/midship/aft elevator split (only a total of 18 surfaced)
- *   - Dream/Magic obstruction lists (only Breeze's surfaced)
- *   - theater/nightclub/galley deck numbers (generic aggregator prose with
- *     no attributable source — it read like fleet boilerplate, not a
- *     Dream-class deck plan)
+ * Deliberately still absent: the elevator bank split. Eighteen cars is
+ * corroborated, but there is no reliable bank layout or recurring
+ * congestion pattern, so the record stores the count and refuses to
+ * recommend a bank.
  */
 
 const DREAM_CLASS_SOURCES: Source[] = [
   {
-    label: "Dream-class deck plans — cabins on the Lido deck, spa cabins on 12",
-    url: "https://www.cruisedeckplans.com/ships/Carnival-Dream",
+    label:
+      "Carnival Dream deck plan — obstructed-view list and deck 10 mixed use (checked by Jimmy against Carnival's own PDF)",
+    url: "https://www.carnival.com/cruise-ships/carnival-dream",
     checked: "2026-08-18",
   },
   {
-    label: "Breeze obstructed cabins — 9205/9206 bulkhead, forward observation platform",
-    url: "https://www.cruisebooking.com/articles/carnival-cruise-tips/carnival-breeze-rooms-to-avoid",
+    label:
+      "Carnival Magic deck plan — obstructed-view list, deck 12 Spa/Sports/SkyCourse (checked by Jimmy)",
+    url: "https://www.carnival.com/cruise-ships/carnival-magic",
     checked: "2026-08-18",
   },
   {
-    label: "SportSquare ship list — Magic and Breeze, not Dream",
+    label:
+      "Carnival Breeze deck plan and advisor cabin data — 7C cove 185+45 sq ft, 9205/9206 obstructed (checked by Jimmy)",
+    url: "https://www.carnival.com/cruise-ships/carnival-breeze",
+    checked: "2026-08-18",
+  },
+  {
+    label: "SportSquare and ropes-course availability — Magic and Breeze, not Dream",
     url: "https://help.carnival.com/app/answers/detail/a_id/1158",
     checked: "2026-08-18",
   },
   {
-    label: "Twister waterslide — 42 inch minimum",
-    url: "https://www.carnival.com/onboard/twister-waterslide",
+    label: "Elevator count corroboration — 18 on all three hulls",
+    url: "https://www.cruisemapper.com/deckplans/Carnival-Dream-680",
     checked: "2026-08-18",
   },
 ];
 
-/** Magic and Breeze only. Dream is not on Carnival's SportSquare list. */
+/**
+ * The class placement default, as a named rule because it is the single
+ * most useful thing in this record and it is NOT the obvious answer.
+ *
+ * Decks 7 and 8 are the clean sandwich — cabins above and below. Deck 9
+ * looks like it belongs in that band and does not, because deck 10 above
+ * it becomes Lido, pool and buffet space through much of the ship.
+ *
+ * OPERATOR-CONFIRMED (Jimmy, 2026-08-18). His conclusion is an inference
+ * from Carnival's official deck geometry, not something Carnival
+ * recommends — recorded that way on purpose.
+ */
+const DREAM_CLASS_QUIET_DEFAULT =
+  "Midship on deck 7 or 8. Those two are the clean sandwich on this class — cabins above and below, no public rooms either way. Deck 9 looks like it belongs with them and doesn't: deck 10 above turns into Lido, pool and buffet space through much of the ship, so 9 needs a vertical check on the specific cabin rather than a blanket yes. That's read off Carnival's deck geometry rather than anything Carnival recommends.";
+
+/**
+ * Deck 10 is mixed-use and the distinction matters. Cabins concentrate
+ * forward; the pool, Lido and buffet take more of the midship and aft.
+ * So the useful instruction is "check same-deck traffic", not "you'll be
+ * beside the pool" — which was my original over-broad wording.
+ */
+const DECK_10_MIXED_USE =
+  "Deck 10 is mixed-use, and that's the thing to understand before you book it. The cabins concentrate forward while the Lido, pool and buffet take more of the midship and aft space — so a deck 10 cabin isn't automatically beside the pool, but it isn't a normal cabin deck either. Check what shares the deck alongside the specific cabin rather than treating 10 the way you'd treat 8.";
+
+/**
+ * A separate rule from the balcony obstruction, on purpose. Carnival
+ * calls these "Interior with Picture Window (Walkway View)" and says
+ * outright that the outdoor observation deck and walkway partially
+ * obstruct the view. It is a different category, a different cause, and
+ * a privacy question as much as a view one — lumping it in with the
+ * obstructed balconies was wrong.
+ */
+const FORWARD_WALKWAY_VIEW =
+  "Separate from the obstructed balconies: the forward interiors sold as \"Interior with Picture Window (Walkway View)\". Carnival says plainly that the outdoor observation deck and walkway partially obstruct the view — and it cuts both ways, because people on the walkway are looking back. Fine for a client who wants light and doesn't care; wrong for anyone expecting a sea view or privacy.";
+
+/** Carnival's own published obstructed-view accommodations, per hull. */
+const OBSTRUCTED: Record<"dream" | "magic" | "breeze", string> = {
+  dream:
+    "Carnival's current deck plan lists 1432, 1447, 2448, 2473, 9205 and 9206 as obstructed-view accommodations on this ship.",
+  magic:
+    "Carnival's current deck plan lists 1440, 1459, 2448, 2473, 9205 and 9206 as obstructed-view accommodations on this ship.",
+  breeze:
+    "Carnival's current deck plan lists 9205 and 9206 as obstructed-view Junior Suites on this ship; the lower-deck entries weren't enumerated in this review, so check the plan for the specific cabin.",
+};
+
+/** Magic and Breeze only. Dream is not on Carnival's ropes-course list. */
 const SPORTSQUARE_SHIPS = new Set(["magic", "breeze"]);
 
 function dreamClassContent(ship: "dream" | "magic" | "breeze"): ShipContent {
@@ -76,65 +139,77 @@ function dreamClassContent(ship: "dream" | "magic" | "breeze"): ShipContent {
     sources: [...CARNIVAL_SOURCES, ...DREAM_CLASS_SOURCES],
 
     cabin: {
-      // MY RESEARCH. Not signed off — the deck-level detail below rests on
-      // aggregator snippets, not a deck plan anyone opened.
-      verified: false,
-      placementNote:
-        "Midship first, as always. The thing that's different about this class: deck 10 is the Lido deck and a cabin deck at the same time, so a client who books deck 10 for the view can end up beside the pool rather than below it. Cabins run down to deck 1 and up to deck 12, with the spa cabins on 12 sitting under the waterpark and sport deck. Treat decks 10 and 12 as the two that need a vertical check, and decks 7 to 9 midship as the quiet middle of the stack.",
+      // Signed off by Jimmy, 2026-08-18, against Carnival's own deck
+      // plans. The corrections he made are listed at the top of the file.
+      verified: true,
+      placementNote: `${DREAM_CLASS_QUIET_DEFAULT} Cabins on this class sit on decks 1, 2, 6, 7, 8, 9, 10, 11 and 12 — not a continuous run, so don't reason from "deck 4" or "deck 5" existing as cabin decks here. ${DECK_10_MIXED_USE}`,
       motionAvoid: MOTION_RULE,
       vibrationNote: VIBRATION_RULE,
       categoryWarnings: [
         PORTHOLE_STEER,
         BOTTOM_DECK_NOTE,
-        "Cove balconies here run about 185 square feet inside with a 45-foot partly-enclosed veranda, and the aft-view extended balconies get the wake — both are worth pricing against a standard balcony rather than assuming the standard one wins.",
-        "Deck 10 cabins sit on the Lido deck itself rather than under it. That's not automatically bad — it's a short walk to everything — but it's the wrong pick for anyone who wants quiet, and it surprises people who read \"deck 10\" as \"high and away from it all\".",
+        ship === "breeze"
+          ? "The cove balconies are worth pricing properly rather than dismissing — category 7C runs about 185 square feet inside plus a 45-square-foot cove balcony, 230 total, and on this ship Carnival describes the cove experience as unusually close to the waterline. That's a genuine selling point for someone who wants the sea rather than the view down onto it."
+          : "The cove balconies are worth pricing properly rather than dismissing — about 185 square feet inside plus a 45-square-foot cove balcony, 230 total, the same configuration across the class. Low, sheltered, and closer to the water than a standard balcony.",
+        "The aft-view extended balconies look straight down the wake, and Carnival markets them on exactly that — so treat the wake as the selling point rather than something to warn about. Price them against a standard balcony rather than assuming the standard one wins.",
+        FORWARD_WALKWAY_VIEW,
+        ...(hasSportSquare
+          ? [
+              "Deck 12 on this ship carries the Spa, Sports, SkyCourse and WaterWorks areas alongside its cabins. The spa cabins up there are beside that activity rather than beneath it — it's the portions of deck 11 underneath deck 12 that take recreation noise from above.",
+            ]
+          : []),
       ],
       hazardsAboveBelow: [
         {
           source: "lido",
           where:
-            "deck 10 — same deck as the cabins there rather than above them, so it's an along-the-corridor problem, not an overhead one",
+            "deck 10, mixed in with the cabins on that deck rather than sitting above them — a same-deck traffic problem, concentrated midship and aft",
+        },
+        {
+          source: "buffet",
+          where: "also on deck 10, in the same midship and aft space",
+        },
+        {
+          source: "sports",
+          where:
+            "the deck 12 recreation areas, over the portions of deck 11 beneath them — not over the deck 12 spa cabins, which sit alongside",
         },
         {
           source: "kids",
           where:
-            "the waterpark on the sport deck, over the spa cabins on 12 — check the specific cabin rather than writing off the deck",
-        },
-        {
-          source: "sports",
-          where: "the sport deck above 12, on the ships that carry it",
+            "WaterWorks up on 12 on the ships that carry it, again over parts of deck 11 rather than the cabins sharing deck 12 with it",
         },
       ],
-      obstructedViewNotes:
-        ship === "breeze"
-          ? "On Breeze specifically: Junior Suites 9205 and 9206 are blocked by a steel bulkhead, and the forward cabins on decks 6, 7, 9 and 10 look onto a shared observation platform rather than open sea. That list came from traveler write-ups rather than Carnival's own obstruction sheet, so confirm it on the booking screen before you promise anything. No equivalent list surfaced for Dream or Magic — that's a gap in the research, not evidence they're clean."
-          : "No obstruction list surfaced for this hull. Breeze has a documented one (a steel bulkhead at 9205/9206, plus forward cabins on 6, 7, 9 and 10 facing an observation platform), and these are sister ships, so check the same positions on the booking screen — but I'm not claiming the same cabins are affected here.",
+      obstructedViewNotes: `Junior Suites 9205 and 9206 are obstructed on all three ships in this class — Carnival publishes it, and the obstruction is a steel bulkhead and ship structure rather than a lifeboat. Worth knowing that the same two numbers come up as obstructed on the Vista class too; it's a recurring Carnival design pattern across classes, not a coincidence or a bad source. ${OBSTRUCTED[ship]}`,
       connectingNote: CONNECTING_RULE,
       minorPlacementRule: CARNIVAL_MINOR_PLACEMENT,
       elevatorNote:
-        "Eighteen elevators on this class, which is a lot of cars — but I couldn't establish how they split forward, midship and aft, so don't steer anyone to a bank on my say-so. The rule that still holds: pick the end of the ship where they'll actually spend the week.",
+        "Eighteen elevators on this class, corroborated across sources — but there's no reliable bank split and no recurring congestion pattern, so don't steer anyone forward or aft on my say-so. The rule that still holds: pick the end of the ship where they'll actually spend the week.",
       accessibilityNote:
-        "Cabins spread from deck 1 to deck 12 on a big hull, and the pool sits on a cabin deck rather than well above it — which actually helps a slower traveller, because the Lido isn't a separate trip up. The vertical split that bites on the Excel ships is less pronounced here, though that's my read of the deck mix rather than something a source states outright. Confirm scooter clearance against Carnival's accessible deck plan as usual.",
+        "Deck 10 being mixed-use cuts the vertical trip for some high-deck guests — they reach the Lido along the deck rather than taking the big jump the Excel ships force. But that only helps if they're already up there: anyone on the lower cabin decks still has substantial travel to reach 10 through 12. So it's less pronounced than Excel class rather than solved, and that comparison is our inference from the deck geometry rather than a Carnival statement. Confirm scooter clearance against Carnival's accessible deck plan as usual.",
     },
 
     money: CARNIVAL_MONEY,
 
     traps: {
-      // MY RESEARCH. Not signed off.
-      verified: false,
-      kidAgeHeightRules: `${CARNIVAL_SLIDE_RULES} The Twister slide runs a 42-inch minimum. ${CARNIVAL_KIDS_RULES}`,
-      ...(ship === "breeze"
-        ? {
-            obstructedBalconyDecks:
-              "Junior Suites 9205 and 9206, and the forward cabins on decks 6, 7, 9 and 10 that face the shared observation platform",
-          }
-        : {}),
+      // Signed off by Jimmy, 2026-08-18, after the ropes-course
+      // restrictions were added — my "none published" note was stale.
+      verified: true,
+      kidAgeHeightRules: `${CARNIVAL_SLIDE_RULES} The Twister slide runs a 42-inch minimum.${
+        hasSportSquare ? ` ${CARNIVAL_ROPES_COURSE_RULES}` : ""
+      } ${CARNIVAL_KIDS_RULES}`,
+      obstructedBalconyDecks:
+        ship === "breeze"
+          ? "Junior Suites 9205 and 9206"
+          : ship === "dream"
+            ? "1432, 1447, 2448, 2473 and Junior Suites 9205 and 9206"
+            : "1440, 1459, 2448, 2473 and Junior Suites 9205 and 9206",
       embarkationNote: CARNIVAL_EMBARKATION,
       other: [
         "Neither BOLT nor SkyRide is on this class — those are the Excel and Vista ships. Don't let a client arrive expecting the rollercoaster or the sky ride.",
         hasSportSquare
-          ? "SportSquare and the SkyCourse ropes course are here, but I don't have published height or weight minimums for the ropes course — check before you quote one to a family."
-          : "No SportSquare or ropes course on this one — Magic and Breeze have it, Dream doesn't appear on Carnival's own list for it. Don't promise the ropes course.",
+          ? "SportSquare and the SkyCourse ropes course are here. The restrictions are published and worth quoting up front: included in the fare, 52 to 77 inches, 300 pounds, and closed-toe athletic shoes required."
+          : "No SportSquare or ropes course on this one — Magic and Breeze have it, Dream doesn't appear on Carnival's current availability list. Don't promise the ropes course.",
       ],
     },
   };

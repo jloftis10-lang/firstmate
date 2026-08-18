@@ -77,6 +77,20 @@ export const CARNIVAL_MONEY: ShipContent["money"] = {
 export const CARNIVAL_KIDS_RULES =
   "Camp Ocean splits 2–11 into age bands (Penguins 2–5, Sting Rays 6–8, Sharks 9–11), then Circle C at 12–14 and Club O2 at 15–17. Turtles covers 6 months to under 2 at certain times.";
 
+/**
+ * SkyCourse, the ropes course. Carnival publishes current restrictions —
+ * an earlier version of the Dream-class record said none were published,
+ * which was out of date.
+ *
+ * Note the per-person limits match BOLT's exactly (52 to 77 inches, 300
+ * pounds). Same restraint spec, different ride.
+ *
+ * OPERATOR-CONFIRMED (Jimmy, 2026-08-18, against Carnival's current
+ * published restrictions).
+ */
+export const CARNIVAL_ROPES_COURSE_RULES =
+  "The ropes course is included in the fare, needs 52 inches minimum and caps at 77 inches and 300 pounds per person. Closed-toe athletic shoes and workout clothing are required, so a child in sandals gets turned away at the gate no matter how tall they are.";
+
 /** BOLT is on the Excel-class ships only. */
 export const BOLT_RULES =
   "BOLT, the rollercoaster, needs 52 inches minimum and caps at 77 inches, 300 pounds per person and 440 pounds per vehicle. Anyone under 12 has to ride with someone 15 or over.";
