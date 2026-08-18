@@ -12,8 +12,10 @@ import type { ShipContent, Source } from "@/lib/types";
  * FAQ pages are the best of them, but this environment's egress proxy
  * blocks royalcaribbean.com along with Cruise Critic and the deck-plan
  * sites, so even the FAQ claims come from search snippets rather than a
- * page anyone opened. Money is `verified: false` across the line until
- * Jimmy signs it.
+ * page anyone opened. Jimmy signed the money block on 2026-08-19 knowing
+ * that — the rates and the all-or-nothing package rule are things he
+ * checks against his own bookings, so the sourcing weakness was not what
+ * the sign-off rested on.
  */
 
 export const ROYAL_SOURCES: Source[] = [
@@ -64,6 +66,10 @@ export const ROYAL_SOURCES: Source[] = [
  * depending on ship and sailing; $75 is the tracked fleet median and is
  * what's recorded here. It is a genuinely variable price, not a rate.
  *
+ * SIGNED OFF by Jimmy, 2026-08-19, at the Icon-class review. One
+ * decision covering all 30 Royal hulls, which is why it was raised
+ * separately from the per-class cabin and traps work.
+ *
  * There is deliberately NO break-even figure, the same as Carnival.
  * Break-even is a property of the drinker, not the ship.
  *
@@ -75,7 +81,8 @@ export const ROYAL_SOURCES: Source[] = [
  * expensive surprise on this line.
  */
 export const ROYAL_MONEY: ShipContent["money"] = {
-  verified: false,
+  // Signed off by Jimmy, 2026-08-19.
+  verified: true,
   drinkPackagePrice: 75,
   drinkPackageNote:
     "Two things before you price this. The 18% gratuity is added at checkout rather than included, so the real daily cost is about a fifth above the headline — and if one adult in the stateroom buys the alcohol package, every guest of drinking age in that stateroom has to buy it too. For a couple where only one drinks, that doubles the bill. The non-alcoholic packages can be bought individually, so that's the way round it.",
