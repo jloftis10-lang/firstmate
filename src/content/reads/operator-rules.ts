@@ -129,6 +129,34 @@ export const QUIET_DEFAULT_RULE =
   "A deck is only a safe default if it has cabins above it AND cabins below it — plenty of cabins on the deck itself proves nothing.";
 
 /**
+ * WHAT KIND of obstruction, not just "obstructed".
+ *
+ * Jimmy's point from the Spirit-class review, and it changes the advice
+ * rather than the wording. There are at least two materially different
+ * things sold under one word:
+ *
+ *   - **Solid structure** — a steel railing or bulkhead in front of the
+ *     glass. That takes the view itself, and on the Excel ships it
+ *     reportedly disappears when seated and opens up when standing. A
+ *     client booking for the view should be steered off these. This is
+ *     what the Excel, Vista and Dream-class records describe in their
+ *     own words; it hasn't been factored out because those files each
+ *     say something ship-specific about it.
+ *   - **Lifeboats and davits below the rail** — the constant below.
+ *     Compromises the view DOWNWARD while often leaving the outward
+ *     horizon usable. Someone who wants to sit and watch the sea may be
+ *     perfectly happy in one of these, and they price lower.
+ *
+ * Collapsing the two into "obstructed" loses a booking that would have
+ * worked. If a third kind turns up, this pair should probably become a
+ * typed field rather than more prose constants.
+ *
+ * OPERATOR-CONFIRMED (Jimmy, 2026-08-18).
+ */
+export const OBSTRUCTION_LIFEBOAT_BELOW =
+  "Worth saying what kind of obstruction this is, because it isn't the solid-steel sort. It's lifeboats, tender boats and their davits sitting at about balcony-floor and railing height — so it takes the view straight down more than the view out, and plenty of these cabins still have a usable horizon from a seated position. A client who wants to sit with a book and see sea may be perfectly happy here at a lower price; a client who wants to look down at the water won't be. Describe it rather than just calling it obstructed.";
+
+/**
  * Attach a ship-specific observation to a confirmed general rule.
  *
  * The pattern throughout the class files is "the confirmed rule, then
