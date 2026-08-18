@@ -84,6 +84,25 @@ export const ROYAL_MONEY: ShipContent["money"] = {
   gratuityPerDayUSD: 18.5,
 };
 
+/**
+ * The deck 12 / deck 14 numbering trick, confirmed on two Royal classes
+ * now (Oasis 2026-08-19, Icon 2026-08-19).
+ *
+ * OPERATOR-CONFIRMED. It lives here rather than in a class file because
+ * it is a property of how Royal numbers decks, not of any hull: they skip
+ * the NUMBER 13, so the physical deck sitting on top of deck 12 is
+ * labelled 14. That defeats the quiet-default scan for anyone counting
+ * numerically — you look for "deck 13" above your deck 12 cabin, find no
+ * such deck, and wrongly conclude there is nothing overhead.
+ *
+ * What is above 14 differs by class and is NOT part of this constant.
+ * On the Oasis ships deck 14 mixes cabins with Adventure Ocean; on the
+ * Icon ships it is accommodation under the deck 15 pool complex. Each
+ * class file finishes the sentence its own way.
+ */
+export const ROYAL_DECK_12_NUMBERING =
+  "Deck 12 is often good but doesn't get an automatic yes, and the reason is a numbering trick: Royal skips the number 13, so the physical deck directly above 12 is numbered 14";
+
 /** Aquanauts 3–5, Explorers 6–8, Voyagers 9–12, then two teen bands. */
 export const ROYAL_KIDS_RULES =
   "Adventure Ocean runs Aquanauts 3–5 (potty-trained only), Explorers 6–8 and Voyagers 9–12, with separate teen spaces for 12–14 and 15–17. The nursery covers 6 to 36 months but is not on every ship — check the specific hull rather than assuming.";

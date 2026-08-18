@@ -1,6 +1,7 @@
 import type { ShipContent, Source } from "@/lib/types";
 import {
   ROYAL_ATTRACTION_RULES,
+  ROYAL_DECK_12_NUMBERING,
   ROYAL_EMBARKATION,
   ROYAL_FLEET_TRAPS,
   ROYAL_KIDS_COST,
@@ -122,7 +123,7 @@ type OasisShip =
  *
  * OPERATOR-CONFIRMED (Jimmy, 2026-08-19).
  */
-const OASIS_QUIET_DEFAULT = `Midship on decks 9, 10 or 11. ${QUIET_DEFAULT_RULE} Deck 8 fails below — that's Central Park and public space. Deck 12 is often good but doesn't get an automatic yes, and the reason is a numbering trick: Royal skips the number 13, so the physical deck directly above 12 is numbered 14, and 14 mixes cabins with Adventure Ocean and other spaces. Check 14 before you bless 12.`;
+const OASIS_QUIET_DEFAULT = `Midship on decks 9, 10 or 11. ${QUIET_DEFAULT_RULE} Deck 8 fails below — that's Central Park and public space. ${ROYAL_DECK_12_NUMBERING}, and 14 mixes cabins with Adventure Ocean and other spaces. Check 14 before you bless 12.`;
 
 /**
  * Deck 14 as a tradeoff rather than a veto. The exact affected cabins are
