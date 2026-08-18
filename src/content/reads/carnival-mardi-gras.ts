@@ -128,6 +128,7 @@ export const carnivalMardiGras: ShipContent = {
     // of mine that named tender boats — wrong. The obstruction is the
     // solid steel forward railing, and it spans six decks not one.
     obstructedViewNotes: EXCEL_FORWARD_OBSTRUCTION,
+    obstructionKinds: ["solid-structure"],
     connectingNote: CONNECTING_RULE,
     minorPlacementRule: CARNIVAL_MINOR_PLACEMENT,
     elevatorNote: EXCEL_ELEVATOR_NOTE,

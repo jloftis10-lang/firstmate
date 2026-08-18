@@ -124,6 +124,7 @@ function jewelClassContent(
         },
       ],
       obstructedViewNotes: DECK_8_OBSTRUCTION,
+      obstructionKinds: ["lifeboat-davit"],
       connectingNote: CONNECTING_RULE,
       minorPlacementRule: NCL_MINOR_PLACEMENT,
       elevatorNote:

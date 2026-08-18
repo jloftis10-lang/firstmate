@@ -149,6 +149,7 @@ function conquestClassContent(): ShipContent {
         },
       ],
       obstructedViewNotes: CONQUEST_OBSTRUCTION,
+      obstructionKinds: ["outdoor-walkway", "lifeboat-davit"],
       connectingNote: CONNECTING_RULE,
       minorPlacementRule: CARNIVAL_MINOR_PLACEMENT,
       elevatorNote:

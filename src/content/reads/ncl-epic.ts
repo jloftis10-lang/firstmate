@@ -106,6 +106,7 @@ export const norwegianEpic: ShipContent = {
     ],
     obstructedViewNotes:
       "Decks 8 and 9 are the lifeboat decks and this ship has an unusually specific published picture. On deck 8, the cabins from 8026 forward on port and 8027 forward on starboard are clear, as are 8190 and aft on port and 8191 and aft on starboard — most of the rest look down onto the tops of the lifeboats. On deck 9 the clear ones are 9044 forward and 9270 aft on port, 9047 forward and 9269 aft on starboard, with the rest looking at the boats extending from deck 7. Separately, a run of deck 9 balconies is open to view from the cabins above — that's a privacy issue rather than an obstruction, and it's the one people don't think to ask about.",
+    obstructionKinds: ["lifeboat-davit", "overlooked"],
     connectingNote: CONNECTING_RULE,
     minorPlacementRule: NCL_MINOR_PLACEMENT,
     elevatorNote:

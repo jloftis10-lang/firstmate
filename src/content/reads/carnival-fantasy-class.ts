@@ -132,6 +132,7 @@ function fantasyClassContent(ship: "elation" | "paradise"): ShipContent {
       ],
       obstructedViewNotes:
         "Category OB, and it's a discrete set rather than a range: junior suites V21, V23, V25, V27, V30, V34, V38 and V42. The obstruction is rescue-boat structures and davits. Note those are specific cabins with gaps between them — don't sweep in everything from V21 to V42, because most of that run is unaffected. I'm not going to claim the visual effect matches the lifeboat obstructions on the Spirit class, because nobody has established that it does; what's documented is that boats and davits are in the way.",
+      obstructionKinds: ["lifeboat-davit"],
       connectingNote: CONNECTING_RULE,
       minorPlacementRule: CARNIVAL_MINOR_PLACEMENT,
       accessibilityNote:

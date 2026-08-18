@@ -181,6 +181,7 @@ function dreamClassContent(ship: "dream" | "magic" | "breeze"): ShipContent {
         },
       ],
       obstructedViewNotes: `Junior Suites 9205 and 9206 are obstructed on all three ships in this class — Carnival publishes it, and the obstruction is a steel bulkhead and ship structure rather than a lifeboat. Worth knowing that the same two numbers come up as obstructed on the Vista class too; it's a recurring Carnival design pattern across classes, not a coincidence or a bad source. ${OBSTRUCTED[ship]}`,
+      obstructionKinds: ["solid-structure", "outdoor-walkway"],
       connectingNote: CONNECTING_RULE,
       minorPlacementRule: CARNIVAL_MINOR_PLACEMENT,
       elevatorNote:

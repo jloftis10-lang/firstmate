@@ -107,6 +107,7 @@ function vistaClassContent(ship: "vista" | "horizon" | "panorama"): ShipContent 
       ],
       obstructedViewNotes:
         "Four specific cabins, the same on all three ships: Junior Suites 9205 and 9206 and Spa Suites 14205 and 14206. A solid steel panel or bulkhead blocks the seated view — not a lifeboat.",
+      obstructionKinds: ["solid-structure"],
       connectingNote: CONNECTING_RULE,
       minorPlacementRule: CARNIVAL_MINOR_PLACEMENT,
       elevatorNote:

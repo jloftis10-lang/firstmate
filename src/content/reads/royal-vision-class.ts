@@ -141,6 +141,7 @@ function visionClassContent(
       ],
       obstructedViewNotes:
         "Deck 3 is the lifeboat band on this class — the oceanviews there are obstructed by tenders, lifeboats, davits and steel framing, and at least one passenger account describes opening the curtain onto the stern of a lifeboat. No cabin-by-cabin list is published for any ship in this class that I could reach, so the deck is the warning and the booking screen is the check.",
+      obstructionKinds: ["lifeboat-davit"],
       connectingNote: CONNECTING_RULE,
       minorPlacementRule: ROYAL_MINOR_PLACEMENT,
       elevatorNote:

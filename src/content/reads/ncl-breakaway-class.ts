@@ -165,6 +165,7 @@ function breakawayContent(ship: BreakawayShip): ShipContent {
           : ship === "escape"
             ? "The deck 8 oceanviews and balconies on this hull carry partial to full lifeboat obstruction. Beyond that no per-cabin list is published for this ship — and be careful with what circulates, because at least one summary was caught copying Breakaway's cabin numbers onto this ship wholesale. Check the specific cabin."
             : "No per-cabin obstruction list is published for this hull. The class pattern is worth checking against the plan anyway: lifeboat obstruction on the lower balcony decks, and a few deck 8 balconies overlooked from The Waterfront promenade.",
+      obstructionKinds: ["lifeboat-davit", "overlooked"],
       connectingNote: CONNECTING_RULE,
       minorPlacementRule: NCL_MINOR_PLACEMENT,
       elevatorNote: isPlus

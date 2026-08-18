@@ -11,7 +11,6 @@ import {
   BOTTOM_DECK_NOTE,
   CONNECTING_RULE,
   MOTION_RULE,
-  OBSTRUCTION_LIFEBOAT_BELOW,
   PORTHOLE_STEER,
   QUIET_DEFAULT_RULE,
   VIBRATION_RULE,
@@ -165,7 +164,8 @@ function spiritClassContent(
             ]
           : []),
       ],
-      obstructedViewNotes: `Carnival sells three obstructed categories on this class rather than hiding them: 4K interior with window, 7A balcony and 9A premium balcony. The cause is the lifeboats, tender boats and davits on Main Deck 4. Named examples from the published list include 9A cabins 5241 and 5243 and a large run of 7A cabins starting around 5142 to 5191 with more further aft — that list hasn't been imported here cabin-by-cabin, so read the category code on the specific cabin. ${OBSTRUCTION_LIFEBOAT_BELOW}`,
+      obstructedViewNotes: `Carnival sells three obstructed categories on this class rather than hiding them: 4K interior with window, 7A balcony and 9A premium balcony. The cause is the lifeboats, tender boats and davits on Main Deck 4. Named examples from the published list include 9A cabins 5241 and 5243 and a large run of 7A cabins starting around 5142 to 5191 with more further aft — that list hasn't been imported here cabin-by-cabin, so read the category code on the specific cabin.`,
+      obstructionKinds: ["lifeboat-davit"],
       connectingNote: CONNECTING_RULE,
       minorPlacementRule: CARNIVAL_MINOR_PLACEMENT,
       accessibilityNote:
@@ -180,7 +180,7 @@ function spiritClassContent(
       verified: true,
       kidAgeHeightRules: `${CARNIVAL_SLIDE_RULES} On this class specifically: the Twister slide needs 42 inches and caps at 300 pounds, while Green Thunder needs 48 inches and the same 300-pound cap. That gap is the one to head off — a child between 42 and 47 inches clears Twister and gets turned away from Green Thunder, and finding that out at the top of the stairs ruins an afternoon. There are Mini Racer slides too for the smaller ones. ${CARNIVAL_KIDS_RULES}`,
       obstructedBalconyDecks:
-        "the 4K, 7A and 9A categories, where lifeboats and davits on Main Deck 4 sit at balcony-floor height — 9A cabins 5241 and 5243 and a long 7A run from around 5142 to 5191 are named examples",
+        "the 4K, 7A and 9A categories — 9A cabins 5241 and 5243 and a long 7A run from around 5142 to 5191 are the named examples",
       embarkationNote: CARNIVAL_EMBARKATION,
       other: [
         "Neither BOLT nor SkyRide is on this class — those are the Excel and Vista ships. Don't let a client arrive expecting the rollercoaster or the sky ride.",

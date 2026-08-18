@@ -133,6 +133,7 @@ function oasisClassContent(ship: OasisShip): ShipContent {
       ],
       obstructedViewNotes:
         "Deck 6 is the lifeboat band and it's the best-documented obstruction on the class: six boats a side forward block the downward view from roughly 6136 to 6224 on port and 6536 to 6624 on starboard, and three a side aft affect 6282 and aft on port, 6682 and aft on starboard. The hump cabins are exempt. There's a second group of Boardwalk-side obstructed cabins up on deck 14, but the two published lists of those disagree with each other, so confirm those on the booking screen rather than from me.",
+      obstructionKinds: ["lifeboat-davit"],
       connectingNote: CONNECTING_RULE,
       minorPlacementRule: ROYAL_MINOR_PLACEMENT,
       elevatorNote:

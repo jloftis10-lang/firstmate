@@ -1,5 +1,6 @@
 import type { ClientProfile, CoveredShip, Read, ReadCategory } from "./types";
 import { noiseRank, noiseSource } from "./noise";
+import { obstructionSentence } from "./obstruction";
 
 /**
  * The deterministic Confidence Read engine.
@@ -226,8 +227,14 @@ function trapsRead(
   if (obstruction || obstructedDecks) {
     const cause = obstruction ? ` ${obstruction}` : "";
     const decks = obstructedDecks ? ` Watch ${obstructedDecks}.` : "";
+    // WHAT KIND, not just whether. A steel bulkhead and a lifeboat below
+    // the rail both get sold as "obstructed" and lead to opposite advice.
+    // Empty when the record hasn't established the mechanism — the field
+    // exists to carry knowledge, not to manufacture a guess.
+    const kind = obstructionSentence(cabin?.obstructionKinds ?? []);
+    const kinds = kind ? ` ${kind}` : "";
     flags.push(
-      `If you've booked a balcony, confirm the view isn't blocked.${cause}${decks} The deck plan doesn't always flag it, and an obstructed view is the first thing the client notices.`,
+      `If you've booked a balcony, confirm the view isn't blocked.${cause}${decks}${kinds} The deck plan doesn't always flag it, and an obstructed view is the first thing the client notices.`,
     );
   }
 

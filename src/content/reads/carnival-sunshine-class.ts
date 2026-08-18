@@ -176,6 +176,7 @@ function sunshineClassContent(
         },
       ],
       obstructedViewNotes: OBSTRUCTED[ship],
+      obstructionKinds: ["solid-structure", "outdoor-walkway"],
       connectingNote: CONNECTING_RULE,
       minorPlacementRule: CARNIVAL_MINOR_PLACEMENT,
       accessibilityNote:

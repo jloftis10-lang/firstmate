@@ -18,6 +18,8 @@
  * the exact thing the advisor feared.
  */
 
+import type { ObstructionKind } from "./obstruction";
+
 /** Where a line sits in the market — drives grouping in the ship picker. */
 export type LineCategory =
   | "contemporary"
@@ -137,6 +139,17 @@ export type ShipContent = {
      */
     hazardsAboveBelow: { source: string; where?: string }[];
     obstructedViewNotes?: string;
+    /**
+     * WHICH KINDS of obstruction this hull has — see `src/lib/obstruction.ts`
+     * for the taxonomy and why the distinction changes the advice.
+     *
+     * Populate ONLY where the mechanism is actually established. Several
+     * records deliberately leave this empty because the line publishes
+     * that a cabin is obstructed without saying by what, and guessing
+     * would defeat the point of having the field. An empty list renders
+     * nothing rather than a hedge.
+     */
+    obstructionKinds?: ObstructionKind[];
     connectingNote?: string;
     /**
      * A line rule about where minors may be berthed. Fires on family

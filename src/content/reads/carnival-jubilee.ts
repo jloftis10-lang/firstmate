@@ -51,6 +51,7 @@ export const carnivalJubilee: ShipContent = {
       { source: "nightclub" },
     ],
     obstructedViewNotes: EXCEL_FORWARD_OBSTRUCTION,
+    obstructionKinds: ["solid-structure"],
     connectingNote: CONNECTING_RULE,
     minorPlacementRule: CARNIVAL_MINOR_PLACEMENT,
     elevatorNote: EXCEL_ELEVATOR_NOTE,

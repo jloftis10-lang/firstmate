@@ -164,6 +164,7 @@ function voyagerFamilyContent(ship: VoyagerShip): ShipContent {
       ],
       obstructedViewNotes:
         "Deck 6 is the lifeboat band on both classes — that much is consistent. What isn't consistent is which cabins: the two published lists contradict each other on whether the affected sections are forward or aft, and neither source is one I'd rely on, so I'm not repeating their numbers. Read the category on the specific cabin. Separately and better sourced, there's a second kind of obstruction on deck 10 that isn't lifeboats at all: the pool deck above overhangs some cabins and shades them, and a few sit directly beneath whirlpools that extend out over the ship's side. Those are worth checking on the deck plan before you place anyone on 10.",
+      obstructionKinds: ["lifeboat-davit", "overlooked"],
       connectingNote: CONNECTING_RULE,
       minorPlacementRule: ROYAL_MINOR_PLACEMENT,
       accessibilityNote:

@@ -114,6 +114,7 @@ function radianceClassContent(
       ],
       obstructedViewNotes:
         "Two specific pairs are documented: 7170 and 7670, partially blocked by the ship's structure, and 9252 and 9652, blocked by the window-washing platform. Separately, all the indented deck 7 balconies carry the lifeboat roof described above, which is a different thing from a blocked view. A much broader claim circulates that a long run of deck 7 cabins is lifeboat-obstructed, but it comes from a low-quality source and contradicts the better-sourced list, so I'd check the booking screen rather than believe either of us.",
+      obstructionKinds: ["solid-structure"],
       connectingNote: CONNECTING_RULE,
       minorPlacementRule: ROYAL_MINOR_PLACEMENT,
       elevatorNote:
