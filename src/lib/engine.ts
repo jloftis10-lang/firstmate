@@ -103,7 +103,7 @@ function cabinRead(
     );
   }
 
-  return { call, flags, why };
+  return { call, flags, why, verified: cabin.verified };
 }
 
 /* ------------------------------------------------------------------ *
@@ -154,7 +154,7 @@ function moneyRead(
     );
   }
 
-  return { call, flags, why };
+  return { call, flags, why, verified: money.verified };
 }
 
 /* ------------------------------------------------------------------ *
@@ -225,7 +225,7 @@ function trapsRead(
     flags.push(other);
   }
 
-  return { call, flags, why };
+  return { call, flags, why, verified: traps.verified };
 }
 
 /* ------------------------------------------------------------------ */

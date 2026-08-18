@@ -5,23 +5,29 @@
  * how much of each line is still uncharted, so the content grind has a
  * scoreboard instead of a vibe.
  */
+import { blockStates } from "../src/lib/types";
 import { LINES, SHIPS } from "../src/content/ships";
 
-const verified = SHIPS.filter((s) => s.content?.verified);
+const verified = SHIPS.filter((s) => s.content && blockStates(s.content).allVerified);
+const partial = SHIPS.filter(
+  (s) => s.content && blockStates(s.content).anyVerified && !blockStates(s.content).allVerified,
+);
 const researched = SHIPS.filter(
-  (s) => s.content && !s.content.verified && s.content.sources?.length,
+  (s) =>
+    s.content && !blockStates(s.content).anyVerified && s.content.sources?.length,
 );
 const invented = SHIPS.filter(
-  (s) => s.content && !s.content.verified && !s.content.sources?.length,
+  (s) =>
+    s.content && !blockStates(s.content).anyVerified && !s.content.sources?.length,
 );
 
 console.log("");
 console.log(`  ${SHIPS.length} ships · ${LINES.length} lines`);
 console.log(
-  `  ${verified.length} verified · ${researched.length} researched · ${
-    invented.length
-  } placeholder · ${
-    SHIPS.length - verified.length - researched.length - invented.length
+  `  ${verified.length} verified · ${partial.length} part-verified · ${
+    researched.length
+  } researched · ${invented.length} placeholder · ${
+    SHIPS.length - verified.length - partial.length - researched.length - invented.length
   } uncharted`,
 );
 console.log("");
@@ -29,6 +35,15 @@ console.log("");
 if (verified.length > 0) {
   console.log("  VERIFIED — signed off by an operator");
   for (const s of verified) console.log(`    ✓ ${s.line} · ${s.name}`);
+  console.log("");
+}
+
+if (partial.length > 0) {
+  console.log("  PART-VERIFIED — some blocks signed off, some not");
+  for (const s of partial) {
+    const b = blockStates(s.content!);
+    console.log(`    ~ ${s.line} · ${s.name}  (${b.verified}/${b.present} blocks)`);
+  }
   console.log("");
 }
 
@@ -51,7 +66,7 @@ if (invented.length > 0) {
 console.log("  BY LINE");
 const rows = LINES.map((line) => {
   const fleet = SHIPS.filter((s) => s.line === line.name);
-  const done = fleet.filter((s) => s.content?.verified).length;
+  const done = fleet.filter((s) => s.content && blockStates(s.content).allVerified).length;
   return { name: line.name, done, total: fleet.length };
 }).sort((a, b) => b.done - a.done || b.total - a.total);
 

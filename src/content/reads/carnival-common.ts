@@ -54,6 +54,7 @@ export const CARNIVAL_SOURCES: Source[] = [
  * number that makes the advisor more cautious, not less.
  */
 export const CARNIVAL_MONEY: ShipContent["money"] = {
+  verified: false,
   drinkPackagePrice: 84,
   breakEvenDrinksPerDay: 8,
   specialtyDiningNote:
@@ -109,11 +110,11 @@ export function carnivalFleetContent(opts: {
     .join(" ");
 
   return {
-    verified: false,
     reviewDue: "2027-02-01",
     sources: CARNIVAL_SOURCES,
     money: CARNIVAL_MONEY,
     traps: {
+      verified: false,
       kidAgeHeightRules: kidRules,
       embarkationNote: CARNIVAL_EMBARKATION,
       ...(opts.otherTraps ? { other: opts.otherTraps } : {}),

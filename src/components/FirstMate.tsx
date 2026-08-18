@@ -1,9 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import {
-  isCovered,
-} from "@/lib/types";
+import { blockStates, isCovered } from "@/lib/types";
 import type {
   ClientProfile,
   Experience,
@@ -225,6 +223,7 @@ function ReadView({
 }) {
   const read = getRead(ship, client);
   const summary = clientSummary(ship, client);
+  const { allVerified, anyVerified } = blockStates(ship.content);
 
   const bits = [
     ship.name.toUpperCase(),
@@ -253,14 +252,14 @@ function ReadView({
           &nbsp; {bits.join("  ·  ")}
         </p>
 
-        {!ship.content.verified && (
+        {!allVerified && (
           <p className="mt-2.5 rounded-[9px] border border-signal bg-signal-bg px-3 py-2.5 text-[0.82rem] leading-[1.5] text-ink">
             <span className="mr-2 inline-block rounded-[5px] bg-signal px-1.5 py-[3px] font-readout text-[0.6rem] font-bold tracking-[0.08em] text-white align-[1px]">
               SAMPLE
             </span>
-            This read is built on unverified sample data for the {ship.name}.
-            Treat it as a demonstration of the format, not an operator&apos;s
-            call you can act on.
+            {anyVerified
+              ? `Parts of this read aren't signed off yet — look for the marker on each card below. Those sections are researched, not an operator's call.`
+              : `Nothing in this read is signed off yet for the ${ship.name}. It's researched, not an operator's call you can act on.`}
           </p>
         )}
       </div>
@@ -269,7 +268,7 @@ function ReadView({
       <ReadCard number="02" category="Money surprises" read={read.money} />
       <ReadCard number="03" category="Expectation traps" read={read.traps} />
 
-      <ClientSummary text={summary} verified={ship.content.verified} />
+      <ClientSummary text={summary} verified={allVerified} />
 
       <button
         type="button"

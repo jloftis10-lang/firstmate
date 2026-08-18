@@ -13,7 +13,6 @@ import type { ShipContent } from "@/lib/types";
  * their client has already been given.
  */
 export const norwegianPrima: ShipContent = {
-  verified: false,
   reviewDue: "2027-02-01",
 
   sources: [
@@ -35,6 +34,7 @@ export const norwegianPrima: ShipContent = {
   ],
 
   money: {
+    verified: false,
     // No standalone daily rate quoted here on purpose: on most Free at Sea
     // fares the package is included and the guest pays only the service
     // charge, so a headline price would misrepresent the decision.
@@ -47,6 +47,7 @@ export const norwegianPrima: ShipContent = {
   },
 
   traps: {
+    verified: false,
     kidAgeHeightRules:
       "Splash Academy runs 3 to 12, and Entourage is the teen space for 13 to 17.",
   },

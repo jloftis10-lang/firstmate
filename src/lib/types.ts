@@ -52,13 +52,6 @@ export type Source = {
 
 /** The operator's knowledge of a hull. Absent until someone works it up. */
 export type ShipContent = {
-  /**
-   * False until Jimmy confirms the content against his own operator
-   * knowledge. Until it flips true, the UI must visibly mark this ship's
-   * read as sample/unverified — an unverified confident claim must never
-   * reach a real advisor unlabeled.
-   */
-  verified: boolean;
   reviewDue?: string; // freshness date
 
   /**
@@ -76,6 +69,15 @@ export type ShipContent = {
    * quietly filled in.
    */
   cabin?: {
+    /**
+     * False until an operator confirms this block against their own
+     * knowledge. Verification is per block, not per ship: cabin advice
+     * comes from someone who has sailed the hull, while money and trap
+     * policy is researched from the line. Those become true at different
+     * moments and must be markable separately, or nothing is ever
+     * signable without over-claiming the rest.
+     */
+    verified: boolean;
     /**
      * Reads as "book them midship, ___" — e.g. "decks 8 to 10".
      *
@@ -125,6 +127,8 @@ export type ShipContent = {
     accessibilityNote?: string;
   };
   money?: {
+    /** See cabin.verified. */
+    verified: boolean;
     drinkPackagePrice?: number;
     breakEvenDrinksPerDay?: number;
     /**
@@ -139,6 +143,8 @@ export type ShipContent = {
     gratuityPerDayUSD?: number;
   };
   traps?: {
+    /** See cabin.verified. */
+    verified: boolean;
     kidAgeHeightRules?: string;
     obstructedBalconyDecks?: string;
     embarkationNote?: string;
@@ -153,6 +159,19 @@ export type Ship = ShipIdentity & {
 
 /** A ship we can actually produce a read for. */
 export type CoveredShip = ShipIdentity & { content: ShipContent };
+
+/** The blocks a record actually carries, and which of them are signed off. */
+export function blockStates(c: ShipContent) {
+  const present = [c.cabin, c.money, c.traps].filter(Boolean) as {
+    verified: boolean;
+  }[];
+  return {
+    present: present.length,
+    verified: present.filter((b) => b.verified).length,
+    allVerified: present.length > 0 && present.every((b) => b.verified),
+    anyVerified: present.some((b) => b.verified),
+  };
+}
 
 export function isCovered(ship: Ship): ship is CoveredShip {
   const c = ship.content;
@@ -192,6 +211,8 @@ export type ReadCategory = {
   call: string;
   flags: string[];
   why: string;
+  /** Whether an operator has signed this category off. Drives the marker. */
+  verified: boolean;
 };
 
 /**

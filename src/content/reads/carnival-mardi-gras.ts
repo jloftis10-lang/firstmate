@@ -29,7 +29,6 @@ import {
  * someone who has actually walked this ship.
  */
 export const carnivalMardiGras: ShipContent = {
-  verified: false,
   reviewDue: "2027-02-01",
 
   sources: [
@@ -77,6 +76,10 @@ export const carnivalMardiGras: ShipContent = {
   ],
 
   cabin: {
+    // Jimmy's own calls, but the block also carries researched detail he
+    // has accepted rather than recalled. Flip only when the whole block
+    // is something he'd say on the phone.
+    verified: false,
     // OPERATOR-CONFIRMED (Jimmy, 2026-08-17): "midship 6-9", off the rule
     // "lower or middle levels, towards the middle of the ship". This
     // replaces a range I had inferred from the deck plan.
@@ -116,6 +119,7 @@ export const carnivalMardiGras: ShipContent = {
   money: CARNIVAL_MONEY,
 
   traps: {
+    verified: false,
     kidAgeHeightRules: `${BOLT_RULES} ${CARNIVAL_KIDS_RULES}`,
     obstructedBalconyDecks: EXCEL_OBSTRUCTED_DECKS,
     embarkationNote: CARNIVAL_EMBARKATION,

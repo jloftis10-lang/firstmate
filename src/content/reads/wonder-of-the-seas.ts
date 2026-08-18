@@ -14,7 +14,6 @@ import type { ShipContent } from "@/lib/types";
  * fleet: policy is researchable, cabin advice needs an operator.
  */
 export const wonderOfTheSeas: ShipContent = {
-  verified: false,
   reviewDue: "2027-02-01",
 
   sources: [
@@ -36,6 +35,7 @@ export const wonderOfTheSeas: ShipContent = {
   ],
 
   money: {
+    verified: false,
     // Fleet median. The package spans roughly $70–125 depending on ship
     // and sailing, so the figure is indicative rather than exact.
     drinkPackagePrice: 84,
@@ -50,6 +50,7 @@ export const wonderOfTheSeas: ShipContent = {
   },
 
   traps: {
+    verified: false,
     kidAgeHeightRules:
       "Adventure Ocean runs 3 to 11 in bands — Aquanauts 3–5, Explorers 6–8, Voyagers 9–12 — with a separate nursery for 6 to 36 months.",
     other: [

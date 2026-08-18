@@ -41,6 +41,13 @@ export function ReadCard({ number, category, read }: Props) {
     <div className="mb-3.5 rounded-2xl border border-line bg-surface p-5 pb-[18px] shadow-[0_1px_2px_rgba(15,42,61,.05),0_8px_24px_rgba(15,42,61,.06)]">
       <div className="mb-3 flex items-center gap-2 font-readout text-[0.72rem] font-bold tracking-[0.09em] uppercase text-ink-3">
         <span className="text-line">{number}</span> {category}
+        {/* Marks the sections nobody has signed off, so an advisor can see
+            at a glance which calls carry an operator behind them. */}
+        {!read.verified && (
+          <span className="ml-auto rounded-[5px] border border-signal/60 px-1.5 py-[2px] text-[0.6rem] font-bold tracking-[0.08em] text-signal">
+            NOT SIGNED OFF
+          </span>
+        )}
       </div>
 
       {/* The call — serif, prominent, always the hero. */}
