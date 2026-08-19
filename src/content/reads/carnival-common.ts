@@ -66,8 +66,20 @@ export const CARNIVAL_SOURCES: Source[] = [
 export const CARNIVAL_MONEY: ShipContent["money"] = {
   // Signed off by Jimmy, 2026-08-17, after dropping the unsupported
   // effective date and the fixed break-even figure.
+  //
+  // The package price, the service charge and the note below were added
+  // 2026-08-19 on Jimmy's sign-off, after the compare page put Carnival
+  // and Royal side by side and showed $84 against $75 — which reads as
+  // Carnival being dearer when the all-in figures run the other way.
+  // The facts were already in the header comment above and had never
+  // reached a rendered field.
   verified: true,
-  drinkPackagePrice: 84,
+  // The exact advance price rather than the rounded 84 it carried, so
+  // the normalised comparison is arithmetic on a real number.
+  drinkPackagePrice: 83.94,
+  serviceCharge: { rate: 0.2, includedInPrice: true },
+  drinkPackageNote:
+    "CHEERS! is $83.94 per person per day bought in advance and $89.94 bought onboard, and both figures already include the 20% service charge — so the price you see is the price they pay. Every guest of drinking age in the stateroom has to buy it if one does. Worth saying plainly when a client is comparing against another line: some lines post the package before their gratuity and add it at checkout, so a lower-looking number can end up costing more.",
   specialtyDiningNote:
     "It's reservable pre-cruise through Cruise Manager, and times are first-come first-served, so lock in the nights that matter early.",
   gratuityPerDayUSD: 17,

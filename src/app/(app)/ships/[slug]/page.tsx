@@ -18,6 +18,7 @@ import { FactList, NoteList, NoiseList, ObstructionList } from "@/components/shi
 import { ShipFitSection } from "@/components/ship/ShipFit";
 import { ShipSources } from "@/components/ship/ShipSources";
 import { quietCandidates } from "@/lib/decks";
+import { packageCost, packageLine } from "@/lib/money";
 
 /**
  * THE SHIP PAGE — the reference view of one hull.
@@ -464,9 +465,15 @@ export default async function ShipPage({ params }: PageProps<"/ships/[slug]">) {
                     },
                     {
                       label: "Drink package",
-                      value: money.drinkPackagePrice
-                        ? `Around ${usd(money.drinkPackagePrice)} per person, per day.`
-                        : undefined,
+                      // Resolved through `packageCost` so the price and
+                      // its service charge are never printed apart. A
+                      // bare "around $75" is the number that made the
+                      // compare page read backwards.
+                      value: packageCost(money)
+                        ? packageLine(packageCost(money)!)
+                        : money.drinkPackagePrice
+                          ? `Around ${usd(money.drinkPackagePrice)} per person, per day. Whether the service charge is already in that number has not been recorded for this line.`
+                          : undefined,
                     },
                     { label: "Before you price it", value: money.drinkPackageNote },
                     {

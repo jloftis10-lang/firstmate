@@ -272,6 +272,33 @@ export type ShipContent = {
     /** See cabin.verified. */
     verified: boolean;
     drinkPackagePrice?: number;
+    /**
+     * THE SERVICE CHARGE, AND WHETHER THE PRICE ALREADY CARRIES IT.
+     *
+     * The single most misleading thing on a compare screen. Carnival
+     * posts CHEERS! at $83.94 with its 20% service charge already in;
+     * Royal posts $75 and adds 18% at checkout. Side by side that reads
+     * as Carnival being $9 a day dearer when the all-in figures are
+     * $83.94 against $88.50 — the comparison is backwards, and it is
+     * backwards on the one screen built to compare them.
+     *
+     * Recorded as a RATE AND A FLAG rather than as prose naming another
+     * line, so the normalisation is derived wherever two lines meet and
+     * a rate change stays one edit. A note in Carnival's record saying
+     * "Royal adds 18%" would render on 29 Carnival ship pages where
+     * nobody is comparing anything, and would rot the day Royal moved
+     * its rate.
+     *
+     * ABSENT MEANS NOBODY CHECKED, not that the price is all-in. The
+     * compare page declines to normalise a pair where either side is
+     * missing rather than assuming a zero.
+     */
+    serviceCharge?: {
+      /** 0.18 for eighteen percent. */
+      rate: number;
+      /** True when `drinkPackagePrice` already carries it. */
+      includedInPrice: boolean;
+    };
     breakEvenDrinksPerDay?: number;
     /**
      * Anything that changes the package maths on this line before the

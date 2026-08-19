@@ -84,6 +84,13 @@ export const ROYAL_MONEY: ShipContent["money"] = {
   // Signed off by Jimmy, 2026-08-19.
   verified: true,
   drinkPackagePrice: 75,
+  // The 18% has been in the note since the Icon review; recorded as a
+  // rate as well from 2026-08-19 so the compare page can normalise it
+  // rather than an advisor doing the arithmetic in their head. Note the
+  // price is a tracked fleet median of roughly $55 to $120 — see the
+  // header above — so any normalised figure is arithmetic on the median
+  // and not a fleet-wide claim. The compare page says so.
+  serviceCharge: { rate: 0.18, includedInPrice: false },
   drinkPackageNote:
     "Two things before you price this. The 18% gratuity is added at checkout rather than included, so the real daily cost is about a fifth above the headline — and if one adult in the stateroom buys the alcohol package, every guest of drinking age in that stateroom has to buy it too. For a couple where only one drinks, that doubles the bill. The non-alcoholic packages can be bought individually, so that's the way round it.",
   specialtyDiningNote:

@@ -2,6 +2,8 @@ import { diff, listDiff } from "./classes";
 import type { FieldDiff, ListDiff } from "./classes";
 import type { CoveredShip, ShipContent } from "./types";
 import { shipProvenance } from "./provenance";
+import { packageCost, packageLine, usd } from "./money";
+import type { PackageCost } from "./money";
 
 /**
  * TWO SHIPS, SIDE BY SIDE.
@@ -35,11 +37,6 @@ import { shipProvenance } from "./provenance";
  * per-client reasoning already has a home on each ship page.
  */
 
-/** A whole-dollar rate reads as "$17"; anything with cents needs both. */
-function usd(amount: number): string {
-  return Number.isInteger(amount) ? `$${amount}` : `$${amount.toFixed(2)}`;
-}
-
 const MONEY_FIELDS: {
   field: string;
   read: (c: ShipContent) => string | undefined;
@@ -53,10 +50,19 @@ const MONEY_FIELDS: {
   },
   {
     field: "money.drinkPackagePrice",
-    read: (c) =>
-      c.money?.drinkPackagePrice
-        ? `Around ${usd(c.money.drinkPackagePrice)} per person, per day.`
-        : undefined,
+    // Never a bare price. A row reading "around $83.94" against "around
+    // $75" is the exact misleading comparison the normalisation panel
+    // exists to correct, and printing it underneath that panel would
+    // contradict it on the same screen. Where the service charge is
+    // unrecorded the row says so rather than implying the price is
+    // all-in.
+    read: (c) => {
+      const cost = packageCost(c.money);
+      if (cost) return packageLine(cost);
+      return c.money?.drinkPackagePrice
+        ? `Around ${usd(c.money.drinkPackagePrice)} per person, per day. Whether the service charge is already in that number has not been recorded for this line.`
+        : undefined;
+    },
   },
   { field: "money.drinkPackageNote", read: (c) => c.money?.drinkPackageNote },
   {
@@ -160,5 +166,67 @@ export function comparisonCoverage(c: Comparison) {
   return {
     a: shipProvenance(c.a.content),
     b: shipProvenance(c.b.content),
+  };
+}
+
+/* ------------------------------------------------------------------ */
+
+export type Normalised = {
+  a: { ship: string; slug: string; line: string; cost: PackageCost };
+  b: { ship: string; slug: string; line: string; cost: PackageCost };
+  /** The hull whose package costs less at checkout. */
+  cheaper: "a" | "b" | "level";
+  /** Per person per day, at checkout, on the recorded prices. */
+  gap: number;
+  /** True when the sticker prices point the other way from the real ones. */
+  reverses: boolean;
+};
+
+/**
+ * THE PRICING ILLUSION, CORRECTED.
+ *
+ * Carnival posts CHEERS! with its 20% service charge already in the
+ * number. Royal posts its package before the 18% and adds that at
+ * checkout. Printed side by side those look like the same kind of
+ * number and they are not: $83.94 against $75 reads as Carnival being
+ * nine dollars a day dearer, when the figures a client actually pays are
+ * $83.94 against $88.50 and the gap runs the other way.
+ *
+ * `reverses` is the flag worth having. It marks the case where the
+ * sticker comparison and the checkout comparison disagree — which is the
+ * only case where an advisor reading the two posted prices reaches the
+ * wrong conclusion rather than merely an imprecise one.
+ *
+ * RETURNS NULL WHEN EITHER SIDE IS UNRECORDED. Norwegian has no service
+ * charge on file, so a Norwegian pair is not normalised at all. Assuming
+ * an unrecorded rate is zero would reproduce exactly the wrong
+ * comparison this function exists to correct, and it would do it
+ * silently.
+ *
+ * THE GAP IS ARITHMETIC ON THE RECORDED PRICES, NOT A FLEET CLAIM.
+ * Royal's $75 is a tracked median of roughly $55 to $120 depending on
+ * ship and sailing — its own record says so — so the dollar figure moves
+ * with the sailing even though the rates do not. The page states that
+ * beside the number rather than presenting a median as a rate.
+ */
+export function normalisePackages(c: Comparison): Normalised | null {
+  const costA = packageCost(c.a.content.money);
+  const costB = packageCost(c.b.content.money);
+  if (!costA || !costB) return null;
+
+  const gap = Math.abs(costA.allIn - costB.allIn);
+  const cheaper =
+    costA.allIn === costB.allIn ? "level" : costA.allIn < costB.allIn ? "a" : "b";
+
+  // Which way the posted prices point, if they point anywhere.
+  const sticker =
+    costA.base === costB.base ? "level" : costA.base < costB.base ? "a" : "b";
+
+  return {
+    a: { ship: c.a.name, slug: c.a.id, line: c.a.line, cost: costA },
+    b: { ship: c.b.name, slug: c.b.id, line: c.b.line, cost: costB },
+    cheaper,
+    gap,
+    reverses: sticker !== "level" && cheaper !== "level" && sticker !== cheaper,
   };
 }

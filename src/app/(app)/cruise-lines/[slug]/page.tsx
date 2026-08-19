@@ -5,6 +5,7 @@ import { LINES, SHIPS } from "@/content/ships";
 import { LINE_RECORDS } from "@/content/lines/records";
 import { exceptionCount, isUniform, routedClassRecords } from "@/lib/classes";
 import { blockProvenance } from "@/lib/provenance";
+import { packageCost, packageLine } from "@/lib/money";
 import { classPath, linePath, shipPath } from "@/lib/nav";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ShipSection } from "@/components/ship/ShipSection";
@@ -139,9 +140,13 @@ export default async function LinePage({
                   },
                   {
                     label: "Drink package",
-                    value: money.drinkPackagePrice
-                      ? `Around ${usd(money.drinkPackagePrice)} per person, per day.`
-                      : undefined,
+                    // See the ship page: price and service charge are
+                    // resolved together or not printed as a comparison.
+                    value: packageCost(money)
+                      ? packageLine(packageCost(money)!)
+                      : money.drinkPackagePrice
+                        ? `Around ${usd(money.drinkPackagePrice)} per person, per day. Whether the service charge is already in that number has not been recorded for this line.`
+                        : undefined,
                   },
                   { label: "Before you price it", value: money.drinkPackageNote },
                   {

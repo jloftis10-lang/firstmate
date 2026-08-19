@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { LINES, SHIPS, getShip } from "@/content/ships";
-import { compareShips } from "@/lib/compare";
+import { compareShips, normalisePackages } from "@/lib/compare";
+import { percent, usd } from "@/lib/money";
 import { routedClassRecords } from "@/lib/classes";
 import { classPath, linePath, shipPath } from "@/lib/nav";
 import { isCovered } from "@/lib/types";
@@ -137,6 +138,7 @@ export default async function ComparePage({
 
   const ready = a && b && a.id !== b.id;
   const comparison = ready ? compareShips(a, b) : undefined;
+  const normalised = comparison ? normalisePackages(comparison) : null;
 
   const extras: { onlyA: SharedExtra[]; onlyB: SharedExtra[] } = { onlyA: [], onlyB: [] };
   if (comparison) {
@@ -235,15 +237,129 @@ export default async function ComparePage({
                 title="Money"
                 lede="Set by the line rather than the hull, which is why two ships on one line agree here and two ships on different lines rarely do."
                 empty={
-                  comparison!.moneyDiffer.length === 0
+                  comparison!.moneyDiffer.length === 0 && !normalised
                     ? `Identical. ${comparison!.sameLine ? `Both are ${comparison!.a.line} ships and carry the same money block — literally the same record, not a copy of it.` : "Two different lines that happen to record the same rates and rules."}`
                     : undefined
                 }
               >
                 <div className="space-y-4">
-                  {comparison!.moneyDiffer.map((d) => (
-                    <ExceptionField key={d.field} diff={d} />
-                  ))}
+                  {/* THE PRICING ILLUSION, CORRECTED — and the reason
+                      this section exists rather than leaving two posted
+                      prices to be read side by side. One line's number
+                      carries its service charge and the other's does
+                      not, so the two are not the same kind of number.
+                      Rendered before the field differences because an
+                      advisor who reads the raw prices first has already
+                      reached the wrong conclusion. */}
+                  {normalised && (
+                    <div
+                      className={`rounded-[13px] border p-4 ${
+                        normalised.reverses
+                          ? "border-signal bg-signal-bg"
+                          : "border-line bg-surface"
+                      }`}
+                    >
+                      <h3 className="mb-1 flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
+                        <span className="font-call text-[1.1rem] leading-[1.3] text-ink">
+                          What the package actually costs
+                        </span>
+                        {normalised.reverses && (
+                          <span className="font-readout text-[0.6rem] font-bold tracking-[0.07em] uppercase text-signal">
+                            the sticker prices point the wrong way
+                          </span>
+                        )}
+                      </h3>
+                      <p className="mb-3.5 max-w-[62ch] text-[0.9rem] leading-[1.55] text-ink-2">
+                        Compare checkout prices, not sticker prices — one of
+                        these posts its service charge in the number and the
+                        other adds it at the till.
+                      </p>
+
+                      <dl className="divide-y divide-line/60 border-y border-line/60">
+                        {[normalised.a, normalised.b].map((side) => (
+                          <div
+                            key={side.slug}
+                            className="grid gap-x-6 gap-y-1 py-3 sm:grid-cols-[13rem_1fr]"
+                          >
+                            <dt className="font-readout text-[0.64rem] font-bold tracking-[0.06em] uppercase text-ink-3">
+                              {side.ship}
+                            </dt>
+                            <dd className="text-[0.94rem] leading-[1.6] text-ink-2">
+                              <span className="font-call text-[1.15rem] text-ink">
+                                {usd(side.cost.allIn)}
+                              </span>{" "}
+                              per person, per day at checkout —{" "}
+                              {side.cost.includedInPrice
+                                ? `posted at ${usd(side.cost.base)} with the ${percent(side.cost.rate)} service charge already in it`
+                                : `posted at ${usd(side.cost.base)}, plus ${percent(side.cost.rate)} added at checkout`}
+                              .
+                            </dd>
+                          </div>
+                        ))}
+                      </dl>
+
+                      <p className="mt-3.5 max-w-[62ch] text-[0.92rem] leading-[1.6] text-ink-2">
+                        {normalised.cheaper === "level" ? (
+                          "The two come out level once the service charges are normalised."
+                        ) : (
+                          <>
+                            On these recorded prices the{" "}
+                            <strong className="font-semibold text-ink">
+                              {normalised.cheaper === "a"
+                                ? normalised.a.ship
+                                : normalised.b.ship}{" "}
+                              package is {usd(normalised.gap)} a day less
+                            </strong>{" "}
+                            once the mandatory service charges are normalised
+                            {normalised.reverses
+                              ? " — the opposite of what the posted prices suggest."
+                              : "."}
+                          </>
+                        )}
+                      </p>
+                      {/* Royal's package is a tracked fleet median of
+                          roughly $55 to $120 by ship and sailing. The
+                          RATES are fixed and the dollar gap is not, and
+                          presenting a median as though it were a rate is
+                          the false precision this product refuses
+                          everywhere else. */}
+                      <p className="mt-2 max-w-[62ch] text-[0.84rem] leading-[1.55] text-ink-3">
+                        The rates are fixed; the prices are not. Package
+                        pricing moves by ship and sailing, so run the
+                        arithmetic against the actual quote — what carries
+                        across every sailing is which line adds its charge at
+                        checkout, not the size of the gap.
+                      </p>
+                    </div>
+                  )}
+
+                  {/* The price row is dropped once the panel above has
+                      resolved it — the panel says the same thing with
+                      the service charges applied, and two versions of
+                      one comparison on one screen is one too many. */}
+                  {comparison!.moneyDiffer
+                    .filter((d) => !(normalised && d.field === "money.drinkPackagePrice"))
+                    .map((d) => (
+                      <ExceptionField key={d.field} diff={d} />
+                    ))}
+
+                  {!normalised && comparison!.moneyDiffer.length > 0 && (
+                    <p className="max-w-[62ch] rounded-[11px] border border-dashed border-line px-4 py-3 text-[0.88rem] leading-[1.55] text-ink-3">
+                      These two cannot be normalised to a checkout price:{" "}
+                      {[comparison!.a, comparison!.b]
+                        .filter((s) => !s.content.money?.serviceCharge)
+                        .map((s) => s.line)
+                        .join(" and ")}{" "}
+                      {[comparison!.a, comparison!.b].filter(
+                        (s) => !s.content.money?.serviceCharge,
+                      ).length === 1
+                        ? "has"
+                        : "have"}{" "}
+                      no service-charge rate on file. Unrecorded is not zero,
+                      so the comparison is left as posted rather than
+                      normalised on a guess.
+                    </p>
+                  )}
                 </div>
               </ShipSection>
 

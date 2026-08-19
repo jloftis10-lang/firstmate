@@ -95,6 +95,14 @@ export const NCL_MONEY: ShipContent["money"] = {
   // Signed off by Jimmy, 2026-08-19.
   verified: true,
   drinkPackagePrice: 109,
+  // NO `serviceCharge` HERE, DELIBERATELY. Carnival's 20% is included
+  // and Royal's 18% is added at checkout, both signed. What Norwegian's
+  // $109 does about its own service charge has not been established,
+  // and Free at Sea's separate mandatory charge — described in the note
+  // below — makes it the least safe of the three to assume. Absent means
+  // unchecked; the compare page declines to normalise a Norwegian pair
+  // rather than guessing at a rate.
+
   drinkPackageNote:
     "Do not tell an NCL client their drinks are free. Free at Sea bundles the open bar in, but it carries a mandatory fixed charge for every guest 21 and over — about $28.50 per person per day on sailings of six nights or more, and $32 on two-to-five-night sailings since May 2026 — and that STACKS on top of the ordinary daily service charge rather than replacing it. A Haven couple on a week is around $53.50 each per day before they buy a thing. Two more catches: the specialty dining in the bundle goes to guests one and two only, and a second guest under 21 gets a soda package at $12.50 a day charged separately, while guests three and up under 21 get no substitute at all.",
   specialtyDiningNote:

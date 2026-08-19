@@ -590,8 +590,40 @@ Carnival's equivalent of the note lives only in a code comment. The
 comparison is therefore backwards by roughly $13 a day, and it is
 backwards on the one screen built to compare them.
 
-**Not fixed here.** Writing `CARNIVAL_MONEY.drinkPackageNote` is
-operator content that needs your sign-off, not a UI change. The facts to
-draw on are in the header comment of `src/content/reads/carnival-common
-.ts`. It is one field, and it fixes 29 ship pages, the Carnival line
-page and every cross-line comparison at once.
+**FIXED 2026-08-19 on Jimmy's sign-off**, and built as a derivation
+rather than as the note originally specified. Two departures from the
+brief, both stated to him before implementing:
+
+1. **The note named Royal but would have lived in Carnival's record**,
+   which renders on 29 Carnival ship pages where nobody is comparing
+   anything, and hardcodes a competitor's rate in a file that would rot
+   the day Royal moved it. So the FACT is recorded per line —
+   `money.serviceCharge: { rate, includedInPrice }` — and the comparison
+   is derived wherever two lines meet. Same output, one source, and it
+   covers Carnival-against-Norwegian too rather than only the pair that
+   prompted it.
+2. **"~$4.56/day less" is false precision.** The rates are solid; the
+   prices are not. Royal's $75 is the tracked fleet median of a $55–$120
+   range — its own record says so, and it is the same reason break-even
+   figures were refused. At $55 Royal is $64.90 all-in and cheaper than
+   Carnival; at $120 it is $141.60. The page therefore states the gap as
+   arithmetic on the recorded prices and says in the panel that the
+   rates carry across every sailing and the gap does not.
+
+What shipped: `serviceCharge` on Carnival (20%, included) and Royal
+(18%, at checkout); Norwegian deliberately absent, and the compare page
+declines to normalise a Norwegian pair rather than treating unrecorded
+as zero. `CARNIVAL_MONEY` gained the missing `drinkPackageNote` and its
+price moved from the rounded 84 to the exact 83.94. `src/lib/money.ts`
+resolves price and service charge together for every surface, so a bare
+"around $75" cannot be printed anywhere — including in the compare
+table's own price row, which was still contradicting the panel above it
+until that row was made to use the same resolver.
+
+The engine snapshot moved for the first time: 29 Carnival hulls, because
+the new `drinkPackageNote` is a flag the money read emits. Regenerated
+and committed so the change is visible in review.
+
+**Still open for Jimmy:** Norwegian's service charge is unrecorded, and
+Royal's $55–$120 range is signed in a comment but not in a field — the
+same shape of gap as Carnival's was.
