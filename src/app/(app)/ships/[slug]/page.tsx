@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { COVERED_SHIPS, getShip } from "@/content/ships";
+import { COVERED_SHIPS, LINES, SHIPS, getShip } from "@/content/ships";
 import { isCovered } from "@/lib/types";
 import type { CoveredShip } from "@/lib/types";
 import { shipProvenance } from "@/lib/provenance";
 import { shipFit } from "@/lib/fit";
-import { checkPath } from "@/lib/nav";
+import { checkPath, classPath, linePath } from "@/lib/nav";
+import { routedClassRecords } from "@/lib/classes";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CoverageChips } from "@/components/CoverageChips";
 import { DecisionCard } from "@/components/DecisionCard";
@@ -111,6 +112,25 @@ function splitNote(note: string): { head: string; tail?: string } {
   return { head: m[0].trim(), tail: tail || undefined };
 }
 
+/**
+ * Line and class URLs for the breadcrumb.
+ *
+ * Computed once at module scope rather than per page, because the class
+ * routing is the same 29-record derivation the class pages run and there
+ * is no reason to run it 79 times.
+ *
+ * A ship whose class is not in here — because it has no `shipClass` —
+ * gets an href-less crumb rather than a guessed one. `Breadcrumbs`
+ * renders that as plain text, which is the correct outcome and not a
+ * degraded one.
+ */
+const LINE_ID = new Map(LINES.map((l) => [l.name, l.id]));
+const CLASS_SLUG = new Map(
+  routedClassRecords(SHIPS, LINES).flatMap((c) =>
+    c.ships.map((s) => [s.id, c.slug] as const),
+  ),
+);
+
 const SECTIONS = [
   { id: "cabin", label: "Cabin intelligence" },
   { id: "decks", label: "Deck by deck" },
@@ -152,16 +172,30 @@ export default async function ShipPage({ params }: PageProps<"/ships/[slug]">) {
   return (
     <main className="flex-1">
       <div className="mx-auto w-full max-w-[1180px] px-5 pt-6 pb-20 sm:px-8">
-        {/* Line and class are not links yet — those pages land in Phase 6,
-            and a crumb pointing at a 404 is worse than a crumb that is
-            only a label. `Breadcrumbs` renders an href-less crumb as
-            plain text, so each becomes one edit when its route exists —
-            which is what just happened to the directory crumb. */}
+        {/* Every crumb but the last is a link now that Phase 6 has
+            shipped the line and class routes. A crumb still falls back to
+            plain text when its target does not resolve — an uncharted
+            line or a ship with no class — because a crumb pointing at a
+            404 is worse than a crumb that is only a label. */}
         <Breadcrumbs
           trail={[
             { label: "Ships", href: "/ships" },
-            { label: ship.line },
-            ...(ship.shipClass ? [{ label: `${ship.shipClass} class` }] : []),
+            {
+              label: ship.line,
+              href: LINE_ID.has(ship.line)
+                ? linePath(LINE_ID.get(ship.line) as string)
+                : undefined,
+            },
+            ...(ship.shipClass
+              ? [
+                  {
+                    label: `${ship.shipClass} class`,
+                    href: CLASS_SLUG.has(ship.id)
+                      ? classPath(CLASS_SLUG.get(ship.id) as string)
+                      : undefined,
+                  },
+                ]
+              : []),
             { label: ship.name },
           ]}
         />

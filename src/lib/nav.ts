@@ -28,8 +28,8 @@ export type NavItem = {
 
 export const NAV: NavItem[] = [
   { label: "Ships", href: "/ships", available: true },
-  { label: "Cruise Lines", href: "/cruise-lines", available: false },
-  { label: "Ship Classes", href: "/classes", available: false },
+  { label: "Cruise Lines", href: "/cruise-lines", available: true },
+  { label: "Ship Classes", href: "/classes", available: true },
   { label: "Compare", href: "/compare", available: false },
   { label: "How It Works", href: "/methodology", available: false },
 ];
@@ -64,3 +64,15 @@ export const shipPath = (id: string) => `/ships/${id}`;
  * params are a frozen public contract and this does not touch them.
  */
 export const checkPath = (shipId: string) => `/?ship=${encodeURIComponent(shipId)}`;
+
+/**
+ * A cruise line's page. Keyed by `CruiseLine.id`, and only the three
+ * lines with a `LineRecord` have one — same rule as ships.
+ */
+export const linePath = (lineId: string) => `/cruise-lines/${lineId}`;
+
+/**
+ * A ship class's page. The slug is built in `src/lib/classes.ts`, which
+ * also asserts it is unique — class names collide across lines.
+ */
+export const classPath = (slug: string) => `/classes/${slug}`;

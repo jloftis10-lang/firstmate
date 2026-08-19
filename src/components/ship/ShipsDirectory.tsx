@@ -107,9 +107,23 @@ export function ShipsDirectory({ lines }: { lines: DirectoryLine[] }) {
             {covered.map((line) => (
               <div key={line.id}>
                 <h3 className="mb-3 flex flex-wrap items-baseline gap-x-3 gap-y-1 border-b border-line pb-2">
-                  <span className="font-call text-[1.1rem] leading-[1.25] text-ink">
-                    {line.name}
-                  </span>
+                  {/* A charted line always has a page — `LINE_RECORDS`
+                      and coverage are the same three lines today. If that
+                      ever comes apart the link would be an orphan, which
+                      is why the page passes the href in rather than this
+                      component deriving one from an id it cannot check. */}
+                  {line.href ? (
+                    <Link
+                      href={line.href}
+                      className="font-call text-[1.1rem] leading-[1.25] text-ink no-underline hover:underline"
+                    >
+                      {line.name}
+                    </Link>
+                  ) : (
+                    <span className="font-call text-[1.1rem] leading-[1.25] text-ink">
+                      {line.name}
+                    </span>
+                  )}
                   <span className="font-readout text-[0.64rem] tracking-[0.06em] uppercase text-ink-3">
                     {/* Derived. A half-worked-up line will say so here
                         without anything in this file changing. */}

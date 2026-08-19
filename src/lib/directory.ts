@@ -51,6 +51,13 @@ export type DirectoryLine = {
   id: string;
   name: string;
   category: LineCategory;
+  /**
+   * The line's own page, when it has one. Passed in rather than derived
+   * from the id, because coverage and `LINE_RECORDS` are two different
+   * facts that happen to agree today — and a link built on that
+   * coincidence would become an orphan the moment they stop agreeing.
+   */
+  href?: string;
   total: number;
   covered: number;
   /** Covered AND all present blocks signed off. */
@@ -61,6 +68,8 @@ export type DirectoryLine = {
 export function buildDirectory(
   ships: Ship[],
   lines: { id: string; name: string; category: LineCategory }[],
+  /** Ids of lines that have a page. Anything not listed renders unlinked. */
+  linked: Set<string> = new Set(),
 ): DirectoryLine[] {
   return lines
     .map((line) => {
@@ -89,6 +98,7 @@ export function buildDirectory(
         id: line.id,
         name: line.name,
         category: line.category,
+        ...(linked.has(line.id) ? { href: `/cruise-lines/${line.id}` } : {}),
         total: fleet.length,
         covered: fleet.filter((s) => s.content).length,
         signed: fleet.filter((s) => s.content && blockStates(s.content).allVerified)

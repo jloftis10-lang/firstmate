@@ -383,3 +383,59 @@ wraps to its own full-width row below `sm` and scrolls sideways if it
 outgrows the screen. Phase 6 makes this four or five items and needs
 that treatment regardless; a wider breakpoint would only have deferred
 it.
+
+## Phase 6 — what shipped
+
+`/classes` + 29 class pages, `/cruise-lines` + 3 line pages. Both nav
+items are live, and the ship page's Line and Class breadcrumbs are links
+rather than labels for the first time.
+
+**Class names are not unique across the catalog** — Carnival has a Spirit
+class and so does Norwegian. Slugs carry the line id and
+`routedClassRecords` throws on a duplicate rather than letting one page
+silently overwrite another at build time.
+
+**A one-ship class is not a uniform class.** Nine of the 29 charted
+classes report zero exceptions and five of those hold a single hull,
+where uniformity is a tautology. The directory shows three distinct
+badges — "nothing to compare", "hulls identical", "N exceptions" — and
+collapsing the first two would have roughly tripled a real signal. The
+honest number is 3 of 23 multi-ship classes.
+
+### Two rendering findings the class page forced
+
+**The by-field layout did not work as built.** Four Radiance obstruction
+notes share four opening sentences and one closing one and differ in a
+single clause, so reading them side by side meant diffing prose by eye —
+the work the page exists to have already done. `sentenceFraming` lifts
+the shared leading and trailing sentences out, shows them once, and
+gives each hull only its middle: ~850 characters per hull down to ~150,
+and the Oasis notes from ~1,030 to ~130. It applies to 15 fields across
+9 classes and declines on 4 rather than approximating. Each middle is a
+`slice` of the record between two offsets, so it is exact rather than
+sentences rejoined — the first version normalised a trailing space
+inside a Vision-class note before that was fixed.
+
+**`listDiff`'s binary hid partial inheritance.** An array entry was
+either on every hull or one ship's own, so the solo-studios note on
+three of four Breakaway Plus hulls rendered as three unrelated notes
+that happened to agree. Nine entries across eight classes are in that
+position. `groupedExtras` now groups by exact text and reports the
+hulls, and section 02 renders three tiers: every hull answers
+differently, carried by some and not others, one hull only.
+
+`exceptionCount` changed with it — distinct divergences rather than
+per-ship rows, so a five-hull class no longer looks worse than a
+two-hull one for carrying the same single exception. Radiance reads 3
+rather than 5.
+
+### For Jimmy — a content observation, not a change
+
+Two category notes are really *one note with a per-hull ending*: the
+Radiance hump-cabin note (3 hulls identical, Serenade a variant) and the
+Breakaway Plus solo-studios note (3 identical, Escape a variant). The
+page renders both correctly — shared tier, then the variant — but the
+opening sentences appear twice as a result. If those records were
+restructured so the shared part is a class constant and only the ending
+is per-ship, both would collapse to one entry. That is a content call,
+not a rendering one.

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { LINES, SHIPS } from "@/content/ships";
+import { LINE_RECORDS } from "@/content/lines/records";
 import { buildDirectory, directoryTotals } from "@/lib/directory";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ShipsDirectory } from "@/components/ship/ShipsDirectory";
@@ -26,7 +27,8 @@ export const metadata: Metadata = {
 };
 
 export default function ShipsPage() {
-  const lines = buildDirectory(SHIPS, LINES);
+  // Only lines with a record have a page; the directory links exactly those.
+  const lines = buildDirectory(SHIPS, LINES, new Set(LINE_RECORDS.map((r) => r.id)));
   const totals = directoryTotals(lines);
 
   return (
