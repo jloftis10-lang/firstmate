@@ -300,6 +300,20 @@ function ReadView({
         )}
       </div>
 
+      {/* The booking cannot happen. Rendering three cards of cabin and
+          money advice underneath "this party cannot sail" would be worse
+          than useless, so the read is replaced rather than annotated. */}
+      {read.ineligible ? (
+        <div className="mt-5 rounded-[13px] border border-signal bg-signal-bg p-5">
+          <p className="font-readout text-[0.62rem] font-bold tracking-[0.09em] text-ink-3">
+            00 &nbsp;·&nbsp; NOT A BOOKING THIS SHIP CAN TAKE
+          </p>
+          <p className="mt-2.5 text-[0.98rem] leading-[1.55] text-ink">
+            {read.ineligible.reason}
+          </p>
+        </div>
+      ) : (
+        <>
       <ReadCard number="01" category="Cabin & deck" read={read.cabin} />
       <ReadCard number="02" category="Money surprises" read={read.money} />
       <ReadCard
@@ -308,6 +322,8 @@ function ReadView({
         read={read.traps}
         lineName={ship.line}
       />
+        </>
+      )}
 
       <ClientSummary
         text={summary}

@@ -56,6 +56,51 @@ export type Source = {
   checked: string;
 };
 
+/**
+ * WHO MAY SAIL AT ALL. Evaluated before any other logic — see
+ * `getRead` — because a fit question presumes eligibility.
+ *
+ * This exists because of the Viking pilot. Every hull covered before it
+ * was Carnival, Royal or Norwegian, so nothing in the catalog ever said
+ * "children cannot board". The engine's family read opens with "Kid
+ * access is the trap on this ship", which on an adults-only line is not
+ * a wrong warning but an incoherent one.
+ */
+export type Eligibility = {
+  /** Published minimum guest age. Viking Ocean is 18. */
+  minimumGuestAge: number;
+  /** Anything that qualifies it — a region or itinerary that differs. */
+  note?: string;
+};
+
+/**
+ * WHAT THE FARE ALREADY COVERS — three states, deliberately.
+ *
+ * `"none"` and `"not-researched"` must not be the same value. The
+ * absence-as-evidence errors (a missing SportSquare, missing kart-noise
+ * complaints, missing solo studios in four files) all came from reading
+ * "nobody checked" as "nothing there". An engine that can't tell them
+ * apart will make that mistake structurally rather than occasionally.
+ */
+export type FareInclusions =
+  | {
+      state: "known";
+      /** Itemised, as the line words it. */
+      includes: string[];
+      /**
+       * Alcohol specifically, because it is the one the money read turns
+       * on. "with-meals" is Viking's shape: beer, wine and soft drinks
+       * at lunch and dinner, with an upgrade sold separately.
+       */
+      alcohol: "none" | "with-meals" | "unlimited";
+      /** The paid upgrade, where one exists — Viking's Silver Spirits. */
+      upgrade?: { name: string; note: string };
+    }
+  /** Checked, and the fare genuinely includes nothing beyond passage. */
+  | { state: "none" }
+  /** Nobody has looked. NOT the same as `none`. */
+  | { state: "not-researched" };
+
 /** The operator's knowledge of a hull. Absent until someone works it up. */
 export type ShipContent = {
   reviewDue?: string; // freshness date
@@ -66,6 +111,18 @@ export type ShipContent = {
    * which is fine once `verified` is true and dangerous before.
    */
   sources?: Source[];
+
+  /**
+   * Who may sail. Absent means the ordinary adult-and-child assumption
+   * holds, which is true of every contemporary line in the catalog.
+   */
+  eligibility?: Eligibility;
+
+  /**
+   * What the fare already covers. Absent is read as `not-researched`,
+   * never as `none` — see the `FareInclusions` comment.
+   */
+  fareInclusions?: FareInclusions;
 
   /**
    * What is CURRENTLY not running on this hull — see
@@ -300,4 +357,14 @@ export type Read = {
   cabin: ReadCategory | null;
   money: ReadCategory | null;
   traps: ReadCategory | null;
+  /**
+   * The booking cannot happen at all — an under-age party on an
+   * adults-only ship. NOT a fourth category: it replaces the read
+   * rather than joining it, because there is nothing to advise on.
+   *
+   * When this is set, all three categories are null. Rendering a cabin
+   * recommendation beside "this party cannot sail" would be worse than
+   * useless.
+   */
+  ineligible?: { reason: string };
 };

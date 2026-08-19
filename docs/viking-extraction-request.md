@@ -60,29 +60,49 @@ Both need engine changes, not content workarounds. **The extraction is
 what tells me which changes** — hence the two fields below being as
 important as the deck stack.
 
-So please answer these two with particular care:
+### Already verified — do not re-extract these
 
-- `minimumGuestAge` — the actual published minimum, and whether it
-  varies by itinerary or region
-- `fareInclusions` — everything the fare covers, itemised. Drinks (and
-  *which* drinks, at *which* meals), Wi-Fi, shore excursions, gratuities,
-  specialty dining, the thermal suite. An empty list would mean nothing
-  is included; that is a different answer from "unknown"
+Signed off 2026-08-19 against Viking's own pages, and now encoded:
+
+- **minimum guest age 18** — no guests under 18
+- **no casino**
+- **a private veranda in every ocean stateroom**, and **no inside
+  staterooms at all**
+- **Wi-Fi included**
+- **one included shore excursion per port**
+- **beer, wine and soft drinks included with lunch and dinner**
+
+The all-veranda fact is confirmed, which means the cabin question is now
+the one it should have been: **not "does it have a balcony" but "is that
+veranda compromised"** — by location, structure, privacy, weather
+exposure or venue adjacency. That is what the deck stack and the
+obstruction question need to answer.
+
+What still needs extracting on the money side is the **upgrade**: Silver
+Spirits, what it costs, and what it adds over the included beer and wine.
+The engine now asks only that narrower question, so it is the only part
+of the package economics that matters here.
+
+### Still to answer
+
+- whether the age minimum **varies by itinerary or region**
+- **gratuities** — included or not, and at what rate if not
+- **specialty dining and the thermal suite** — included, or charged
+- anything else in the fare not on the verified list above
 
 ## Two more where Viking is likely to differ
 
-**Every stateroom is understood to have a veranda.** If that's right, it
-changes several questions rather than answering them: there is no
-balcony-scarcity conversation, no interior-versus-balcony trade, and the
-obstructed-view question becomes *which verandas are compromised* rather
-than *which cabins have one*. **Confirm it rather than assuming it** —
-"all-veranda" is exactly the kind of marketing claim that turns out to
-have exceptions, and the Sky "zero balconies" error was made in the
-opposite direction from the same kind of sentence.
+Both confirmed above. What follows from them:
 
-**No casino is reported.** If true it belongs in the record as a
-positioning fact, and it also removes a noise source that appears on
-most other hulls.
+**All-veranda removes two conversations and sharpens a third.** No
+balcony-scarcity question, no interior-versus-balcony trade — and the
+obstruction question becomes which verandas are compromised and how.
+Given the taxonomy already distinguishes a lost horizon from a blocked
+downward view from lost privacy from lost sky, that is a question with a
+real answer rather than a yes/no.
+
+**No casino** removes a noise source that appears on nearly every other
+hull, which changes what the low-deck adjacency check is looking for.
 
 ---
 

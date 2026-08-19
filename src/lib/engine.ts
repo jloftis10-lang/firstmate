@@ -145,7 +145,31 @@ function moneyRead(
   let call: string;
   let why: string;
 
-  if (client.itinerary === "sea-days") {
+  // WHAT THE FARE ALREADY COVERS IS RESOLVED FIRST. The old code opened
+  // with "is the drink package worth it", which presumes there is one to
+  // buy — and then raised the correction as a flag UNDERNEATH a call
+  // that had already said the wrong thing. On a fare-inclusive line the
+  // question isn't close to right. The comment on the flag below used to
+  // admit this; now the call itself acts on it.
+  //
+  // Note `undefined` is treated as not-researched, never as none.
+  const inclusions = ship.content.fareInclusions ?? { state: "not-researched" };
+  const alcoholIncluded =
+    inclusions.state === "known" && inclusions.alcohol !== "none";
+
+  if (alcoholIncluded && inclusions.state === "known") {
+    const upgrade = inclusions.upgrade;
+    const covered =
+      inclusions.alcohol === "unlimited"
+        ? "drinks are already in the fare"
+        : "beer, wine and soft drinks come with lunch and dinner already";
+    call = upgrade
+      ? `Don't sell them a drink package — ${covered}. The only question here is whether ${upgrade.name} earns its keep on top of that, and it's a narrower question than it looks.`
+      : `Don't sell them a drink package on this ship — ${covered}. Check what's actually left to buy before you quote anything.`;
+    why = upgrade
+      ? `On a fare-inclusive line the package maths everyone reaches for is the wrong maths. The client isn't choosing between nothing and a package; they're choosing between what's already included and an increment on top of it. ${upgrade.note} Price the difference, not the whole thing.`
+      : "On a fare-inclusive line the usual package question doesn't apply — the client is not choosing between nothing and a package. Establish what the fare already covers before you price anything, or you'll sell them something they already have.";
+  } else if (client.itinerary === "sea-days") {
     const math =
       money.drinkPackagePrice && money.breakEvenDrinksPerDay
         ? `at about $${money.drinkPackagePrice} a day it breaks even around ${money.breakEvenDrinksPerDay} drinks, and they'll clear that`
@@ -158,6 +182,14 @@ function moneyRead(
       "Skip the blanket drink package here. It's a port-heavy run — they'll be off the ship most days, and it rarely earns back its cost.";
     why =
       "A drink package has to be consumed on the ship. When the itinerary pulls them ashore five days out of seven, the daily rate almost never breaks even. Sell it and they feel it was a waste — and they remember who suggested it.";
+  }
+
+  // Everything else the fare covers, once, so an advisor doesn't quote a
+  // client for Wi-Fi or an excursion they've already paid for.
+  if (inclusions.state === "known" && inclusions.includes.length > 0) {
+    flags.push(
+      `Know what's already in the fare before you quote anything on top of it: ${inclusions.includes.join(", ")}. On a line like this the expensive mistake isn't overselling — it's selling something twice.`,
+    );
   }
 
   // Raised before the dining flag: if the package is already in the fare,
@@ -283,8 +315,47 @@ function trapsRead(
 
 /* ------------------------------------------------------------------ */
 
-/** Exactly three categories. Do not add a fourth. */
+/**
+ * ELIGIBILITY, evaluated before anything else.
+ *
+ * A fit question presumes the booking can happen. The "Family + kids"
+ * party means exactly that — children — so on a hull with an adult
+ * minimum age it is not a hard booking, it is an impossible one, and the
+ * honest answer is to say so rather than to advise on cabins.
+ *
+ * Deliberately NOT applied to "Multigen / mobility": that party is about
+ * mixed generations and walking distance, and three generations of
+ * adults sail adults-only ships routinely. Blocking it would be the same
+ * over-reach in the opposite direction.
+ */
+function ineligibleReason(
+  ship: CoveredShip,
+  client: ClientProfile,
+): string | null {
+  const min = ship.content.eligibility?.minimumGuestAge;
+  if (!min || min <= 0) return null;
+  if (client.party !== "family") return null;
+  const note = ship.content.eligibility?.note
+    ? ` ${ship.content.eligibility.note}`
+    : "";
+  return `This ship cannot take this booking. ${ship.name} carries a minimum guest age of ${min}, so a family sailing with children is not a difficult fit here — it is not a permitted one.${note} Say that before anything else, because every other question about the ship is moot. If the party is actually adults travelling together, run the check again as a couple or as multigen and you will get a real read.`;
+}
+
+/**
+ * Exactly three categories. Do not add a fourth.
+ *
+ * The order matters and is not cosmetic:
+ *   1. eligibility — can this party sail at all
+ *   2. the three reads, each of which resolves what the fare already
+ *      includes before it reasons about what to buy
+ */
 export function getRead(ship: CoveredShip, client: ClientProfile): Read {
+  const blocked = ineligibleReason(ship, client);
+  if (blocked) {
+    // All three null on purpose. A cabin recommendation printed beside
+    // "this party cannot sail" is worse than no recommendation.
+    return { cabin: null, money: null, traps: null, ineligible: { reason: blocked } };
+  }
   return {
     cabin: cabinRead(ship, client),
     money: moneyRead(ship, client),

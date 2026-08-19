@@ -281,6 +281,60 @@ export function validateIntake(intake: ShipIntake): IntakeProblem[] {
 }
 
 /**
+ * SISTER-SHIP DIFFERENCE CHECK — three states, and the third is the point.
+ *
+ * Twelve identical-looking hulls do not justify twelve full extractions,
+ * but they must not be assumed identical either: a published summary was
+ * caught copying Norwegian Breakaway's obstructed cabin numbers onto
+ * Escape, which is not even the same sub-class.
+ *
+ * So one hull gets the full intake and the rest get this. The states are
+ * deliberately not two:
+ *
+ *   "no-difference-found"  somebody looked and found none
+ *   "not-checked"          nobody looked
+ *   "differs"              somebody looked and found some
+ *
+ * Collapsing the first two is the absence-as-evidence error again, and
+ * it is the one that would do the most damage here — silence across
+ * eleven ships reads as eleven confirmations.
+ */
+export type SisterCheck = {
+  ship: string;
+  /** The hull this was compared against. */
+  against: string;
+} & (
+  | { state: "no-difference-found"; checked: string; source: string }
+  | { state: "not-checked" }
+  | { state: "differs"; differences: string[]; checked: string; source: string }
+);
+
+/**
+ * Reject a sister check that claims a finding without saying where from.
+ * "not-checked" needs nothing, which is exactly why it must be stated
+ * rather than left blank.
+ */
+export function validateSisterCheck(check: SisterCheck): IntakeProblem[] {
+  const problems: IntakeProblem[] = [];
+  const iso = /^\d{4}-\d{2}-\d{2}$/;
+  if (check.state === "not-checked") return problems;
+
+  if (!check.source) {
+    problems.push({ field: check.ship, problem: "claims a finding with no source" });
+  }
+  if (!iso.test(check.checked)) {
+    problems.push({ field: check.ship, problem: "claims a finding with no ISO checked date" });
+  }
+  if (check.state === "differs" && check.differences.length === 0) {
+    problems.push({
+      field: check.ship,
+      problem: 'state is "differs" but no differences listed — use "no-difference-found"',
+    });
+  }
+  return problems;
+}
+
+/**
  * The decks that pass the quiet-default test, computed rather than
  * judged: cabins on this deck, cabins above, cabins below.
  *
