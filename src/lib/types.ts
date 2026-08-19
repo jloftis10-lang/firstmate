@@ -38,6 +38,21 @@ export type ShipIdentity = {
   line: string; // "Royal Caribbean"
   name: string; // "Wonder of the Seas"
   shipClass?: string;
+  /**
+   * Year entered service. The ship page header wants it.
+   *
+   * Optional and SPARSELY POPULATED on purpose. The years are stated in
+   * the signed class-file headers, so they can be transcribed the same
+   * way the deck stacks were — but not by pattern-matching. The headers
+   * contain "Jewel (2004)" and "Jewel (2005)" for two different ships on
+   * two different lines, and "Star (2001)" and "Star (2025)" likewise. An
+   * automated sweep would have crossed them, which is the Pride of
+   * America error with a regex instead of a press release.
+   *
+   * So it is filled in per class, deliberately, alongside the deck work.
+   * A ship without it renders no year rather than a guessed one.
+   */
+  serviceYear?: number;
 };
 
 /** One cruise line and its fleet. */
@@ -46,7 +61,7 @@ export type CruiseLine = {
   name: string;
   category: LineCategory;
   /** `id` is derived from the ship name unless one is given explicitly. */
-  ships: { id?: string; name: string; shipClass?: string }[];
+  ships: { id?: string; name: string; shipClass?: string; serviceYear?: number }[];
 };
 
 /** Where a claim came from, and when it was last looked at. */

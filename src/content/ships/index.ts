@@ -79,6 +79,7 @@ function buildCatalog(): Ship[] {
         line: line.name,
         name: entry.name,
         shipClass: entry.shipClass,
+        serviceYear: entry.serviceYear,
         content: SHIP_READS[id],
       });
     }

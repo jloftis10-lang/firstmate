@@ -1,4 +1,5 @@
 import type { ShipContent, Source } from "@/lib/types";
+import type { Deck } from "@/lib/decks";
 import type { ObstructionKind } from "@/lib/obstruction";
 import {
   ROYAL_EMBARKATION,
@@ -171,6 +172,52 @@ const VISION_SOURCES: Source[] = [
 const VISION_QUIET_DEFAULT = `Midship on deck 3, and this one is going to feel wrong until you check it. ${QUIET_DEFAULT_RULE} There are five cabin decks here — 2, 3, 4, 7 and 8 — and running the test properly puts the answer at the BOTTOM of the ship, not the top. Deck 3 has cabins on 2 below it and 4 above it, so it passes cleanly. Deck 7 fails, because deck 6 underneath it is public space rather than cabins. Deck 8 fails the other way, with the pool, Solarium and Windjammer directly over it on 9. The instinct to put a client high on a small ship is the wrong instinct on these four hulls.`;
 
 /** Midship matters on 3 — the ends of that deck have their own problems. */
+/**
+ * THE DECK STACK, transcribed from this file's own signed placement note.
+ * Second class through the transcription route after Radiance, and the
+ * point of doing a second one is that the checksum has to hold on a
+ * stack with a different shape — this one produces a ONE-deck answer.
+ *
+ * From `VISION_QUIET_DEFAULT`, verbatim:
+ *   "There are five cabin decks here — 2, 3, 4, 7 and 8 — ... Deck 3 has
+ *    cabins on 2 below it and 4 above it, so it passes cleanly. Deck 7
+ *    fails, because deck 6 underneath it is public space rather than
+ *    cabins. Deck 8 fails the other way, with the pool, Solarium and
+ *    Windjammer directly over it on 9."
+ *
+ * Deck 5 is not among the five, so it carries no cabins; what IS on it
+ * is unrecorded and left empty rather than guessed. Deck 1 is absent for
+ * the same reason it is absent from Radiance — the signed prose never
+ * says — which makes deck 2 undetermined rather than passing or failing.
+ */
+const VISION_DECKS: Deck[] = [
+  { deck: 2, carriesCabins: true, publicSpace: [] },
+  { deck: 3, carriesCabins: true, publicSpace: [] },
+  { deck: 4, carriesCabins: true, publicSpace: [] },
+  {
+    deck: 5,
+    carriesCabins: false,
+    publicSpace: [],
+    note: "Not one of the five cabin decks. What's on it isn't recorded.",
+  },
+  {
+    deck: 6,
+    carriesCabins: false,
+    publicSpace: ["public space"],
+    note: "Named in the signed note as the public space that makes deck 7 fail below.",
+  },
+  { deck: 7, carriesCabins: true, publicSpace: [] },
+  { deck: 8, carriesCabins: true, publicSpace: [] },
+  {
+    deck: 9,
+    carriesCabins: false,
+    publicSpace: ["the pool", "the Solarium", "the Windjammer buffet"],
+  },
+];
+
+/** The band the signed placement note names — one deck, not a range. */
+export const VISION_SIGNED_BAND = [3];
+
 const VISION_DECK_3_CAVEATS = `Midship is doing real work in that sentence, so don't bless the whole of deck 3. Aft on 3 can sit under galley space on some of these hulls, which is a check rather than a rule. And at the extreme forward end the cabins are a different product: several are porthole rooms with two round windows rather than a rectangular one. ${PORTHOLE_STEER} Forward is also where the motion is, so that end of deck 3 wants both checks, not one.`;
 
 const VISION_DECK_8 =
@@ -242,6 +289,9 @@ function visionClassContent(ship: VisionShip): ShipContent {
   return {
     reviewDue: "2027-02-01",
     sources: [...ROYAL_SOURCES, ...VISION_SOURCES],
+
+    // Class geometry, shared by all four hulls.
+    decks: VISION_DECKS,
 
     cabin: {
       // Signed off by Jimmy, 2026-08-19. Corrections at the top of the file.

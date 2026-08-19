@@ -83,14 +83,21 @@ export const CONTEMPORARY_LINES: CruiseLine[] = [
       { name: "Adventure of the Seas", shipClass: "Voyager" },
       { name: "Navigator of the Seas", shipClass: "Voyager" },
       { name: "Mariner of the Seas", shipClass: "Voyager" },
-      { name: "Radiance of the Seas", shipClass: "Radiance" },
-      { name: "Brilliance of the Seas", shipClass: "Radiance" },
-      { name: "Serenade of the Seas", shipClass: "Radiance" },
-      { name: "Jewel of the Seas", shipClass: "Radiance" },
-      { name: "Grandeur of the Seas", shipClass: "Vision" },
-      { name: "Enchantment of the Seas", shipClass: "Vision" },
-      { name: "Rhapsody of the Seas", shipClass: "Vision" },
-      { name: "Vision of the Seas", shipClass: "Vision" },
+      /* serviceYear is transcribed from the signed class-file headers in
+         src/content/reads/ — "Radiance (2001), Brilliance (2002), Serenade
+         (2003), Jewel (2004)" and "Grandeur (1996), Enchantment (1997),
+         Rhapsody (1997), Vision (1998)". Populated only for the two
+         classes whose deck stacks were transcribed in the same pass, per
+         the note on ShipIdentity.serviceYear: an automated sweep would
+         cross Royal's Jewel (2004) with Norwegian's Jewel (2005). */
+      { name: "Radiance of the Seas", shipClass: "Radiance", serviceYear: 2001 },
+      { name: "Brilliance of the Seas", shipClass: "Radiance", serviceYear: 2002 },
+      { name: "Serenade of the Seas", shipClass: "Radiance", serviceYear: 2003 },
+      { name: "Jewel of the Seas", shipClass: "Radiance", serviceYear: 2004 },
+      { name: "Grandeur of the Seas", shipClass: "Vision", serviceYear: 1996 },
+      { name: "Enchantment of the Seas", shipClass: "Vision", serviceYear: 1997 },
+      { name: "Rhapsody of the Seas", shipClass: "Vision", serviceYear: 1997 },
+      { name: "Vision of the Seas", shipClass: "Vision", serviceYear: 1998 },
     ],
   },
   {
