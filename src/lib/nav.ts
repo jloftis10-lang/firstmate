@@ -27,7 +27,7 @@ export type NavItem = {
 };
 
 export const NAV: NavItem[] = [
-  { label: "Ships", href: "/ships", available: false },
+  { label: "Ships", href: "/ships", available: true },
   { label: "Cruise Lines", href: "/cruise-lines", available: false },
   { label: "Ship Classes", href: "/classes", available: false },
   { label: "Compare", href: "/compare", available: false },

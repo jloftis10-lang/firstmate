@@ -354,3 +354,32 @@ Two things are worth flagging beyond the route:
   built to refuse. Nothing in that file knows what a family is.
 - **`/?ship=<id>`.** A new parameter on `/` only. The five `/share`
   params remain a frozen contract and are untouched.
+
+## Phase 5 — what shipped
+
+`/ships`, static, with the whole catalog in the payload and the filter
+running in the browser — so the prerendered HTML carries all 79 covered
+ships and all 79 links, and search narrows what is already there rather
+than fetching.
+
+**The page's real finding is the shape of coverage.** Three lines are
+charted completely (30/30, 29/29, 20/20) and eleven are charted not at
+all. There is no partially covered line in the catalog. So the covered
+lines list every hull as a card with its coverage chips, and the eleven
+uncharted lines collapse to one row each with a count — 116 rows saying
+what eleven line names already say is the ship dump the no-read screen
+removed for the same reason. They expand on demand, because "is my ship
+even in there" is a real question, and a search reaches them directly:
+typing "Sky Princess" returns the hull marked not charted rather than
+"no results", which would read as a catalog gap.
+
+It is derived throughout. The day a line is half worked up it reports
+"12 of 17" and renders its covered hulls with nothing here edited.
+
+`/ships` is now `available` in `src/lib/nav.ts` — the first nav item the
+site has had. That forced the header's small-screen question a phase
+early: inline at 390px wraps both the wordmark and the CTA, so the nav
+wraps to its own full-width row below `sm` and scrolls sideways if it
+outgrows the screen. Phase 6 makes this four or five items and needs
+that treatment regardless; a wider breakpoint would only have deferred
+it.

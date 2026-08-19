@@ -1,4 +1,16 @@
-import type { Provenance } from "@/lib/provenance";
+import type { ProvenanceState } from "@/lib/provenance";
+
+/**
+ * Only the state is read, so only the state is required.
+ *
+ * The ship page hands this a full `Provenance` and always will. The
+ * directory hands it 79 ships' worth at once, and a full Provenance
+ * carries the source object — 237 of them, most of them duplicated
+ * across a line's hulls, all serialised into the client payload for a
+ * component that renders none of it. Narrowing the parameter is not a
+ * loosening: `Provenance` still satisfies it.
+ */
+type ChipState = { state: ProvenanceState };
 
 /**
  * The three-block coverage summary for one ship, as chips.
@@ -18,12 +30,12 @@ export function CoverageChips({
   traps,
   className = "",
 }: {
-  cabin: Provenance;
-  money: Provenance;
-  traps: Provenance;
+  cabin: ChipState;
+  money: ChipState;
+  traps: ChipState;
   className?: string;
 }) {
-  const blocks: [string, Provenance][] = [
+  const blocks: [string, ChipState][] = [
     ["Cabin", cabin],
     ["Money", money],
     ["Traps", traps],

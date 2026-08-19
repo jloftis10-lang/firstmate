@@ -155,9 +155,11 @@ export default async function ShipPage({ params }: PageProps<"/ships/[slug]">) {
         {/* Line and class are not links yet — those pages land in Phase 6,
             and a crumb pointing at a 404 is worse than a crumb that is
             only a label. `Breadcrumbs` renders an href-less crumb as
-            plain text, so this becomes two edits when the routes exist. */}
+            plain text, so each becomes one edit when its route exists —
+            which is what just happened to the directory crumb. */}
         <Breadcrumbs
           trail={[
+            { label: "Ships", href: "/ships" },
             { label: ship.line },
             ...(ship.shipClass ? [{ label: `${ship.shipClass} class` }] : []),
             { label: ship.name },
