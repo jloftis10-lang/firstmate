@@ -155,10 +155,11 @@ export const ROYAL_EMBARKATION =
  * has Typhoon and Cyclone, where this generic paragraph names rides a
  * ship may not carry. Voyager/Freedom uses the table.
  *
- * This stays because Oasis, Icon, Quantum, Radiance and Vision are SIGNED
- * against this exact wording, and rewriting signed text to adopt a better
- * structure would silently change what an operator approved. Each class
- * migrates at its next review, not before.
+ * This stays because Oasis, Icon and Quantum are SIGNED against this
+ * exact wording, and rewriting signed text to adopt a better structure
+ * would silently change what an operator approved. Each class migrates
+ * at its next review, not before. Radiance and Vision have already
+ * migrated; those three are what's left.
  */
 export const ROYAL_ATTRACTION_RULES =
   "The FlowRider needs 52 inches to bodyboard and 58 inches to stand up on a flowboard, which catches families out — a child can ride it lying down and not standing. The rock wall is age 6 and up with a signed waiver, and 6 to 12 need supervision. Where there are Perfect Storm slides they run a 48-inch minimum with under-12s supervised.";
