@@ -1,4 +1,5 @@
 import type { ShipContent, Source } from "@/lib/types";
+import type { ObstructionKind } from "@/lib/obstruction";
 import {
   NCL_EMBARKATION,
   NCL_FLEET_TRAPS,
@@ -9,9 +10,11 @@ import {
   NCL_MONEY,
   NCL_SOURCES,
 } from "./ncl-common";
+import { nclAttractionRules, type NclAttractionId } from "./ncl-attractions";
 import {
   CONNECTING_RULE,
   MOTION_RULE,
+  QUIET_DEFAULT_RULE,
   VIBRATION_RULE,
 } from "./operator-rules";
 
@@ -19,68 +22,70 @@ import {
  * Breakaway class: Breakaway (2013), Getaway (2014).
  * Breakaway Plus: Escape (2015), Joy (2017), Bliss (2018), Encore (2019).
  *
- * MY RESEARCH, NOT OPERATOR-CONFIRMED. Cabin and traps are `verified: false`.
+ * CABIN AND TRAPS SIGNED OFF by Jimmy, 2026-08-19. Third Norwegian unit.
+ * MONEY STILL UNSIGNED line-wide, so these six stay part-verified.
  *
- * The class signature is The Waterfront — an outdoor oceanfront promenade
- * on deck 8 — and it creates the one cabin problem unique to these ships.
- * A handful of deck 8 balconies are directly overlooked from the
- * promenade; one passenger described it as a fishbowl and kept the
- * curtains shut all week. Separately, some deck 9 aft cabins look down
- * onto the Waterfront's steel roof rather than the sea.
+ * REBUILT HIERARCHICALLY, which the flat version badly needed:
  *
- * The good news is about the go-karts, and it's worth telling clients
- * because it cuts against the obvious assumption: the karts are electric
- * and the engine sound is piped into the driver's helmet rather than out
- * into the air. No cabin-noise complaints for Joy, Bliss or Encore
- * surfaced at all. The kart-noise reports that circulate are from the
- * Prima ships, not these.
+ *     shared Breakaway-family geometry
+ *       -> Breakaway/Getaway overlay
+ *       -> Breakaway Plus overlay
+ *          -> Escape / Joy / Bliss / Encore ship overlays
  *
- * Where the pool deck sits differs between the two halves of this family,
- * so it's handled per ship rather than as one rule:
- *   - Breakaway and Getaway: deck 15 is the pool deck AND carries Haven
- *     cabins. Deck 14 is the one underneath it.
- *   - Breakaway Plus: pool on 16, Haven on 17 and 18 above it — and on
- *     Joy, Bliss and Encore the go-kart track on 18 and 19 sits right by
- *     the Haven suites.
+ * And Joy gets a CHRONOLOGICAL overlay inside that, which is new:
+ * original China configuration -> 2019 westernisation -> 2024 refit.
+ * The old record described her through the 2019 lens alone and would
+ * have had an advisor quoting a cabin count that changed again five
+ * years later.
+ *
+ * THE QUIET DEFAULT SURVIVED. Decks 10 to 13 midship, unchanged — the
+ * first time a band I couldn't show the working for turned out to be
+ * right anyway. Worth being honest that this was luck rather than
+ * method: I flagged it as probably wrong and it wasn't.
+ *
+ * THE TAXONOMY GAINED A GENERALISATION RATHER THAN A TYPE. The deck 9
+ * aft cabins look down onto the Waterfront's steel ROOF — structure
+ * below the balcony, horizon untouched. That is the same shape as
+ * Radiance's lifeboat roof with different metal, and Jimmy's call was to
+ * stop minting a kind per shipyard decision: `lower-structure` is the
+ * reusable concept and the specific structure is a cause named in the
+ * ship's prose. See `src/lib/obstruction.ts`.
+ *
+ * Corrections his pass made:
+ *   - The kart-noise FALSE ALARM is not signable as written. "No
+ *     cabin-noise complaints surfaced" is an absence claim and absence
+ *     isn't evidence — the same trap as the Sunshine SportSquare error.
+ *     What survives is the electric-kart fact and the instruction not to
+ *     infer conventional engine noise from a go-kart track.
+ *   - Speedway adjacency to the Haven is PHYSICAL GEOMETRY, not a noise
+ *     verdict. The record says they're next to each other and stops.
+ *   - The deck 9 visibility ranges are not promoted. What's supported is
+ *     that those cabins have materially larger balconies; the
+ *     visible-from-above claim across the whole range isn't.
+ *   - Escape's deck 8 lifeboat obstruction stays explicitly researched.
+ *     The mechanism is plausible and the exact band isn't extracted.
+ *   - The studios are resolved in the record's favour, like Prima and
+ *     Epic: NCL states no single supplement and Studio Lounge access on
+ *     its own pages. But the DECKS differ between the original pair and
+ *     the Plus ships, so that goes in the overlays rather than one rule.
+ *   - Kart PRICING is deleted from static ship knowledge. Attraction
+ *     prices move faster than anything else here and belong in a dated
+ *     layer or nowhere.
+ *   - The elevator claims drop to researched, third class running. The
+ *     "buffet and theatre are forward therefore the forward bank is
+ *     congested therefore book forward" chain is exactly the kind of
+ *     plausible reasoning that shouldn't drive a mobility recommendation.
+ *
+ * AND A DATA-INGESTION RULE came out of this one, which is worth more
+ * than any single fact in the file: NEVER propagate exact cabin-number
+ * defects across sister ships without independent deck-plan
+ * confirmation. A search summary was caught copying Breakaway's numbers
+ * onto Escape wholesale, and the two aren't even the same sub-class.
  *
  * Deliberately NOT encoded: obstructed-cabin lists for Getaway, Joy,
- * Bliss and Encore — none are published, and one search summary was
- * caught importing Breakaway's cabin numbers wholesale onto Escape.
- * Only Breakaway's and Escape's own findings are recorded.
+ * Bliss and Encore; kart or ropes-course pricing; elevator bank
+ * behaviour; and any noise verdict derived from adjacency alone.
  */
-
-const BREAKAWAY_SOURCES: Source[] = [
-  {
-    label: "Breakaway deck 8 — Waterfront-overlooked balconies",
-    url: "https://www.cruisedeckplans.com/ships/deckbydeck.php?ship=Norwegian-Breakaway&deck=8",
-    checked: "2026-08-18",
-  },
-  {
-    label: "Breakaway deck 9 — Haven forward penthouse and overlooked balconies",
-    url: "https://www.cruisedeckplans.com/ships/deckbydeck.php?ship=Norwegian-Breakaway&deck=9",
-    checked: "2026-08-18",
-  },
-  {
-    label: "Getaway deck 14 — under the pool deck, overhang and chair scraping",
-    url: "https://www.cruisedeckplans.com/ships/deckbydeck.php?ship=Norwegian-Getaway&deck=14",
-    checked: "2026-08-18",
-  },
-  {
-    label: "Go-karts are electric with the engine sound piped into the helmet",
-    url: "https://www.cruzely.com/15-must-know-things-about-norwegians-go-kart-track-at-sea/",
-    checked: "2026-08-18",
-  },
-  {
-    label: "Bliss elevators — 8 forward, 8 aft, forward bank overloaded",
-    url: "https://boards.cruisecritic.com/topic/2601692-bliss-elevators/",
-    checked: "2026-08-18",
-  },
-  {
-    label: "Joy's 2019 reconfiguration removed 22 of 95 Concierge cabins",
-    url: "https://www.travelweekly.com/Cruise-Travel/After-China-sojourn-Norwegian-Joy-updated-for-Alaska",
-    checked: "2026-08-18",
-  },
-];
 
 type BreakawayShip =
   | "breakaway"
@@ -92,42 +97,173 @@ type BreakawayShip =
 
 const PLUS = new Set<BreakawayShip>(["escape", "joy", "bliss", "encore"]);
 const KARTS = new Set<BreakawayShip>(["joy", "bliss", "encore"]);
+/** Ropes course confirmed on these; the kart ships have a different top-deck mix. */
+const ROPES = new Set<BreakawayShip>(["breakaway", "getaway", "escape"]);
+
+const BREAKAWAY_SOURCES: Source[] = [
+  {
+    label:
+      "Breakaway deck 13 described as cabins above and below cabins; core stack 10-13 (checked by Jimmy)",
+    url: "https://www.ncl.com/cruise-ship/breakaway/deck-plans",
+    checked: "2026-08-19",
+  },
+  {
+    label: "Breakaway deck 8 — balconies overlooked from The Waterfront promenade",
+    url: "https://www.cruisedeckplans.com/ships/deckbydeck.php?ship=Norwegian-Breakaway&deck=8",
+    checked: "2026-08-19",
+  },
+  {
+    label: "Escape — Haven on decks 17-18 above the deck 16 pool; Club Balcony inventory to deck 15",
+    url: "https://www.ncl.com/cruise-ship/escape/deck-plans",
+    checked: "2026-08-19",
+  },
+  {
+    label: "Escape Studios on decks 10, 11 and 12 with the Studio Lounge on 11",
+    url: "https://www.ncl.com/cruise-ship/escape/staterooms",
+    checked: "2026-08-19",
+  },
+  {
+    label:
+      "NCL — Studios are priced for solo travellers with Studio Lounge access and no single supplement",
+    url: "https://www.ncl.com/cruise-ship/breakaway/staterooms",
+    checked: "2026-08-19",
+  },
+  {
+    label: "Joy Speedway on decks 19-20; NCL FAQ 55in-82in, 265lb",
+    url: "https://www.ncl.com/faq/size-age-weight-requirements-for-activities",
+    checked: "2026-08-19",
+  },
+  {
+    label: "Joy 2019 — 22 of 95 Concierge cabins removed for the Observation Lounge",
+    url: "https://www.travelweekly.com/Cruise-Travel/After-China-sojourn-Norwegian-Joy-updated-for-Alaska",
+    checked: "2026-08-19",
+  },
+  {
+    label: "Joy 2024 refit — part of the Observation Lounge reduced to add 24 balcony cabins",
+    url: "https://www.ncl.com/cruise-ship/joy",
+    checked: "2026-08-19",
+  },
+  {
+    label: "Go-karts are electric with the engine sound piped into the driver's helmet",
+    url: "https://www.cruzely.com/15-must-know-things-about-norwegians-go-kart-track-at-sea/",
+    checked: "2026-08-19",
+  },
+];
+
+/* ------------------------------------------------------------------ *
+ * LAYER 1 — shared Breakaway-family geometry.
+ * ------------------------------------------------------------------ */
+
+/**
+ * Decks 10 to 13 midship, and this one held. Deck 13 on Breakaway is
+ * explicitly cabins above and below cabins, and the core stack runs the
+ * same way on the Plus hulls.
+ *
+ * OPERATOR-CONFIRMED (Jimmy, 2026-08-19).
+ */
+const BREAKAWAY_QUIET_DEFAULT = `Midship on decks 10 to 13. ${QUIET_DEFAULT_RULE} That band is the core cabin stack across this whole family and it passes cleanly — deck 13 in particular sits with cabins above it and cabins below it. Deck 9 needs the check downward, because of what's under it and beside it. From deck 14 up the answer stops being a family rule and becomes ship-specific, so check the overhead on the actual hull rather than the class.`;
+
+/**
+ * THE WATERFRONT. The class's best feature and the source of the one
+ * cabin problem nothing else in the fleet has.
+ *
+ * OPERATOR-CONFIRMED (Jimmy, 2026-08-19). Exact cabin numbers stay
+ * researched; the mechanism is the signed part.
+ */
+const WATERFRONT_PRIVACY =
+  "The Waterfront on deck 8 — the outdoor oceanfront promenade — is the best thing about these ships and it creates a defect nothing else in the fleet has. A small run of deck 8 balconies sits where people walking the promenade have a direct sightline toward the balcony, and into the room when the curtains are open. One passenger called it a fishbowl and kept the curtains shut all week. Crucially this is NOT sold as obstructed, so it's a deck-plan check rather than a category check — and it's a privacy tradeoff rather than a bad cabin. Some clients would happily take promenade proximity; ask before you assume.";
+
+const WATERFRONT_ROOF =
+  "A separate and different thing on deck 9 aft: some of those balconies look down onto the Waterfront's steel roof rather than the water. The horizon is untouched and the balcony is fine — what's gone is the straight-down view. Name the roof to the client rather than saying obstructed, because what they pictured, sea in front of them from a chair, is entirely intact.";
+
+/**
+ * Resolved in the record's favour, like Prima and Epic — NCL says it on
+ * its own pages. The DECKS differ between sub-classes, so they live in
+ * the overlays.
+ */
+const STUDIOS_BASE =
+  "The solo studios here are a real product rather than a discounted double: keycard-clustered with a private Studio Lounge, and NCL's own pages state no single supplement is required, so you can say that plainly. I'm not giving you a count — sources differ and inventory moves.";
+
+/* ------------------------------------------------------------------ *
+ * LAYER 2 — sub-class overlays.
+ * ------------------------------------------------------------------ */
+
+/** Breakaway and Getaway: deck 15 does two jobs at once. */
+const ORIGINAL_UPPER_DECKS =
+  "The upper decks on this pair are mixed-use in a way the newer sisters aren't: deck 15 is the pool, the Garden Café and the aqua park AND it carries Haven cabins. So the top of this ship is busier than a plan skim suggests, and the cabins directly under that zone want a real overhead check on the specific room rather than a blanket warning about deck 14.";
+
+/** Breakaway Plus: Haven sits ABOVE the Lido, and cabins run higher. */
+const PLUS_UPPER_DECKS =
+  "The upper decks are arranged the other way round from Breakaway and Getaway: the pool and aqua park sit around deck 16 with The Haven ABOVE them on 17 and 18, rather than sharing a deck. Cabin inventory also runs higher on these hulls — Escape sells Club Balcony rooms as far up as deck 15 — so \"everything above the cabins is public space\" is not a safe assumption here. Check the specific deck on the specific ship.";
+
+/* ------------------------------------------------------------------ *
+ * LAYER 3 — per-ship overlays.
+ * ------------------------------------------------------------------ */
+
+const STUDIO_DECKS: Partial<Record<BreakawayShip, string>> = {
+  escape:
+    "On this ship the Studios are on decks 10, 11 and 12 with the Studio Lounge on 11.",
+};
+
+const SHIP_OBSTRUCTION: Partial<Record<BreakawayShip, string>> = {
+  breakaway:
+    "This hull has the most specific published picture in the family, and it's all researched rather than confirmed. The Haven forward penthouses 9106 and 9706 have small side balconies partly blocked by the ship's structure — 9106 in particular comes up in passenger reports, and it's a cabin-specific finding rather than a rule. On deck 8, the balconies flagged as overlooked from The Waterfront are 8176, 8178 and 8180 on port with 8776, 8778 and 8780 on starboard. On deck 9, the run from 9112 to 9134 on port and 9712 to 9734 on starboard is worth knowing for a different reason: those cabins have materially larger balconies, around 70 square feet on 9112. A claim also circulates that the outer part of those balconies is visible from above — that one isn't supported across the whole range and isn't encoded.",
+  escape:
+    "The deck 8 oceanviews and balconies on this hull are reported to carry partial to full lifeboat obstruction. That is RESEARCHED and the exact band has not been extracted from the current plan, so treat it as a check on the specific cabin rather than a deck to avoid. And be careful with what circulates about this ship: at least one summary was caught copying Breakaway's cabin numbers onto it wholesale, and these two aren't even the same sub-class.",
+};
+
+/** Joy's chronology. Three configurations, and reviews exist from all three. */
+const JOY_HISTORY = [
+  "Joy has been three different ships and an advisor needs the chronology, not just the latest state. She was built for the Chinese market — private karaoke rooms, three casinos, tea rooms, Asian-market restaurants. Reviews and photos from before 2019 describe a materially different product from the one your client will board.",
+  "The 2019 westernisation is the change that still shows in the cabin inventory: adding the Observation Lounge meant removing 22 of the original 95 Concierge cabins. Concierge is a Joy-only tier to begin with, so it's thinner than it looks on paper — check availability early if a client wants it.",
+  "Then she changed again in 2024, and this is the part an older note will miss: part of the Observation Lounge was itself reduced to add 24 balcony cabins. So don't describe this ship's current layout through the 2019 refit alone — that lens is now two configurations out of date.",
+];
+
+const ATTRACTIONS: Record<BreakawayShip, NclAttractionId[]> = {
+  breakaway: ["ropes-course"],
+  getaway: ["ropes-course"],
+  escape: ["ropes-course"],
+  joy: ["speedway"],
+  bliss: ["speedway"],
+  encore: ["speedway"],
+};
 
 function breakawayContent(ship: BreakawayShip): ShipContent {
   const isPlus = PLUS.has(ship);
   const hasKarts = KARTS.has(ship);
+
+  // Overlooked = the Waterfront privacy defect. lower-structure = the
+  // Waterfront roof under the deck 9 aft balconies. lifeboat-davit only
+  // where a hull actually reports it.
+  const kinds: ObstructionKind[] = [
+    "overlooked",
+    "lower-structure",
+    ...(ship === "escape" ? (["lifeboat-davit"] as ObstructionKind[]) : []),
+  ];
 
   return {
     reviewDue: "2027-02-01",
     sources: [...NCL_SOURCES, ...BREAKAWAY_SOURCES],
 
     cabin: {
-      // MY RESEARCH. Not signed off.
-      verified: false,
-      placementNote: isPlus
-        ? `Midship, decks 10 to 13. Cabins run from deck 5 and then 8 upward, the pool deck and aqua park sit on 16, and The Haven is above all of it on 17 and 18. The deck directly under the pool is the one to check.${
-            hasKarts
-              ? " The go-kart track runs across 18 and 19, right alongside the Haven — which matters for a Haven booking rather than a standard one."
-              : ""
-          } Deck 8 is The Waterfront, the outdoor promenade, and a few balconies there are overlooked from it.`
-        : "Midship, decks 10 to 13. Cabins run from deck 5 and then 8 up to 14, and deck 15 is doing two jobs at once — it's the pool deck, the Garden Café and the aqua park, and it also carries the Haven cabins. That makes deck 14 the one sitting under all the noise. Deck 8 is The Waterfront, the outdoor promenade, and a few balconies there are directly overlooked from it.",
+      // Signed off by Jimmy, 2026-08-19. Corrections at the top of the file.
+      verified: true,
+      placementNote: `${BREAKAWAY_QUIET_DEFAULT} ${isPlus ? PLUS_UPPER_DECKS : ORIGINAL_UPPER_DECKS}${hasKarts ? " The Speedway go-kart track runs across the top decks immediately beside The Haven on this ship. That's physical adjacency, stated as geometry — it is NOT a noise verdict, and nothing establishes that it carries into the suites." : ""}`,
       motionAvoid: MOTION_RULE,
       vibrationNote: VIBRATION_RULE,
       categoryWarnings: [
-        "The Waterfront on deck 8 is the class's best feature and the source of its one odd cabin problem. A small run of deck 8 balconies is directly overlooked by people walking the promenade — one passenger called it a fishbowl and kept the curtains closed all week. Separately, some deck 9 aft cabins look down onto the Waterfront's steel roof rather than the water. Neither is sold as obstructed, so it's a deck-plan check rather than a category check.",
-        "Club Balcony Suite is the renamed mini-suite. It is not a Haven category and carries no Haven access, and it sits in the lower service-charge band. Clients hear \"suite\" and picture the private complex — be explicit that it isn't that.",
-        ...(ship === "joy"
-          ? [
-              "Joy was built for the Chinese market and reconfigured for North America in 2019. The part that still shows in the cabin inventory: adding the Observation Lounge meant removing 22 of the 95 Concierge cabins, so that tier — which is a Joy-only category — is much thinner than it looks on paper. Check availability early if a client wants it.",
-            ]
-          : []),
-        "The solo studios here are keycard-clustered with a private Studio Lounge and no single supplement — around 59 on the original pair and roughly 82 on the newer ones, on decks 10 through 12 with the lounge on 11. Sources disagree slightly on which decks, so confirm on the plan.",
+        WATERFRONT_PRIVACY,
+        WATERFRONT_ROOF,
+        `${STUDIOS_BASE}${STUDIO_DECKS[ship] ? ` ${STUDIO_DECKS[ship]}` : " The exact Studio decks differ between the original pair and the Plus ships, so read them off this hull's own plan rather than a class rule."}`,
+        "Club Balcony Suite is the renamed mini-suite. It is not a Haven category, carries no Haven access, and sits in the lower service-charge band. Clients hear \"suite\" and picture the private complex — be explicit that it isn't that, especially with anyone coming from another line.",
+        ...(ship === "joy" ? [JOY_HISTORY[1]] : []),
       ],
       hazardsAboveBelow: isPlus
         ? [
             {
               source: "lido",
-              where: "the pool deck and aqua park on 16, over the cabins on 15",
+              where:
+                "the pool and aqua park around deck 16, with The Haven above them on 17 and 18 rather than alongside",
             },
             {
               source: "buffet",
@@ -138,7 +274,7 @@ function breakawayContent(ship: BreakawayShip): ShipContent {
                   {
                     source: "sports",
                     where:
-                      "the go-kart track on decks 18 and 19, immediately above and beside the Haven suites on 17 and 18",
+                      "the Speedway on the top decks, immediately beside The Haven — adjacency only, with no established noise effect",
                   },
                 ]
               : []),
@@ -147,55 +283,43 @@ function breakawayContent(ship: BreakawayShip): ShipContent {
             {
               source: "lido",
               where:
-                "deck 15 — the pool and aqua park, over the deck 14 cabins, and the deck also carries the Haven",
-            },
-            {
-              source: "buffet",
-              where: "the Garden Café, also on 15 above those same cabins",
+                "deck 15 — the pool, Garden Café and aqua park, which on this pair ALSO carries Haven cabins rather than being purely public",
             },
             {
               source: "gym",
-              where:
-                "the fitness centre, over a run of starboard cabins on deck 14",
+              where: "the fitness centre, over a run of starboard cabins on deck 14",
             },
           ],
-      obstructedViewNotes:
-        ship === "breakaway"
-          ? "Two specific things on this hull. The Haven forward penthouses 9106 and 9706 have small side balconies partly blocked by the ship's structure. And on deck 8, balconies 8176, 8178 and 8180 on port with 8776, 8778 and 8780 on starboard are the ones overlooked from The Waterfront — not obstructed, but not private either. On deck 9, the run from 9112 to 9134 on port and 9712 to 9734 on starboard has 50-square-foot balconies whose outer part is visible from above, and 9134 forward and 9734 forward look down onto the deck 8 balconies."
-          : ship === "escape"
-            ? "The deck 8 oceanviews and balconies on this hull carry partial to full lifeboat obstruction. Beyond that no per-cabin list is published for this ship — and be careful with what circulates, because at least one summary was caught copying Breakaway's cabin numbers onto this ship wholesale. Check the specific cabin."
-            : "No per-cabin obstruction list is published for this hull. The class pattern is worth checking against the plan anyway: lifeboat obstruction on the lower balcony decks, and a few deck 8 balconies overlooked from The Waterfront promenade.",
-      obstructionKinds: ["lifeboat-davit", "overlooked"],
+      obstructedViewNotes: `Two mechanisms run through this whole family and they call for different conversations. The Waterfront promenade on deck 8 overlooks a small run of balconies — that's a privacy defect, not a view one, and it isn't sold as obstructed. And the Waterfront's steel roof sits under some deck 9 aft balconies, taking the downward view while leaving the horizon open. ${SHIP_OBSTRUCTION[ship] ?? "No per-cabin obstruction list is published for this hull. Check both class mechanisms against the current plan for the specific cabin, and do NOT carry a sister ship's cabin numbers across — that mistake has already been made in print about these ships."}`,
+      obstructionKinds: kinds,
       connectingNote: CONNECTING_RULE,
       minorPlacementRule: NCL_MINOR_PLACEMENT,
-      elevatorNote: isPlus
-        ? "Around sixteen lifts split evenly forward and aft. The documented complaint on this class is lopsided demand rather than the count: the buffet, the Observation Lounge and the theatre all sit forward, so the forward bank takes the load and it's worst on port days. If your client is in an aft cabin they'll be walking forward a lot."
-        : "Forward and aft banks. I couldn't establish car counts for this pair, so check the deck plan rather than taking a number from me.",
-      accessibilityNote: isPlus
-        ? "The forward bank carries most of the traffic here because the buffet, the theatre and the observation lounge are all at that end — so for a slower traveller, a forward cabin genuinely reduces the walking, at the cost of queuing with everyone else. Weigh that against where they'll actually spend the day, and confirm the accessible deck plan for the specific cabin."
-        : "Deck 15 doing double duty as both pool deck and Haven means the top of this ship is busier than the plan suggests. For a mobility booking, work out the route from the cabin to the main dining room specifically, and confirm it against the accessible deck plan.",
+      elevatorNote:
+        "Around sixteen lifts is the widely reported figure for this design family, and that's as far as I'd go. The bank layout needs verifying per hull, and the story that circulates — that the buffet, theatre and observation lounge all sit forward so the forward bank takes the load — is passenger experience rather than encoded geometry. It may well be right. It is not something to build a cabin recommendation on.",
+      accessibilityNote:
+        "I'm giving you less here than an earlier version of this record did, deliberately. That version told you to book forward because the forward lift bank serves the busy venues; that chain of reasoning was plausible and unverified, and a mobility recommendation is the worst place for plausible-and-unverified. What's solid: this is a large ship, the lift count is roughly sixteen, and the layout wants checking per hull. Map the actual route from the specific cabin to the main dining room, and confirm it against NCL's accessible deck plan rather than against a rule from me.",
     },
 
+    // STILL UNSIGNED, line-wide. See the file header.
     money: NCL_MONEY,
 
     traps: {
-      // MY RESEARCH. Not signed off.
-      verified: false,
-      kidAgeHeightRules: `${
-        hasKarts
-          ? "The go-karts need 55 inches minimum and 82 maximum with a 265-pound cap, closed flat shoes required, and they cost about $15 for ten laps or roughly $199 for unlimited. "
-          : ""
-      }The ropes course needs 48 inches to go up unaccompanied, with a Sky Tykes version for smaller children with an adult, and it's free. ${NCL_KIDS_RULES}`,
+      // Signed off by Jimmy, 2026-08-19, after the attraction-table
+      // migration and the removal of the kart-noise absence claim.
+      verified: true,
+      kidAgeHeightRules: `${nclAttractionRules(ATTRACTIONS[ship])} ${NCL_KIDS_RULES}`,
       embarkationNote: NCL_EMBARKATION,
       other: [
+        "The Waterfront cabins on deck 8 are a genuine tradeoff rather than a trap to avoid: promenade proximity in exchange for people being able to see toward the balcony and into the room with the curtains open. Raise it and let the client choose — the ones who mind, mind a lot.",
         ...(hasKarts
           ? [
-              "If a client is worried about go-kart noise in the cabins, the evidence doesn't support it on this ship. The karts are electric and the engine sound is piped into the driver's helmet rather than out across the deck, and no cabin-noise complaints surfaced for this class at all. The kart-noise reports that circulate are about the Prima ships.",
+              "Don't assume the Speedway means engine noise. These karts are electric and the engine sound is piped into the driver's helmet rather than out across the deck, so the mental image of a racetrack over the cabins is wrong on the mechanics. What I can't tell you is that there's no noise issue at all — nobody has established that either way, so judge it on the actual structural adjacency for the specific cabin rather than on either assumption.",
             ]
           : []),
-        ...(ship === "joy"
+        ...(ship === "joy" ? [JOY_HISTORY[0], JOY_HISTORY[2]] : []),
+        ...(ROPES.has(ship)
           ? [
-              "Joy spent its first two years in the Chinese market and was rebuilt for North America in 2019 — private karaoke rooms, two of three casinos, tea rooms and the Asian-market restaurants went, and the Observation Lounge came in. Reviews and photos from before 2019 describe a materially different ship.",
+              "The ropes course is free, which surprises people on a line where most of the headline activities aren't. Worth mentioning to a family pricing the week.",
             ]
           : []),
       ],

@@ -34,7 +34,8 @@ export type NclAttractionId =
   | "slidecoaster"
   | "the-drop"
   | "the-rush"
-  | "epic-waterslides";
+  | "epic-waterslides"
+  | "ropes-course";
 
 export type NclAttraction = AttractionEntry<NclAttractionId>;
 
@@ -67,6 +68,11 @@ export const NCL_ATTRACTIONS: AttractionTable<NclAttractionId> = {
    * record carried three conflicting figures and told the advisor to
    * check; the line publishes one number and it covers everything.
    */
+  "ropes-course": {
+    id: "ropes-course",
+    name: "the ropes course",
+    rule: "the ropes course needs 48 inches to go up unaccompanied and caps at 300 pounds, and there's a Sky Tykes version for children under 48 inches with a chaperone present — so a small child isn't shut out, they just need an adult. Closed flat shoes only: no Crocs, no flip-flops, no heels",
+  },
   "epic-waterslides": {
     id: "epic-waterslides",
     name: "the three multi-storey waterslides, including the 200-foot Epic Plunge",

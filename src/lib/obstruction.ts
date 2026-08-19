@@ -25,6 +25,19 @@
  * Collapsing them loses a booking that would have worked, which is the
  * opposite of what this product is for.
  *
+ * `lower-structure` is a deliberate GENERALISATION rather than another
+ * entry in a growing list, and it came from Jimmy at the Breakaway
+ * review: "that's cleaner than proliferating experience-level obstruction
+ * types every time the shipyard uses a different piece of metal." The
+ * reusable abstraction is "something big sits under the balcony and takes
+ * the downward view"; the specific metal — a Waterfront promenade roof, a
+ * lifeboat canopy — is a CAUSE the ship record names in its own prose.
+ *
+ * `lifeboat-roof` predates it and is the same shape. It stays because
+ * Radiance is signed against its wording; expressed today it would be
+ * `lower-structure` with the cause named in the Radiance record. New
+ * below-balcony structures use `lower-structure`.
+ *
  * `slide-intrusion` came from the Norwegian Prima review and is the one
  * that most justifies the whole taxonomy. A dry slide running down the
  * hull enters the balcony rather than blocking a view of anything, so
@@ -88,7 +101,8 @@ export type ObstructionKind =
   | "aft-superstructure"
   | "lifeboat-roof"
   | "window-washing-platform"
-  | "slide-intrusion";
+  | "slide-intrusion"
+  | "lower-structure";
 
 export type Obstruction = {
   id: ObstructionKind;
@@ -172,6 +186,14 @@ export const OBSTRUCTION_KINDS: Obstruction[] = [
       "the ship's dry-slide structure running down the side of the hull, physically entering the balcony",
     experience:
       "this one is not a view problem and calling it \"obstructed\" misses it entirely — the client still has a balcony and the sea is still there, but the slide structure comes INTO the balcony space rather than passing outside it. The rooms with the biggest balconies are the ones reported worst affected, which is the opposite of what anyone expects. Describe the geometry; don't file it under obstructed and let them imagine a wall",
+  },
+  {
+    id: "lower-structure",
+    effect: "downward-blocked",
+    cause:
+      "a large piece of the ship immediately BELOW the balcony — a promenade roof, a canopy, a deck extension",
+    experience:
+      "the balcony is fine and the horizon is open; what's been replaced is the straight-down view of the water. Name the specific structure to the client rather than saying obstructed, because the thing they pictured — sea in front of them from a chair — is entirely intact",
   },
 ];
 
