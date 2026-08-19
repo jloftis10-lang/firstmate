@@ -136,6 +136,42 @@ export const QUIET_DEFAULT_RULE =
   "A deck is only a safe default if it has cabins above it AND cabins below it — plenty of cabins on the deck itself proves nothing.";
 
 /**
+ * PUBLIC SPACE SANDWICH — the shape the simple vertical scan misses.
+ *
+ * `QUIET_DEFAULT_RULE` asks what is above and below. That is the right
+ * first question and it is not the only one, because a cabin can sit on
+ * a MIXED-USE deck: staterooms sharing their own deck with a pool, a
+ * buffet, a spa or a kids' area, with another active public deck
+ * immediately above or below. The vertical scan can pass such a cabin
+ * cleanly while the client spends the week beside a pool bar.
+ *
+ * It has now come up four times, which is why it earns a name rather
+ * than being rediscovered per hull:
+ *
+ *   - Carnival Fantasy class: Verandah cabins on 11 sit ABOVE the Lido
+ *     on 10 — the case that first proved the scan runs both ways.
+ *   - Norwegian Dawn class: deck 12 mixes staterooms with the pool, the
+ *     Garden Café, the kids' facilities and the library.
+ *   - Norwegian Breakaway and Getaway: deck 15 is the pool, the Garden
+ *     Café AND Haven cabins.
+ *   - Norwegian Sun: deck 11 is the worst instance found so far — cabins
+ *     beside the pools and the gym on their own deck, with the sports
+ *     court, golf net, Spinnaker Lounge and four specialty restaurants
+ *     directly above on 12. Hit from both directions at once.
+ *
+ * The advice it produces is different from a plain overhead warning:
+ * "what is above this cabin" is the wrong question on such a deck, and
+ * an advisor who only asks it will reassure a client wrongly.
+ *
+ * OPERATOR-CONFIRMED (Jimmy, 2026-08-19): "PUBLIC_SPACE_SANDWICH
+ * deserves to become a real cabin-engine concept. It captures
+ * Fantasy/Dawn/Sun-style cabins much more cleanly than pretending every
+ * noise risk is simply 'what's directly above?'"
+ */
+export const PUBLIC_SPACE_SANDWICH =
+  "Watch for the mixed-use deck: a cabin whose own deck also carries public space — a pool, a buffet, a spa, a kids' area — with another active deck above or below it. On a deck like that, \"what's above this cabin\" is the wrong question, because the noise is beside them as well. Ask what shares the deck before you ask what sits over it.";
+
+/**
  * Attach a ship-specific observation to a confirmed general rule.
  *
  * The pattern throughout the class files is "the confirmed rule, then
