@@ -627,3 +627,58 @@ and committed so the change is visible in review.
 **Still open for Jimmy:** Norwegian's service charge is unrecorded, and
 Royal's $55–$120 range is signed in a comment but not in a field — the
 same shape of gap as Carnival's was.
+
+## Phase 10 — what shipped
+
+`/methodology` and three guides. **Every nav item and every footer link
+is now live**, and each resolves.
+
+### A guide here is a cross-cut, not an essay
+
+The general rules were already signed operator content driving every
+read — the noise ranking, the obstruction taxonomy, the sandwich test.
+What no page answered was the cross-cut: *which hulls have a lifeboat
+roof under the balcony*, *which have a galley near the cabins*. That is
+one `filter` away and it is the whole value of a guide.
+
+So nothing in `src/lib/guides.ts` is written. A guide states a rule that
+was already signed, lists the ships the records say it applies to, and
+takes its count from the length of that list — a page cannot say "20
+hulls" above nineteen links because it never writes the number down.
+Verified programmatically: every count on both data guides equals the
+number of ship links beneath it.
+
+New numbers the cross-cut surfaced, all derived:
+
+- The pool deck is a hazard on **all 79** charted hulls; 77 of those name
+  the decks. The two counts are rendered separately because "names a
+  hazard" and "tells you where it is" are different states.
+- **58** hulls have an obstruction mechanism established; **21** are
+  published as obstructed with no mechanism stated. The second number is
+  given as much room as the first — a guide listing only what it knows
+  reads as though the taxonomy were complete.
+- Four of the eleven taxonomy entries are one line's geometry and appear
+  nowhere else.
+
+### The guarantee guide had a scope problem to solve first
+
+A guarantee is a general booking mechanic and the temptation was to
+write the general version. The only signed content in this catalog is
+Norwegian's — **10 hulls, one line, nothing for Carnival and nothing for
+Royal**. Presenting one line's terms as how guarantees work is exactly
+the over-reach the product refuses, because the terms differ by line and
+the differences are the whole question.
+
+So the page states its scope in the header, names the two charted lines
+it cannot speak for, and links their line pages. The warnings are found
+by matching the word against the records rather than from an authored
+list, so the page cannot claim a hull it does not have.
+
+### `/methodology`
+
+Where the homepage's four refusals get their argument. It states rules
+and links out; the guides carry the tables and the ship lists, so there
+is one copy of each. The provenance definitions are rendered from
+`PROVENANCE_COPY` — the same constant the badges use — rather than
+restated, because the day a restatement disagreed with a badge the badge
+would be the honest one and this page the reassuring one.

@@ -31,7 +31,7 @@ export const NAV: NavItem[] = [
   { label: "Cruise Lines", href: "/cruise-lines", available: true },
   { label: "Ship Classes", href: "/classes", available: true },
   { label: "Compare", href: "/compare", available: true },
-  { label: "How It Works", href: "/methodology", available: false },
+  { label: "How It Works", href: "/methodology", available: true },
 ];
 
 /**
@@ -45,9 +45,9 @@ export const PRIMARY_CTA = { label: "Run a Booking Check", href: "/check" };
 
 export const FOOTER_NAV: NavItem[] = [
   ...NAV,
-  { label: "Quiet cabins", href: "/guides/quiet-cabins", available: false, footerOnly: true },
-  { label: "Obstructed balconies", href: "/guides/obstructed-balconies", available: false, footerOnly: true },
-  { label: "Guarantee cabins", href: "/guides/cruise-guarantee-cabins", available: false, footerOnly: true },
+  { label: "Quiet cabins", href: "/guides/quiet-cabins", available: true, footerOnly: true },
+  { label: "Obstructed balconies", href: "/guides/obstructed-balconies", available: true, footerOnly: true },
+  { label: "Guarantee cabins", href: "/guides/cruise-guarantee-cabins", available: true, footerOnly: true },
 ];
 
 export const availableNav = (items: NavItem[]) => items.filter((i) => i.available);
