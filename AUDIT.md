@@ -302,10 +302,13 @@ changes:
    product plays, *read* is the noun for what it produces, and the mark
    carries both. No rebrand, no domain change; the brief's
    `firstmatecruise.com` is the error.
-2. **`/` vs `/check`: deferred to Phase 7**, where the results shell is
-   rebuilt anyway. Phase 1 kept the check at `/` and introduced route
-   groups instead — `(app)` for the advisor chrome, `(client)` for the
-   share page, which must never show an advisor a CTA meant for them.
+2. **`/` vs `/check`: RESOLVED in Phase 7 — the check moved to
+   `/check`.** Phase 1 kept it at `/` and introduced route groups
+   instead — `(app)` for the advisor chrome, `(client)` for the share
+   page, which must never show an advisor a CTA meant for them. The root
+   now 307s to `/check`, preserving the query, so an advisor's bookmark
+   and any `/?ship=` link still land where they meant to. Deliberately
+   temporary rather than a 308: Phase 8 takes `/` for the homepage.
 3. **Deck data: extend the model.** Done and proved on Radiance class —
    see `src/lib/decks.ts` and the checksum. The stacks are transcribed
    from signed prose, not researched afresh, and `quietBandHolds()`
@@ -439,3 +442,39 @@ opening sentences appear twice as a result. If those records were
 restructured so the shared part is a class constant and only the ending
 is per-ship, both would collapse to one entry. That is a content call,
 not a rendering one.
+
+## Phase 7 — what shipped
+
+The check moved to `/check` and became addressable.
+
+**The URL is now the state.** A run used to live in a `useState` no URL
+described, which made it un-bookmarkable, un-sendable and invisible to
+the back button — an advisor who ran a check, clicked through to the
+ship page and pressed back landed on an empty form and answered five
+questions again. `/check` now reads the same five params `/share` has
+always used, so one query renders two pages for two audiences: the
+operator's read with its flags, and the warm note a client opens.
+
+Three consequences worth stating:
+
+- **Back and forward work.** `history.pushState` does not fire
+  `popstate`, so pushes go through `pushUrl` in `src/lib/url-state.ts`,
+  which notifies subscribers the same way a back button does. Back also
+  restores what the advisor had typed, and "Run another booking" seeds
+  the form from the run it is leaving — someone who arrived on a link
+  and wants to change one answer does not start from defaults.
+- **A stale link lands on the form, never a crash.** The old code
+  asserted the ship id was findable, which held only while it could
+  only come from the picker. It now comes from a URL, so an unknown
+  ship, a bad party value or a partial query all fall through to the
+  form.
+- **`/check` is still static.** `useSearchParams` would have forced the
+  subtree under Suspense and dropped the form out of the prerender — the
+  form is the product, and a crawler or a JavaScript-off reader gets it
+  in the HTML.
+
+Also: the read links out to the ship page, the coverage line links the
+directory, the no-read screen links the charted lines and the directory,
+and the client summary gained "See it as they will" — an advisor about
+to send a note to a paying client can open the page first rather than
+trusting a sentence describing it.

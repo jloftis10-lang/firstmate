@@ -135,7 +135,23 @@ export function ClientSummary({
       </div>
       <p className="mt-2 text-[0.76rem] leading-[1.5] text-[#9EC4D4]">
         The link opens a clean page with just this note on it — no flags, no
-        shop talk.
+        shop talk.{" "}
+        {/* An advisor is about to send this to a paying client. Being able
+            to look at the page first, rather than trusting a description
+            of it, is the cheapest possible reassurance — and the copy
+            above is a claim about a page until you can open it. New tab
+            on purpose: leaving the read to check the client view and
+            having to run the booking again would be the opposite of
+            reassuring. */}
+        <a
+          href={sharePath}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-semibold text-[#EAF2F5] underline decoration-[#9EC4D4] underline-offset-2 hover:decoration-[#EAF2F5]"
+        >
+          See it as they will
+        </a>
+        .
       </p>
 
       {!emailEnabled ? null : !emailOpen ? (

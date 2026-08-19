@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { blockStates, isCovered } from "@/lib/types";
 import type {
@@ -13,17 +13,15 @@ import type {
   CoveredShip,
 } from "@/lib/types";
 import { clientSummary, getRead } from "@/lib/engine";
-import { sharePath } from "@/lib/share";
+import { checkPath, parseShare, sharePath } from "@/lib/share";
 import { shipPath } from "@/lib/nav";
+import { currentSearch, pushUrl, serverSearch, subscribeToUrl } from "@/lib/url-state";
 import { ReadCard } from "./ReadCard";
 import { shipProvenance } from "@/lib/provenance";
 import { ClientSummary } from "./ClientSummary";
 import { Sounding } from "./Sounding";
 import { ShipPicker } from "./ShipPicker";
 import { NoReadYet } from "./NoReadYet";
-
-/** The linked ship cannot change without a navigation, which remounts. */
-const noopSubscribe = () => () => {};
 
 const PARTY_OPTIONS: { value: Party; label: string; readout: string }[] = [
   { value: "couple", label: "Couple", readout: "COUPLE" },
@@ -98,55 +96,85 @@ function Segmented<T extends string>({
 export function FirstMate({
   ships,
   emailEnabled,
+  lineHrefs = {},
 }: {
   ships: Ship[];
   emailEnabled: boolean;
+  /**
+   * Line name to line-page URL, for the lines that have a page.
+   *
+   * Passed in rather than derived here. `LINE_RECORDS` is the authority
+   * on which lines have a page and it pulls the whole policy corpus in
+   * with it — every fleet trap, every package note — which has no
+   * business in the client bundle of a form. Three strings do.
+   */
+  lineHrefs?: Record<string, string>;
 }) {
+  // THE URL IS THE STATE — see `src/lib/url-state.ts`.
+  //
+  // A run used to live in a `useState` no URL described, which made it
+  // un-bookmarkable, un-sendable, and invisible to the back button: an
+  // advisor who ran a check, clicked through to the ship page and
+  // pressed back landed on an empty form and answered five questions
+  // again. The five params are the same ones `/share` has always used.
+  const search = useSyncExternalStore(
+    subscribeToUrl,
+    currentSearch,
+    serverSearch,
+  );
+  const params = useMemo(
+    () => Object.fromEntries(new URLSearchParams(search)),
+    [search],
+  );
+
+  // A COMPLETE, VALID profile means results; anything less means the
+  // form. `parseShare` returns null on a partial or malformed query, and
+  // a ship id that is not in the catalog is treated the same way — a
+  // stale link must land an advisor on the form, never on a crash. The
+  // old code asserted the ship was findable, which was true only while
+  // the id could only come from the picker.
+  const result = useMemo(() => {
+    const parsed = parseShare(params);
+    if (!parsed) return null;
+    return ships.some((s) => s.id === parsed.shipId) ? parsed : null;
+  }, [params, ships]);
+
   // Default to a ship we can actually read, so the first run shows the product.
   const fallbackShip = (ships.find((s) => s.content) ?? ships[0]).id;
-  // Null until the advisor picks one — the effective ship is resolved
-  // below, so an explicit choice always beats a linked one.
-  const [chosenShip, setShipId] = useState<string | null>(null);
+  // What the advisor has changed on the form. Empty until they touch it,
+  // so a linked ship or a profile they came back from wins by default.
+  const [draft, setDraft] = useState<Partial<ClientProfile>>({});
 
-  // `/?ship=<id>` — how a ship page hands a hull to the check.
-  //
-  // Read through `useSyncExternalStore` rather than `useSearchParams` or
-  // an effect, because both of those cost something this route cannot
-  // afford. `useSearchParams` forces the subtree under a Suspense
-  // boundary and drops it out of the prerender, so the check's form and
-  // heading would be absent from the static HTML of the site's most
-  // important page. Reading `window.location` in a state initialiser
-  // hydrates a different ship than the server rendered, which is a real
-  // hydration error and not a cosmetic one. Setting state from an effect
-  // is the cascading-render pattern React now lints against.
-  //
-  // This hook exists for exactly this shape: `getServerSnapshot` returns
-  // null so the prerender and the hydration agree, then the client
-  // snapshot supplies the parameter on the pass after. The subscribe is
-  // a no-op because the value cannot change without a navigation, and a
-  // navigation remounts this anyway.
-  //
-  // An unknown or absent id falls through to the default. A link naming
-  // a ship we cannot read must not blank the picker.
-  const linkedShip = useSyncExternalStore(
-    noopSubscribe,
-    () => new URLSearchParams(window.location.search).get("ship"),
-    () => null,
-  );
-  const shipId =
-    chosenShip ??
-    (linkedShip && ships.some((s) => s.id === linkedShip) ? linkedShip : null) ??
-    fallbackShip;
-  const [party, setParty] = useState<Party>("couple");
-  const [seasick, setSeasick] = useState<Seasick>("no");
-  const [experience, setExperience] = useState<Experience>("first");
-  const [itinerary, setItinerary] = useState<Itinerary>("port-heavy");
+  // `/check?ship=<id>` — how a ship page hands a hull to the check
+  // without answering the other four questions for the advisor. An
+  // unknown id falls through to the default: a link naming a ship we
+  // cannot read must not blank the picker.
+  const linkedShip =
+    params.ship && ships.some((s) => s.id === params.ship) ? params.ship : undefined;
 
-  const [result, setResult] = useState<ClientProfile | null>(null);
+  const shipId = draft.shipId ?? linkedShip ?? fallbackShip;
+  const party = draft.party ?? "couple";
+  const seasick = draft.seasick ?? "no";
+  const experience = draft.experience ?? "first";
+  const itinerary = draft.itinerary ?? "port-heavy";
+
+  const setShipId = (shipId: string) => setDraft((d) => ({ ...d, shipId }));
+  const setParty = (party: Party) => setDraft((d) => ({ ...d, party }));
+  const setSeasick = (seasick: Seasick) => setDraft((d) => ({ ...d, seasick }));
+  const setExperience = (experience: Experience) =>
+    setDraft((d) => ({ ...d, experience }));
+  const setItinerary = (itinerary: Itinerary) =>
+    setDraft((d) => ({ ...d, itinerary }));
+
   const [sounding, setSounding] = useState(false);
   const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   useEffect(() => () => clearTimeout(timer.current), []);
+
+  function show(profile: ClientProfile) {
+    pushUrl(checkPath(profile));
+    window.scrollTo(0, 0);
+  }
 
   function run() {
     const profile: ClientProfile = {
@@ -158,20 +186,21 @@ export function FirstMate({
     };
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce) {
-      setResult(profile);
-      window.scrollTo(0, 0);
+      show(profile);
       return;
     }
     setSounding(true);
     timer.current = setTimeout(() => {
       setSounding(false);
-      setResult(profile);
-      window.scrollTo(0, 0);
+      show(profile);
     }, 1250);
   }
 
   function reset() {
-    setResult(null);
+    // Seed the form from the run being left, so an advisor who arrived on
+    // a link and wants to change one answer does not start from defaults.
+    if (result) setDraft(result);
+    pushUrl("/check");
     window.scrollTo(0, 0);
   }
 
@@ -243,9 +272,17 @@ export function FirstMate({
           </button>
 
           <p className="mt-[34px] text-center text-[0.76rem] leading-[1.6] text-ink-3">
-            {coveredCount} of {ships.length} ships carry a read so far. The rest
-            are listed so you can find them, but they&apos;ll say plainly that
-            they aren&apos;t charted yet rather than guess.
+            {/* The directory exists now, so the sentence that describes
+                coverage points at the page that shows it. */}
+            <Link
+              href="/ships"
+              className="text-deep underline decoration-line underline-offset-2 hover:decoration-deep"
+            >
+              {coveredCount} of {ships.length} ships
+            </Link>{" "}
+            carry a read so far. The rest are listed so you can find them, but
+            they&apos;ll say plainly that they aren&apos;t charted yet rather
+            than guess.
             <br />
             {/* Derived, not written down. An earlier version of this
                 paragraph hard-coded the idea that some covered ships were
@@ -279,6 +316,7 @@ export function FirstMate({
           ship={ship}
           covered={coveredShips}
           all={ships}
+          lineHrefs={lineHrefs}
           onAgain={reset}
         />
       )}

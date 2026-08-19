@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Ship } from "@/lib/types";
 import { blockStates } from "@/lib/types";
 
@@ -50,11 +51,14 @@ export function NoReadYet({
   ship,
   covered,
   all,
+  lineHrefs,
   onAgain,
 }: {
   ship: Ship;
   covered: Ship[];
   all: Ship[];
+  /** Line name to line-page URL. A line without one renders unlinked. */
+  lineHrefs: Record<string, string>;
   onAgain: () => void;
 }) {
   const lines = coverageByLine(covered, all);
@@ -94,7 +98,19 @@ export function NoReadYet({
             <ul className="text-[0.93rem] leading-[1.7] text-ink-2">
               {lines.map((l) => (
                 <li key={l.line}>
-                  <span className="font-semibold text-ink">{l.line}</span>
+                  {/* The line pages exist now. A covered line always has
+                      one today, and a line that somehow does not renders
+                      as text rather than as a link to a 404. */}
+                  {lineHrefs[l.line] ? (
+                    <Link
+                      href={lineHrefs[l.line]}
+                      className="font-semibold text-deep underline decoration-line underline-offset-2 hover:decoration-deep"
+                    >
+                      {l.line}
+                    </Link>
+                  ) : (
+                    <span className="font-semibold text-ink">{l.line}</span>
+                  )}
                   {" — "}
                   {l.covered === l.total
                     ? `the whole fleet, all ${l.total}`
@@ -106,7 +122,14 @@ export function NoReadYet({
             <p className="mt-3 text-[0.85rem] leading-[1.55] text-ink-3">
               If the {ship.line} is one you book often, that&apos;s worth
               saying — the order these get worked up in is driven by what
-              advisors actually ask for.
+              advisors actually ask for.{" "}
+              <Link
+                href="/ships"
+                className="text-deep underline decoration-line underline-offset-2 hover:decoration-deep"
+              >
+                Every ship we carry
+              </Link>{" "}
+              is listed, charted or not.
             </p>
           </div>
         )}

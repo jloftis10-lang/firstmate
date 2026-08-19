@@ -6,7 +6,7 @@ import { isCovered } from "@/lib/types";
 import type { CoveredShip } from "@/lib/types";
 import { shipProvenance } from "@/lib/provenance";
 import { shipFit } from "@/lib/fit";
-import { checkPath, classPath, linePath } from "@/lib/nav";
+import { checkShipPath, classPath, linePath } from "@/lib/nav";
 import { routedClassRecords } from "@/lib/classes";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CoverageChips } from "@/components/CoverageChips";
@@ -232,7 +232,7 @@ export default async function ShipPage({ params }: PageProps<"/ships/[slug]">) {
 
           <div className="mt-5 flex flex-wrap items-center gap-3">
             <Link
-              href={checkPath(ship.id)}
+              href={checkShipPath(ship.id)}
               className="rounded-[10px] bg-go px-4 py-2.5 text-[0.9rem] font-semibold text-white no-underline transition-colors hover:bg-[#175A50]"
             >
               Run a Booking Check on this ship

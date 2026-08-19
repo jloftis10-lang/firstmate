@@ -7,6 +7,20 @@ const nextConfig: NextConfig = {
   // Next 16 differs from older versions in ways agents guess wrong about;
   // the guides it points at live in node_modules/next/dist/docs/.
   agentRules: false,
+
+  /**
+   * The Booking Check moved to `/check` in Phase 7. Advisors have been
+   * using `/` as the check since the beginning, so the root keeps
+   * working rather than 404ing on a bookmark.
+   *
+   * TEMPORARY, and deliberately a 307 rather than a 308. Phase 8 gives
+   * `/` a real homepage and removes this; a permanent redirect would
+   * have taught every cache and crawler something we are about to
+   * contradict.
+   */
+  async redirects() {
+    return [{ source: "/", destination: "/check", permanent: false }];
+  },
 };
 
 export default nextConfig;

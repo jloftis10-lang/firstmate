@@ -34,8 +34,14 @@ export const NAV: NavItem[] = [
   { label: "How It Works", href: "/methodology", available: false },
 ];
 
-/** The one action every screen offers. Lives at `/` until Phase 7. */
-export const PRIMARY_CTA = { label: "Run a Booking Check", href: "/" };
+/**
+ * The one action every screen offers.
+ *
+ * It moved off `/` in Phase 7. The check is a tool and the root is about
+ * to be a homepage; `/` redirects there in the meantime so an advisor's
+ * bookmark still lands on the thing they bookmarked.
+ */
+export const PRIMARY_CTA = { label: "Run a Booking Check", href: "/check" };
 
 export const FOOTER_NAV: NavItem[] = [
   ...NAV,
@@ -58,12 +64,16 @@ export const availableNav = (items: NavItem[]) => items.filter((i) => i.availabl
 export const shipPath = (id: string) => `/ships/${id}`;
 
 /**
- * The Booking Check, pre-loaded with a ship.
+ * The Booking Check, pre-loaded with a ship and nothing else.
  *
- * `ship` is a NEW parameter on `/`, not on `/share` — the five share
- * params are a frozen public contract and this does not touch them.
+ * `ship` is one of the five params `/share` already uses, so this is a
+ * partial version of the same query rather than a second encoding —
+ * `parseShare` returns null for it, which the check reads as "preselect
+ * this hull and still ask the four questions". The full-profile link is
+ * `checkPath` in `src/lib/share.ts`.
  */
-export const checkPath = (shipId: string) => `/?ship=${encodeURIComponent(shipId)}`;
+export const checkShipPath = (shipId: string) =>
+  `/check?ship=${encodeURIComponent(shipId)}`;
 
 /**
  * A cruise line's page. Keyed by `CruiseLine.id`, and only the three
