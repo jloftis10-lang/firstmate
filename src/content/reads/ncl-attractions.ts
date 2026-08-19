@@ -33,7 +33,8 @@ export type NclAttractionId =
   | "speedway"
   | "slidecoaster"
   | "the-drop"
-  | "the-rush";
+  | "the-rush"
+  | "epic-waterslides";
 
 export type NclAttraction = AttractionEntry<NclAttractionId>;
 
@@ -57,6 +58,19 @@ export const NCL_ATTRACTIONS: AttractionTable<NclAttractionId> = {
     id: "the-rush",
     name: "The Rush",
     rule: "The Rush needs 48 inches and caps at 330 pounds",
+  },
+  /**
+   * Epic's slides are one entry rather than several on purpose. NCL's
+   * current FAQ sets a SINGLE rule for the whole complex — "Norwegian
+   * Epic, All Waterslides" — which is the opposite of the Icon Category 6
+   * situation where every ride differs. An earlier version of the Epic
+   * record carried three conflicting figures and told the advisor to
+   * check; the line publishes one number and it covers everything.
+   */
+  "epic-waterslides": {
+    id: "epic-waterslides",
+    name: "the three multi-storey waterslides, including the 200-foot Epic Plunge",
+    rule: "every waterslide on this ship runs the same rule — 42 inches minimum and a 300-pound maximum, across all of them. That's unusually simple for a slide complex this size, and it means clearing one really does clear the rest here",
   },
 };
 
