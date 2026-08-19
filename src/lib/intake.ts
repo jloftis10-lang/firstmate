@@ -166,6 +166,35 @@ export type ShipIntake = {
   /** What the top-tier product actually includes on THIS hull. */
   suiteProduct: Claim<string>;
 
+  /**
+   * MINIMUM GUEST AGE, and this field exists because the Viking pilot
+   * found it missing before any extraction happened.
+   *
+   * The engine's family read opens with "Kid access is the trap on this
+   * ship." On an adults-only line that is not a warning, it is nonsense —
+   * children cannot be booked at all. Every hull in the catalog so far
+   * has been Carnival, Royal or Norwegian, so the assumption never
+   * surfaced. `18` here is what tells the record it must not answer a
+   * family question with height rules.
+   */
+  minimumGuestAge: Claim<number>;
+
+  /**
+   * WHAT THE FARE ALREADY INCLUDES — drinks, Wi-Fi, shore excursions,
+   * gratuities, specialty dining.
+   *
+   * Same origin as the field above. The money read's whole opening call
+   * is whether a drink package is worth buying, which presumes there is
+   * one to buy. On a fare-inclusive line the question is not close to
+   * right, and the engine currently raises the correction as a FLAG
+   * underneath a call that has already said the wrong thing.
+   *
+   * Empty array means genuinely nothing is included; `"unknown"` means
+   * nobody checked. Those are different and the money block reads them
+   * differently.
+   */
+  fareInclusions: Claim<string[]>;
+
   /** Anything the extractor could not settle, in their own words. */
   openQuestions: string[];
 };
@@ -203,6 +232,8 @@ export function validateIntake(intake: ShipIntake): IntakeProblem[] {
     ["elevatorBanks", intake.elevatorBanks],
     ["cabinDimensions", intake.cabinDimensions],
     ["suiteProduct", intake.suiteProduct],
+    ["minimumGuestAge", intake.minimumGuestAge],
+    ["fareInclusions", intake.fareInclusions],
   ];
   for (const [field, claim] of claims) {
     if (claim.value === UNKNOWN) continue;
