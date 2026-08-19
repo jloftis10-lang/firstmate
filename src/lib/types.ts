@@ -21,12 +21,15 @@
 import type { ActivityAvailability } from "./availability";
 import type { ObstructionKind } from "./obstruction";
 
-/** Where a line sits in the market — drives grouping in the ship picker. */
-export type LineCategory =
-  | "contemporary"
-  | "premium"
-  | "luxury"
-  | "expedition";
+/**
+ * Where a line sits in the market — drives grouping in the ship picker.
+ *
+ * Luxury and expedition were removed with their rosters on 2026-08-19;
+ * see the note in `src/content/ships/index.ts`. The type lists what the
+ * catalog actually contains rather than what it might one day, so a
+ * category nothing can be assigned to doesn't sit here looking valid.
+ */
+export type LineCategory = "contemporary" | "premium";
 
 /** A ship as it appears in the picker. Identity only, no judgment. */
 export type ShipIdentity = {

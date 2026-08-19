@@ -1,30 +1,46 @@
 import type { CruiseLine, LineCategory, Ship } from "@/lib/types";
 import { CONTEMPORARY_LINES } from "../lines/contemporary";
 import { PREMIUM_LINES } from "../lines/premium";
-import { LUXURY_LINES } from "../lines/luxury";
-import { EXPEDITION_LINES } from "../lines/expedition";
 import { SHIP_READS } from "../reads";
 
+/**
+ * LUXURY AND EXPEDITION WERE CUT on 2026-08-19, and the reason is worth
+ * recording because it is not "we ran out of time".
+ *
+ * They were 87 ships across 43 classes — roughly two ships per review
+ * unit, against Royal Caribbean's thirty ships in eight. So they were
+ * the most expensive coverage in the catalog by a factor of four.
+ *
+ * The deciding argument was the product's thesis rather than the cost.
+ * First Mate exists because a five-thousand-passenger ship has cabin
+ * traps an advisor cannot see from a booking screen: a Lido deck
+ * overhead, a lifeboat roof under the balcony, a dry slide passing
+ * through it, deck 9 versus deck 11. A two-hundred-passenger expedition
+ * hull has one cabin arrangement, no pool deck to sit beneath and a
+ * client already getting concierge attention. Forty-three review units
+ * would have produced reads that said "midship, and there is not much to
+ * warn you about" — which is a true answer nobody needs a tool for.
+ *
+ * The expedition roster file said as much itself before it was removed:
+ * "much of the three-category framework fits these ships poorly."
+ *
+ * The rosters are not lost. They are in git history at the commit that
+ * removed them, and restoring either is a file and two imports.
+ */
 export const LINES: CruiseLine[] = [
   ...CONTEMPORARY_LINES,
   ...PREMIUM_LINES,
-  ...LUXURY_LINES,
-  ...EXPEDITION_LINES,
 ];
 
 /** Order the picker groups by how often a generalist advisor books them. */
 export const CATEGORY_ORDER: LineCategory[] = [
   "contemporary",
   "premium",
-  "luxury",
-  "expedition",
 ];
 
 export const CATEGORY_LABEL: Record<LineCategory, string> = {
   contemporary: "Contemporary",
   premium: "Premium",
-  luxury: "Luxury",
-  expedition: "Expedition",
 };
 
 function slugify(name: string): string {

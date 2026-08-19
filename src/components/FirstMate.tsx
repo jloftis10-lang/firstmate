@@ -208,9 +208,24 @@ export function FirstMate({
             are listed so you can find them, but they&apos;ll say plainly that
             they aren&apos;t charted yet rather than guess.
             <br />
-            {signedCount} are signed off end to end. The others are researched
-            rather than confirmed, and every unsigned call is marked as such on
-            the card it appears on.
+            {/* Derived, not written down. An earlier version of this
+                paragraph hard-coded the idea that some covered ships were
+                still unconfirmed; the day every block got signed, the
+                sentence became false and nothing caught it. Now the copy
+                follows the data. */}
+            {signedCount === coveredCount ? (
+              <>
+                Every one of them is signed off end to end &mdash; an operator
+                has confirmed the cabin, money and trap calls against the
+                current deck plans.
+              </>
+            ) : (
+              <>
+                {signedCount} are signed off end to end. The others are
+                researched rather than confirmed, and every unsigned call is
+                marked as such on the card it appears on.
+              </>
+            )}
           </p>
         </section>
       ) : isCovered(ship) ? (
