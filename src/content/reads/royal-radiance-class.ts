@@ -1,4 +1,5 @@
 import type { ShipContent, Source } from "@/lib/types";
+import type { Deck } from "@/lib/decks";
 import type { ObstructionKind } from "@/lib/obstruction";
 import {
   ROYAL_EMBARKATION,
@@ -139,6 +140,63 @@ const RADIANCE_SOURCES: Source[] = [
 const RADIANCE_QUIET_DEFAULT = `Midship on decks 8 or 9. ${QUIET_DEFAULT_RULE} Here that lands on a narrow two-deck band and the working is worth knowing: cabins run 2 to 4 and then 7 to 10, so deck 7 fails BELOW — deck 6 under it is public space — and deck 10 fails ABOVE, with the pool, Solarium and Windjammer directly over it on 11. Everything in between is genuinely sandwiched.`;
 
 /**
+ * THE DECK STACK, transcribed from this file's own signed placement note
+ * rather than researched afresh. Every fact here is already in
+ * `RADIANCE_QUIET_DEFAULT` and `hazardsAboveBelow` above, in words:
+ *
+ *   "cabins run 2 to 4 and then 7 to 10, so deck 7 fails BELOW — deck 6
+ *    under it is public space — and deck 10 fails ABOVE, with the pool,
+ *    Solarium and Windjammer directly over it on 11"
+ *   "the sports court on 12 and the rock wall and mini-golf on 13"
+ *
+ * NOTHING NEW IS ASSERTED. Deck 5 is recorded as carrying no cabins
+ * because the signed sentence runs "2 to 4 and then 7 to 10", which
+ * excludes it; its venues are unknown and the list is left empty with a
+ * note rather than invented.
+ *
+ * DECK 1 IS DELIBERATELY ABSENT. The signed prose does not say what is
+ * on it, so it is not in the stack — which makes deck 2 come out
+ * `undetermined` rather than passing or failing. That is the correct
+ * answer and the reason `deckRows()` has an undetermined state at all:
+ * "we don't know what's under deck 2" is not "deck 2 is fine".
+ *
+ * The transcription is checked, not trusted — `quietBandHolds()` asserts
+ * that decks 8 and 9, the signed answer, both survive the arithmetic.
+ * See the deck test.
+ */
+const RADIANCE_DECKS: Deck[] = [
+  { deck: 2, carriesCabins: true, publicSpace: [] },
+  { deck: 3, carriesCabins: true, publicSpace: [] },
+  { deck: 4, carriesCabins: true, publicSpace: [] },
+  {
+    deck: 5,
+    carriesCabins: false,
+    publicSpace: [],
+    note: "Not a cabin deck — the signed stack runs 2 to 4 and then 7 to 10. What's on it isn't recorded.",
+  },
+  {
+    deck: 6,
+    carriesCabins: false,
+    publicSpace: ["public space"],
+    note: "Named in the signed note as the public space that makes deck 7 fail below. The specific venues aren't recorded.",
+  },
+  { deck: 7, carriesCabins: true, publicSpace: [] },
+  { deck: 8, carriesCabins: true, publicSpace: [] },
+  { deck: 9, carriesCabins: true, publicSpace: [] },
+  { deck: 10, carriesCabins: true, publicSpace: [] },
+  {
+    deck: 11,
+    carriesCabins: false,
+    publicSpace: ["the pool", "the Solarium", "the Windjammer buffet"],
+  },
+  { deck: 12, carriesCabins: false, publicSpace: ["the sports court"] },
+  { deck: 13, carriesCabins: false, publicSpace: ["the rock wall", "mini-golf"] },
+];
+
+/** The band the signed placement note names. Checked against the stack. */
+export const RADIANCE_SIGNED_BAND = [8, 9];
+
+/**
  * Deck 10 as a tradeoff. Fourth class running where I wrote a blanket
  * avoid and it needed softening.
  *
@@ -201,6 +259,12 @@ function radianceClassContent(ship: RadianceShip): ShipContent {
   return {
     reviewDue: "2027-02-01",
     sources: [...ROYAL_SOURCES, ...RADIANCE_SOURCES],
+
+    // Class-level geometry, shared by all four hulls. This is the deck
+    // STACK, not cabin numbers — the inheritance rule bars propagating
+    // exact cabins between sisters and expressly allows class geometry,
+    // which is what the whole class-factory architecture rests on.
+    decks: RADIANCE_DECKS,
 
     cabin: {
       // Signed off by Jimmy, 2026-08-19. Corrections at the top of the file.

@@ -62,21 +62,15 @@ export type Claim<T> = {
 };
 
 /**
- * ONE DECK, described the way the quiet-default rule actually needs.
- *
- * `carriesCabins` and `publicSpace` are separate booleans on purpose,
- * because a deck can be both — that is `PUBLIC_SPACE_SANDWICH`, and it
- * came up on Fantasy class, Dawn class, Breakaway/Getaway and Sun.
- * Asking only "what is above this cabin" misses every one of them.
+ * ONE DECK. The canonical type now lives in `src/lib/decks.ts`, because
+ * a deck stack is domain data a ship record carries, not something
+ * peculiar to extraction. Re-exported here so an intake and a ship
+ * record are literally the same shape and hand over without a mapping
+ * step — which is one fewer place to introduce a transcription error.
  */
-export type DeckEntry = {
-  /** As the line numbers it. Royal skips 13; record what the plan says. */
-  deck: number;
-  carriesCabins: boolean;
-  /** Public venues ON this deck, named. Empty when it is pure cabins. */
-  publicSpace: string[];
-  note?: string;
-};
+import type { Deck } from "./decks";
+export type { Deck, Deck as DeckEntry };
+type DeckEntry = Deck;
 
 /**
  * An obstructed cabin, as the OFFICIAL plan marks it.
@@ -335,52 +329,15 @@ export function validateSisterCheck(check: SisterCheck): IntakeProblem[] {
 }
 
 /**
- * The decks that pass the quiet-default test, computed rather than
- * judged: cabins on this deck, cabins above, cabins below.
+ * The deck arithmetic moved to `src/lib/decks.ts` alongside the type,
+ * and is re-exported here so existing intake callers keep working.
  *
- * This is the check I got wrong four times before Jimmy named the rule,
- * and it is pure arithmetic over the intake — so it should never be done
- * by hand again. Note it deliberately does NOT filter out mixed-use
- * decks: a deck can pass this and still be a bad answer because of what
- * shares it. `mixedUseDecks` is the second question.
+ * The caveat that lived on `mixedUseDecks` moved with it, because it was
+ * found by this pipeline and belongs next to the code: `publicSpace` is a
+ * flat list of names, so a self-service launderette counts exactly as
+ * much as an infinity pool. The first Viking extraction marked four decks
+ * mixed-use on the strength of a launderette apiece — true, and useless
+ * as a warning. The functions report the fact; `src/lib/noise.ts` and the
+ * person composing the record decide which venues matter.
  */
-export function quietCandidates(decks: DeckEntry[]): number[] {
-  const byNumber = new Map(decks.map((d) => [d.deck, d]));
-  const ordered = [...decks].sort((a, b) => a.deck - b.deck);
-  const out: number[] = [];
-
-  for (let i = 0; i < ordered.length; i++) {
-    const d = ordered[i];
-    if (!d.carriesCabins) continue;
-    const below = ordered[i - 1];
-    const above = ordered[i + 1];
-    if (!below?.carriesCabins || !above?.carriesCabins) continue;
-    out.push(d.deck);
-  }
-  void byNumber;
-  return out;
-}
-
-/**
- * Decks carrying cabins AND public space — the `PUBLIC_SPACE_SANDWICH`
- * cases. These can pass `quietCandidates` and still be wrong, which is
- * exactly why the two are separate functions.
- *
- * CAVEAT FOUND BY THE VIKING PILOT, and it is a real weakness in the
- * field this reads. `publicSpace` is a flat list of names, so a
- * self-service launderette counts exactly as much as an infinity pool.
- * The first Viking extraction came back with decks 3, 4, 5 and 6 all
- * marked mixed-use on the strength of a launderette apiece — which is
- * true and tells an advisor nothing, because nobody is kept awake by a
- * washing machine two doors down.
- *
- * This function still reports the fact, because filtering here would
- * hide it. The judgment about which venues are noise-relevant belongs to
- * `src/lib/noise.ts`, which already ranks sources by what a client
- * actually experiences, and to the person composing the record. What the
- * extraction brief now says is: name every venue, and the composition
- * step decides which ones matter.
- */
-export function mixedUseDecks(decks: DeckEntry[]): DeckEntry[] {
-  return decks.filter((d) => d.carriesCabins && d.publicSpace.length > 0);
-}
+export { quietCandidates, mixedUseDecks, deckRows, quietBandHolds } from "./decks";

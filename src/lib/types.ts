@@ -19,6 +19,7 @@
  */
 
 import type { ActivityAvailability } from "./availability";
+import type { Deck } from "./decks";
 import type { ObstructionKind } from "./obstruction";
 
 /**
@@ -131,6 +132,17 @@ export type ShipContent = {
    * never as `none` — see the `FareInclusions` comment.
    */
   fareInclusions?: FareInclusions;
+
+  /**
+   * THE DECK STACK, when it is known — see `src/lib/decks.ts`.
+   *
+   * Absent means nobody has recorded it, NOT that the ship has no decks.
+   * A ship without this renders no deck table at all rather than an
+   * inferred one: `cabin.placementNote` still carries the operator's
+   * answer in prose, and prose is where it stays until someone has read
+   * a plan or transcribed a signed stack.
+   */
+  decks?: Deck[];
 
   /**
    * What is CURRENTLY not running on this hull — see
