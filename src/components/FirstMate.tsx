@@ -239,6 +239,7 @@ export function FirstMate({
         <NoReadYet
           ship={ship}
           covered={coveredShips}
+          all={ships}
           onAgain={reset}
         />
       )}
