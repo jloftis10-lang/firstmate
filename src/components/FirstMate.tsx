@@ -14,6 +14,7 @@ import type {
 import { clientSummary, getRead } from "@/lib/engine";
 import { sharePath } from "@/lib/share";
 import { ReadCard } from "./ReadCard";
+import { shipProvenance } from "@/lib/provenance";
 import { ClientSummary } from "./ClientSummary";
 import { Sounding } from "./Sounding";
 import { ShipPicker } from "./ShipPicker";
@@ -261,6 +262,8 @@ function ReadView({
   emailEnabled: boolean;
 }) {
   const read = getRead(ship, client);
+  // Derived in one place; the cards no longer decide for themselves.
+  const prov = shipProvenance(ship.content);
   const summary = clientSummary(ship, client);
   const { allVerified, anyVerified } = blockStates(ship.content);
 
@@ -322,12 +325,13 @@ function ReadView({
         </div>
       ) : (
         <>
-      <ReadCard number="01" category="Cabin & deck" read={read.cabin} />
-      <ReadCard number="02" category="Money surprises" read={read.money} />
+      <ReadCard number="01" category="Cabin & deck" read={read.cabin} provenance={prov.cabin} />
+      <ReadCard number="02" category="Money surprises" read={read.money} provenance={prov.money} />
       <ReadCard
         number="03"
         category="Expectation traps"
         read={read.traps}
+        provenance={prov.traps}
         lineName={ship.line}
       />
         </>
