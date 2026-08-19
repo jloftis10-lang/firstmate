@@ -279,17 +279,23 @@ function ReadView({
           className="mb-2.5 font-readout text-[0.72rem] font-bold tracking-[0.1em] uppercase text-go"
           role="status"
         >
-          Read complete
+          {read.ineligible ? "Stop here" : "Read complete"}
         </div>
         <h1 className="font-call text-[1.5rem] leading-[1.2] tracking-[-0.01em]">
-          Here&apos;s what to watch on this booking.
+          {/* "Here's what to watch on this booking" is the wrong sentence
+              above a notice saying the booking cannot be made. */}
+          {read.ineligible
+            ? "This one can't be booked as asked."
+            : "Here's what to watch on this booking."}
         </h1>
         <p className="mt-3.5 rounded-[9px] border border-[#E3EAEC] bg-surface px-3 py-2.5 font-readout text-[0.72rem] leading-[1.7] tracking-[0.02em] text-ink-2">
           <span className="text-deep">◎</span>
           &nbsp; {bits.join("  ·  ")}
         </p>
 
-        {!allVerified && (
+        {/* Suppressed when the booking is blocked: the banner points at
+            per-card markers, and no cards render in that state. */}
+        {!allVerified && !read.ineligible && (
           <p className="mt-2.5 rounded-[9px] border border-signal bg-signal-bg px-3 py-2.5 text-[0.82rem] leading-[1.5] text-ink">
             <span className="mr-2 inline-block rounded-[5px] bg-signal px-1.5 py-[3px] font-readout text-[0.6rem] font-bold tracking-[0.08em] text-white align-[1px]">
               SAMPLE

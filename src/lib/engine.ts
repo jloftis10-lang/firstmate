@@ -368,6 +368,17 @@ export function getRead(ship: CoveredShip, client: ClientProfile): Read {
  * This is what the advisor sends, so it carries no jargon and no flags.
  */
 export function clientSummary(ship: CoveredShip, client: ClientProfile): string {
+  // ELIGIBILITY FIRST, for the same reason getRead does it — and this
+  // one matters more, because this is the text an advisor SENDS TO A
+  // PAYING CLIENT. The eligibility gate was added to getRead and this
+  // function was missed, so a blocked Viking family read still produced
+  // a cheerful note about cabin placement and drink packages for a
+  // sailing that cannot happen. Caught by looking at the rendered page
+  // rather than by any assertion.
+  if (ineligibleReason(ship, client)) {
+    return `Before anything else on the ${ship.name}: this ship doesn't carry guests under ${ship.content.eligibility?.minimumGuestAge}, so it isn't one I can book for a family with children. Let me come back to you with ships that fit — there are good ones, and I'd rather tell you now than at deposit.`;
+  }
+
   const who =
     client.party === "family"
       ? "your crew"
@@ -397,13 +408,27 @@ export function clientSummary(ship: CoveredShip, client: ClientProfile): string 
     );
   }
 
+  // Same sequencing as the money read: what the fare already covers is
+  // resolved BEFORE any package advice. Without this the summary told a
+  // Viking client to skip a package their fare already includes, which
+  // is the exact failure the engine change was meant to end — it was
+  // just fixed in one of the two places that needed it.
   const money = ship.content.money;
+  const inclusions = ship.content.fareInclusions ?? { state: "not-researched" };
   if (money) {
-    parts.push(
-      client.itinerary === "sea-days"
-        ? "With this many sea days, the drink package is genuinely worth it, so I'll add it."
-        : "I'd skip the drink package on this one — you'll be off exploring most days, so it wouldn't pay off.",
-    );
+    if (inclusions.state === "known" && inclusions.alcohol !== "none") {
+      parts.push(
+        inclusions.alcohol === "unlimited"
+          ? "You don't need a drink package on this one — drinks are already in your fare."
+          : "You don't need a drink package on this one — beer, wine and soft drinks come with lunch and dinner already.",
+      );
+    } else {
+      parts.push(
+        client.itinerary === "sea-days"
+          ? "With this many sea days, the drink package is genuinely worth it, so I'll add it."
+          : "I'd skip the drink package on this one — you'll be off exploring most days, so it wouldn't pay off.",
+      );
+    }
   }
 
   if (client.party === "family" && ship.content.traps?.kidAgeHeightRules) {
@@ -419,8 +444,13 @@ export function clientSummary(ship: CoveredShip, client: ClientProfile): string 
   }
 
   if (money) {
+    const diningIncluded =
+      inclusions.state === "known" &&
+      inclusions.includes.some((i) => /specialty|alternative/i.test(i));
     parts.push(
-      "I'll also lock in your specialty dining before you sail so you get the nights you want.",
+      diningIncluded
+        ? "I'll also book your restaurant nights before you sail — they're included, so it's about getting the times you want rather than the cost."
+        : "I'll also lock in your specialty dining before you sail so you get the nights you want.",
     );
   }
 
