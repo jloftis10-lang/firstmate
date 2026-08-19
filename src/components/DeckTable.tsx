@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import type { Deck, DeckRow, DeckVerdict } from "@/lib/decks";
 import { deckRows } from "@/lib/decks";
 
@@ -39,7 +40,20 @@ const NEIGHBOUR: Record<DeckRow["above"], string> = {
   unknown: "—",
 };
 
-export function DeckTable({ decks }: { decks: Deck[] }) {
+export function DeckTable({
+  decks,
+  caption,
+}: {
+  decks: Deck[];
+  /**
+   * Overrides the default caption. The default points at "the placement
+   * call above", which is true on a ship page and on a class page and
+   * false anywhere the table stands on its own — the homepage renders it
+   * with no call above it. A caption that describes a neighbouring
+   * element has to be able to change when the neighbour does.
+   */
+  caption?: ReactNode;
+}) {
   const rows = deckRows(decks).reverse();
 
   return (
@@ -49,11 +63,16 @@ export function DeckTable({ decks }: { decks: Deck[] }) {
       <div className="overflow-x-auto">
         <table className="w-full min-w-[520px] border-collapse text-left">
           <caption className="mb-3 text-left text-[0.86rem] leading-[1.55] text-ink-2">
-            A deck is a <strong className="font-semibold text-ink">quiet candidate</strong>{" "}
-            when it has cabins directly above and directly below it and nothing
-            public sharing it. That narrows the field — it does not pick the
-            cabin. The placement call above does that, and it is allowed to be
-            narrower than this table.
+            {caption ?? (
+              <>
+                A deck is a{" "}
+                <strong className="font-semibold text-ink">quiet candidate</strong>{" "}
+                when it has cabins directly above and directly below it and
+                nothing public sharing it. That narrows the field — it does not
+                pick the cabin. The placement call above does that, and it is
+                allowed to be narrower than this table.
+              </>
+            )}
           </caption>
           <thead>
             <tr className="border-b border-line font-readout text-[0.62rem] tracking-[0.08em] uppercase text-ink-3">

@@ -478,3 +478,49 @@ directory, the no-read screen links the charted lines and the directory,
 and the client summary gained "See it as they will" — an advisor about
 to send a note to a paying client can open the page first rather than
 trusting a sentence describing it.
+
+## Phase 8 — what shipped
+
+`/` is a page again. The Phase 7 redirect is gone rather than inverted —
+both routes are real now and neither stands in for the other, and since
+the redirect was always a 307 nothing cached it as permanent.
+
+**Nothing on the homepage is a mock-up.** The three calls in the demo
+section are produced by the real engine from the Radiance record at
+build time, and the deck table is the same `DeckTable` the ship page
+renders from the same transcribed stack. Both name the ship and link to
+the live version, so a reader who suspects a marketing screenshot can
+click through and check — a verification asserts the linked check
+reproduces the three calls verbatim, so the page cannot claim a read the
+product does not give.
+
+Radiance is the demonstration hull because it is the best-covered ship
+in the catalog: signed end to end, fourteen sources, and one of only two
+classes with a transcribed deck stack — which is what lets one page show
+both the answer and the arithmetic behind it. If it ever leaves the
+catalog the build throws rather than rendering a homepage with a hole.
+
+Every number is reduced from the catalog at build time. No stock
+photography, no testimonials, no logos, no percentages, no ratings —
+asserted by the verification, not just by intent.
+
+### A bug the homepage's canonical tag exposed
+
+`/share` was inheriting `canonical: "/"` from the root layout. Every
+other route overrides it and that one never did, so **every share link
+was telling crawlers it was really the homepage** — and worse, share
+URLs were indexable at all. A share URL carries one named client's
+booking: the ship, who is travelling, whether they get seasick. It is a
+link an advisor sends to one person, not a page.
+
+Fixed by `robots: { index: false, follow: false }` and dropping the
+inherited canonical, which is the right pair — there is no canonical URL
+for a page that should not be indexed. `public/robots.txt` is still a
+Phase 11 item; this is the meta-tag fix and it does not wait for it.
+
+### One component fix
+
+`DeckTable`'s caption pointed at "the placement call above", which is
+true on a ship page and a class page and false on the homepage, where
+the table stands on its own. The caption is a prop now, defaulting to
+the original text.

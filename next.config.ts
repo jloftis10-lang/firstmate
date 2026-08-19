@@ -9,18 +9,12 @@ const nextConfig: NextConfig = {
   agentRules: false,
 
   /**
-   * The Booking Check moved to `/check` in Phase 7. Advisors have been
-   * using `/` as the check since the beginning, so the root keeps
-   * working rather than 404ing on a bookmark.
-   *
-   * TEMPORARY, and deliberately a 307 rather than a 308. Phase 8 gives
-   * `/` a real homepage and removes this; a permanent redirect would
-   * have taught every cache and crawler something we are about to
-   * contradict.
+   * `/` was the Booking Check until Phase 7 and redirected to `/check`
+   * until Phase 8 gave it a homepage. The redirect is gone rather than
+   * inverted: both routes are real pages now and neither stands in for
+   * the other. It was a 307 throughout, so nothing cached it as
+   * permanent and no bookmark is stranded.
    */
-  async redirects() {
-    return [{ source: "/", destination: "/check", permanent: false }];
-  },
 };
 
 export default nextConfig;

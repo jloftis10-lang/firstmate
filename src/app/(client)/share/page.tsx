@@ -20,6 +20,23 @@ import { Wordmark } from "@/components/Wordmark";
 export const metadata: Metadata = {
   title: "Your cruise plan — First Mate",
   description: "A note from your travel advisor.",
+
+  /**
+   * NOT INDEXED, and this is the important line in the file.
+   *
+   * A share URL carries one named client's booking — the ship, who is
+   * travelling, whether they get seasick. It is a link an advisor sends
+   * to one person, not a page. It has no business in a search index and
+   * it has never had a reason to be in one.
+   *
+   * It was also inheriting `canonical: "/"` from the root layout, which
+   * every other route overrides and this one did not — so every share
+   * link was telling crawlers it was really the homepage. Dropping the
+   * canonical and saying noindex fixes both at once: there is no
+   * canonical URL for a page that should not be indexed.
+   */
+  robots: { index: false, follow: false },
+  alternates: {},
 };
 
 type Props = {
