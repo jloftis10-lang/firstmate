@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "coverage": "tsx scripts/coverage.ts"
+    "coverage": "tsx scripts/coverage.ts",
+    "snapshot": "tsx scripts/snapshot.ts",
+    "verify": "tsc --noEmit && tsx scripts/snapshot.ts --check"
   },
   "dependencies": {
     "next": "16.3.1",

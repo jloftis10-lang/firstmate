@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# The client-facing share page carries one advisor's note to one client.
+# It is not content and it should not be indexed.
+Disallow: /share
+
+Sitemap: https://cruiseread.com/sitemap.xml

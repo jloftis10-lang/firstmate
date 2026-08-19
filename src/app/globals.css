@@ -17,12 +17,36 @@
   /* navigation blue */
   --color-deep: #15516f;
 
-  /* brass — HEADS UP flags */
-  --color-signal: #b26a1c;
+  /* --- BRAND, from the logo sheet -----------------------------------
+     Deep navy and sea teal are adopted verbatim: both clear WCAG AA as
+     body text on `paper` (14.6:1 and 5.1:1) and carry white at 17.0:1
+     and 5.9:1. They are the mark's colours and the product's.
+
+     Brass is adopted too, and CONSTRAINED. #C8A24D is 2.07:1 on paper
+     and 2.41:1 under white — it cannot carry text in either direction,
+     at any size. It is a DECORATIVE token only: rules, hairlines, the
+     lighthouse rays and the third wave. Never text, never a text
+     background. The readable counterpart is `signal`, below. */
+  --color-brand-navy: #0b1d33;
+  --color-brand-teal: #2e6d6f;
+  --color-brass: #c8a24d;
+
+  /* brass — HEADS UP flags. READABLE counterpart to --color-brass.
+
+     Darkened along the logo brass's own hue (41deg) until it passes:
+     4.85:1 on paper as text, 5.63:1 carrying white. The value it
+     replaces, #b26a1c, was 3.64:1 as text and 4.22:1 under white — so
+     the SAMPLE badge, which is white on this colour, has been failing AA
+     since it was built. That is an accessibility fix with the arithmetic
+     behind it, not a restyle. */
+  --color-signal: #7d642b;
   --color-signal-bg: #fbf1e3;
 
-  /* sea teal — the call / confidence */
-  --color-go: #1b6b5f;
+  /* sea teal — the call / confidence. Aligned to the logo teal, which is
+     both on-brand and better: 5.12:1 on paper against the previous
+     #1b6b5f at 5.45:1, and white-on at 5.94:1. Both pass; this one
+     matches the mark. */
+  --color-go: #2e6d6f;
   --color-go-bg: #e5f0ed;
 
   /* Archivo: brand, UI, labels (sturdy, instrument-like)

@@ -16,7 +16,6 @@ import { sharePath } from "@/lib/share";
 import { ReadCard } from "./ReadCard";
 import { ClientSummary } from "./ClientSummary";
 import { Sounding } from "./Sounding";
-import { Wordmark } from "./Wordmark";
 import { ShipPicker } from "./ShipPicker";
 import { NoReadYet } from "./NoReadYet";
 
@@ -149,13 +148,16 @@ export function FirstMate({
     (s) => blockStates(s.content!).allVerified,
   ).length;
 
+  // The shell is wide; this column is not. A five-question form and a
+  // column of prose want a reading measure, so the Booking Check keeps one
+  // while the platform pages around it get the full 1180. Widening this
+  // would make the check worse, not better.
   return (
-    <div className="mx-auto max-w-[640px] px-5 pt-7 pb-20">
+    <div className="mx-auto max-w-[640px] px-5 pt-7 pb-20 sm:px-8">
       {sounding && <Sounding />}
 
       {result === null ? (
         <section aria-label="Run a booking check">
-          <Wordmark />
 
           <h1 className="mt-[22px] mb-1.5 max-w-[15ch] font-call text-[1.5rem] leading-[1.18] tracking-[-0.015em] sm:text-[1.72rem]">
             Before you book, know what you&apos;d{" "}
@@ -272,7 +274,6 @@ function ReadView({
 
   return (
     <section className="fm-rise" aria-label="The confidence read">
-      <Wordmark />
 
       <div className="mb-[22px]">
         <div

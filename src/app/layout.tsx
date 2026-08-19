@@ -24,16 +24,20 @@ export const metadata: Metadata = {
   // The production domain. Canonicals, OG tags and share links all derive
   // from this — keep it in step with the Vercel domain settings.
   metadataBase: new URL("https://cruiseread.com"),
-  title: "First Mate",
+  title: {
+    default: "First Mate Cruise — cabin intelligence for travel advisors",
+    template: "%s — First Mate Cruise",
+  },
   description:
     "A second set of eyes on every cruise booking before your client pays.",
   alternates: { canonical: "/" },
+  icons: { icon: "/icon.svg" },
   openGraph: {
-    title: "First Mate",
+    title: "First Mate Cruise",
     description:
       "A second set of eyes on every cruise booking before your client pays.",
     url: "https://cruiseread.com",
-    siteName: "First Mate",
+    siteName: "First Mate Cruise",
     type: "website",
   },
 };
@@ -44,6 +48,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${archivo.variable} ${newsreader.variable} ${spaceMono.variable} h-full antialiased`}
     >
+      {/* Root carries fonts and the stylesheet only. The advisor chrome
+          lives in `(app)`; `(client)` stays bare on purpose — see the
+          note in (app)/layout.tsx. */}
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );

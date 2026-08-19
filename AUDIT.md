@@ -193,9 +193,13 @@ the operator's verdicts — the signature move), `Space Mono`
 Navy/teal/brass ✔. Focus-visible ✔. `prefers-reduced-motion` ✔.
 
 **The mobile bottleneck:** there is no shell. `FirstMate` renders
-`<div className="mx-auto w-full max-w-[520px] px-5 …">` inline. **520px,
-hardcoded, one place.** Every screen inherits it. Desktop is literally a
-520px column. There is no layout component to widen.
+`<div className="mx-auto max-w-[640px] px-5 …">` inline. **640px,
+hardcoded, one place.** Every screen inherits it. There is no layout
+component to widen.
+
+> **Correction, 2026-08-19.** This originally read 520px. It is 640px —
+> I mis-transcribed it. The finding is unchanged (one hardcoded width, no
+> shell) and the number was wrong.
 
 ## 7. Share / client-summary
 
@@ -290,17 +294,22 @@ changes:
 | **10** | Methodology + guides | unchanged |
 | **11** | Instrumentation + SEO + `public/` + Lighthouse | **expanded** — analytics is net-new, and `public/` does not exist |
 
-### Three decisions I need from you before Phase 1
+### Decisions — resolved 2026-08-19
 
-1. **Domain.** Code says `cruiseread.com`; the brief says
-   `firstmatecruise.com`. Which is live?
-2. **`/` vs `/check`.** Move the Booking Check to `/check` and make `/`
-   the new homepage (with a redirect), or keep the check at `/`?
-3. **Deck data.** The deck-by-deck section is the best idea in the brief
-   and needs data that doesn't exist. Options: (a) I extend the model and
-   we populate 2–3 ships by hand from plans you can open, (b) ship pages
-   launch without the section until extraction fills it, (c) something
-   else. **This is the one that most changes what the platform feels
-   like.**
+1. **Domain and brand: both.** The logo sheet settles it — the brand is
+   **First Mate Cruise** and the domain is **cruiseread.com**, locked up
+   together. They were never competing: *First Mate* names the role the
+   product plays, *read* is the noun for what it produces, and the mark
+   carries both. No rebrand, no domain change; the brief's
+   `firstmatecruise.com` is the error.
+2. **`/` vs `/check`: deferred to Phase 7**, where the results shell is
+   rebuilt anyway. Phase 1 kept the check at `/` and introduced route
+   groups instead — `(app)` for the advisor chrome, `(client)` for the
+   share page, which must never show an advisor a CTA meant for them.
+3. **Deck data: extend the model.** Done and proved on Radiance class —
+   see `src/lib/decks.ts` and the checksum. The stacks are transcribed
+   from signed prose, not researched afresh, and `quietBandHolds()`
+   fails the build if a transcription contradicts the signed answer.
 
-I have made no code changes. Awaiting approval.
+Phase 0 produced this file with no code changes. Phases 1 onward are in
+their own commits.

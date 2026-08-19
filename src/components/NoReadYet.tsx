@@ -1,6 +1,5 @@
 import type { Ship } from "@/lib/types";
 import { blockStates } from "@/lib/types";
-import { Wordmark } from "./Wordmark";
 
 /**
  * Coverage stated by LINE, not by hull.
@@ -62,7 +61,6 @@ export function NoReadYet({
 
   return (
     <section className="fm-rise" aria-label="No read available">
-      <Wordmark />
 
       <div className="mb-[22px]">
         <div
