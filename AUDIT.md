@@ -313,3 +313,44 @@ changes:
 
 Phase 0 produced this file with no code changes. Phases 1 onward are in
 their own commits.
+
+---
+
+## Content findings raised by a page, not by a review
+
+The ship page is the first surface that shows one hull's whole record at
+once, and putting the engine's conditional output beside the record it
+came from surfaced a duplication nobody had seen in five class reviews.
+
+**The connecting-cabin flag says the same thing twice on a family
+booking.** `engine.ts` wraps the family branch in "never infer it from
+the category or from two cabin numbers sitting next to each other. Only
+an explicit connecting pair counts", then appends
+`cabin.connectingNote`, which on the Royal records reads "Never read
+connecting status off the category or off two cabin numbers being next
+to each other — only an explicit connecting pair counts." Same rule,
+same sentence, twice in one flag.
+
+This ships today in the Booking Check as well; the ship page only made
+it visible. **Not fixed here** — the fix is either in `engine.ts` or in
+27 signed records, both of which change operator-approved output, and
+neither belongs in a UI phase. Raised for Jimmy to call.
+
+## Phase 4 — what shipped
+
+`/ships/[slug]`, static, for the 79 covered hulls only; `dynamicParams`
+is off, so the other 116 return 404 rather than an indexable empty page.
+Eight sections, none of which is ever dropped — a hull with no deck
+stack still renders section 02 saying so, because seven sections instead
+of eight reads as a ship whose decks were checked.
+
+Two things are worth flagging beyond the route:
+
+- **`src/lib/fit.ts`.** A reference page has no client, so it cannot
+  print a read. It enumerates all 32 profiles through the real engine
+  and partitions the output into what is always said and what a
+  particular answer turns on. The alternative was a second copy of the
+  gating rules in the page, which is the drift the class records were
+  built to refuse. Nothing in that file knows what a family is.
+- **`/?ship=<id>`.** A new parameter on `/` only. The five `/share`
+  params remain a frozen contract and are untouched.

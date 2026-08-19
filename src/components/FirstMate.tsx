@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import Link from "next/link";
 import { blockStates, isCovered } from "@/lib/types";
 import type {
   ClientProfile,
@@ -13,12 +14,16 @@ import type {
 } from "@/lib/types";
 import { clientSummary, getRead } from "@/lib/engine";
 import { sharePath } from "@/lib/share";
+import { shipPath } from "@/lib/nav";
 import { ReadCard } from "./ReadCard";
 import { shipProvenance } from "@/lib/provenance";
 import { ClientSummary } from "./ClientSummary";
 import { Sounding } from "./Sounding";
 import { ShipPicker } from "./ShipPicker";
 import { NoReadYet } from "./NoReadYet";
+
+/** The linked ship cannot change without a navigation, which remounts. */
+const noopSubscribe = () => () => {};
 
 const PARTY_OPTIONS: { value: Party; label: string; readout: string }[] = [
   { value: "couple", label: "Couple", readout: "COUPLE" },
@@ -98,9 +103,40 @@ export function FirstMate({
   emailEnabled: boolean;
 }) {
   // Default to a ship we can actually read, so the first run shows the product.
-  const [shipId, setShipId] = useState(
-    (ships.find((s) => s.content) ?? ships[0]).id,
+  const fallbackShip = (ships.find((s) => s.content) ?? ships[0]).id;
+  // Null until the advisor picks one — the effective ship is resolved
+  // below, so an explicit choice always beats a linked one.
+  const [chosenShip, setShipId] = useState<string | null>(null);
+
+  // `/?ship=<id>` — how a ship page hands a hull to the check.
+  //
+  // Read through `useSyncExternalStore` rather than `useSearchParams` or
+  // an effect, because both of those cost something this route cannot
+  // afford. `useSearchParams` forces the subtree under a Suspense
+  // boundary and drops it out of the prerender, so the check's form and
+  // heading would be absent from the static HTML of the site's most
+  // important page. Reading `window.location` in a state initialiser
+  // hydrates a different ship than the server rendered, which is a real
+  // hydration error and not a cosmetic one. Setting state from an effect
+  // is the cascading-render pattern React now lints against.
+  //
+  // This hook exists for exactly this shape: `getServerSnapshot` returns
+  // null so the prerender and the hydration agree, then the client
+  // snapshot supplies the parameter on the pass after. The subscribe is
+  // a no-op because the value cannot change without a navigation, and a
+  // navigation remounts this anyway.
+  //
+  // An unknown or absent id falls through to the default. A link naming
+  // a ship we cannot read must not blank the picker.
+  const linkedShip = useSyncExternalStore(
+    noopSubscribe,
+    () => new URLSearchParams(window.location.search).get("ship"),
+    () => null,
   );
+  const shipId =
+    chosenShip ??
+    (linkedShip && ships.some((s) => s.id === linkedShip) ? linkedShip : null) ??
+    fallbackShip;
   const [party, setParty] = useState<Party>("couple");
   const [seasick, setSeasick] = useState<Seasick>("no");
   const [experience, setExperience] = useState<Experience>("first");
@@ -295,6 +331,20 @@ function ReadView({
         <p className="mt-3.5 rounded-[9px] border border-[#E3EAEC] bg-surface px-3 py-2.5 font-readout text-[0.72rem] leading-[1.7] tracking-[0.02em] text-ink-2">
           <span className="text-deep">◎</span>
           &nbsp; {bits.join("  ·  ")}
+        </p>
+
+        {/* Out to the reference view. The read answers this booking; the
+            ship page answers the hull, and an advisor quoting a second
+            client on the same ship wants the second one. Rendered for
+            covered ships only, which is all ReadView ever receives — the
+            uncovered path is NoReadYet and there is no page to point at. */}
+        <p className="mt-2">
+          <Link
+            href={shipPath(ship.id)}
+            className="font-readout text-[0.7rem] tracking-[0.05em] uppercase text-deep underline decoration-line underline-offset-[3px] hover:decoration-deep"
+          >
+            Everything we know about {ship.name} &rarr;
+          </Link>
         </p>
 
         {/* Suppressed when the booking is blocked: the banner points at

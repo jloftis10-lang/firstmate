@@ -45,3 +45,22 @@ export const FOOTER_NAV: NavItem[] = [
 ];
 
 export const availableNav = (items: NavItem[]) => items.filter((i) => i.available);
+
+/**
+ * The canonical URL for a ship page, in one place.
+ *
+ * Only COVERED ships have one — `generateStaticParams` builds pages for
+ * those alone and `dynamicParams` is off, so an uncharted hull 404s
+ * rather than serving an empty page under a real URL. That is the
+ * brief's "no indexable pages for ships without real coverage", enforced
+ * by the router rather than by a robots directive.
+ */
+export const shipPath = (id: string) => `/ships/${id}`;
+
+/**
+ * The Booking Check, pre-loaded with a ship.
+ *
+ * `ship` is a NEW parameter on `/`, not on `/share` — the five share
+ * params are a frozen public contract and this does not touch them.
+ */
+export const checkPath = (shipId: string) => `/?ship=${encodeURIComponent(shipId)}`;
