@@ -25,7 +25,13 @@
  * Collapsing them loses a booking that would have worked, which is the
  * opposite of what this product is for.
  *
- * The last three were added at the Voyager/Freedom review, where the
+ * `slide-intrusion` came from the Norwegian Prima review and is the one
+ * that most justifies the whole taxonomy. A dry slide running down the
+ * hull enters the balcony rather than blocking a view of anything, so
+ * "obstructed" is not merely imprecise about it — it is the wrong word.
+ * The client still has their view; what they've lost is floor.
+ *
+ * The last three before it were added at the Voyager/Freedom review, where the
  * first draft reached for "overlooked" to describe a whirlpool
  * cantilevered over a balcony. Jimmy drew the line: "overlooked" is
  * reserved for a PRIVACY problem where people can physically see down
@@ -62,12 +68,14 @@
  *   - horizon-lost      the primary sea view is materially gone
  *   - downward-blocked  can't see straight down; horizon preserved
  *   - sky-blocked       permanent shade from above; horizon preserved
+ *   - space-intrusion   structure physically occupies the balcony itself
  *   - privacy-reduced   the view is fine; other people can see in
  */
 export type ViewEffect =
   | "horizon-lost"
   | "downward-blocked"
   | "sky-blocked"
+  | "space-intrusion"
   | "privacy-reduced";
 
 export type ObstructionKind =
@@ -79,7 +87,8 @@ export type ObstructionKind =
   | "cantilevered-whirlpool"
   | "aft-superstructure"
   | "lifeboat-roof"
-  | "window-washing-platform";
+  | "window-washing-platform"
+  | "slide-intrusion";
 
 export type Obstruction = {
   id: ObstructionKind;
@@ -155,6 +164,14 @@ export const OBSTRUCTION_KINDS: Obstruction[] = [
     cause: "the ship's window-washing platform and its equipment",
     experience:
       "an unusual one, and it affects a small number of specific cabins rather than a band — the platform sits in the view itself. Worth checking by cabin number rather than by deck, because the cabins either side can be perfectly clear",
+  },
+  {
+    id: "slide-intrusion",
+    effect: "space-intrusion",
+    cause:
+      "the ship's dry-slide structure running down the side of the hull, physically entering the balcony",
+    experience:
+      "this one is not a view problem and calling it \"obstructed\" misses it entirely — the client still has a balcony and the sea is still there, but the slide structure comes INTO the balcony space rather than passing outside it. The rooms with the biggest balconies are the ones reported worst affected, which is the opposite of what anyone expects. Describe the geometry; don't file it under obstructed and let them imagine a wall",
   },
 ];
 

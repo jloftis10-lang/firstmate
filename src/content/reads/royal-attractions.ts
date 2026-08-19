@@ -1,6 +1,16 @@
+import {
+  attractionNames as namesFrom,
+  attractionRules as rulesFrom,
+  type AttractionEntry,
+  type AttractionTable,
+} from "@/lib/attractions";
+
 /**
  * Royal Caribbean's attractions and their actual restrictions, as
  * constants a ship maps onto rather than prose each ship repeats.
+ *
+ * The shape and the joining live in `src/lib/attractions.ts`; this file
+ * is only Royal's table. Norwegian has its own.
  *
  * OPERATOR-DIRECTED (Jimmy, 2026-08-19) at the Voyager/Freedom review:
  * "Instead of putting child restrictions in eight ship records, I would
@@ -38,23 +48,9 @@ export type AttractionId =
   | "mini-golf"
   | "sports-court";
 
-export type Attraction = {
-  id: AttractionId;
-  /** As Royal names it, because that's what's on the sign at the queue. */
-  name: string;
-  /**
-   * The restriction sentence, complete and quotable.
-   *
-   * OPTIONAL, because "what's aboard" and "what has a height rule" are
-   * different questions. Mini-golf and the sports court belong in a
-   * hull's inventory — on a Radiance ship they're most of the answer —
-   * but they gate nobody, and inventing a restriction to fill the field
-   * would be worse than leaving it empty.
-   */
-  rule?: string;
-};
+export type Attraction = AttractionEntry<AttractionId>;
 
-export const ROYAL_ATTRACTIONS: Record<AttractionId, Attraction> = {
+export const ROYAL_ATTRACTIONS: AttractionTable<AttractionId> = {
   flowrider: {
     id: "flowrider",
     name: "FlowRider",
@@ -95,26 +91,12 @@ export const ROYAL_ATTRACTIONS: Record<AttractionId, Attraction> = {
   },
 };
 
-/**
- * The restriction sentence for exactly the attractions a hull currently
- * has — nothing about rides it doesn't.
- *
- * Returns "" for an empty list. A ship with no mapped attractions says
- * nothing here rather than falling back to a generic fleet paragraph
- * that might name a ride it doesn't carry.
- */
+/** Royal's rules for exactly the rides a hull currently carries. */
 export function attractionRules(ids: AttractionId[]): string {
-  const found = ids
-    .map((id) => ROYAL_ATTRACTIONS[id])
-    .filter((a) => a?.rule) as Required<Attraction>[];
-  if (found.length === 0) return "";
-  const rules = found.map((a) => a.rule);
-  const last = rules.pop() as string;
-  const joined = rules.length ? `${rules.join("; ")}; and ${last}` : last;
-  return `On this ship specifically: ${joined}. Different rides, different numbers — clearing one does not clear the rest, so check the ride the child actually wants.`;
+  return rulesFrom(ROYAL_ATTRACTIONS, ids);
 }
 
 /** What's aboard, for a plain "here's what this hull has" sentence. */
 export function attractionNames(ids: AttractionId[]): string {
-  return ids.map((id) => ROYAL_ATTRACTIONS[id]?.name).filter(Boolean).join(", ");
+  return namesFrom(ROYAL_ATTRACTIONS, ids);
 }
