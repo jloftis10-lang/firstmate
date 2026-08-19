@@ -6,7 +6,14 @@ import type { ShipContent, Source } from "@/lib/types";
  * Researched August 2026. ncl.com is blocked by this environment's egress
  * proxy along with the deck-plan sites, so even the claims attributed to
  * NCL's own FAQ come from search snippets rather than a page anyone
- * opened. Money is `verified: false` across the line until Jimmy signs it.
+ * opened. Jimmy signed the money block on 2026-08-19 knowing that — the
+ * rates, the stacking charge and the placement rule are things he checks
+ * against his own bookings, so the sourcing weakness was not what the
+ * sign-off rested on.
+ *
+ * That was the last outstanding decision in the project: it covers all
+ * 20 Norwegian hulls at once, which is why it was raised separately from
+ * the per-class cabin and traps work rather than being folded into it.
  *
  * TWO THINGS ON THIS LINE DIVERGE HARD FROM ADVISOR INTUITION built on
  * Royal and Carnival, and both are encoded as explicit warnings:
@@ -78,11 +85,15 @@ export const NCL_SOURCES: Source[] = [
  * lifts the ceiling for roughly $29 more. Everyone in the stateroom has
  * to buy it — the same all-or-nothing rule Royal has.
  *
+ * SIGNED OFF by Jimmy, 2026-08-19. One decision covering all 20
+ * Norwegian hulls.
+ *
  * There is deliberately NO break-even figure, the same as the other
  * lines. Break-even is a property of the drinker.
  */
 export const NCL_MONEY: ShipContent["money"] = {
-  verified: false,
+  // Signed off by Jimmy, 2026-08-19.
+  verified: true,
   drinkPackagePrice: 109,
   drinkPackageNote:
     "Do not tell an NCL client their drinks are free. Free at Sea bundles the open bar in, but it carries a mandatory fixed charge for every guest 21 and over — about $28.50 per person per day on sailings of six nights or more, and $32 on two-to-five-night sailings since May 2026 — and that STACKS on top of the ordinary daily service charge rather than replacing it. A Haven couple on a week is around $53.50 each per day before they buy a thing. Two more catches: the specialty dining in the bundle goes to guests one and two only, and a second guest under 21 gets a soda package at $12.50 a day charged separately, while guests three and up under 21 get no substitute at all.",
