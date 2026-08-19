@@ -1,0 +1,47 @@
+{
+  "_note": "First extraction returned through the intake pipeline, 2026-08-18. Kept verbatim as the audit trail. NOT yet composed into ship records — see docs/viking-findings.md for what was and was not usable.",
+  "extractionMeta": {
+    "checked": "2026-08-18",
+    "deckStackSourceType": "SECONDARY (cruisemapper) — self-flagged by the extractor as requiring visual confirmation against Viking's own graphic before promotion",
+    "officialPdfRetrievable": false
+  },
+  "usable": {
+    "silverSpirits": {
+      "price": "$27 per guest per day",
+      "serviceCharge": "15% included in the stated price",
+      "minimumAge": 21,
+      "purchaseRule": "both guests in a stateroom must buy it, for the whole cruise",
+      "adds": "wines by the glass, house champagne, cocktails, aperitifs, drinks priced up to $18 all day, premium pairing at The Chef's Table, 30% off premium bottles, 50% off premium tastings",
+      "source": "https://www.vikingcruises.com/oceans/my-trip/silver-spirits-beverage-package/index.html"
+    },
+    "gratuities": {
+      "includedInFare": false,
+      "recommended": "$20 per person per night",
+      "caution": "some promotions and World Cruise offers include them — booking terms override the standard rule",
+      "source": "https://www.vikingcruises.com/oceans/frequently-asked-questions.html"
+    },
+    "alsoIncluded": [
+      "alternative / specialty restaurant dining",
+      "Nordic Spa and Fitness Center access",
+      "24-hour room service",
+      "self-service launderettes"
+    ],
+    "source": "https://www.vikingcruises.com/oceans/why-viking/viking-difference/viking-inclusive-value.html"
+  },
+  "notUsable": {
+    "deckStack": "secondary source, self-flagged, and the mixed-use flags are driven by launderettes",
+    "obstructedCabins": "unknown — the graphical plan could not be inspected",
+    "vikingMarksObstruction": "unknown, and correctly NOT converted into 'Viking does not mark them'",
+    "elevatorCount": "unknown",
+    "elevatorBanks": "unknown",
+    "verandaCompromises": "unknown on every axis except venue-adjacency, which is inferred from the secondary deck stack",
+    "refits": "unknown",
+    "stateroomSubcategories": "only grouped codes OS/ES/PS/PV/DV/V exposed; no DV1/DV2 style subcodes, and correctly not invented"
+  },
+  "catalogCorrections": {
+    "vikingSun": "now Viking Yi Dun — PRC-registered, operated by China Merchants Viking Cruises",
+    "vikingMira": "in service, delivered 26 May 2026, was missing from the catalog",
+    "classSplit": "Vela, Vesta and Mira are 998 guests / 784ft / 101ft beam against 930 / 745ft / 94ft — a larger generation, not the same class",
+    "notInService": "Libra (Nov 2026) and Astrea (2027) announced only"
+  }
+}

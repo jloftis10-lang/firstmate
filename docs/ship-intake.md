@@ -57,6 +57,14 @@ A deck can be **both** cabins and public space. That is the case the
 simple vertical scan misses, and it has come up on four hulls. Do not
 collapse it — a deck with cabins and a pool on it needs both flags.
 
+**Name every venue, including the dull ones**, and let the composition
+step decide which matter. The first Viking extraction flagged four decks
+as mixed-use on the strength of a self-service launderette on each —
+correct, and useless as a warning, because nobody is kept awake by a
+washing machine two doors down. A launderette and an infinity pool are
+both public space and only one of them is a reason to move a cabin. The
+extraction records what is there; the record decides what it means.
+
 ### Obstructed cabins — from the official plan only
 
 Cabin numbers the **line's own** deck plan marks. Plus, separately:

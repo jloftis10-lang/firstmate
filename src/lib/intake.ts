@@ -365,6 +365,21 @@ export function quietCandidates(decks: DeckEntry[]): number[] {
  * Decks carrying cabins AND public space — the `PUBLIC_SPACE_SANDWICH`
  * cases. These can pass `quietCandidates` and still be wrong, which is
  * exactly why the two are separate functions.
+ *
+ * CAVEAT FOUND BY THE VIKING PILOT, and it is a real weakness in the
+ * field this reads. `publicSpace` is a flat list of names, so a
+ * self-service launderette counts exactly as much as an infinity pool.
+ * The first Viking extraction came back with decks 3, 4, 5 and 6 all
+ * marked mixed-use on the strength of a launderette apiece — which is
+ * true and tells an advisor nothing, because nobody is kept awake by a
+ * washing machine two doors down.
+ *
+ * This function still reports the fact, because filtering here would
+ * hide it. The judgment about which venues are noise-relevant belongs to
+ * `src/lib/noise.ts`, which already ranks sources by what a client
+ * actually experiences, and to the person composing the record. What the
+ * extraction brief now says is: name every venue, and the composition
+ * step decides which ones matter.
  */
 export function mixedUseDecks(decks: DeckEntry[]): DeckEntry[] {
   return decks.filter((d) => d.carriesCabins && d.publicSpace.length > 0);
