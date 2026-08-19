@@ -237,6 +237,12 @@ export default async function ShipPage({ params }: PageProps<"/ships/[slug]">) {
             >
               Run a Booking Check on this ship
             </Link>
+            <Link
+              href={`/compare?a=${ship.id}`}
+              className="rounded-[10px] border border-line px-4 py-2.5 text-[0.9rem] font-semibold text-ink-2 no-underline transition-colors hover:border-ink-3 hover:text-ink"
+            >
+              Compare with another ship
+            </Link>
             <span className="max-w-[34ch] text-[0.82rem] leading-[1.5] text-ink-3">
               This page is the ship. The check is the booking — it asks who is
               sailing and narrows all of this to them.

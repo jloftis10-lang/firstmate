@@ -57,7 +57,9 @@ export function ExceptionField({ diff }: { diff: FieldDiff }) {
 
       {framing && framing.lead.length > 0 && (
         <Frame
-          label={`All ${n} hulls open with`}
+          // "All 2 hulls" is what a count reads like when nobody checked
+          // it against two. The compare page always has exactly two.
+          label={n === 2 ? "Both ships open with" : `All ${n} hulls open with`}
           sentences={framing.lead}
           className="mb-3"
         />
@@ -79,8 +81,12 @@ export function ExceptionField({ diff }: { diff: FieldDiff }) {
                 <Emphasis text={s.value} />
               ) : (
                 <span className="text-ink-3">
-                  Nothing recorded for this hull — its sisters carry a note
-                  here and it does not.
+                  {/* "Its sisters" is true on a class page and false on
+                      the compare page, which routinely puts a Carnival
+                      hull beside a Royal one. */}
+                  {n === 2
+                    ? "Nothing recorded for this hull — the other one carries a note here and this one does not."
+                    : "Nothing recorded for this hull — its sisters carry a note here and it does not."}
                 </span>
               )}
             </dd>
@@ -90,7 +96,7 @@ export function ExceptionField({ diff }: { diff: FieldDiff }) {
 
       {framing && framing.tail.length > 0 && (
         <Frame
-          label={`and all ${n} close with`}
+          label={n === 2 ? "and both close with" : `and all ${n} close with`}
           sentences={framing.tail}
           className="mt-3"
         />

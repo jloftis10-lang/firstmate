@@ -524,3 +524,74 @@ Phase 11 item; this is the meta-tag fix and it does not wait for it.
 true on a ship page and a class page and false on the homepage, where
 the table stands on its own. The caption is a prop now, defaulting to
 the original text.
+
+## Phase 9 — what shipped
+
+`/compare?a=&b=`, and the last nav item is live.
+
+**Almost none of it is new code, and that is the finding.**
+`buildClassRecord` never knew it was looking at a class — it takes
+covered ships and a field accessor and reports where they agree and
+where they diverge. A class is one interesting pair of that shape; two
+ships an advisor is choosing between is another. So `ExceptionField`,
+`sentenceFraming` and `UniqueExtras` all work here unchanged.
+
+The framing matters more here than it did on the class pages. Comparing
+sisters — Radiance against Brilliance — gives 14 of 15 fields matching
+and one difference, and that difference is two 850-character notes
+sharing four opening sentences and one closing one. Framed, it renders
+as two single-line differences under a frame shown once.
+
+What compare adds that a class page cannot: **money**. Every hull on a
+line carries the same money block by reference, so a class can only
+agree with itself and the class page rightly never looks. Across lines
+it is often the largest difference between two ships.
+
+Dynamic, deliberately: 79 covered hulls make ~3,000 pairs, which is not
+a prerender, and computing a comparison in the browser would ship the
+whole knowledge base to a page that renders a table. `canonical` points
+at the bare `/compare` for every pair so the permutations do not
+fragment the index.
+
+No client profile. The check answers "what about this booking"; compare
+answers "how do these two hulls differ", which is a question about ships
+— and the per-client reasoning already has a home on each ship page.
+
+### Two rendering fixes the pair case forced
+
+- `ExceptionField` said "All 2 hulls open with" and "its sisters carry a
+  note here", both written for a class and both wrong beside a Carnival
+  hull and a Royal one. Both now switch on the count.
+- The two deck tables overflowed the page at 390px. A grid item defaults
+  to `min-width: auto`, so the table's 520px minimum pushed the page
+  sideways instead of scrolling inside its own container. The ship page
+  never hit it because its table is not in a grid.
+
+---
+
+## For Jimmy — a money gap the compare page makes dangerous
+
+**Carnival's money block has no `drinkPackageNote`. Royal's and
+Norwegian's do.** Put Carnival Vista beside Radiance of the Seas and the
+page now shows, side by side:
+
+- Carnival — drink package: **around $84 per person, per day**
+- Royal — drink package: **around $75 per person, per day**
+
+An advisor reads that as Carnival being $9 a day more expensive. It is
+not. `ROYAL_MONEY.drinkPackageNote` says the 18% gratuity is added at
+checkout, so Royal's $75 is really about $88.50. And the signed comment
+above `CARNIVAL_MONEY` says Cheers! is "$83.94 per person per day
+pre-cruise and $89.94 onboard, both including the 20% service charge" —
+so Carnival's $84 is all-in, and buying onboard costs $6 a day more.
+
+Both of those facts are already signed. Neither is on the page, because
+Carnival's equivalent of the note lives only in a code comment. The
+comparison is therefore backwards by roughly $13 a day, and it is
+backwards on the one screen built to compare them.
+
+**Not fixed here.** Writing `CARNIVAL_MONEY.drinkPackageNote` is
+operator content that needs your sign-off, not a UI change. The facts to
+draw on are in the header comment of `src/content/reads/carnival-common
+.ts`. It is one field, and it fixes 29 ship pages, the Carnival line
+page and every cross-line comparison at once.

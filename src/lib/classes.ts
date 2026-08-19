@@ -127,9 +127,23 @@ const LABEL: Record<string, string> = {
   "traps.embarkationNote": "Embarkation",
   "cabin.categoryWarnings": "Category notes",
   "traps.other": "Ship-specific traps",
+  // Money is never diffed for a class page — every hull on a line
+  // carries the same block by reference, so a class can only ever agree
+  // with itself. The compare page diffs it across lines, where it is
+  // often the largest difference between two ships. See lib/compare.ts.
+  "money.gratuityPerDayUSD": "Gratuities",
+  "money.drinkPackagePrice": "Drink package",
+  "money.drinkPackageNote": "Before you price it",
+  "money.breakEvenDrinksPerDay": "Break-even",
+  "money.specialtyDiningNote": "Specialty dining",
 };
 
-function diff(
+/**
+ * Exported for the compare page, which diffs two ships that are not a
+ * class — see `src/lib/compare.ts`. The function never knew or cared:
+ * it takes a list of covered ships and a field accessor.
+ */
+export function diff(
   ships: CoveredShip[],
   field: string,
   read: (c: ShipContent) => string | undefined,
@@ -153,7 +167,8 @@ function diff(
   return { field, label: LABEL[field] ?? field, perShip: values };
 }
 
-function listDiff(
+/** Exported for the same reason as `diff`. */
+export function listDiff(
   ships: CoveredShip[],
   field: string,
   read: (c: ShipContent) => string[] | undefined,
