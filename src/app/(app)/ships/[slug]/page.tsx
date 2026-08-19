@@ -7,6 +7,7 @@ import type { CoveredShip } from "@/lib/types";
 import { shipProvenance } from "@/lib/provenance";
 import { shipFit } from "@/lib/fit";
 import { checkShipPath, classPath, linePath } from "@/lib/nav";
+import { OG_IMAGE } from "@/lib/og";
 import { routedClassRecords } from "@/lib/classes";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CoverageChips } from "@/components/CoverageChips";
@@ -83,6 +84,7 @@ export async function generateMetadata({
       description: parts.join(" "),
       url: `/ships/${ship.id}`,
       type: "article",
+      images: [OG_IMAGE],
     },
   };
 }

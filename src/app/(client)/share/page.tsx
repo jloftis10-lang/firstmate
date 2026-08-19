@@ -18,7 +18,11 @@ import { Wordmark } from "@/components/Wordmark";
  */
 
 export const metadata: Metadata = {
-  title: "Your cruise plan — First Mate",
+  // ABSOLUTE, because the root layout's template appends " — First Mate
+  // Cruise" to every page title and this one already ends in the brand.
+  // The tab on the page a paying client opens read "Your cruise plan —
+  // First Mate — First Mate Cruise".
+  title: { absolute: "Your cruise plan — First Mate Cruise" },
   description: "A note from your travel advisor.",
 
   /**

@@ -682,3 +682,108 @@ is one copy of each. The provenance definitions are rendered from
 `PROVENANCE_COPY` — the same constant the badges use — rather than
 restated, because the day a restatement disagreed with a badge the badge
 would be the honest one and this page the reassuring one.
+
+## Phase 11 — what shipped
+
+The last phase: SEO, `public/`, accessibility, instrumentation.
+
+### Four live defects, found by checking rather than by looking
+
+1. **`/sitemap.xml` 404'd while `robots.txt` promised it.** `public/robots
+   .txt` had been pointing at a file that did not exist since it was
+   written. `src/app/sitemap.ts` now generates 121 URLs from the same
+   data every page reads — 79 ships, 29 classes, 3 lines, 10 static.
+   `lastModified` is the most recent date a source behind that page was
+   checked, not the build clock: stamping 121 pages with the deploy time
+   tells a crawler everything changed whenever one thing did.
+2. **`/share`'s title was double-suffixed.** The root template appends
+   " — First Mate Cruise" to every title and that page's already ended
+   in the brand, so the tab a paying client opened read "Your cruise plan
+   — First Mate — First Mate Cruise". Now `title: { absolute }`.
+3. **Nothing had an `og:image`.** Every route declared `openGraph`
+   metadata and no image existed, so every pasted link rendered as a
+   blank card. Then, after adding one, a verification caught the sharper
+   half: **111 of the 121 pages still had none.** A page that declares
+   its own `openGraph` block replaces the inherited one, image included —
+   which is every page using `generateMetadata`: all 79 ship pages, all
+   29 class pages, all 3 line pages. The 10 static pages were fine, which
+   is exactly why it was invisible until something checked a ship page.
+4. **The production domain was in two places.** `metadataBase` and
+   `public/robots.txt`. Now one `robots.ts` route; the static file is
+   deleted, because a file in `public/` shadows the route rather than
+   losing to it.
+
+### Accessibility
+
+An audit across all 15 page types found one real defect — a heading jump
+from `h1` to `h3` on the read view, which a screen-reader user
+navigating by heading experiences as a missing section. Fixed.
+
+Added a skip link, because the wordmark was the first focusable element
+on every page: a keyboard user tabbed the brand, five nav items and the
+CTA before reaching content, on each of 121 pages. It moves focus rather
+than only scrolling — `#main` is a real box with `tabIndex={-1}`, since
+a `display: contents` wrapper has no layout box to scroll to and a skip
+link that scrolls without moving focus is the common broken version.
+
+### Instrumentation — a seam, not a tracker
+
+Three pages promise that "the order these get worked up in is driven by
+what advisors actually ask for" and nothing could observe it. That is a
+claim with no mechanism, which is the kind this codebase least wants
+standing.
+
+But choosing a provider is not a code decision. Session-recording tools
+capture an advisor's screen while they work a real client's booking, and
+the check's own URL carries that client's profile. So `src/lib/analytics
+.ts` ships the call sites and the payload constraint and **sends nothing**
+— no third-party script, no beacon, until `NEXT_PUBLIC_ANALYTICS_ENDPOINT`
+is set. Asserted: running a check fires no request and loads no
+third-party script.
+
+The payload is constrained at the type level to a ship id and whether
+that hull is charted. Never the party, the seasickness answer, the
+itinerary or the URL — the demand question does not need facts about a
+real traveller.
+
+**Jimmy's call:** whether to point it at anything, and at what.
+
+---
+
+## For Jimmy — `/check` ships 98% dead weight, and it scales the wrong way
+
+Measured, not estimated:
+
+| | raw | gzipped |
+|---|---|---|
+| `/` | 73 KB | 12 KB |
+| `/ships` | 165 KB | 14 KB |
+| **`/check`** | **906 KB** | **88 KB** |
+
+796 KB of that is one inline RSC payload: the entire ship-content corpus
+serialised into the HTML of every `/check` load. The page hands `SHIPS`
+to a client component because the engine runs in the browser — which is
+what makes the check static, instant and offline-capable after load, and
+that architecture is worth keeping.
+
+The problem is the ratio and the trajectory:
+
+- **98%** of the payload is ship content; the picker needs the other 2%
+  (21 KB of identity for all 195 hulls).
+- **12.4 KB raw per covered hull**, so it grows linearly with the thing
+  the product exists to grow. At full catalog coverage it is **~2.4 MB
+  raw / ~230 KB gzipped** on the page an advisor opens mid-call.
+- Only ONE hull's content is ever used per check.
+
+**The fix, and why it is not in this commit.** Split the payload: the
+server passes identity only, and a hull's content is loaded on demand —
+either a dynamic `import()` of the reads module or per-ship static JSON
+generated at build. Initial HTML drops to roughly 80 KB raw, the content
+is fetched once and cached, and the check's existing 1250 ms Sounding
+animation covers the fetch entirely. It needs a loading state for
+arriving directly on a full check URL, and an honest failure state.
+
+That is a change to the data architecture of the product's most
+important flow, and it deserves its own commit and its own verification
+rather than the tail of a phase about metadata. Same call as the Carnival
+money note: measured, specified, and left for you to schedule.

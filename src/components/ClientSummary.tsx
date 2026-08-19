@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 import type { ClientProfile } from "@/lib/types";
 import { shareParams } from "@/lib/share";
+import { track } from "@/lib/analytics";
 
 type Props = {
   text: string;
@@ -85,9 +86,13 @@ export function ClientSummary({
 
   return (
     <div className="my-[22px] mb-2 rounded-2xl bg-deep px-5 py-[22px] text-[#EAF2F5]">
-      <h3 className="mb-1.5 font-readout text-[0.72rem] font-bold tracking-[0.09em] uppercase text-[#9EC4D4]">
+      {/* h2, not h3. The read view's only other heading is its h1, so an
+          h3 here skipped a level — which a screen-reader user navigating
+          by heading experiences as a missing section rather than as a
+          style choice. */}
+      <h2 className="mb-1.5 font-readout text-[0.72rem] font-bold tracking-[0.09em] uppercase text-[#9EC4D4]">
         Client-ready summary
-      </h3>
+      </h2>
       <p className="mb-[15px] text-[0.86rem] leading-[1.45] text-[#B7D0DB]">
         The bit you send the client — so you sound like you&apos;ve sailed it a
         hundred times.
@@ -121,7 +126,13 @@ export function ClientSummary({
         <button
           type="button"
           onClick={() =>
-            copy(new URL(sharePath, window.location.origin).toString(), "link")
+            {
+            // The end of a successful use: the advisor sent it on. Ship
+            // id only — the link itself carries the client's profile and
+            // must not be reported.
+            track({ name: "summary.shared", ship: client.shipId });
+            copy(new URL(sharePath, window.location.origin).toString(), "link");
+          }
           }
           aria-live="polite"
           className={`flex-1 cursor-pointer rounded-[11px] border p-[13px] text-[0.94rem] font-semibold transition-colors ${

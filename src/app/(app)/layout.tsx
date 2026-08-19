@@ -19,7 +19,18 @@ export default function AppLayout({ children }: LayoutProps<"/">) {
   return (
     <>
       <SiteHeader />
-      {children}
+      {/* The skip link's target. `tabIndex={-1}` makes it focusable by
+          script without putting it in the tab order, which is what lets
+          the jump actually move focus rather than only scroll.
+          
+          A real box rather than `display: contents`: a contents element
+          has no layout box, so a browser has nothing to scroll to and
+          the skip link would move focus without moving the viewport.
+          The flex classes keep the page's `main` a flex child of the
+          body as it was before this wrapper existed. */}
+      <div id="main" tabIndex={-1} className="flex flex-1 flex-col">
+        {children}
+      </div>
       <SiteFooter
         coveredCount={SHIPS.filter((s) => SHIP_READS[s.id]).length}
         shipCount={SHIPS.length}

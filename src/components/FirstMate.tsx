@@ -16,6 +16,7 @@ import { clientSummary, getRead } from "@/lib/engine";
 import { checkPath, parseShare, sharePath } from "@/lib/share";
 import { shipPath } from "@/lib/nav";
 import { currentSearch, pushUrl, serverSearch, subscribeToUrl } from "@/lib/url-state";
+import { track } from "@/lib/analytics";
 import { ReadCard } from "./ReadCard";
 import { shipProvenance } from "@/lib/provenance";
 import { ClientSummary } from "./ClientSummary";
@@ -172,6 +173,15 @@ export function FirstMate({
   useEffect(() => () => clearTimeout(timer.current), []);
 
   function show(profile: ClientProfile) {
+    // The demand signal — see `src/lib/analytics.ts`. Ship id and whether
+    // it is charted, and nothing about the traveller: the party and the
+    // seasickness answer are facts about a real person and the question
+    // "which hulls do advisors ask for" does not need them. Sends
+    // nothing unless an endpoint is configured.
+    const charted = Boolean(ships.find((s) => s.id === profile.shipId)?.content);
+    track({ name: "check.run", ship: profile.shipId, charted });
+    if (!charted) track({ name: "check.uncharted", ship: profile.shipId });
+
     pushUrl(checkPath(profile));
     window.scrollTo(0, 0);
   }

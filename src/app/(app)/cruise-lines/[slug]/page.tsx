@@ -7,6 +7,7 @@ import { exceptionCount, isUniform, routedClassRecords } from "@/lib/classes";
 import { blockProvenance } from "@/lib/provenance";
 import { packageCost, packageLine } from "@/lib/money";
 import { classPath, linePath, shipPath } from "@/lib/nav";
+import { OG_IMAGE } from "@/lib/og";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ShipSection } from "@/components/ship/ShipSection";
 import { FactList, NoteList } from "@/components/ship/ShipFacts";
@@ -64,6 +65,7 @@ export async function generateMetadata({
       description,
       url: linePath(slug),
       type: "article",
+      images: [OG_IMAGE],
     },
   };
 }

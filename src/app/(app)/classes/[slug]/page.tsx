@@ -11,6 +11,7 @@ import {
 import type { RoutedClass } from "@/lib/classes";
 import { shipProvenance } from "@/lib/provenance";
 import { classPath, linePath, shipPath } from "@/lib/nav";
+import { OG_IMAGE } from "@/lib/og";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CoverageChips } from "@/components/CoverageChips";
 import { DeckTable } from "@/components/DeckTable";
@@ -75,6 +76,7 @@ export async function generateMetadata({
       description,
       url: classPath(slug),
       type: "article",
+      images: [OG_IMAGE],
     },
   };
 }

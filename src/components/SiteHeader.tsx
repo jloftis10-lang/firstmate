@@ -17,6 +17,26 @@ export function SiteHeader() {
 
   return (
     <header className="border-b border-line/70 bg-surface/60 backdrop-blur-[2px]">
+      {/* SKIP LINK. The wordmark is the first focusable element on every
+          page, so without this a keyboard or screen-reader user tabs the
+          brand, four nav items and the CTA before reaching content — on
+          every one of a hundred and twenty pages.
+          
+          Visible only when focused, and it moves focus rather than only
+          scrolling: `#main` carries `tabIndex={-1}` in the layout so the
+          jump lands somewhere the next Tab continues from. A skip link
+          that scrolls without moving focus is the common broken version
+          and is worse than none, because it looks like it worked. */}
+      <a
+        href="#main"
+        // Padding lives on the focus variant. `sr-only` sets `padding: 0`, but
+        // a plain `px-4` outranks it and left the hidden link a 32x16 box —
+        // clipped and invisible, but not the 1x1 the utility promises, and not
+        // something a test can assert on.
+        className="sr-only rounded-[8px] bg-deep text-[0.9rem] font-semibold text-white focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:px-4 focus:py-2"
+      >
+        Skip to content
+      </a>
       <div className="mx-auto flex w-full max-w-[1180px] flex-wrap items-center gap-x-4 gap-y-2 px-5 py-3 sm:flex-nowrap sm:px-8 sm:py-3.5">
         <Link
           href="/"
