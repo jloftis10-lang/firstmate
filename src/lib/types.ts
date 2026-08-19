@@ -65,6 +65,14 @@ export type Source = {
  * "children cannot board". The engine's family read opens with "Kid
  * access is the trap on this ship", which on an adults-only line is not
  * a wrong warning but an incoherent one.
+ *
+ * NO SHIP CURRENTLY SETS THIS. The Viking record it was built for was
+ * pulled before sign-off, so the gate is live, tested and unexercised.
+ * That is deliberate rather than dead code: the defect was real and
+ * always was, the fix is guarded (absent field means no block, and every
+ * existing read is verified unchanged), and the next adults-only line
+ * added should not have to rediscover it. The same applies to
+ * `FareInclusions` below.
  */
 export type Eligibility = {
   /** Published minimum guest age. Viking Ocean is 18. */

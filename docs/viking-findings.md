@@ -128,3 +128,73 @@ The three rules earned their place immediately:
 The thing it did not solve is the thing it was never going to: **Viking's
 deck plans are a graphic.** No text extraction reaches them. Composing the
 cabin block needs someone to look at the plan.
+
+---
+
+## The official deck stack — preserved, because it was expensive
+
+Read visually off Viking's 2022 deck-plan PDF by Jimmy, after the
+extraction hit the same 403 I did on the 2024 URL. This is the artifact
+that took a full round-trip to obtain, so it is recorded here rather than
+living only in a deleted file.
+
+| Deck | Staterooms | Public venues on that deck |
+|---|---|---|
+| A | no | Medical Center |
+| 1 | no | Nordic Spa, Fitness, salon, shops, The Living Room, bar, Guest Services, The Chef's Table, The Kitchen Table, Manfredi's, private dining |
+| 2 | no | Torshavn, shops, Promenade, The Theater, The Restaurant, two cinemas, bar, atrium |
+| 3 | **yes** | atrium, launderette |
+| 4 | **yes** | launderette |
+| 5 | **yes** | launderette |
+| 6 | **yes** | launderette (bridge, not a guest venue) |
+| 7 | **yes** | Explorers' Lounge, Mamsen's, Wintergarden, Pool Grill, Pool Bar, Main Pool, Lanai, World Café, Aquavit Terrace, Infinity Pool, hot tub |
+| 8 | **yes** | Explorers' Lounge upper level, open-to-below and retractable-roof areas |
+| 9 | no | Sports Deck, hot tub, outdoor recreation |
+
+### The derivation, and where judgment overrode arithmetic
+
+`quietCandidates()` returns **[4, 5, 6, 7]** on this stack — verified
+against the function, not asserted.
+
+The operator answer is **decks 4 and 5 midship**. The two exclusions are
+the point:
+
+- **Deck 6 passes arithmetically, fails in practice** — deck 7 sits
+  directly over it.
+- **Deck 7 passes arithmetically, fails hardest** — it carries the pools,
+  the buffet and two bars *on its own deck*.
+
+Deck 3 fails below on the theatre and restaurant; deck 8 fails above on
+the sports deck.
+
+**Deck 7 is the most mixed-use deck found anywhere in this catalog**,
+worse than Norwegian Sun's deck 11 which previously held that. It is the
+clearest case `PUBLIC_SPACE_SANDWICH` exists to describe.
+
+### Also established
+
+- Two passenger lift cores visible through the accommodation decks. **No
+  car count and no forward/midship/aft label** — reading bank positions
+  off a drawing is how three accessibility warnings got withdrawn.
+- Categories are the grouped codes **OS, ES, PS, PV, DV, V**. Viking
+  publishes total area *including* the veranda rather than splitting
+  them, so a 270 sq ft Deluxe Veranda is not 270 sq ft of room.
+- Silver Spirits: **$27 per guest per day**, 15% service charge included
+  in that price, age 21, covers anything to $18 a glass all day, and
+  **both guests in the stateroom must buy it for the whole cruise** —
+  the same all-or-nothing shape as Royal's and Norwegian's.
+- **Gratuities are NOT in the fare**, around $20 per person per night,
+  with promotions and World Cruise fares overriding.
+
+## Status: record pulled 2026-08-19
+
+A Viking Star record was composed from all of the above and then removed
+at Jimmy's call. The reason is not that any of it is wrong — it is that
+one SAMPLE-marked ship in an otherwise fully-signed catalog of 79 muddies
+the first impression, and the next step is showing the product to an
+advisor rather than growing it.
+
+Everything needed to rebuild it in one pass is on this page. What would
+still be missing is what was missing before: obstructed verandas,
+elevator counts, refit history, and a deck check on the eight sisters,
+who came back *not checked* rather than *no differences found*.

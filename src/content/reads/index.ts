@@ -1,6 +1,5 @@
 import type { ShipContent } from "@/lib/types";
 import { carnivalCelebration } from "./carnival-celebration";
-import { vikingStar } from "./viking-ocean";
 import { carnivalMardiGras } from "./carnival-mardi-gras";
 import { carnivalJubilee } from "./carnival-jubilee";
 import {
@@ -130,12 +129,6 @@ import {
  * exactly which of its three calls an advisor can act on.
  */
 export const SHIP_READS: Record<string, ShipContent> = {
-  // First record composed through the intake pipeline. Viking Star only —
-  // its eight same-generation sisters came back "not checked" rather than
-  // "no differences found", and that distinction is not to be quietly
-  // upgraded by giving them a shared factory. See viking-ocean.ts.
-  "viking-star": vikingStar,
-
   "carnival-jubilee": carnivalJubilee,
   "carnival-vista": carnivalVista,
   "carnival-horizon": carnivalHorizon,
