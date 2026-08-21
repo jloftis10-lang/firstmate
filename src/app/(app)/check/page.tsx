@@ -3,6 +3,7 @@ import { FirstMate } from "@/components/FirstMate";
 import { LINES, SHIPS } from "@/content/ships";
 import { LINE_RECORDS } from "@/content/lines/records";
 import { linePath } from "@/lib/nav";
+import { checkCatalog } from "@/lib/check-catalog";
 
 /**
  * THE BOOKING CHECK, now at its own route.
@@ -46,7 +47,9 @@ export default function CheckPage() {
   return (
     <main className="flex-1">
       <FirstMate
-        ships={SHIPS}
+        // Identity only. The engine still runs in the browser; the one
+        // record it needs is fetched. See `src/lib/check-catalog.ts`.
+        ships={checkCatalog(SHIPS)}
         emailEnabled={emailEnabled}
         lineHrefs={lineHrefs}
       />

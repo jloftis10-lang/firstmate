@@ -750,40 +750,58 @@ real traveller.
 
 ---
 
-## For Jimmy — `/check` ships 98% dead weight, and it scales the wrong way
+## `/check` payload — FIXED
 
-Measured, not estimated:
+Was the finding at the end of Phase 11; done now.
 
-| | raw | gzipped |
+| | before | after |
 |---|---|---|
-| `/` | 73 KB | 12 KB |
-| `/ships` | 165 KB | 14 KB |
-| **`/check`** | **906 KB** | **88 KB** |
+| `/check` raw | 906 KB | **73 KB** |
+| `/check` gzipped | 88 KB | **12.4 KB** |
+| per covered hull | 12.4 KB inlined | 0 — fetched on demand |
 
-796 KB of that is one inline RSC payload: the entire ship-content corpus
-serialised into the HTML of every `/check` load. The page hands `SHIPS`
-to a client component because the engine runs in the browser — which is
-what makes the check static, instant and offline-capable after load, and
-that architecture is worth keeping.
+**The shape of the fix.** The engine still runs in the browser — that is
+what makes the check static, instant and usable after load, and it was
+never the problem. The problem was handing it all 79 records to read
+one. So the page ships `CatalogShip[]`: id, name, line, and the two
+booleans the form needs to state its own coverage. Twenty-one kilobytes
+for all 195 hulls, and flat forever — a new ship adds a row, not a
+record.
 
-The problem is the ratio and the trajectory:
+The one record being read is a static JSON file per hull, generated at
+build like any other page, so this is a CDN read and the site stays
+statically hostable. Per hull rather than one bundle on purpose: a
+dynamic `import()` of the content module would have been one cached
+chunk, but it would still download all 79 records to read one and still
+grow with coverage.
 
-- **98%** of the payload is ship content; the picker needs the other 2%
-  (21 KB of identity for all 195 hulls).
-- **12.4 KB raw per covered hull**, so it grows linearly with the thing
-  the product exists to grow. At full catalog coverage it is **~2.4 MB
-  raw / ~230 KB gzipped** on the page an advisor opens mid-call.
-- Only ONE hull's content is ever used per check.
+**The split is invisible.** Choosing a hull warms its record while the
+advisor answers the four remaining questions, and `run` waits for the
+fetch and the 1250 ms sounding together before it navigates — so the
+form path never shows a loading state, and a record that will not load
+leaves the advisor on the form with their five answers intact rather
+than on a read page that cannot render one.
 
-**The fix, and why it is not in this commit.** Split the payload: the
-server passes identity only, and a hull's content is loaded on demand —
-either a dynamic `import()` of the reads module or per-ship static JSON
-generated at build. Initial HTML drops to roughly 80 KB raw, the content
-is fetched once and cached, and the check's existing 1250 ms Sounding
-animation covers the fetch entirely. It needs a loading state for
-arriving directly on a full check URL, and an honest failure state.
+### Two things the verification caught
 
-That is a change to the data architecture of the product's most
-important flow, and it deserves its own commit and its own verification
-rather than the tail of a phase about metadata. Same call as the Carnival
-money note: measured, specified, and left for you to schedule.
+- **The fallback hull's record was fetched on every page load.**
+  `useSyncExternalStore` returns the empty query during hydration and
+  the real one on the pass after, so for one committed render `shipId`
+  is the default ship — and warming on `shipId` fetched the first
+  covered hull on every arrival, including arrivals on a link for a
+  different ship. It now warms only a hull that was chosen or linked.
+- **A failed fetch must not read as an uncharted hull.** Both failure
+  screens say so in as many words: "that's a connection problem rather
+  than a gap in the coverage — this hull is charted and the read is
+  there." Turning a dropped connection into a false claim about coverage
+  would be the worst possible version of this bug.
+
+Asserted: the record prose is absent from the HTML, a bare `/check`
+fetches nothing until asked, an uncharted hull fetches nothing at all, a
+warmed record is not re-fetched, back and forward still round-trip, both
+failure paths recover on retry, and the form is still complete with
+JavaScript disabled.
+
+**One note for deployment:** `next start` does not compress the JSON
+route responses, so a record measures 16 KB locally. Vercel's CDN
+compresses them; expect roughly 3 KB over the wire.

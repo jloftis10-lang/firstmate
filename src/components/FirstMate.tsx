@@ -2,16 +2,19 @@
 
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
-import { blockStates, isCovered } from "@/lib/types";
 import type {
   ClientProfile,
   Experience,
   Itinerary,
   Party,
   Seasick,
-  Ship,
+  ShipContent,
   CoveredShip,
 } from "@/lib/types";
+import { blockStates } from "@/lib/types";
+import type { CatalogShip } from "@/lib/check-catalog";
+import { withContent } from "@/lib/check-catalog";
+import { isShipContentCached, loadShipContent } from "@/lib/ship-content";
 import { clientSummary, getRead } from "@/lib/engine";
 import { checkPath, parseShare, sharePath } from "@/lib/share";
 import { shipPath } from "@/lib/nav";
@@ -99,7 +102,14 @@ export function FirstMate({
   emailEnabled,
   lineHrefs = {},
 }: {
-  ships: Ship[];
+  /**
+   * IDENTITY ONLY. The engine runs in the browser, so this used to be
+   * handed every ship record — 906 KB of HTML on the page an advisor
+   * opens mid-call, 98% of it unread until a hull is picked, and growing
+   * about 12 KB with every ship added to the coverage. The one record
+   * being read is fetched instead; see `src/lib/check-catalog.ts`.
+   */
+  ships: CatalogShip[];
   emailEnabled: boolean;
   /**
    * Line name to line-page URL, for the lines that have a page.
@@ -134,14 +144,19 @@ export function FirstMate({
   // stale link must land an advisor on the form, never on a crash. The
   // old code asserted the ship was findable, which was true only while
   // the id could only come from the picker.
+  const byId = useMemo(
+    () => new Map(ships.map((s) => [s.id, s])),
+    [ships],
+  );
+
   const result = useMemo(() => {
     const parsed = parseShare(params);
     if (!parsed) return null;
-    return ships.some((s) => s.id === parsed.shipId) ? parsed : null;
-  }, [params, ships]);
+    return byId.has(parsed.shipId) ? parsed : null;
+  }, [params, byId]);
 
   // Default to a ship we can actually read, so the first run shows the product.
-  const fallbackShip = (ships.find((s) => s.content) ?? ships[0]).id;
+  const fallbackShip = (ships.find((s) => s.charted) ?? ships[0]).id;
   // What the advisor has changed on the form. Empty until they touch it,
   // so a linked ship or a profile they came back from wins by default.
   const [draft, setDraft] = useState<Partial<ClientProfile>>({});
@@ -151,7 +166,7 @@ export function FirstMate({
   // unknown id falls through to the default: a link naming a ship we
   // cannot read must not blank the picker.
   const linkedShip =
-    params.ship && ships.some((s) => s.id === params.ship) ? params.ship : undefined;
+    params.ship && byId.has(params.ship) ? params.ship : undefined;
 
   const shipId = draft.shipId ?? linkedShip ?? fallbackShip;
   const party = draft.party ?? "couple";
@@ -168,9 +183,73 @@ export function FirstMate({
     setDraft((d) => ({ ...d, itinerary }));
 
   const [sounding, setSounding] = useState(false);
+  // Records fetched so far, keyed by ship. The module-level cache in
+  // `ship-content.ts` dedupes the requests; this is what React renders
+  // from, so a load has to land in state as well.
+  const [contents, setContents] = useState<Record<string, ShipContent>>({});
+  // The ship whose record would not load. Held rather than thrown: a
+  // failed fetch on a bad connection is something to retry, not an
+  // error page.
+  const [loadFailed, setLoadFailed] = useState<string | null>(null);
   const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   useEffect(() => () => clearTimeout(timer.current), []);
+
+  const remember = (id: string, content: ShipContent) =>
+    setContents((prev) => (prev[id] ? prev : { ...prev, [id]: content }));
+
+  // WARM THE RECORD AS SOON AS A HULL IS CHOSEN.
+  //
+  // The advisor picks the ship and then answers four more questions,
+  // which is several seconds of a fetch that takes one. By the time they
+  // press the button the record is almost always there, which is what
+  // makes the split invisible rather than a wait. Fire and forget: a
+  // failure here is not reported, because `run` will try again and it is
+  // the one that can tell them.
+  //
+  // CHOSEN OR LINKED, NEVER THE FALLBACK — and that distinction is not
+  // pedantry. `useSyncExternalStore` hands back the empty query during
+  // hydration and the real one on the pass after, so for one committed
+  // render `shipId` is the default hull. Warming on `shipId` therefore
+  // fetched the first covered ship's record on every single page load,
+  // including every arrival on a link for a different ship. Warming only
+  // what somebody actually asked for costs nothing when nobody has.
+  const intendedShip = draft.shipId ?? linkedShip;
+  useEffect(() => {
+    if (!intendedShip) return;
+    const ship = byId.get(intendedShip);
+    if (!ship?.charted || isShipContentCached(intendedShip)) return;
+    let live = true;
+    void loadShipContent(intendedShip).then(
+      (content) => {
+        if (live) remember(intendedShip, content);
+      },
+      () => {},
+    );
+    return () => {
+      live = false;
+    };
+  }, [intendedShip, byId]);
+
+  // ARRIVING ON A LINK is the other way a read gets asked for, and there
+  // is no button press to hang a fetch on. `run` handles its own; this
+  // covers a shared URL, a bookmark and the forward button.
+  useEffect(() => {
+    const id = result?.shipId;
+    if (!id || !byId.get(id)?.charted || contents[id]) return;
+    let live = true;
+    loadShipContent(id).then(
+      (content) => {
+        if (live) remember(id, content);
+      },
+      () => {
+        if (live) setLoadFailed(id);
+      },
+    );
+    return () => {
+      live = false;
+    };
+  }, [result, contents, byId]);
 
   function show(profile: ClientProfile) {
     // The demand signal — see `src/lib/analytics.ts`. Ship id and whether
@@ -178,7 +257,7 @@ export function FirstMate({
     // seasickness answer are facts about a real person and the question
     // "which hulls do advisors ask for" does not need them. Sends
     // nothing unless an endpoint is configured.
-    const charted = Boolean(ships.find((s) => s.id === profile.shipId)?.content);
+    const charted = Boolean(byId.get(profile.shipId)?.charted);
     track({ name: "check.run", ship: profile.shipId, charted });
     if (!charted) track({ name: "check.uncharted", ship: profile.shipId });
 
@@ -186,7 +265,17 @@ export function FirstMate({
     window.scrollTo(0, 0);
   }
 
-  function run() {
+  /**
+   * Run the check: fetch the record and play the sounding at the same
+   * time, and navigate only when both are done.
+   *
+   * Waiting for both rather than navigating first is what keeps the
+   * split from being visible. It also puts the failure in the right
+   * place: a record that will not load leaves the advisor on the form
+   * with a message and their answers intact, rather than on a read page
+   * that cannot render one.
+   */
+  async function run() {
     const profile: ClientProfile = {
       shipId,
       party,
@@ -194,16 +283,31 @@ export function FirstMate({
       experience,
       itinerary,
     };
+    setLoadFailed(null);
+
+    const ship = byId.get(shipId);
+    const needed =
+      ship?.charted && !contents[shipId]
+        ? loadShipContent(shipId)
+        : Promise.resolve(null);
+
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) {
-      show(profile);
-      return;
-    }
-    setSounding(true);
-    timer.current = setTimeout(() => {
+    const settle = reduce
+      ? Promise.resolve()
+      : new Promise<void>((resolve) => {
+          timer.current = setTimeout(resolve, 1250);
+        });
+    if (!reduce) setSounding(true);
+
+    try {
+      const [content] = await Promise.all([needed, settle]);
+      if (content) remember(shipId, content);
       setSounding(false);
       show(profile);
-    }, 1250);
+    } catch {
+      setSounding(false);
+      setLoadFailed(shipId);
+    }
   }
 
   function reset() {
@@ -214,15 +318,17 @@ export function FirstMate({
     window.scrollTo(0, 0);
   }
 
-  const ship = ships.find((s) => s.id === (result?.shipId ?? shipId))!;
-  const coveredShips = ships.filter((s) => s.content);
+  const ship = byId.get(result?.shipId ?? shipId)!;
+  const coveredShips = ships.filter((s) => s.charted);
   const coveredCount = coveredShips.length;
   // Signed end to end — all three blocks confirmed by an operator. The rest
   // carry researched content with the unsigned blocks marked, which is a
   // weaker and different claim, so the footer states both numbers.
-  const signedCount = coveredShips.filter(
-    (s) => blockStates(s.content!).allVerified,
-  ).length;
+  const signedCount = coveredShips.filter((s) => s.signed).length;
+
+  // What the read view can be handed right now. Null while the record is
+  // still in the air, which is the one state this split introduced.
+  const loaded = result ? contents[result.shipId] : undefined;
 
   // The shell is wide; this column is not. A five-question form and a
   // column of prose want a reading measure, so the Booking Check keeps one
@@ -276,10 +382,27 @@ export function FirstMate({
           <button
             type="button"
             onClick={run}
-            className="mt-2.5 w-full cursor-pointer rounded-[13px] bg-go p-[17px] text-[1.04rem] font-semibold tracking-[0.005em] text-white shadow-[0_1px_2px_rgba(15,42,61,.05),0_8px_24px_rgba(15,42,61,.06)] transition-colors hover:bg-[#175A50] active:translate-y-px"
+            disabled={sounding}
+            className="mt-2.5 w-full cursor-pointer rounded-[13px] bg-go p-[17px] text-[1.04rem] font-semibold tracking-[0.005em] text-white shadow-[0_1px_2px_rgba(15,42,61,.05),0_8px_24px_rgba(15,42,61,.06)] transition-colors hover:bg-[#175A50] active:translate-y-px disabled:cursor-wait"
           >
             Run the check
           </button>
+
+          {/* The record would not load. The advisor stays on the form with
+              their five answers intact and a button that will try again —
+              a failed fetch on a hotel connection is a retry, not an
+              error page. Nothing about the booking is lost. */}
+          {loadFailed && (
+            <p
+              role="alert"
+              className="mt-3 rounded-[11px] border border-signal bg-signal-bg px-3.5 py-3 text-[0.9rem] leading-[1.55] text-ink"
+            >
+              Couldn&apos;t load the record for the{" "}
+              {byId.get(loadFailed)?.name ?? "ship"} — that&apos;s a connection
+              problem on our side, not a gap in the coverage. Your answers are
+              still here; press the button again.
+            </p>
+          )}
 
           <p className="mt-[34px] text-center text-[0.76rem] leading-[1.6] text-ink-3">
             {/* The directory exists now, so the sentence that describes
@@ -314,14 +437,9 @@ export function FirstMate({
             )}
           </p>
         </section>
-      ) : isCovered(ship) ? (
-        <ReadView
-          ship={ship}
-          client={result}
-          onAgain={reset}
-          emailEnabled={emailEnabled}
-        />
-      ) : (
+      ) : !ship.charted ? (
+        // No record to wait for — the uncharted screen needs identity
+        // only, which is already here.
         <NoReadYet
           ship={ship}
           covered={coveredShips}
@@ -329,8 +447,83 @@ export function FirstMate({
           lineHrefs={lineHrefs}
           onAgain={reset}
         />
+      ) : loaded ? (
+        <ReadView
+          ship={withContent(ship, loaded)}
+          client={result}
+          onAgain={reset}
+          emailEnabled={emailEnabled}
+        />
+      ) : (
+        // ARRIVED ON A LINK and the record is still in the air. Running
+        // the check from the form never lands here — `run` waits for the
+        // fetch and the sounding together before it navigates — so this
+        // is a shared URL, a bookmark or the forward button, and it is
+        // usually a single frame.
+        <LoadingRead
+          shipName={ship.name}
+          failed={loadFailed === ship.id}
+          onRetry={() => {
+            setLoadFailed(null);
+            void loadShipContent(ship.id).then(
+              (content) => remember(ship.id, content),
+              () => setLoadFailed(ship.id),
+            );
+          }}
+        />
       )}
     </div>
+  );
+}
+
+/**
+ * The record is on its way, or it did not arrive.
+ *
+ * Quiet on purpose. This is a frame or two on a good connection and the
+ * advisor did not ask for a status report — but it says which ship, so
+ * that on a slow one it reads as a wait rather than as a blank page.
+ *
+ * The failure copy separates the two things an advisor would otherwise
+ * conflate: the network did not deliver a record that exists, which is
+ * nothing like the hull being uncharted. Getting that wrong would turn a
+ * dropped connection into a false claim about coverage.
+ */
+function LoadingRead({
+  shipName,
+  failed,
+  onRetry,
+}: {
+  shipName: string;
+  failed: boolean;
+  onRetry: () => void;
+}) {
+  return (
+    <section className="fm-rise" aria-label="Loading the read">
+      <div
+        className="mb-2.5 font-readout text-[0.72rem] font-bold tracking-[0.1em] uppercase text-ink-3"
+        role="status"
+      >
+        {failed ? "Couldn't load it" : "Reading the record"}
+      </div>
+      <h1 className="font-call text-[1.5rem] leading-[1.2] tracking-[-0.01em]">
+        {failed ? `The ${shipName} record didn't load.` : `Pulling the ${shipName}.`}
+      </h1>
+      {failed && (
+        <>
+          <p className="mt-3.5 max-w-[52ch] text-[0.96rem] leading-[1.6] text-ink-2">
+            That&apos;s a connection problem rather than a gap in the coverage
+            — this hull is charted and the read is there.
+          </p>
+          <button
+            type="button"
+            onClick={onRetry}
+            className="mt-5 cursor-pointer rounded-[11px] border border-line px-[26px] py-[13px] text-[0.94rem] font-semibold text-ink-2 transition-colors hover:border-ink-3 hover:text-ink"
+          >
+            Try again
+          </button>
+        </>
+      )}
+    </section>
   );
 }
 

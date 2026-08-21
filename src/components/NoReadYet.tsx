@@ -1,6 +1,5 @@
 import Link from "next/link";
-import type { Ship } from "@/lib/types";
-import { blockStates } from "@/lib/types";
+import type { CatalogShip } from "@/lib/check-catalog";
 
 /**
  * Coverage stated by LINE, not by hull.
@@ -16,7 +15,7 @@ import { blockStates } from "@/lib/types";
  * later reports itself honestly as "12 of 17" instead of quietly
  * claiming the whole fleet.
  */
-function coverageByLine(covered: Ship[], all: Ship[]) {
+function coverageByLine(covered: CatalogShip[], all: CatalogShip[]) {
   const totals = new Map<string, number>();
   for (const s of all) totals.set(s.line, (totals.get(s.line) ?? 0) + 1);
 
@@ -24,7 +23,10 @@ function coverageByLine(covered: Ship[], all: Ship[]) {
   for (const s of covered) {
     const entry = done.get(s.line) ?? { covered: 0, signed: 0 };
     entry.covered += 1;
-    if (s.content && blockStates(s.content).allVerified) entry.signed += 1;
+    // `signed` is computed on the server, where the record still is —
+    // see `src/lib/check-catalog.ts`. The derivation is unchanged; only
+    // the place it happens moved.
+    if (s.signed) entry.signed += 1;
     done.set(s.line, entry);
   }
 
@@ -54,9 +56,9 @@ export function NoReadYet({
   lineHrefs,
   onAgain,
 }: {
-  ship: Ship;
-  covered: Ship[];
-  all: Ship[];
+  ship: CatalogShip;
+  covered: CatalogShip[];
+  all: CatalogShip[];
   /** Line name to line-page URL. A line without one renders unlinked. */
   lineHrefs: Record<string, string>;
   onAgain: () => void;

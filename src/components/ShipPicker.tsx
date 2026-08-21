@@ -1,6 +1,6 @@
 "use client";
 
-import type { Ship } from "@/lib/types";
+import type { CatalogShip } from "@/lib/check-catalog";
 import { CATEGORY_LABEL, CATEGORY_ORDER, LINES } from "@/content/ships";
 
 /**
@@ -10,17 +10,21 @@ import { CATEGORY_LABEL, CATEGORY_ORDER, LINES } from "@/content/ships";
  * picker, which is the fastest thing an advisor mid-call can use. The
  * ships we can actually read are hoisted into a group at the top so the
  * coverage state is legible at the moment of choosing, not after.
+ *
+ * Takes identity rather than ships: the picker only ever needed a name,
+ * a line and whether a read exists, and handing it full records put the
+ * entire knowledge base in the page. See `src/lib/check-catalog.ts`.
  */
 export function ShipPicker({
   ships,
   value,
   onChange,
 }: {
-  ships: Ship[];
+  ships: CatalogShip[];
   value: string;
   onChange: (id: string) => void;
 }) {
-  const covered = ships.filter((s) => s.content);
+  const covered = ships.filter((s) => s.charted);
 
   return (
     <div className="mb-[22px]">
