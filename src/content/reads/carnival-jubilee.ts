@@ -14,7 +14,6 @@ import {
 } from "./carnival-common";
 import {
   BOTTOM_DECK_NOTE,
-  CONNECTING_RULE,
   MOTION_RULE,
   PORTHOLE_STEER,
   VIBRATION_RULE,
@@ -52,7 +51,6 @@ export const carnivalJubilee: ShipContent = {
     ],
     obstructedViewNotes: EXCEL_FORWARD_OBSTRUCTION,
     obstructionKinds: ["solid-structure"],
-    connectingNote: CONNECTING_RULE,
     minorPlacementRule: CARNIVAL_MINOR_PLACEMENT,
     elevatorNote: EXCEL_ELEVATOR_NOTE,
     accessibilityNote: EXCEL_ACCESSIBILITY_NOTE,

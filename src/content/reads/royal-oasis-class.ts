@@ -11,7 +11,6 @@ import {
   ROYAL_SOURCES,
 } from "./royal-common";
 import {
-  CONNECTING_RULE,
   MOTION_RULE,
   QUIET_DEFAULT_RULE,
   VIBRATION_RULE,
@@ -207,7 +206,6 @@ function oasisClassContent(ship: OasisShip): ShipContent {
         parkCabins ?? "The affected cabins differ by ship, so check the current plan for this hull rather than transferring numbers from a sister."
       } ${BOARDWALK_AFT_SIGHTLINE}`,
       obstructionKinds: ["lifeboat-davit", "solid-structure", "overlooked"],
-      connectingNote: CONNECTING_RULE,
       minorPlacementRule: ROYAL_MINOR_PLACEMENT,
       elevatorNote:
         "Twenty-four main lifts — twelve forward and twelve aft, running through deck 16, with another six serving the suite decks on 17 and 18. There is no midship passenger bank at all. That inverts the usual advice: on this class midship still reduces motion, but it INCREASES walking, because all the vertical circulation is concentrated at the two ends. Book near the end of the ship they'll actually use.",

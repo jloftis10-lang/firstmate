@@ -9,7 +9,6 @@ import {
 } from "./carnival-common";
 import {
   BOTTOM_DECK_NOTE,
-  CONNECTING_RULE,
   MOTION_RULE,
   PORTHOLE_STEER,
   QUIET_DEFAULT_RULE,
@@ -150,7 +149,6 @@ function conquestClassContent(): ShipContent {
       ],
       obstructedViewNotes: CONQUEST_OBSTRUCTION,
       obstructionKinds: ["outdoor-walkway", "lifeboat-davit"],
-      connectingNote: CONNECTING_RULE,
       minorPlacementRule: CARNIVAL_MINOR_PLACEMENT,
       elevatorNote:
         "Eighteen elevators, corroborated across current deck-plan sources — but no reliable bank split, so no forward-or-aft recommendation from me. One nuance worth carrying, and this part is researched rather than confirmed off Carnival's plan: the four glass atrium cars run from deck 2 upward, so a client on deck 1 can't use them. Deck 1 is NOT cut off — the regular banks serve it — but somebody on 1 shouldn't assume every midship lift they see on the map reaches their deck.",

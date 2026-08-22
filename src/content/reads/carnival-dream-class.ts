@@ -10,7 +10,6 @@ import {
 } from "./carnival-common";
 import {
   BOTTOM_DECK_NOTE,
-  CONNECTING_RULE,
   MOTION_RULE,
   PORTHOLE_STEER,
   VIBRATION_RULE,
@@ -182,7 +181,6 @@ function dreamClassContent(ship: "dream" | "magic" | "breeze"): ShipContent {
       ],
       obstructedViewNotes: `Junior Suites 9205 and 9206 are obstructed on all three ships in this class — Carnival publishes it, and the obstruction is a steel bulkhead and ship structure rather than a lifeboat. Worth knowing that the same two numbers come up as obstructed on the Vista class too; it's a recurring Carnival design pattern across classes, not a coincidence or a bad source. ${OBSTRUCTED[ship]}`,
       obstructionKinds: ["solid-structure", "outdoor-walkway"],
-      connectingNote: CONNECTING_RULE,
       minorPlacementRule: CARNIVAL_MINOR_PLACEMENT,
       elevatorNote:
         "Eighteen elevators on this class, corroborated across sources — but there's no reliable bank split and no recurring congestion pattern, so don't steer anyone forward or aft on my say-so. The rule that still holds: pick the end of the ship where they'll actually spend the week.",

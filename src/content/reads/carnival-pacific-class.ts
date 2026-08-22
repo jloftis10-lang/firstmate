@@ -7,7 +7,6 @@ import {
   CARNIVAL_SOURCES,
 } from "./carnival-common";
 import {
-  CONNECTING_RULE,
   MOTION_RULE,
   PORTHOLE_STEER,
   QUIET_DEFAULT_RULE,
@@ -130,7 +129,6 @@ function pacificClassContent(ship: "adventure" | "encounter"): ShipContent {
       ],
       obstructedViewNotes:
         "Category 5A on deck 8 is the one, and Carnival's own deck material for both ships confirms it as an obstructed ocean view — that part is solid. What's NOT equally solid is what does the obstructing: secondary cabin data points at some mix of lifeboat, tender and steel structure, and I'd treat that as a lead rather than a fact when you're describing it to a client. No complete cabin-number list is published, so read the category code on the specific cabin. Keep this separate from the deck 10 balcony coverage question — different deck, different problem, and merging them is the obvious mistake.",
-      connectingNote: CONNECTING_RULE,
       minorPlacementRule: CARNIVAL_MINOR_PLACEMENT,
       elevatorNote:
         "Three lift lobbies — forward, midship and aft, the Grand-class layout — and two of the three connect the accessible corridors, so the bank matters more here than on a ship where they're interchangeable. I couldn't establish car counts. The glazed panoramic lifts only run at the atrium on decks 5 to 7 and up at 14 over the pool, and the atrium is only three decks tall, so it isn't the landmark it is on a Carnival-built ship.",

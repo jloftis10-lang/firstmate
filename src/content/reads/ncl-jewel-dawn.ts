@@ -11,7 +11,6 @@ import {
   NCL_SOURCES,
 } from "./ncl-common";
 import {
-  CONNECTING_RULE,
   MOTION_RULE,
   QUIET_DEFAULT_RULE,
   VIBRATION_RULE,
@@ -302,7 +301,6 @@ function jewelClassContent(ship: JewelShip): ShipContent {
       ],
       obstructedViewNotes: DECK_8_OBSTRUCTION,
       obstructionKinds: NO_CONFIRMED_MECHANISM,
-      connectingNote: CONNECTING_RULE,
       minorPlacementRule: NCL_MINOR_PLACEMENT,
       elevatorNote:
         "Around twelve lifts on this class, which is reasonable for the size — that figure is researched rather than confirmed and the bank layout is unknown. One thing I've deliberately NOT turned into a class rule: a report that the aft lifts on Pearl only run down as far as deck 7. It's one ship and one report, and service limits per bank aren't established here, so check the plan rather than carrying that across.",
@@ -356,7 +354,6 @@ function dawnClassContent(ship: DawnShip): ShipContent {
       ],
       obstructedViewNotes: DECK_8_OBSTRUCTION,
       obstructionKinds: NO_CONFIRMED_MECHANISM,
-      connectingNote: CONNECTING_RULE,
       minorPlacementRule: NCL_MINOR_PLACEMENT,
       accessibilityNote:
         "This is a compact ship that's easy to learn, which is the real advantage here. I'm deliberately giving you no lift count and no waiting-time expectation: an earlier version of this record reasoned from a low lift count to a big hull to peak-time queues, and that chain was never measured. Work the route out from the deck plan for the specific cabin and confirm it against the accessible plan.",

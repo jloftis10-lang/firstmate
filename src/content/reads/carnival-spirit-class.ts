@@ -9,7 +9,6 @@ import {
 } from "./carnival-common";
 import {
   BOTTOM_DECK_NOTE,
-  CONNECTING_RULE,
   MOTION_RULE,
   PORTHOLE_STEER,
   QUIET_DEFAULT_RULE,
@@ -166,7 +165,6 @@ function spiritClassContent(
       ],
       obstructedViewNotes: `Carnival sells three obstructed categories on this class rather than hiding them: 4K interior with window, 7A balcony and 9A premium balcony. The cause is the lifeboats, tender boats and davits on Main Deck 4. Named examples from the published list include 9A cabins 5241 and 5243 and a large run of 7A cabins starting around 5142 to 5191 with more further aft — that list hasn't been imported here cabin-by-cabin, so read the category code on the specific cabin.`,
       obstructionKinds: ["lifeboat-davit"],
-      connectingNote: CONNECTING_RULE,
       minorPlacementRule: CARNIVAL_MINOR_PLACEMENT,
       accessibilityNote:
         "A smaller hull with a single Lido deck, so much less of the Excel-class problem where dining is low and the pool is eight decks up — though that comparison is our inference from the layout rather than a sourced claim. Secondary sources report around fifteen lifts but nothing establishes a bank layout, and a count with no layout gives you no useful advice, so check the deck plan for the specific cabin and confirm scooter clearance against Carnival's accessible deck plan.",

@@ -1,7 +1,6 @@
 import type { ShipContent, Source } from "@/lib/types";
 import {
   BOTTOM_DECK_NOTE,
-  CONNECTING_RULE,
   MOTION_RULE,
   PORTHOLE_STEER,
   VIBRATION_RULE,
@@ -204,7 +203,6 @@ export function carnivalCabinBaseline(): NonNullable<ShipContent["cabin"]> {
       BOTTOM_DECK_NOTE,
     ],
     hazardsAboveBelow: [],
-    connectingNote: CONNECTING_RULE,
     minorPlacementRule: CARNIVAL_MINOR_PLACEMENT,
   };
 }

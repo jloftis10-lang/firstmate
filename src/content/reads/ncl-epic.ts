@@ -11,7 +11,6 @@ import {
 } from "./ncl-common";
 import { nclAttractionRules } from "./ncl-attractions";
 import {
-  CONNECTING_RULE,
   MOTION_RULE,
   QUIET_DEFAULT_RULE,
   VIBRATION_RULE,
@@ -202,7 +201,6 @@ export const norwegianEpic: ShipContent = {
     obstructedViewNotes:
       "Deck 8 is where this ship has an unusually specific published picture, and unlike some other lines' \"lifeboat bands\" this one holds up. Most of the deck 8 side balconies look down onto the tops of the lifeboats; the clear ones are 8026 and forward on port with 8190 and aft, and 8027 and forward on starboard with 8191 and aft. That's a DOWNWARD view problem rather than a lost horizon, so describe it rather than writing those cabins off. Deck 9 also carries lifeboat and structure issues and needs the same check, but the exact cabin boundaries there aren't established well enough to quote — read the plan. Separately and differently: a run of deck 9 balconies is open to view from above. That's a privacy defect, not an obstruction, and it's the one people don't think to ask about.",
     obstructionKinds: ["lifeboat-davit", "overlooked"],
-    connectingNote: CONNECTING_RULE,
     minorPlacementRule: NCL_MINOR_PLACEMENT,
     elevatorNote:
       "The geometry here is decision-relevant and it's researched rather than confirmed: the passenger lifts run in forward and aft banks with no true midship bank, on a ship over a thousand feet long. Sources agree on that and I couldn't get plan-level proof, so treat it as a strong steer rather than a fact. Book near the end of the ship they'll actually use. One thing an earlier version of this record claimed and I've withdrawn: that the aft bank doesn't serve deck 5. It may well be true and it was never proven, so it's out.",

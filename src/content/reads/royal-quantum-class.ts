@@ -11,7 +11,6 @@ import {
   ROYAL_SOURCES,
 } from "./royal-common";
 import {
-  CONNECTING_RULE,
   MOTION_RULE,
   QUIET_DEFAULT_RULE,
   VIBRATION_RULE,
@@ -251,10 +250,8 @@ function quantumClassContent(
       obstructedViewNotes:
         "Two authoritative things exist here and neither is a blog list. Royal sells obstruction as its own booking category — Obstructed Ocean View Balcony — and describes the cause as, in most cases, a lifeboat. And Royal's official deck plan carries an explicit obstructed-view marker in its legend, so the plan itself is cabin-level obstruction data. Those two beat any deck number. Cabin-number lists for this class do circulate, but the sites publishing them place cabins on decks that carry none and describe a Royal Promenade this class doesn't have, so none of their numbers are repeated here — read the category code and the official plan marker for the specific cabin.",
       obstructionKinds: ["lifeboat-davit"],
-      connectingNote: withShipNote(
-        CONNECTING_RULE,
+      connectingNote:
         "Connecting options are genuinely good on this class — there are explicit connecting categories for balconies and for interiors including the virtual-balcony rooms, and configurations pairing a Studio Interior with an adjacent balcony. That last one is worth knowing for a solo travelling alongside family. All of it still needs Royal's own connecting marker on the specific pair.",
-      ),
       minorPlacementRule: ROYAL_MINOR_PLACEMENT,
       accessibilityNote:
         "One real advantage here: the pool deck sits above all the cabins rather than among them, so nobody walks through a pool crowd to get home, and the atrium lifts are glass and easy to orient by. What I can't give you is the elevator count or the bank layout — two different counts surfaced and neither is confirmed, and I found nothing establishing where the banks are. So check the deck plan for the specific cabin and confirm it against the accessible plan. Spectrum is the exception to the first sentence: her suite neighbourhood puts cabins up on 15 and 16.",

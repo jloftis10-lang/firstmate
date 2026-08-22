@@ -12,7 +12,6 @@ import {
 } from "./royal-common";
 import { attractionNames, attractionRules, type AttractionId } from "./royal-attractions";
 import {
-  CONNECTING_RULE,
   MOTION_RULE,
   QUIET_DEFAULT_RULE,
   VIBRATION_RULE,
@@ -300,7 +299,6 @@ function radianceClassContent(ship: RadianceShip): ShipContent {
       ],
       obstructedViewNotes: `Two mechanisms here and they call for opposite advice. The first is the deck 7 lifeboat roof on the indented sections — it takes the downward view and leaves the horizon, so it's a disclosure, not a veto. The second is genuinely blocking and it's specific: 9252 and 9652 are obstructed by the ship's window-washing platform, and that pair holds across all four hulls, which is unusual enough to be worth knowing by cabin number. Structural obstructions are the ship-specific part. ${STRUCTURAL_CABINS[ship] ?? ""} A much broader claim circulates that a long run of deck 7 cabins is lifeboat-obstructed; it comes from a low-quality source and it confuses the roof issue with a blocked horizon, so read the current plan rather than believing it.`,
       obstructionKinds: kinds,
-      connectingNote: CONNECTING_RULE,
       minorPlacementRule: ROYAL_MINOR_PLACEMENT,
       elevatorNote:
         "The panoramic glass lifts are a genuine feature rather than transport — they run on the outside of the hull looking out over the ocean, and on an Alaska or Panama sailing riding them is part of the trip. Worth mentioning to a client who'd enjoy it. What I can't give you firmly is the count: nine is the figure that circulates and I couldn't confirm it against Royal's own material, so treat it as approximate. I'm also not telling you which side they're on — that's documented for one hull and I won't assume it holds for four.",

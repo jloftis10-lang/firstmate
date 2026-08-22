@@ -12,7 +12,6 @@ import {
 } from "./royal-common";
 import { attractionRules, type AttractionId } from "./royal-attractions";
 import {
-  CONNECTING_RULE,
   MOTION_RULE,
   QUIET_DEFAULT_RULE,
   VIBRATION_RULE,
@@ -326,7 +325,6 @@ function voyagerFamilyContent(ship: VoyagerShip): ShipContent {
       ],
       obstructedViewNotes: `There is NO deck 6 lifeboat band on these ships, and that's worth saying explicitly because it's what everyone expects from other Royal classes. The boats sit lower here, tucked beneath, and deck 6 ocean balconies are reported unobstructed. Don't warn a client off deck 6 on this family. What IS real is overhead rather than outward: the deck 11 pool complex overhangs and shades some deck 10 balconies.${isFreedom ? " On this class specifically, six Grand Suites sit directly under whirlpools cantilevered out from deck 11 — 1260, 1264, 1268, 1560, 1564 and 1568." : ""} Aft balconies are a separate check again, because some look through the ship's own superstructure. Cabin-number lists circulate for this family; they contradict each other and they rest on the deck 6 lifeboat premise that doesn't survive, so none of their numbers are here. If an individual cabin really is flagged, it will be marked on Royal's own current deck plan.`,
       obstructionKinds: kinds,
-      connectingNote: CONNECTING_RULE,
       minorPlacementRule: ROYAL_MINOR_PLACEMENT,
       accessibilityNote:
         "Around fourteen lifts on these hulls, and the layout is best described as two major passenger elevator-and-stair cores rather than three. I'm deliberately NOT labelling them: some cruisers call them forward and midship, others forward and aft, because the rear core is aft relative to the forward one while still sitting well forward of the stern. Those labels contradict each other and encoding either would mislead. What IS decision-relevant, and what to actually plan around: there is no lift core at the extreme aft end, so a true aft cabin means a long horizontal walk to the rear core before any vertical trip starts. The dining and entertainment core is low and the pool is on 11, so there's a real vertical journey in the day too. Confirm the accessible deck plan for the specific cabin.",

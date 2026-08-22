@@ -8,7 +8,6 @@ import {
 } from "./carnival-common";
 import {
   BOTTOM_DECK_NOTE,
-  CONNECTING_RULE,
   MOTION_RULE,
   QUIET_DEFAULT_RULE,
   VIBRATION_RULE,
@@ -132,7 +131,6 @@ export const carnivalLuminosa: ShipContent = {
     ],
     obstructedViewNotes:
       "Two published categories, not one: 4J is an interior with a picture window sold as obstructed, and 4K is an interior with a window sold as obstructed. Confirmed 4K examples include 4282, 4288, 4296 and 4302 on deck 4 — but those are examples from one of the two categories, not the whole set, so read the code on the specific cabin. What physically does the blocking isn't published cabin-by-cabin, so I'm not going to tell you it's lifeboats when nobody has written that down.",
-    connectingNote: CONNECTING_RULE,
     minorPlacementRule: CARNIVAL_MINOR_PLACEMENT,
     accessibilityNote:
       "A compressed stack — entertainment on 2 and 3, cabins on 1 and 4 to 8, everything outdoors on 9 to 11 — so less of the Excel-class problem where dining and the pool sit eight decks apart. I found two irreconcilable elevator counts for this ship and no reliable bank layout, so check the deck plan for the specific cabin rather than trusting a rule, and confirm scooter clearance against Carnival's accessible deck plan.",

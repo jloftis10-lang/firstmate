@@ -10,7 +10,6 @@ import {
 } from "./carnival-common";
 import {
   BOTTOM_DECK_NOTE,
-  CONNECTING_RULE,
   MOTION_RULE,
   PORTHOLE_STEER,
   QUIET_DEFAULT_RULE,
@@ -177,7 +176,6 @@ function sunshineClassContent(
       ],
       obstructedViewNotes: OBSTRUCTED[ship],
       obstructionKinds: ["solid-structure", "outdoor-walkway"],
-      connectingNote: CONNECTING_RULE,
       minorPlacementRule: CARNIVAL_MINOR_PLACEMENT,
       accessibilityNote:
         "These upper decks mix accommodation and recreation far more than the Excel ships do — cabins sit on and around decks 9 and 10 rather than all sitting well below the outdoor attractions. For a slower traveller that cuts the vertical trip if they're booked high, but it buys that with same-deck traffic and overhead activity, so proximity here is a tradeoff rather than a straight win. That comparison is our inference from the deck geometry rather than a Carnival statement. Confirm scooter clearance against Carnival's accessible deck plan as usual.",

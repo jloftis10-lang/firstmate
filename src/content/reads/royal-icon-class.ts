@@ -11,7 +11,6 @@ import {
   ROYAL_SOURCES,
 } from "./royal-common";
 import {
-  CONNECTING_RULE,
   MOTION_RULE,
   QUIET_DEFAULT_RULE,
   VIBRATION_RULE,
@@ -226,10 +225,8 @@ function iconClassContent(ship: "icon" | "star" | "legend"): ShipContent {
       ],
       obstructedViewNotes:
         "Cabin-level obstruction data for this class does exist — Royal's official graphical deck plans mark obstructed-view staterooms along with the connecting and accessible ones. What doesn't exist is a convenient text table you can quote from, so the markings have to be read off the current plan for the specific hull. Secondary sources cluster complaints around deck 8 above the lifeboats and parts of deck 10, but complaint clustering is not a verified mechanism and neither is a rule here. Until the plan is imported, don't tell a client what KIND of obstruction they'd have — only that the plan marks the cabin, or doesn't.",
-      connectingNote: withShipNote(
-        CONNECTING_RULE,
+      connectingNote:
         "Connecting family rooms genuinely are an option on this class — Royal marks Family Infinite Ocean View Balcony as connecting-capable on Icon and Legend, and its Star material says connecting Ocean View Balcony rooms can be booked together for families or friends. What I can't give you is the exact Surfside pair inventory; that has to come off the current deck plan, and the general rule still applies to every one of them.",
-      ),
       minorPlacementRule: ROYAL_MINOR_PLACEMENT,
       elevatorNote:
         "Twenty-two elevators in two banks — forward and midship — running destination dispatch: you pick your deck at a console outside and the system assigns you a lettered car, with no buttons inside. Worth briefing anyone who'd find that stressful. The bank layout is the important part, because it's the opposite of the Oasis ships: those six put all 24 lifts forward and aft with nothing midship, so the warning that your calmest cabin is also your longest walk to a lift is an Oasis fact and it is NOT true here. Midship on this class is next to a bank.",

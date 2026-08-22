@@ -11,7 +11,6 @@ import {
 } from "./carnival-common";
 import {
   BOTTOM_DECK_NOTE,
-  CONNECTING_RULE,
   MOTION_RULE,
   PORTHOLE_STEER,
   QUIET_DEFAULT_RULE,
@@ -170,7 +169,6 @@ function italianClassContent(ship: "venezia" | "firenze"): ShipContent {
         },
       ],
       obstructedViewNotes: ITALIAN_OBSTRUCTION,
-      connectingNote: CONNECTING_RULE,
       minorPlacementRule: CARNIVAL_MINOR_PLACEMENT,
       elevatorNote: isVenezia
         ? "Sixteen elevators — researched rather than confirmed off Carnival's own material, so treat the count as indicative. What matters more is that they're destination-dispatch: you pick your deck on a panel outside and the system assigns you a car, with no buttons inside. The instruction that actually saves grief is to enter a destination for EVERY person in the group rather than once for the whole party — entering it once is the reported cause of most of the crowding and confusion."

@@ -12,7 +12,6 @@ import {
 } from "./ncl-common";
 import { nclAttractionRules, type NclAttractionId } from "./ncl-attractions";
 import {
-  CONNECTING_RULE,
   MOTION_RULE,
   QUIET_DEFAULT_RULE,
   VIBRATION_RULE,
@@ -292,7 +291,6 @@ function breakawayContent(ship: BreakawayShip): ShipContent {
           ],
       obstructedViewNotes: `Two mechanisms run through this whole family and they call for different conversations. The Waterfront promenade on deck 8 overlooks a small run of balconies — that's a privacy defect, not a view one, and it isn't sold as obstructed. And the Waterfront's steel roof sits under some deck 9 aft balconies, taking the downward view while leaving the horizon open. ${SHIP_OBSTRUCTION[ship] ?? "No per-cabin obstruction list is published for this hull. Check both class mechanisms against the current plan for the specific cabin, and do NOT carry a sister ship's cabin numbers across — that mistake has already been made in print about these ships."}`,
       obstructionKinds: kinds,
-      connectingNote: CONNECTING_RULE,
       minorPlacementRule: NCL_MINOR_PLACEMENT,
       elevatorNote:
         "Around sixteen lifts is the widely reported figure for this design family, and that's as far as I'd go. The bank layout needs verifying per hull, and the story that circulates — that the buffet, theatre and observation lounge all sit forward so the forward bank takes the load — is passenger experience rather than encoded geometry. It may well be right. It is not something to build a cabin recommendation on.",

@@ -9,7 +9,6 @@ import {
 } from "./carnival-common";
 import {
   BOTTOM_DECK_NOTE,
-  CONNECTING_RULE,
   MOTION_RULE,
   PORTHOLE_STEER,
   VIBRATION_RULE,
@@ -108,7 +107,6 @@ function vistaClassContent(ship: "vista" | "horizon" | "panorama"): ShipContent 
       obstructedViewNotes:
         "Four specific cabins, the same on all three ships: Junior Suites 9205 and 9206 and Spa Suites 14205 and 14206. A solid steel panel or bulkhead blocks the seated view — not a lifeboat.",
       obstructionKinds: ["solid-structure"],
-      connectingNote: CONNECTING_RULE,
       minorPlacementRule: CARNIVAL_MINOR_PLACEMENT,
       elevatorNote:
         "Eight elevators forward, four midship, four aft — match the bank to where they'll spend the week. Forward suits the theatre and spa and has twice the cars; aft suits Havana and the aft pool and dining; midship balances the walking but sits where everyone converges. For mobility with no strong destination pattern, lean forward for the extra cars.",

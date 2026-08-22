@@ -12,7 +12,6 @@ import {
 } from "./royal-common";
 import { attractionRules, type AttractionId } from "./royal-attractions";
 import {
-  CONNECTING_RULE,
   MOTION_RULE,
   PORTHOLE_STEER,
   QUIET_DEFAULT_RULE,
@@ -347,7 +346,6 @@ function visionClassContent(ship: VisionShip): ShipContent {
       ],
       obstructedViewNotes: `There is NO class-wide lifeboat band on these ships, and that's worth saying plainly because an earlier version of this record claimed deck 3 was one. Royal's own printable deck 3 plan calls out the forward PORTHOLE cabins — two round windows instead of a rectangular one — without marking the deck as obstructed, and deck 3 otherwise reads as ordinary cabin-sandwiched space. Don't warn a client off deck 3 on lifeboat grounds. What IS true is that Royal marks obstructed staterooms on its own deck plans for all four of these hulls, cabin by cabin, so that plan is the check. ${SHIP_OBSTRUCTION[ship] ?? "The obstructed cabins for this hull need reading off its current plan — don't inherit a sister's numbers."} No mechanism is recorded here, because Royal marks a cabin obstructed without saying by what, and guessing at the cause would defeat the point of having the field.`,
       obstructionKinds: kinds,
-      connectingNote: CONNECTING_RULE,
       minorPlacementRule: ROYAL_MINOR_PLACEMENT,
       accessibilityNote:
         "The saving grace of a small ship is that nothing is far away, and the pool deck sits cleanly above the cabins rather than among them. Against that, this class predates most modern accessible-design conventions. I'm not giving you a lift count or a bank layout: a figure repeated across secondary sources isn't a confirmed one, and a count without a layout gives you no usable advice anyway. Treat a mobility booking here as needing the accessible deck plan checked cabin by cabin rather than reasoned from a rule.",

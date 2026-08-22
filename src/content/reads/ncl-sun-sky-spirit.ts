@@ -11,7 +11,6 @@ import {
   NCL_SOURCES,
 } from "./ncl-common";
 import {
-  CONNECTING_RULE,
   MOTION_RULE,
   PUBLIC_SPACE_SANDWICH,
   QUIET_DEFAULT_RULE,
@@ -239,7 +238,6 @@ function sunContent(): ShipContent {
       ],
       obstructedViewNotes: GUARANTEE_WARNING,
       obstructionKinds: NO_VERIFIED_RULE,
-      connectingNote: CONNECTING_RULE,
       minorPlacementRule: NCL_MINOR_PLACEMENT,
       accessibilityNote:
         "A small ship, so distances are genuinely short — that's the real advantage here. I'm giving you no lift count: the figure that circulates isn't confirmed, and an earlier version of this record used it to recommend booking low and midship, which is a recommendation built on an unverified number. Low and midship may well suit them for motion and for walking distance; just don't take it from me as a lifts argument. Confirm the accessible deck plan for the specific cabin.",
@@ -295,7 +293,6 @@ function skyContent(): ShipContent {
       ],
       obstructedViewNotes: GUARANTEE_WARNING,
       obstructionKinds: NO_VERIFIED_RULE,
-      connectingNote: CONNECTING_RULE,
       minorPlacementRule: NCL_MINOR_PLACEMENT,
       accessibilityNote:
         "Small and compact, so short distances — and this is a 1999 hull that predates most modern accessible-design conventions, which is the thing to actually plan around. I'm not giving you a lift count or a bank layout. Treat a mobility booking here as needing the accessible deck plan checked cabin by cabin.",
@@ -359,7 +356,6 @@ function spiritContent(): ShipContent {
       ],
       obstructedViewNotes: GUARANTEE_WARNING,
       obstructionKinds: NO_VERIFIED_RULE,
-      connectingNote: CONNECTING_RULE,
       minorPlacementRule: NCL_MINOR_PLACEMENT,
       accessibilityNote:
         "Compact and short-distanced, which helps. I'm deliberately NOT repeating what an earlier version of this record said — that the small cabins leave little turning room for a wheelchair or scooter. That's intuitive and it's arithmetic, not geometry, and an accessibility recommendation has to come from the accessible-cabin specifications rather than from a square-footage figure. Get the actual dimensions and the accessible deck plan for the specific room.",

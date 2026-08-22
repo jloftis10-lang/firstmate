@@ -2,6 +2,10 @@ import type { ClientProfile, CoveredShip, Read, ReadCategory } from "./types";
 import { noiseRank, noiseSource } from "./noise";
 import { availabilitySentence } from "./availability";
 import { obstructionSentence } from "./obstruction";
+// The one general cabin rule the engine renders directly. It lives with
+// the other operator-signed judgment rather than being retyped here —
+// see the connecting-cabin branch below for what happened when it was.
+import { CONNECTING_RULE } from "@/content/reads/operator-rules";
 
 /**
  * The deterministic Confidence Read engine.
@@ -95,16 +99,28 @@ function cabinRead(
   // A connecting door cuts both ways, so this fires for EVERY booking, not
   // just families. Operator-confirmed (Jimmy, 2026-08-17): great when your
   // own people are on the other side of it, wrong when it's strangers.
-  if (cabin.connectingNote) {
-    if (client.party === "family") {
-      flags.push(
-        `Connecting cabins are the right call here — but never infer it from the category or from two cabin numbers sitting next to each other. Only an explicit connecting pair counts. ${cabin.connectingNote}`,
-      );
-    } else {
-      flags.push(
-        "Keep them out of a connecting cabin. That door is a bonus when your own people are on the other side of it and a problem when it's strangers — check the deck plan before you confirm.",
-      );
-    }
+  //
+  // THE RULE HAS ONE AUTHOR NOW. This branch used to paraphrase
+  // `CONNECTING_RULE` in its own words and then append the ship's
+  // `connectingNote` — which, on all 79 covered hulls, opened with that
+  // same rule. Every family booking therefore read the same sentence
+  // twice, near-verbatim, and had done since the first class shipped.
+  // The cause was two authors of one rule, so the fix is to have one:
+  // the engine renders the signed constant, and a ship record carries
+  // only what is true of that hull.
+  //
+  // Ungated from `connectingNote` as well. The rule holds on any ship,
+  // so making it conditional on a per-ship note was always wrong — it
+  // just never showed, because every covered hull happened to have one.
+  if (client.party === "family") {
+    const shipNote = cabin.connectingNote ? ` ${cabin.connectingNote}` : "";
+    flags.push(
+      `Connecting cabins are the right call here. ${CONNECTING_RULE}${shipNote}`,
+    );
+  } else {
+    flags.push(
+      "Keep them out of a connecting cabin. That door is a bonus when your own people are on the other side of it and a problem when it's strangers — check the deck plan before you confirm.",
+    );
   }
 
   // Policy, not layout: an adjacent cabin can fail this where a connecting

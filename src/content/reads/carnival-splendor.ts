@@ -9,7 +9,6 @@ import {
 } from "./carnival-common";
 import {
   BOTTOM_DECK_NOTE,
-  CONNECTING_RULE,
   MOTION_RULE,
   PORTHOLE_STEER,
   QUIET_DEFAULT_RULE,
@@ -108,7 +107,6 @@ export const carnivalSplendor: ShipContent = {
     obstructedViewNotes:
       "Two different things, and the record used to have only one of them. The Cloud 9 Spa ocean views 1001, 1002, 1003 and 1004 up on the Panorama deck are category 6S sold as obstructed — the window looks onto an outdoor walkway, which means people as well as a blocked view. Separately, Splendor carries the 4J interior-with-picture-window walkway-view category, which is the same kind of problem in a different category code. So read the code on the specific cabin; those four spa rooms are not the whole picture.",
     obstructionKinds: ["outdoor-walkway"],
-    connectingNote: CONNECTING_RULE,
     minorPlacementRule: CARNIVAL_MINOR_PLACEMENT,
     elevatorNote:
       "Fourteen elevators. I couldn't establish how they split forward, midship and aft, so don't steer anyone to a bank on my say-so — pick the end of the ship where they'll actually spend the week.",

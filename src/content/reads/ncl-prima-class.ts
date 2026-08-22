@@ -12,7 +12,6 @@ import {
 } from "./ncl-common";
 import { nclAttractionRules, type NclAttractionId } from "./ncl-attractions";
 import {
-  CONNECTING_RULE,
   MOTION_RULE,
   QUIET_DEFAULT_RULE,
   VIBRATION_RULE,
@@ -264,10 +263,8 @@ function primaClassContent(ship: PrimaShip): ShipContent {
       obstructedViewNotes:
         "The documented issue on this class is not a blocked view at all — it's the slide structure running down the hull past the balconies between decks 8 and 16, entering the balcony on some cabins. Treat that as a geometry check on the specific room. Beyond it, NCL doesn't publish a full obstructed list and says so obliquely in its own guarantee terms, which warn that a guarantee balcony may be fully or partially obstructed. Lists of specific cabin numbers circulate, but they come from a single site that concedes in the same article that NCL doesn't flag most of them, so none of those numbers are repeated here.",
       obstructionKinds: kinds,
-      connectingNote: withShipNote(
-        CONNECTING_RULE,
+      connectingNote:
         "Connecting cabins exist on this class but I couldn't find any published inventory, so treat it as something to confirm rather than assume.",
-      ),
       minorPlacementRule: NCL_MINOR_PLACEMENT,
       accessibilityNote:
         "I'm deliberately giving you less here than an earlier version of this record did, and the reason matters. That version warned there was no midship lift bank, that the banks sat at dead ends, and that there's no continuous fore-and-aft interior corridor — the strongest accessibility warning in this whole database, resting on ambiguous deck-plan reading. None of it is confirmed, and a wrong mobility recommendation is the most expensive kind to get wrong. So: the lift bank layout is UNCHARTED here. Map the actual route from the specific cabin to the dining room and the theatre before you commit, and confirm it against NCL's accessible deck plan rather than against any rule I could give you.",
