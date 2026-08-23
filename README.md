@@ -46,6 +46,25 @@ Vercel, zero-config. Import the repo, accept the detected Next.js settings,
 deploy. A clean clone with no environment variables set builds and runs
 correctly — verified — so nothing below is required to go live.
 
+### After deploying
+
+```bash
+scripts/smoke.sh https://cruiseread.com
+```
+
+curl and grep only — no Node, no install — so it runs from a laptop. That
+matters: the build environment's egress policy blocks the production
+domain, so the checks that only mean something against a real deployment
+cannot be run from here.
+
+It covers the production-only class of problem: every route and the two
+that must 404, the sitemap's URLs resolving, robots pointing at the right
+host, `og:image` on a `generateMetadata` page as well as a static one
+(111 of 121 pages silently lost it once), the share page being noindex
+with no canonical, and `/check` still being small rather than inlining
+the ship corpus. Run it with no argument against `localhost:3000`; three
+checks that need the real origin report as skipped.
+
 **Domain.** `cruiseread.com` appears in five files. Changing the domain means
 changing all five and rebuilding — there is no single constant, and that is
 worth knowing before you go looking for one:
