@@ -39,6 +39,12 @@ assert.deepEqual(edgeResearch.get("Celebrity Edge")?.arithmeticCandidates, [8, 9
 assert.deepEqual(edgeResearch.get("Celebrity Apex")?.arithmeticCandidates, [8, 9, 10]);
 assert.deepEqual(edgeResearch.get("Celebrity Beyond")?.arithmeticCandidates, [8, 9, 10, 11]);
 assert.deepEqual(edgeResearch.get("Celebrity Ascent")?.arithmeticCandidates, [8, 9, 10, 11]);
-assert.equal(edgeResearch.get("Celebrity Xcel")?.arithmeticCandidates, null);
+assert.deepEqual(edgeResearch.get("Celebrity Xcel")?.arithmeticCandidates, [8, 9, 10, 11]);
+assert.equal(edgeResearch.get("Celebrity Edge")?.operatorStatus, "signed-2026-08-24");
+assert.equal(edgeResearch.get("Celebrity Edge")?.currentPlanReviewed, "2026-08-24");
+assert.equal(
+  edgeResearch.get("Celebrity Xcel")?.operatorStatus,
+  "signed-2026-08-24",
+);
 
 console.log("deck arithmetic holds — skipped numbering and mixed neighbours");

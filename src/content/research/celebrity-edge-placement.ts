@@ -1,14 +1,15 @@
 import { quietCandidates, type Deck } from "@/lib/decks";
 
 /**
- * UNSIGNED EDGE-SERIES PLACEMENT RESEARCH.
+ * EDGE-SERIES PLACEMENT RESEARCH AND OPERATOR DECISION.
  *
- * This file is intentionally not wired into `ShipContent`. The detailed
- * official pages available for four hulls describe an earlier sailing
- * window than the current production plan, while Xcel's current page exposes
+ * The detailed official pages available for four hulls describe an earlier
+ * sailing window than the current production plan, while Xcel's current page exposes
  * cabin decks but not its public-space overlay in accessible text. The data
- * is useful enough to prepare the operator decision and not current enough
- * to publish as verified advice.
+ * prepared the operator decision. Jimmy signed every result on 2026-08-24,
+ * then confirmed Xcel deck 6 is mixed-use and deck 12 is cabins only. The
+ * four complete stacks and all five placement bands now feed `ShipContent`;
+ * Xcel's incomplete full-deck overlay remains outside the live deck table.
  */
 
 export type EdgePlacementResearch = {
@@ -16,13 +17,18 @@ export type EdgePlacementResearch = {
   checked: "2026-08-24";
   currentPlanUrl: string;
   currentPlanWindow: string;
+  currentPlanReviewed: "2026-08-24";
   detailedPlanUrl: string;
   detailedPlanWindow: string;
-  evidence: "historical-detailed-plan" | "current-cabin-decks-only";
+  evidence:
+    | "historical-detailed-plan"
+    | "current-cabin-decks-plus-secondary-public-space";
   decks: Deck[] | null;
+  /** Enough adjacent decks to evaluate the proposed band, not a full stack. */
+  reviewedBand?: Deck[];
   cabinDecks: number[];
   arithmeticCandidates: number[] | null;
-  operatorStatus: "unsigned";
+  operatorStatus: "signed-2026-08-24";
   note: string;
 };
 
@@ -115,13 +121,19 @@ const LATER_STACK: Deck[] = [
 ];
 
 function researched(
-  input: Omit<EdgePlacementResearch, "checked" | "operatorStatus" | "arithmeticCandidates">,
+  input: Omit<
+    EdgePlacementResearch,
+    "checked" | "currentPlanReviewed" | "arithmeticCandidates"
+  >,
 ): EdgePlacementResearch {
   return {
     ...input,
     checked: "2026-08-24",
-    operatorStatus: "unsigned",
-    arithmeticCandidates: input.decks ? quietCandidates(input.decks) : null,
+    currentPlanReviewed: "2026-08-24",
+    arithmeticCandidates:
+      input.decks || input.reviewedBand
+        ? quietCandidates(input.decks ?? input.reviewedBand ?? [])
+        : null,
   };
 }
 
@@ -135,9 +147,10 @@ export const CELEBRITY_EDGE_PLACEMENT_RESEARCH: EdgePlacementResearch[] = [
       "https://tst1.celebritycruises.com/cruise-ships/celebrity-edge/deck-plan",
     detailedPlanWindow: "beginning April 16, 2023",
     evidence: "historical-detailed-plan",
+    operatorStatus: "signed-2026-08-24",
     decks: EARLY_STACK,
     cabinDecks: [3, 6, 7, 8, 9, 10, 11, 12, 15, 16],
-    note: "Reference-hull extraction. Recheck the current production images before signing; the accessible detailed plan is older than the current sailing window.",
+    note: "Reference-hull extraction. Jimmy reviewed the current production plan on 2026-08-24, confirmed it matches the placement geometry and signed the result.",
   }),
   researched({
     ship: "Celebrity Apex",
@@ -148,9 +161,10 @@ export const CELEBRITY_EDGE_PLACEMENT_RESEARCH: EdgePlacementResearch[] = [
       "https://www.test1.celebritycruises.com/gb/cruise-ships/celebrity-apex/deck-plan",
     detailedPlanWindow: "beginning March 7, 2025",
     evidence: "historical-detailed-plan",
+    operatorStatus: "signed-2026-08-24",
     decks: EARLY_STACK,
     cabinDecks: [3, 6, 7, 8, 9, 10, 11, 12, 15, 16],
-    note: "Independently checked against Apex's detailed page; not inherited from Edge. Current production window still needs image-level confirmation.",
+    note: "Independently checked against Apex's detailed page; not inherited from Edge. Jimmy reviewed the current production plan on 2026-08-24 and signed the result.",
   }),
   researched({
     ship: "Celebrity Beyond",
@@ -161,9 +175,10 @@ export const CELEBRITY_EDGE_PLACEMENT_RESEARCH: EdgePlacementResearch[] = [
       "https://tst1.celebritycruises.com/int/cruise-ships/celebrity-beyond/deck-plan",
     detailedPlanWindow: "beginning April 27, 2025",
     evidence: "historical-detailed-plan",
+    operatorStatus: "signed-2026-08-24",
     decks: LATER_STACK,
     cabinDecks: [3, 6, 7, 8, 9, 10, 11, 12, 15, 16],
-    note: "Independently checked. Unlike Edge/Apex, the detailed plan places Luminae on deck 16 rather than cabin deck 12.",
+    note: "Independently checked. Unlike Edge/Apex, Luminae is on deck 16 rather than cabin deck 12. Jimmy reviewed the current production plan on 2026-08-24 and signed the result.",
   }),
   researched({
     ship: "Celebrity Ascent",
@@ -174,9 +189,10 @@ export const CELEBRITY_EDGE_PLACEMENT_RESEARCH: EdgePlacementResearch[] = [
       "https://tst1.celebritycruises.com/int/cruise-ships/celebrity-ascent/deck-plan",
     detailedPlanWindow: "beginning April 19, 2025",
     evidence: "historical-detailed-plan",
+    operatorStatus: "signed-2026-08-24",
     decks: LATER_STACK,
     cabinDecks: [3, 6, 7, 8, 9, 10, 11, 12, 15, 16],
-    note: "Independently checked. Like Beyond, Luminae is listed on deck 16 and deck 12 is shown as cabins only.",
+    note: "Independently checked. Like Beyond, Luminae is on deck 16 and deck 12 is cabins only. Jimmy reviewed the current production plan on 2026-08-24 and signed the result.",
   }),
   researched({
     ship: "Celebrity Xcel",
@@ -186,9 +202,29 @@ export const CELEBRITY_EDGE_PLACEMENT_RESEARCH: EdgePlacementResearch[] = [
     detailedPlanUrl:
       "https://tst1.celebritycruises.com/cruise-ships/celebrity-xcel/deck-plan",
     detailedPlanWindow: "beginning November 2025",
-    evidence: "current-cabin-decks-only",
+    evidence: "current-cabin-decks-plus-secondary-public-space",
+    operatorStatus: "signed-2026-08-24",
     decks: null,
+    reviewedBand: [
+      {
+        deck: 6,
+        carriesCabins: true,
+        publicSpace: ["The Bazaar (upper level)"],
+        note: "Mixed-use confirmed by Jimmy and identified as The Bazaar's upper level by Cruise Critic's shipyard tour, checked 2026-08-24.",
+      },
+      { deck: 7, carriesCabins: true, publicSpace: [] },
+      { deck: 8, carriesCabins: true, publicSpace: [] },
+      { deck: 9, carriesCabins: true, publicSpace: [] },
+      { deck: 10, carriesCabins: true, publicSpace: [] },
+      { deck: 11, carriesCabins: true, publicSpace: [] },
+      {
+        deck: 12,
+        carriesCabins: true,
+        publicSpace: [],
+        note: "Cabins only, confirmed by Jimmy on 2026-08-24.",
+      },
+    ],
     cabinDecks: [3, 6, 7, 8, 9, 10, 11, 12, 15, 16],
-    note: "The current page confirms the cabin decks and Xcel-only upper-deck shape, but its accessible text omits the public-area overlay. Do not copy Beyond's candidate band; no arithmetic result is claimed.",
+    note: "The current page confirms the cabin decks. Jimmy confirmed deck 6 is mixed-use and deck 12 is cabins only on 2026-08-24, which establishes the decks 8–11 band. Cruise Critic's shipyard tour identifies deck 6's public space as the upper level of The Bazaar. The remaining public-space overlay is not fully transcribed, so no full deck stack is published.",
   }),
 ];

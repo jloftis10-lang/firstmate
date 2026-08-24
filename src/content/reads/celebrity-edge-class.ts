@@ -1,4 +1,5 @@
 import type { ShipContent, Source } from "@/lib/types";
+import { CELEBRITY_EDGE_PLACEMENT_RESEARCH } from "@/content/research/celebrity-edge-placement";
 import { MOTION_RULE, VIBRATION_RULE } from "./operator-rules";
 import {
   CELEBRITY_TRAPS,
@@ -20,7 +21,14 @@ const XCEL_SOURCE: Source = {
   checked: "2026-08-24",
 };
 
-const EDGE_CABIN: ShipContent["cabin"] = {
+const XCEL_BAZAAR_DECK_SOURCE: Source = {
+  label:
+    "Cruise Critic Celebrity Xcel shipyard tour — The Bazaar spans decks 5 and 6",
+  url: "https://www.cruisecritic.com/articles/celebrity-xcel-photos-whats-new-sneak-peek-shipyard",
+  checked: "2026-08-24",
+};
+
+const EDGE_CABIN: NonNullable<ShipContent["cabin"]> = {
   // Infinite Veranda tradeoff signed off by Jimmy, 2026-08-24. The imported
   // motion and vibration rules were already operator-confirmed.
   verified: true,
@@ -32,18 +40,74 @@ const EDGE_CABIN: ShipContent["cabin"] = {
   hazardsAboveBelow: [],
 };
 
+const PLACEMENT_RANGE: Partial<Record<EdgeShip, string>> = {
+  edge: "decks 8 through 10",
+  apex: "decks 8 through 10",
+  beyond: "decks 8 through 11",
+  ascent: "decks 8 through 11",
+  xcel: "decks 8 through 11",
+};
+
+const PLACEMENT_NOTE: Partial<Record<EdgeShip, string>> = {
+  edge:
+    "Decks 8 through 10 are the cabin-sandwich band on this hull. Deck 7 sits above mixed-use deck 6, while deck 11 sits below Luminae on cabin deck 12. Keep the choice midship and check the actual cabin rather than blessing every room in the band.",
+  apex:
+    "Decks 8 through 10 are the cabin-sandwich band on this hull. Deck 7 sits above mixed-use deck 6, while deck 11 sits below Luminae on cabin deck 12. Keep the choice midship and check the actual cabin rather than blessing every room in the band.",
+  beyond:
+    "Decks 8 through 11 are the cabin-sandwich band on this hull. Deck 7 sits above mixed-use deck 6; deck 12 is cabins only on the checked plan, with Luminae up on deck 16. Keep the choice midship and check the actual cabin rather than blessing every room in the band.",
+  ascent:
+    "Decks 8 through 11 are the cabin-sandwich band on this hull. Deck 7 sits above mixed-use deck 6; deck 12 is cabins only on the checked plan, with Luminae up on deck 16. Keep the choice midship and check the actual cabin rather than blessing every room in the band.",
+  xcel:
+    "Decks 8 through 11 are the confirmed cabin-sandwich band on this hull. Deck 7 sits above the upper level of The Bazaar on mixed-use deck 6, while deck 12 is cabins only. Keep the choice midship and check the actual cabin rather than extending this reviewed band into a full-deck claim.",
+};
+
+const PLACEMENT = new Map(
+  CELEBRITY_EDGE_PLACEMENT_RESEARCH.map((record) => [
+    record.ship.toLowerCase().replace("celebrity ", "") as EdgeShip,
+    record,
+  ]),
+);
+
 function edgeShip(ship: EdgeShip): ShipContent {
   const name = `Celebrity ${ship.charAt(0).toUpperCase()}${ship.slice(1)}`;
   const isXcel = ship === "xcel";
+  const placement = PLACEMENT.get(ship);
+  const placementRange = PLACEMENT_RANGE[ship];
+  const placementNote = PLACEMENT_NOTE[ship];
+  let cabin: NonNullable<ShipContent["cabin"]> = EDGE_CABIN;
+  let decks: ShipContent["decks"];
+  if (placement && placementRange && placementNote) {
+    // Jimmy signed all five per-hull placement results on 2026-08-24. Xcel
+    // carries the signed placement fields but no deck table because only the
+    // adjacent decks needed for the decision have been transcribed.
+    cabin = {
+      ...EDGE_CABIN,
+      verified: true,
+      midshipRange: placementRange,
+      placementNote,
+    };
+    decks = placement.decks ?? undefined;
+  }
+  const hasSignedPlacement = Boolean(placement && placementRange && placementNote);
 
   return {
     sources: [
       ...celebrityShipSources(`celebrity-${ship}`, name),
       EDGE_VERANDA_SOURCE,
-      ...(isXcel ? [XCEL_SOURCE] : []),
+      ...(hasSignedPlacement && placement
+        ? [
+            {
+              label: `${name} detailed official deck plan — ${placement.detailedPlanWindow}`,
+              url: placement.detailedPlanUrl,
+              checked: placement.checked,
+            },
+          ]
+        : []),
+      ...(isXcel ? [XCEL_SOURCE, XCEL_BAZAAR_DECK_SOURCE] : []),
     ],
     fareInclusions: { state: "not-researched" },
-    cabin: EDGE_CABIN,
+    decks,
+    cabin,
     traps: isXcel
       ? {
           ...CELEBRITY_TRAPS,

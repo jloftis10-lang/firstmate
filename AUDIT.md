@@ -1021,3 +1021,24 @@ consecutive deck numbers; deck 14 is correctly treated as the deck above 12
 when a line skips 13. It also treats a mixed cabin/public deck as a public
 neighbor for the sandwich test. A focused regression command covers both
 failures and is part of `npm run verify`.
+
+## Phase 19 — 2026-08-24 — Edge-series placement sign-off
+
+Jimmy signed every Decision 3 placement result. Celebrity Edge and Apex now
+use a midship decks 8–10 default; Beyond and Ascent use midship decks 8–11.
+He then confirmed that Xcel deck 6 is mixed-use and deck 12 is cabins only,
+independently establishing the same decks 8–11 band on Xcel without copying a
+sister's full layout. Cruise Critic's shipyard tour identifies deck 6's public
+space as the upper level of The Bazaar, replacing the deliberately generic
+placeholder used before that venue was sourced.
+
+The four complete researched deck stacks now render on their ship and class
+pages. Xcel receives the signed placement wording but not a deck table: only
+the adjacent decks needed for the sandwich test have been confirmed, the deck
+6 venue is The Bazaar's upper level, and publishing that partial band as a
+complete ship stack would still overstate the remaining evidence.
+
+Jimmy also completed and signed the visual freshness review against the
+current 2026–27 plans on 2026-08-24. The operator packet keeps that checklist
+as the audit record for the next freshness pass rather than leaving a
+completed review in the remaining-work queue.

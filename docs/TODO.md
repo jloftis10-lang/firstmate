@@ -217,13 +217,14 @@ hull-specific.
 
 Jimmy signed the line-policy warnings, Infinite Veranda tradeoff, Xcel Bazaar
 distinction and Celebrity Solstice teen-facility exception on 2026-08-24.
-Decision 3 now has unsigned, per-hull deck-stack research in
-`docs/celebrity-operator-review.md`: Edge/Apex provisionally compute to decks
-8–10, Beyond/Ascent to 8–11, and Xcel remains unresolved because its current
-accessible page omits the public-space overlay. **Next:** compare those four
-historical detailed plans with the current 2026–27 plan images, complete Xcel,
-then ask the operator to narrow and sign the actual placement wording. After
-that, continue with obstruction, elevators, refits and availability.
+Jimmy signed Decision 3 on 2026-08-24: Edge/Apex use midship decks 8–10 and
+Beyond/Ascent/Xcel use midship decks 8–11. He confirmed Xcel deck 6 is
+mixed-use and deck 12 is cabins only. All five placement bands are live; four
+complete deck stacks are live, while Xcel's full deck table waits on the rest
+of its public-space transcription. Cruise Critic identifies Xcel deck 6's
+mixed-use space as The Bazaar's upper level. Jimmy completed and signed the current-plan
+visual review on 2026-08-24. **Next:** continue with obstruction, elevators,
+refits and availability.
 
 #### B4. Migrate Oasis, Icon and Quantum off `ROYAL_ATTRACTION_RULES`
 
