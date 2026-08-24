@@ -108,6 +108,29 @@ body {
   animation: fm-rise 0.5s ease both;
 }
 
+.cr-pro-print {
+  display: none;
+}
+
+@media print {
+  @page { size: letter; margin: 0.65in; }
+  body { background: white !important; background-image: none !important; }
+  body * { visibility: hidden !important; }
+  .cr-pro-print, .cr-pro-print * { visibility: visible !important; }
+  .cr-pro-print { position: absolute; inset: 0; display: block; color: #0f2a3d; font-family: Arial, Helvetica, sans-serif; }
+  .cr-pro-print-header { display: flex; align-items: baseline; justify-content: space-between; border-bottom: 2px solid #2e6d6f; padding-bottom: 12px; }
+  .cr-pro-print-brand { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; color: #2e6d6f; }
+  .cr-pro-print-brand span { color: #0b1d33; }
+  .cr-pro-print-kicker, .cr-pro-print-profile { font-family: "Courier New", monospace; font-size: 10px; letter-spacing: 1.1px; color: #3a5872; }
+  .cr-pro-print-byline { margin-top: 22px; font-size: 14px; font-weight: 700; }
+  .cr-pro-print-contact { margin-top: 4px; font-size: 12px; color: #3a5872; }
+  .cr-pro-print h1 { margin-top: 34px; font-family: Georgia, "Times New Roman", serif; font-size: 30px; font-weight: 400; line-height: 1.2; }
+  .cr-pro-print-profile { margin-top: 10px; text-transform: uppercase; }
+  .cr-pro-print-summary { margin-top: 26px; border: 1px solid #d2dcdf; border-radius: 12px; padding: 22px; font-family: Georgia, "Times New Roman", serif; font-size: 17px; line-height: 1.65; }
+  .cr-pro-print footer { margin-top: 34px; border-top: 1px solid #d2dcdf; padding-top: 14px; font-size: 10px; line-height: 1.55; color: #6e869a; }
+  .cr-pro-print footer p + p { margin-top: 6px; }
+}
+
 /* Visible keyboard focus everywhere — part of the quality floor. */
 :focus-visible {
   outline: 2px solid var(--color-deep);

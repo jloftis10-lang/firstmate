@@ -43,7 +43,7 @@ echo "Smoke check: $BASE"
 echo
 
 echo "Routes"
-for p in / /check /ships /classes /cruise-lines /compare /methodology /about /guides /pricing /request-a-ship \
+for p in / /check /ships /classes /cruise-lines /compare /methodology /about /guides /pricing /pro /request-a-ship \
          /guides/quiet-cabins /guides/obstructed-balconies /guides/cruise-guarantee-cabins \
          /ships/radiance-of-the-seas /classes/royal-caribbean-radiance \
          /cruise-lines/royal-caribbean /sitemap.xml /robots.txt /opengraph-image; do
@@ -65,6 +65,7 @@ SITEMAP="$(body /sitemap.xml)"
 URLS="$(printf '%s' "$SITEMAP" | grep -c '<loc>' || true)"
 check "sitemap lists 125 urls" "$URLS" "125"
 if printf '%s' "$SITEMAP" | grep -q '/share'; then bad "sitemap must not list /share"; else ok "sitemap omits /share"; fi
+if printf '%s' "$SITEMAP" | grep -q '/pro'; then bad "sitemap must not list /pro"; else ok "sitemap omits /pro"; fi
 ROBOTS="$(body /robots.txt)"
 if printf '%s' "$ROBOTS" | grep -qi 'Disallow: /share'; then ok "robots disallows /share"; else bad "robots must disallow /share"; fi
 if [ "$PROD" = "1" ]; then
@@ -101,6 +102,13 @@ SHARE_HTML="$(body "$SHARE")"
 if printf '%s' "$SHARE_HTML" | grep -q 'name="robots"[^>]*noindex'; then ok "share is noindex"; else bad "share must be noindex — it carries a client's booking"; fi
 if printf '%s' "$SHARE_HTML" | grep -q 'rel="canonical"'; then bad "share must not claim a canonical"; else ok "share claims no canonical"; fi
 if printf '%s' "$SHARE_HTML" | grep -q 'Your cruise plan — CruiseRead'; then ok "share title is not double-suffixed"; else bad "share title wrong"; fi
+
+echo
+echo "The browser-local workspace is private"
+PRO_HTML="$(body /pro)"
+if printf '%s' "$PRO_HTML" | grep -q 'name="robots"[^>]*noindex'; then ok "pro workspace is noindex"; else bad "pro workspace must be noindex"; fi
+if printf '%s' "$PRO_HTML" | grep -q 'rel="canonical"'; then bad "pro workspace must not claim a canonical"; else ok "pro workspace claims no canonical"; fi
+if printf '%s' "$PRO_HTML" | grep -q 'Founding Pro preview'; then ok "pro workspace renders"; else bad "pro workspace content missing"; fi
 
 echo
 echo "Payload"

@@ -33,6 +33,7 @@ export const NAV: NavItem[] = [
   { label: "Compare", href: "/compare", available: true },
   { label: "Guides", href: "/guides", available: true },
   { label: "Pricing", href: "/pricing", available: true },
+  { label: "My Checks", href: "/pro", available: true },
   { label: "How It Works", href: "/methodology", available: true },
 ];
 

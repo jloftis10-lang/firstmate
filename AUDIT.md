@@ -896,3 +896,39 @@ snapshot and the production build all pass. Build-output assertions confirm
 the three prices, early-access disclosure and interest form are present with
 no card input; direct route checks confirm malformed or unapproved plans fail
 closed and an unconfigured email service returns the expected fallback status.
+
+## Phase 15 — 2026-08-24 — Founding Pro browser preview
+
+The new `/pro` workspace makes the first paid workflow testable before billing
+or account infrastructure. An advisor can save an exact five-input Booking
+Check with an optional working label, reopen either the operator read or the
+clean client page, remove it, and store the advisor name, agency, email and
+phone used on printable summaries. All of that state is versioned, parsed as
+untrusted input and kept in `localStorage`; it is not posted to CruiseRead or
+analytics and does not cross devices.
+
+Every covered result now offers **Save this check** and **Print / save PDF**.
+The print document contains the deterministic client summary, optional advisor
+identity, booking profile, signed state and the real latest source-check date.
+It uses the browser print dialog rather than uploading client details to a PDF
+service. Missing advisor fields remain missing; the document falls back only
+to the generic words “your travel advisor.”
+
+Saved checks carry a fingerprint of the complete structured ship record. When
+My Checks opens, CruiseRead fetches the current per-hull JSON and compares it
+with the saved fingerprint. A difference is shown as **Research changed —
+rerun**; the old summary is never silently rewritten. These are in-app alerts,
+not background email notifications, and the workspace says so plainly.
+
+The Founding Pro pricing card now links to the free preview and distinguishes
+the working browser-local features from the still-planned Agency product.
+`/pro` is noindex, has no canonical and stays out of the 125-URL public
+sitemap. No ship fact, engine rule, snapshot output or booking input changed.
+
+Lint, generated route types, TypeScript and the unchanged 2,528-read engine
+snapshot pass. The production build prerenders `/pro` among 215 routes. Pure
+assertions cover storage parsing, fingerprint stability and change detection;
+build-output assertions confirm the noindex/no-canonical boundary, pricing
+preview copy, print stylesheet and saved-check client action. The smoke script
+also checks `/pro` while continuing to require that it stay out of the public
+sitemap.

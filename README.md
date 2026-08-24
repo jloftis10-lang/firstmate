@@ -27,6 +27,22 @@ records**. No language model is involved at any point, and there are no
 scores, ratings or percentages anywhere in the product. See `/methodology` on
 the running site, or `src/lib/engine.ts`.
 
+## Founding Pro preview
+
+`/pro` is an account-free preview of the paid workflow. A completed Booking
+Check can be saved with an optional working label, printed or saved as an
+advisor-branded PDF, and reopened from **My Checks**. When that workspace
+opens, it fetches the current record for each saved hull and compares a
+fingerprint of the complete structured research with the version saved behind
+the check. A change is a prompt to rerun, never an automatic rewrite of the
+old client summary.
+
+The preview uses versioned `localStorage`; names, labels and saved profiles do
+not leave the browser and are never sent to analytics. There is deliberately
+no auth, database, cross-device sync or email notification yet. Clearing site
+data removes the workspace. This is the validation layer before CruiseRead
+asks advisors to pay or commits to account infrastructure.
+
 ## Commands
 
 ```bash
@@ -114,3 +130,6 @@ a future contributor should know they were choices:
 - **Absence is not evidence.** "Nobody checked" and "there is nothing there"
   are different values in the data model.
 - **No cabin facts inferred between sister ships**, even inside a class.
+- **No Pro accounts or cloud sync yet.** The Founding Pro preview is local to
+  one browser; research alerts run when its workspace opens rather than by
+  background email.

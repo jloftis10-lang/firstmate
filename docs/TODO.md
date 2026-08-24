@@ -6,6 +6,21 @@ against the tree at the time of writing; nothing is from memory.
 **Read `CLAUDE.md` first** (the product brief and standing constraints),
 then the "Non-negotiables" section below, then pick a task.
 
+## Current order — 2026-08-24
+
+1. **Founding Pro preview — shipped in Phase 15.** Browser-local saved checks,
+   advisor-branded print/PDF output and in-app research-change alerts are the
+   validation layer. Do not add billing, auth or cloud sync until advisors use
+   this workflow and the account requirement is real.
+2. **Coverage expansion — next.** Start with the existing Celebrity extraction
+   request in `docs/celebrity-extraction-request.md`; it covers 14 ships across
+   three classes and remains gated on source-backed research plus operator
+   sign-off. A3 deck-stack transcription may widen only where signed prose
+   already contains the facts.
+3. **Persistent Pro infrastructure — later.** Accounts, cross-device history
+   and background email alerts follow validation of the browser preview, not
+   before it.
+
 ---
 
 ## Non-negotiables
@@ -127,7 +142,7 @@ every ship says nothing.
 run verify` green with **no snapshot change** (nothing reads it, so
 output must not move).
 
-#### A2. `/guides` has no index page
+#### A2. `/guides` has no index page — COMPLETED IN PHASE 12
 
 `/guides/quiet-cabins`, `/guides/obstructed-balconies` and
 `/guides/cruise-guarantee-cabins` all exist and are linked from the

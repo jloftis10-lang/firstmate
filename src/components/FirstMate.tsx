@@ -22,7 +22,9 @@ import { currentSearch, pushUrl, serverSearch, subscribeToUrl } from "@/lib/url-
 import { track } from "@/lib/analytics";
 import { ReadCard } from "./ReadCard";
 import { shipProvenance } from "@/lib/provenance";
+import { latestResearchChecked, researchFingerprint } from "@/lib/pro";
 import { ClientSummary } from "./ClientSummary";
+import { FoundingProActions } from "./FoundingProActions";
 import { Sounding } from "./Sounding";
 import { ShipPicker } from "./ShipPicker";
 import { NoReadYet } from "./NoReadYet";
@@ -634,6 +636,16 @@ function ReadView({
         sharePath={sharePath(client)}
         client={client}
         emailEnabled={emailEnabled}
+      />
+
+      <FoundingProActions
+        client={client}
+        shipName={ship.name}
+        line={ship.line}
+        summary={summary}
+        verified={allVerified}
+        researchFingerprint={researchFingerprint(ship.content)}
+        researchChecked={latestResearchChecked(ship.content)}
       />
 
       <button

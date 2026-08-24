@@ -31,18 +31,18 @@ const PLANS = [
   },
   {
     name: "Founding Pro",
-    marker: "Early access — planned",
+    marker: "Preview available — no charge",
     price: "$19",
     cadence: "per month · or $190/year",
     description: "For individual advisors who want to save, brand and monitor repeat booking work.",
     features: [
       "Everything in Free",
-      "Saved Booking Checks",
-      "Advisor-branded client summaries and PDF export",
-      "Alerts when checked guidance changes",
+      "Saved Booking Checks on this browser",
+      "Advisor-branded printable and PDF summaries",
+      "In-app alerts when checked research changes",
     ],
-    cta: "Request founding access",
-    href: "#founding-access",
+    cta: "Open Founding Pro preview",
+    href: "/pro",
     featured: true,
   },
   {
@@ -67,12 +67,12 @@ const FAQ = [
   {
     question: "Is CruiseRead charging now?",
     answer:
-      "No. The Free product is available now. Founding Pro and Agency are early-access plans, and the interest form does not collect a card or start a subscription.",
+      "No. The Free product and browser-local Founding Pro preview are available now. The preview and interest form do not collect a card or start a subscription.",
   },
   {
     question: "When would billing begin?",
     answer:
-      "Only after the paid features are ready and an advisor accepts an invitation with the price and billing terms shown before checkout.",
+      "Only after the preview has been validated and an advisor accepts an invitation with the price and billing terms shown before checkout.",
   },
   {
     question: "What is the founding price?",
@@ -95,9 +95,9 @@ export default function PricingPage() {
             Start free. Pay when CruiseRead saves repeat work.
           </h1>
           <p className="mx-auto mt-4 max-w-[62ch] text-[1rem] leading-[1.65] text-ink-2">
-            The public research and Booking Check are free now. Paid plans are
-            shown so advisors can help shape them; CruiseRead is not accepting
-            payment until the listed paid features are ready.
+            The public research and Booking Check are free now. The Founding
+            Pro workflow is also open as a browser-local preview; CruiseRead is
+            not accepting payment while advisors test it.
           </p>
         </header>
 
@@ -144,7 +144,8 @@ export default function PricingPage() {
 
         <p className="mx-auto mt-5 max-w-[68ch] text-center text-[0.78rem] leading-[1.55] text-ink-3">
           Founding and standard prices are launch plans, not active offers.
-          Joining the list does not purchase, reserve or renew anything.
+          Using the preview or joining the list does not purchase, reserve or
+          renew anything.
         </p>
 
         <section id="founding-access" className="scroll-mt-6 border-t border-line pt-12 mt-12">
