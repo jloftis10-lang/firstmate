@@ -315,6 +315,14 @@ export type ShipContent = {
     /** See cabin.verified. */
     verified: boolean;
     kidAgeHeightRules?: string;
+    /**
+     * Family-program eligibility that is not a ride-height rule — youth
+     * club ages, toilet-training requirements, nursery availability and
+     * paid care windows. Kept separate because the ride field deliberately
+     * renders slide language that would invent an attraction on lines whose
+     * family product is programming rather than a waterpark.
+     */
+    familyProgramRules?: string;
     obstructedBalconyDecks?: string;
     embarkationNote?: string;
     /** Traps specific to THIS ship or class. Shown as flags, like the rest. */

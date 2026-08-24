@@ -394,7 +394,7 @@ export default function HomePage() {
               },
               {
                 title: "No language model deciding anything",
-                body: "The read is a deterministic engine over structured records. The same booking returns the same answer every time, and a snapshot of all 2,528 combinations is checked on every build — so a change to the reasoning cannot slip through unnoticed.",
+                body: "The read is a deterministic engine over structured records. The same booking returns the same answer every time, and a snapshot of all 2,976 combinations is checked on every build — so a change to the reasoning cannot slip through unnoticed.",
               },
               {
                 title: "No unsigned call passing as a signed one",

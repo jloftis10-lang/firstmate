@@ -12,11 +12,11 @@ then the "Non-negotiables" section below, then pick a task.
    advisor-branded print/PDF output and in-app research-change alerts are the
    validation layer. Do not add billing, auth or cloud sync until advisors use
    this workflow and the account requirement is real.
-2. **Coverage expansion — next.** Start with the existing Celebrity extraction
-   request in `docs/celebrity-extraction-request.md`; it covers 14 ships across
-   three classes and remains gated on source-backed research plus operator
-   sign-off. A3 deck-stack transcription may widen only where signed prose
-   already contains the facts.
+2. **Celebrity operator review — next.** Phase 16 added source-backed,
+   unsigned coverage for 14 ships across three classes. Review
+   `docs/celebrity-operator-review.md`; sign, edit or reject the line-policy
+   and Infinite Veranda wording, then supply hull-specific cabin placement.
+   No deck stack, obstruction cause or sister parity was inferred.
 3. **Persistent Pro infrastructure — later.** Accounts, cross-device history
    and background email alerts follow validation of the browser preview, not
    before it.
@@ -43,8 +43,8 @@ different — "nobody checked" is not "there is nothing there".
 
 ### 2. Never delete or hand-edit the engine snapshot to make a check pass
 
-`npm run verify` replays all 79 covered ships against all 32 client
-profiles — 2,528 reads — against a committed hash in
+`npm run verify` replays all 93 covered ships against all 32 client
+profiles — 2,976 reads — against a committed hash in
 `scripts/engine-snapshot.json`.
 
 - Snapshot fails and you did **not** intend to change engine output →
@@ -158,7 +158,7 @@ sitemap count updated from 121 to 122.
 
 #### A3. Widen deck-stack coverage — transcription, not research
 
-Only **8 of 79** hulls have a `decks` array (Radiance and Vision
+Only **8 of 93** covered hulls have a `decks` array (Radiance and Vision
 classes), and it is what makes the quiet-cabin arithmetic run rather than
 be asserted.
 
@@ -205,19 +205,18 @@ It matters on `/compare`, which currently normalises Royal's median
 against Carnival's real price and carries a prose caveat instead of the
 range. A `priceRange` field would let the page state it.
 
-#### B3. Celebrity coverage — 14 ships, 3 classes
+#### B3. Celebrity coverage — RESEARCH PASS SHIPPED IN PHASE 16
 
-The next line, and the request is already written:
-**`docs/celebrity-extraction-request.md`**. It covers the roster, the
-per-sister difference-check rule, and three things Celebrity does that
-the catalog has never recorded — the Infinite Veranda, "Always Included"
-(the first real use of `fareInclusions`, currently set by zero ships),
-and family programming that is neither Carnival's nor adults-only.
+The 14 mainstream ocean ships now have source-backed unsigned records.
+The research corrected “Always Included” to the current optional All
+Included fare choice and leaves `fareInclusions` unknown at ship level so a
+Cruise-Only booking cannot be misread. Edge-series records carry the Infinite
+Veranda tradeoff; Xcel's Bazaar and Solstice's teen-facility exception remain
+hull-specific.
 
-`docs/ship-intake.md` is the field-by-field schema. `src/lib/intake.ts`
-validates it. The Viking pilot in `docs/viking-*.md` is the worked
-example — including the part where it broke its own premise, which is
-what the difference check is for.
+**Next:** use `docs/celebrity-operator-review.md` for sign-off and the missing
+hull-level placement, deck-stack, obstruction, elevator, refit and availability
+checks. Do not mark any block verified until that review happens.
 
 #### B4. Migrate Oasis, Icon and Quantum off `ROYAL_ATTRACTION_RULES`
 
@@ -237,7 +236,7 @@ finding time.** Do not do it unprompted.
 #### B5. Availability is checked on one hull
 
 `ActivityAvailability` — what is currently out of service — is populated
-on **1 of 79** ships. An empty list means nobody checked, which every
+on **1 of 93** covered ships. An empty list means nobody checked, which every
 page states plainly, so this is honest. It is also the most perishable
 claim in any record and the one most likely to embarrass an advisor who
 quoted it.
@@ -263,7 +262,7 @@ Worth a standing process more than a one-off task.
   typed and tested; built for the Viking pilot, and the Viking record
   was pulled before sign-off. Deliberate, and documented in
   `src/lib/types.ts`. Do not delete them.
-- **`serviceYear` is on 8 of 79 ships.** Sparse on purpose. The signed
+- **`serviceYear` is on 8 of 93 covered ships.** Sparse on purpose. The signed
   class headers contain "Jewel (2004)" for Royal and "Jewel (2005)" for
   Norwegian, and "Star (2001)" against "Star (2025)". An automated sweep
   would cross them. Filled in per class, deliberately.

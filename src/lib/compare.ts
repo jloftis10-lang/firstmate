@@ -113,6 +113,7 @@ const CABIN_FIELDS = [
 
 const TRAPS_FIELDS = [
   "kidAgeHeightRules",
+  "familyProgramRules",
   "obstructedBalconyDecks",
   "embarkationNote",
 ] as const;

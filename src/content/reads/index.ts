@@ -114,6 +114,26 @@ import {
   norwegianSpirit,
   norwegianSun,
 } from "./ncl-sun-sky-spirit";
+import {
+  celebrityApex,
+  celebrityAscent,
+  celebrityBeyond,
+  celebrityEdge,
+  celebrityXcel,
+} from "./celebrity-edge-class";
+import {
+  celebrityEclipse,
+  celebrityEquinox,
+  celebrityReflection,
+  celebritySilhouette,
+  celebritySolstice,
+} from "./celebrity-solstice-class";
+import {
+  celebrityConstellation,
+  celebrityInfinity,
+  celebrityMillennium,
+  celebritySummit,
+} from "./celebrity-millennium-class";
 
 /**
  * Operator read content, keyed by ship id.
@@ -222,6 +242,23 @@ export const SHIP_READS: Record<string, ShipContent> = {
   "norwegian-sun": norwegianSun,
   "norwegian-sky": norwegianSky,
   "norwegian-spirit": norwegianSpirit,
+
+  "celebrity-edge": celebrityEdge,
+  "celebrity-apex": celebrityApex,
+  "celebrity-beyond": celebrityBeyond,
+  "celebrity-ascent": celebrityAscent,
+  "celebrity-xcel": celebrityXcel,
+
+  "celebrity-solstice": celebritySolstice,
+  "celebrity-equinox": celebrityEquinox,
+  "celebrity-eclipse": celebrityEclipse,
+  "celebrity-silhouette": celebritySilhouette,
+  "celebrity-reflection": celebrityReflection,
+
+  "celebrity-millennium": celebrityMillennium,
+  "celebrity-infinity": celebrityInfinity,
+  "celebrity-summit": celebritySummit,
+  "celebrity-constellation": celebrityConstellation,
 
   "carnival-celebration": carnivalCelebration,
   "carnival-mardi-gras": carnivalMardiGras,

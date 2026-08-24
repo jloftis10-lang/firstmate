@@ -45,6 +45,7 @@ const CABIN_FIELDS = [
 
 const TRAPS_FIELDS = [
   "kidAgeHeightRules",
+  "familyProgramRules",
   "obstructedBalconyDecks",
   "embarkationNote",
 ] as const;
@@ -123,6 +124,7 @@ const LABEL: Record<string, string> = {
   "cabin.elevatorNote": "Lifts",
   "cabin.accessibilityNote": "Accessibility",
   "traps.kidAgeHeightRules": "Height and age rules",
+  "traps.familyProgramRules": "Family programme rules",
   "traps.obstructedBalconyDecks": "Obstructed balconies",
   "traps.embarkationNote": "Embarkation",
   "cabin.categoryWarnings": "Category notes",

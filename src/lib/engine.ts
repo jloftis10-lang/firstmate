@@ -259,11 +259,16 @@ function trapsRead(
   if (client.party === "family") {
     call =
       "Kid access is the trap on this ship. What the parents picture and what their kids can actually use are two different things — and nobody finds out until day one.";
-    why =
-      "Every line splits kids' programming and thrill rides by age and height, and the cutoffs aren't on the booking page. A parent who was promised the waterpark and gets a crying kid at the rope is a parent who books with someone else next year.";
+    why = traps.familyProgramRules
+      ? "Family programming can turn on age bands, toilet-training requirements, care windows and whether a dedicated space exists. Those details are easy to flatten into “kids club included,” but they decide whether the parents actually get the time they planned for."
+      : "Every line splits kids' programming and thrill rides by age and height, and the cutoffs aren't on the booking page. A parent who was promised the waterpark and gets a crying kid at the rope is a parent who books with someone else next year.";
     if (traps.kidAgeHeightRules) {
       flags.push(
         `Confirm the kids clear the height and age lines **before** you promise anything. ${traps.kidAgeHeightRules} A tall six-year-old still gets turned away at the slide.`,
+      );
+    } else if (traps.familyProgramRules) {
+      flags.push(
+        `Confirm the family programme fits **before** you promise childcare or teen space. ${traps.familyProgramRules}`,
       );
     }
   } else if (client.party === "multigen") {
@@ -451,6 +456,13 @@ export function clientSummary(ship: CoveredShip, client: ClientProfile): string 
     parts.push(
       "I'm double-checking the kids clear the height and age rules for the slides and clubs so there are no surprises on day one.",
     );
+  } else if (
+    client.party === "family" &&
+    ship.content.traps?.familyProgramRules
+  ) {
+    parts.push(
+      "I'm double-checking the youth-program ages, care windows and eligibility rules so there are no surprises on day one.",
+    );
   }
 
   if (client.party === "multigen" && cabin) {
@@ -472,4 +484,3 @@ export function clientSummary(ship: CoveredShip, client: ClientProfile): string 
 
   return parts.join(" ");
 }
-

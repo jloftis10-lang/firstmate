@@ -932,3 +932,42 @@ build-output assertions confirm the noindex/no-canonical boundary, pricing
 preview copy, print stylesheet and saved-check client action. The smoke script
 also checks `/pro` while continuing to require that it stay out of the public
 sitemap.
+
+## Phase 16 — 2026-08-24 — Celebrity research coverage
+
+CruiseRead now has source-backed, unsigned coverage for Celebrity's 14
+mainstream ocean ships: five Edge-series, five Solstice-class and four
+Millennium-class hulls. Galapagos remains excluded because its fare and family
+product cannot safely inherit the mainstream policy record. The coverage
+report now separates **79 verified**, **14 researched** and **102 uncharted**
+ships rather than treating research as sign-off.
+
+The research corrected the extraction request's biggest assumption. Celebrity
+currently offers Cruise-Only and All Included fare choices; “All Included” is
+not a universal ship-level inclusion. The records therefore keep
+`fareInclusions` as not researched and put the rate-choice distinction in the
+unsigned policy warning, preventing the engine from telling a Cruise-Only
+client that drinks and Wi-Fi are already covered.
+
+Edge-series cabin records carry one deliberately narrow, source-backed call:
+an Infinite Veranda is its own inside/outside design, while Sunset Veranda and
+Deluxe Porthole View with Veranda are the conventional step-out alternatives.
+The wording is a tradeoff, not a ranking. Xcel's Bazaar stays Xcel-only, and
+Celebrity Solstice's current lack of a dedicated teen facility stays on that
+hull instead of being inherited by its sisters.
+
+No deck range, full deck stack, obstruction mechanism, elevator position,
+refit parity or operating-status claim was inferred. The operator packet at
+`docs/celebrity-operator-review.md` records every hull-level plan checked and
+the exact gaps that remain before sign-off. Until that review, Edge carries
+unsigned cabin and trap blocks; Solstice and Millennium carry unsigned trap
+blocks with cabin and money explicitly uncharted.
+
+The intentional snapshot change is 14 ships gaining coverage and no existing
+ship changing output. The regenerated guard now replays **93 ships × 32
+profiles — 2,976 reads**. The new ship and class pages raise the derived public
+sitemap from 125 to **142 URLs**.
+
+TypeScript and ESLint pass with zero errors or warnings, the production build
+prerenders all 246 routes, and the local smoke suite finishes **44 passed, 0
+failed** with the two CDN-only checks skipped as designed.

@@ -17,8 +17,8 @@ gangway rather than on the booking page.
 
 ## What it is, technically
 
-Next 16, React 19, Tailwind v4, TypeScript. The sitemap carries 125 public
-URLs, plus 79 ship records served as JSON. Three pages are server-rendered
+Next 16, React 19, Tailwind v4, TypeScript. The sitemap carries 142 public
+URLs, plus 93 ship records served as JSON. Three pages are server-rendered
 on demand (`/share`, `/compare`, `/request-a-ship`); the content catalog and
 all other pages are prerendered.
 
@@ -55,7 +55,7 @@ npm run coverage   # coverage report by line and class
 ```
 
 `npm run verify` is the gate that matters. It typechecks and then replays all
-79 covered ships against all 32 client profiles — 2,528 reads — against a
+93 covered ships against all 32 client profiles — 2,976 reads — against a
 committed hash. An unintended change to the reasoning fails it. An intended
 one has to be regenerated and committed, so it shows up in review as a diff
 rather than passing unnoticed. **Do not delete the snapshot to make it pass.**
@@ -122,7 +122,7 @@ Recorded here because each one costs coverage or convenience on purpose, and
 a future contributor should know they were choices:
 
 - **No scores.** No rating, percentage or confidence number anywhere.
-- **No page for a ship nobody has worked up.** 116 of the 195 catalog hulls
+- **No page for a ship nobody has worked up.** 102 of the 195 catalog hulls
   have no read; they are listed so an advisor can find them and get a
   straight answer, and they 404 rather than rendering an empty page.
 - **Uncharted is never a clean bill of health.** Empty blocks and sections

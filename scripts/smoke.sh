@@ -11,7 +11,7 @@
 # runnable from a laptop.
 #
 # Everything here is a production-only concern. The build already
-# typechecks, lints and replays 2,528 engine reads; none of that needs
+# typechecks, lints and replays 2,976 engine reads; none of that needs
 # repeating. What this catches is the class of thing that is only true
 # once a CDN, a domain and a TLS terminator are involved.
 set -uo pipefail
@@ -45,7 +45,8 @@ echo
 echo "Routes"
 for p in / /check /ships /classes /cruise-lines /compare /methodology /about /guides /pricing /pro /request-a-ship \
          /guides/quiet-cabins /guides/obstructed-balconies /guides/cruise-guarantee-cabins \
-         /ships/radiance-of-the-seas /classes/royal-caribbean-radiance \
+         /ships/radiance-of-the-seas /ships/celebrity-edge \
+         /classes/royal-caribbean-radiance /classes/celebrity-edge \
          /cruise-lines/royal-caribbean /sitemap.xml /robots.txt /opengraph-image; do
   check "$p" "$(status "$p")" "200"
 done
@@ -63,7 +64,7 @@ echo
 echo "Crawlability"
 SITEMAP="$(body /sitemap.xml)"
 URLS="$(printf '%s' "$SITEMAP" | grep -c '<loc>' || true)"
-check "sitemap lists 125 urls" "$URLS" "125"
+check "sitemap lists 142 urls" "$URLS" "142"
 if printf '%s' "$SITEMAP" | grep -q '/share'; then bad "sitemap must not list /share"; else ok "sitemap omits /share"; fi
 if printf '%s' "$SITEMAP" | grep -q '/pro'; then bad "sitemap must not list /pro"; else ok "sitemap omits /pro"; fi
 ROBOTS="$(body /robots.txt)"
