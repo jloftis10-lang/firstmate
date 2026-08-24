@@ -1078,3 +1078,35 @@ none of Xcel's obstruction, noise or elevator fields. Xcel's availability and
 refit history also remain unknown because the research did not establish
 either. This is an intentional one-ship engine-output change and requires a
 regenerated snapshot.
+
+## Phase 22 — 2026-08-24 — Celebrity Edge cabin-risk research
+
+Decision 5 now has a typed, unsigned Celebrity Edge research layer covering
+obstruction mechanisms, venue-noise checks and elevator geometry without
+changing the live Edge record. The work is independent of Xcel: no sister fact
+was copied across the class.
+
+Celebrity's detailed official plan marks obstructed views on deck 3 and decks
+6 through 12 and names Partial View Infinite Veranda and Concierge categories.
+Passenger reports identify lifeboats below some solo cabins on decks 6 and 7
+and the Magic Carpet support frame beside specific starboard midship cabins.
+The official images corroborate the frame location, but the proposed wording
+keeps both mechanisms cabin-specific rather than turning them into deck-wide
+rules.
+
+Cruise Critic's editor cautions against deck 3 cabins below casino, restaurant
+and shop space; the official deck 3 and 4 images confirm that mixed adjacency.
+A cabin 12148 report describes nighttime chair movement from the pool deck,
+and the official deck 12 and 14 images establish the overhead footprint across
+Celebrity's skipped deck 13. A separate cabin 3143 report names Le Grand
+Bistro, but the official geometry does not support that venue directly above
+the cabin, so the packet excludes the claim rather than guessing.
+
+Official deck 3, 6, 8 and 12 images independently show the same two passenger
+elevator banks, one forward of center and one aft of center, with no central
+midship bank. The current production page covers May 14, 2026 through April
+18, 2027, while the detailed image set is labeled for sailings beginning April
+16, 2023. The operator packet therefore requires a current-plan visual check
+before the obstruction, noise and elevator wording can be signed. Availability
+and refit history remain explicitly unknown, and the engine snapshot must stay
+unchanged during this research-only phase.

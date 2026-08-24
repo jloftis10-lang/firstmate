@@ -2,8 +2,9 @@
 
 **Research date:** 2026-08-24  
 **Status:** decisions 1–4, current-plan visual review and the two researched
-hull exceptions signed by Jimmy on 2026-08-24; Xcel's full-deck transcription,
-operating-status check and refit history remain incomplete
+hull exceptions signed by Jimmy on 2026-08-24; Decision 5 now contains an
+unsigned Celebrity Edge cabin-risk packet; Xcel's full-deck transcription and
+both ships' operating-status and refit checks remain incomplete
 **Scope:** 14 mainstream ocean ships; Galapagos excluded
 
 This phase deliberately adds only claims the current Celebrity pages support.
@@ -61,8 +62,9 @@ parity. Those facts therefore remain unknown rather than being inherited.
 4. **SIGNED FOR XCEL 2026-08-24:** lifeboat obstruction on deck 6, the three
    researched noise adjacencies and the forward/aft elevator-bank wording.
    Repeat the research per hull; Xcel's findings do not establish its sisters.
-5. Confirm elevator-bank positions, current out-of-service experiences,
-   refit differences and any cabin-category exceptions per sister.
+5. **AWAITING SIGN-OFF FOR EDGE:** the independently researched obstruction,
+   noise and elevator wording below. Edge's operating-status and refit checks
+   remain incomplete; repeat the same research per remaining sister.
 
 The trap block is now verified on all 14 ships, including the two researched
 hull exceptions. All five Edge-series cabin blocks are verified for the signed
@@ -197,3 +199,68 @@ specific cabin's route.”
 Operating status and refit history remain unknown. No source in this pass
 established a currently out-of-service experience, and absence of a report is
 not treated as proof that everything is operating.
+
+## Decision 5 — Celebrity Edge cabin risks — awaiting sign-off
+
+The typed research is in
+`src/content/research/celebrity-edge-cabin-risks.ts`. It remains outside the
+live Edge record. The production page's checked plan window is **May 14,
+2026–April 18, 2027**; the detailed official images are labeled for sailings
+beginning April 16, 2023. Before signing, confirm that the current plan retains
+the cited symbols and geometry.
+
+### Evidence that is established
+
+- Celebrity's detailed plan presents an **Obstructed View** marker under decks
+  3 and 6 through 12. It names Partial View Infinite Veranda and Concierge
+  categories. The marker establishes a cabin-level check, not one common cause.
+- Two passenger reports supply candidate mechanisms. One reports lifeboats
+  below some solo cabins on decks 6 and 7. Another names the Magic Carpet
+  support frame beside specific starboard midship cabins. Celebrity's official
+  deck images corroborate the frame location, but neither mechanism should be
+  generalized to a whole deck.
+- [Cruise Critic's editor review](https://www.cruisecritic.com/cruise/celebrity/celebrity-edge/cabins)
+  advises caution on deck 3 because cabins sit below casino, restaurant and
+  shop space. Celebrity's deck 3 and 4 images corroborate that mixed adjacency.
+- A [cabin 12148 passenger report](https://www.cruisecritic.com/cruise/celebrity/celebrity-edge/reviews/650687)
+  describes nighttime chair movement from the pool deck above. Celebrity's
+  official deck 12 and 14 images confirm that deck 14 is physically above 12
+  because the line skips deck 13 and show the pool footprint overhead.
+- Celebrity's official deck 3, 6, 8 and 12 images each show two passenger
+  elevator banks: one forward of center and one aft of center. There is no
+  central midship bank.
+- A cabin 3143 passenger report attributes noise to Le Grand Bistro, but the
+  official images do not support that venue directly above the cabin. The
+  proposed wording excludes that report instead of guessing at a reconciliation.
+
+### Proposed operator wording
+
+**Obstruction:** “Celebrity marks view limitations by exact cabin and sells
+Partial View categories on Edge. Passenger reports identify two mechanisms:
+lifeboats below some solo cabins on decks 6 and 7, and the Magic Carpet support
+frame beside some starboard midship cabins. Treat both as cabin-specific
+checks, not deck-wide rules, and verify the current plan marker and category
+for the exact cabin.”
+
+**Noise:** “On deck 3, check the exact overhead footprint before booking:
+cabins sit below a mixed deck of casino, restaurant and shop space. On deck 12,
+check the deck 14 footprint immediately above; a cabin 12148 report describes
+nighttime chair movement under the pool deck. These are location checks, not
+warnings against every cabin on either deck.”
+
+**Elevators:** “Edge's cabin decks have one elevator bank forward of center
+and one aft of center, with no central midship bank. For a mobility booking,
+balance the midship motion advantage against the walk to a lift and check the
+specific cabin's route.”
+
+### Operator decisions needed
+
+1. Sign or revise the obstruction wording and the two candidate mechanisms:
+   `lifeboat-davit` and `solid-structure`.
+2. Sign or revise the deck 3 mixed-public-space and deck 12 pool-overhead
+   noise wording.
+3. Sign or revise the two-bank elevator wording for mobility bookings.
+
+Current operating status and refit history remain unknown. No Edge finding is
+inherited from Xcel, and no Edge finding should be inherited by Apex, Beyond,
+Ascent or Xcel.

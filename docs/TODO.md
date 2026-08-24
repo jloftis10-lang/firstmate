@@ -226,9 +226,12 @@ mixed-use space as The Bazaar's upper level. Jimmy completed and signed the curr
    visual review on 2026-08-24. Xcel's obstruction, noise and elevator
    research was signed on 2026-08-24: deck 6 lifeboat obstruction, the three
    noise adjacencies and the two-bank elevator wording are live on Xcel only.
-   Its operating status and refit history remain unknown. **Next:** research
-   Edge obstruction, noise and elevator geometry independently; do not inherit
-   Xcel's findings across the class.
+   Its operating status and refit history remain unknown. Edge now has an
+   independent, unsigned Decision 5 packet for cabin-level view markers,
+   lifeboat and Magic Carpet-frame mechanisms, deck 3/deck 12 noise checks and
+   its two-bank elevator geometry. The detailed image set predates the current
+   production window, so **next:** visually confirm the current Edge plan and
+   sign or revise all three findings. Do not inherit them across the class.
 
 #### B4. Migrate Oasis, Icon and Quantum off `ROYAL_ATTRACTION_RULES`
 
