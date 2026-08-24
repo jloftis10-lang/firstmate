@@ -32,6 +32,7 @@ export const NAV: NavItem[] = [
   { label: "Ship Classes", href: "/classes", available: true },
   { label: "Compare", href: "/compare", available: true },
   { label: "Guides", href: "/guides", available: true },
+  { label: "Pricing", href: "/pricing", available: true },
   { label: "How It Works", href: "/methodology", available: true },
 ];
 

@@ -17,7 +17,7 @@ gangway rather than on the booking page.
 
 ## What it is, technically
 
-Next 16, React 19, Tailwind v4, TypeScript. The sitemap carries 124 public
+Next 16, React 19, Tailwind v4, TypeScript. The sitemap carries 125 public
 URLs, plus 79 ship records served as JSON. Three pages are server-rendered
 on demand (`/share`, `/compare`, `/request-a-ship`); the content catalog and
 all other pages are prerendered.
@@ -87,7 +87,7 @@ worth knowing before you go looking for one:
 |---|---|---|
 | `RESEND_API_KEY` | The "email it to them" affordance is not offered at all | Advisors can email the client summary |
 | `RESEND_FROM` | `CruiseRead <notes@cruiseread.com>` | Overrides the sender |
-| `REQUESTS_TO_EMAIL` | `jloftis10@gmail.com` | Overrides where ship requests are delivered |
+| `REQUESTS_TO_EMAIL` | `jloftis10@gmail.com` | Overrides where ship and pricing-interest requests are delivered |
 | `NEXT_PUBLIC_ANALYTICS_ENDPOINT` | Nothing is sent anywhere, no third-party script loads | Events POST to that URL |
 
 The email affordance is hidden rather than broken when the key is missing —

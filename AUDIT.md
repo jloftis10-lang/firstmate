@@ -869,3 +869,30 @@ build pass. The local smoke suite finishes **36 passed, 0 failed**, and a
 separate runtime check confirms the request page prefills correctly and
 the unconfigured API fails closed with a 503 so the mail fallback can
 take over.
+
+## Phase 14 — 2026-08-24 — launch pricing and founding access
+
+`/pricing` now gives CruiseRead a public commercial path without pretending
+the paid product is finished. Free is marked available now. Founding Pro is
+shown at **$19/month or $190/year**, the planned later standard price is
+**$29/month or $290/year**, and Agency is shown at **$79/month for five
+advisors plus $12 for each additional advisor**. Every paid label, feature
+list and FAQ calls the plans early access or planned; no checkout, card field
+or active-subscription claim appears anywhere.
+
+The founding-access form records which plan an advisor wants, their reply
+address, team size and the task the paid product needs to solve. It sends only
+to the same configured CruiseRead inbox as ship requests, uses the same input
+bounds, escaping, honeypot and best-effort throttle, and falls back to a
+prefilled email when Resend is absent. Its success state says explicitly that
+no subscription has begun.
+
+Pricing is linked in the main and footer navigation. The sitemap and smoke
+suite now carry **125** public URLs. No ship record, source, booking claim,
+engine rule or client input changed.
+
+Lint, generated route types, TypeScript, the unchanged 2,528-read engine
+snapshot and the production build all pass. Build-output assertions confirm
+the three prices, early-access disclosure and interest form are present with
+no card input; direct route checks confirm malformed or unapproved plans fail
+closed and an unconfigured email service returns the expected fallback status.
