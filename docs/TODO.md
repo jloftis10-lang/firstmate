@@ -12,11 +12,12 @@ then the "Non-negotiables" section below, then pick a task.
    advisor-branded print/PDF output and in-app research-change alerts are the
    validation layer. Do not add billing, auth or cloud sync until advisors use
    this workflow and the account requirement is real.
-2. **Celebrity operator review — next.** Phase 16 added source-backed,
-   unsigned coverage for 14 ships across three classes. Review
-   `docs/celebrity-operator-review.md`; sign, edit or reject the line-policy
-   and Infinite Veranda wording, then supply hull-specific cabin placement.
-   No deck stack, obstruction cause or sister parity was inferred.
+2. **Celebrity hull-level completion — next.** Jimmy signed the shared policy,
+   Infinite Veranda wording, Xcel Bazaar distinction and Celebrity Solstice
+   teen-facility exception on 2026-08-24. Decisions 3–5 in
+   `docs/celebrity-operator-review.md` remain: ship-specific quiet defaults,
+   obstruction mechanisms, elevator positions, operating status, refit
+   differences and cabin exceptions. No missing fact may be inferred.
 3. **Persistent Pro infrastructure — later.** Accounts, cross-device history
    and background email alerts follow validation of the browser preview, not
    before it.
@@ -207,16 +208,17 @@ range. A `priceRange` field would let the page state it.
 
 #### B3. Celebrity coverage — RESEARCH PASS SHIPPED IN PHASE 16
 
-The 14 mainstream ocean ships now have source-backed unsigned records.
+The 14 mainstream ocean ships now have source-backed records.
 The research corrected “Always Included” to the current optional All
 Included fare choice and leaves `fareInclusions` unknown at ship level so a
 Cruise-Only booking cannot be misread. Edge-series records carry the Infinite
 Veranda tradeoff; Xcel's Bazaar and Solstice's teen-facility exception remain
 hull-specific.
 
-**Next:** use `docs/celebrity-operator-review.md` for sign-off and the missing
-hull-level placement, deck-stack, obstruction, elevator, refit and availability
-checks. Do not mark any block verified until that review happens.
+Jimmy signed the line-policy warnings, Infinite Veranda tradeoff, Xcel Bazaar
+distinction and Celebrity Solstice teen-facility exception on 2026-08-24.
+**Next:** use `docs/celebrity-operator-review.md` for the missing hull-level
+placement, deck-stack, obstruction, elevator, refit and availability checks.
 
 #### B4. Migrate Oasis, Icon and Quantum off `ROYAL_ATTRACTION_RULES`
 

@@ -1,15 +1,18 @@
 # Celebrity coverage — operator review packet
 
 **Research date:** 2026-08-24  
-**Status:** researched, unsigned  
+**Status:** decisions 1–2 and the two researched hull exceptions signed by
+Jimmy on 2026-08-24
 **Scope:** 14 mainstream ocean ships; Galapagos excluded
 
 This phase deliberately adds only claims the current Celebrity pages support.
-Every block is `verified: false` until an operator signs it. A source opening
-successfully is not treated as proof that sister ships have identical cabin
-stacks, obstruction mechanisms or venue layouts.
+Jimmy signed decisions 1 and 2 on 2026-08-24: the two shared line-policy
+warnings and the Infinite Veranda tradeoff. He also signed the researched
+Xcel Bazaar distinction and Celebrity Solstice teen-facility exception. A
+source opening successfully is not treated as proof that sister ships have
+identical cabin stacks, obstruction mechanisms or venue layouts.
 
-## What is ready to review
+## What was reviewed
 
 - **All 14 ships:** the current fare-choice warning and Camp at Sea policy.
   “All Included” is an optional rate, not a universal ship-level inclusion.
@@ -44,10 +47,12 @@ parity. Those facts therefore remain unknown rather than being inherited.
 | Millennium | Celebrity Summit | [deck plan](https://www.celebritycruises.com/cruise-ships/celebrity-summit/deck-plans) | policy only; refit parity not asserted |
 | Millennium | Celebrity Constellation | [deck plan](https://www.celebritycruises.com/cruise-ships/celebrity-constellation/deck-plans) | policy only; refit parity not asserted |
 
-## Decisions needed from the operator
+## Decision log and remaining work
 
-1. Sign, edit or reject the two line-policy warnings.
-2. Sign, edit or reject the Infinite Veranda tradeoff wording.
+1. **SIGNED 2026-08-24:** the two line-policy warnings.
+2. **SIGNED 2026-08-24:** the Infinite Veranda tradeoff wording.
+   **Also signed:** Xcel's Bazaar distinction and Celebrity Solstice's
+   teen-programming-without-a-dedicated-facility exception.
 3. Supply a ship-specific quiet default only after checking cabins above and
    below; no deck range is encoded in this phase.
 4. Identify any obstruction mechanism by hull. An “obstructed view” symbol
@@ -55,8 +60,9 @@ parity. Those facts therefore remain unknown rather than being inherited.
 5. Confirm elevator-bank positions, current out-of-service experiences,
    refit differences and any cabin-category exceptions per sister.
 
-Until those decisions are made, Solstice- and Millennium-class ships show
-the cabin and money sections as explicitly uncharted. Edge-series ships show
-an unsigned cabin block and an uncharted money block. No record claims that
-drinks or Wi-Fi are included without first knowing the fare selected.
-
+The trap block is now verified on all 14 ships, including the two researched
+hull exceptions. All five Edge-series cabin blocks are verified for the signed
+Infinite Veranda tradeoff; their ship-specific quiet defaults remain absent.
+Solstice- and Millennium-class cabin sections and every Celebrity money
+section remain explicitly uncharted. No record claims that drinks or Wi-Fi
+are included without first knowing the fare selected.

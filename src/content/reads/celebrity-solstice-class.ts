@@ -31,6 +31,9 @@ function solsticeShip(ship: SolsticeShip): ShipContent {
     traps: isSolstice
       ? {
           ...CELEBRITY_TRAPS,
+          // Solstice-specific teen-facility exception signed off by Jimmy,
+          // 2026-08-24.
+          verified: true,
           other: [
             "Celebrity Solstice currently offers teen programming without a dedicated teen facility; Celebrity says those activities use other venues. Do not inherit that exception across Equinox, Eclipse, Silhouette or Reflection.",
           ],
@@ -44,4 +47,3 @@ export const celebrityEquinox = solsticeShip("equinox");
 export const celebrityEclipse = solsticeShip("eclipse");
 export const celebritySilhouette = solsticeShip("silhouette");
 export const celebrityReflection = solsticeShip("reflection");
-

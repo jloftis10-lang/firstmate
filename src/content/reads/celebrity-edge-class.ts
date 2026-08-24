@@ -21,7 +21,9 @@ const XCEL_SOURCE: Source = {
 };
 
 const EDGE_CABIN: ShipContent["cabin"] = {
-  verified: false,
+  // Infinite Veranda tradeoff signed off by Jimmy, 2026-08-24. The imported
+  // motion and vibration rules were already operator-confirmed.
+  verified: true,
   motionAvoid: MOTION_RULE,
   vibrationNote: VIBRATION_RULE,
   categoryWarnings: [
@@ -45,6 +47,8 @@ function edgeShip(ship: EdgeShip): ShipContent {
     traps: isXcel
       ? {
           ...CELEBRITY_TRAPS,
+          // Xcel-specific Bazaar exception signed off by Jimmy, 2026-08-24.
+          verified: true,
           other: [
             "The Bazaar is an Xcel-specific experience, not an Edge-series class constant. Do not promise it on Edge, Apex, Beyond or Ascent because a client has seen it in Xcel material.",
           ],
@@ -58,4 +62,3 @@ export const celebrityApex = edgeShip("apex");
 export const celebrityBeyond = edgeShip("beyond");
 export const celebrityAscent = edgeShip("ascent");
 export const celebrityXcel = edgeShip("xcel");
-

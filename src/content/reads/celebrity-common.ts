@@ -2,10 +2,10 @@ import type { ShipContent, Source } from "@/lib/types";
 
 /**
  * Celebrity policy research shared by the 14 mainstream ocean ships in this
- * phase. None of these blocks is operator-signed. Galapagos is deliberately
- * excluded: its fare and family product are different enough that inheriting
- * this record would be the exact absence-as-evidence error the intake guards
- * against.
+ * phase. The two line-policy warnings and the matching family-program rule
+ * were SIGNED OFF by Jimmy on 2026-08-24. Galapagos is deliberately excluded:
+ * its fare and family product are different enough that inheriting this record
+ * would be the exact absence-as-evidence error the intake guards against.
  */
 export const CELEBRITY_COMMON_SOURCES: Source[] = [
   {
@@ -31,7 +31,8 @@ export const CELEBRITY_LINE_POLICY = [
 ];
 
 export const CELEBRITY_TRAPS: NonNullable<ShipContent["traps"]> = {
-  verified: false,
+  // Signed off by Jimmy, 2026-08-24.
+  verified: true,
   familyProgramRules:
     "Camp at Sea begins at age 3, and children in the 3–5 Shipmates group must be fully potty trained. There is no nursery or drop-off service for children under 3. Ages 13–17 use the separate teen programme, while late-night care from 10 p.m. to 1 a.m. is an extra-charge service.",
   linePolicy: CELEBRITY_LINE_POLICY,

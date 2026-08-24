@@ -971,3 +971,29 @@ sitemap from 125 to **142 URLs**.
 TypeScript and ESLint pass with zero errors or warnings, the production build
 prerenders all 246 routes, and the local smoke suite finishes **44 passed, 0
 failed** with the two CDN-only checks skipped as designed.
+
+## Phase 17 — 2026-08-24 — Celebrity operator sign-off, decisions 1–2
+
+Jimmy signed the two shared Celebrity line-policy warnings, the matching
+family-program rule and the Edge-series Infinite Veranda tradeoff. He also
+signed the two researched hull exceptions: The Bazaar belongs to Xcel rather
+than the full Edge series, and Celebrity Solstice currently runs teen
+programming without a dedicated teen facility.
+
+All 14 Celebrity trap blocks are now operator-verified, and the five
+Edge-series cabin blocks are verified for the Infinite Veranda wording plus
+the previously signed general motion and vibration rules. Verification does
+not fill a missing field: all Celebrity money blocks, every Solstice- and
+Millennium-class cabin block, ship-specific quiet defaults, deck stacks,
+obstruction causes, elevator positions, refit differences and operating
+status remain explicitly uncharted.
+
+The operator packet now records the approval and leaves decisions 3–5 open.
+The engine snapshot changes only the verification markers on the 14 Celebrity
+records; no existing Carnival, Royal Caribbean or Norwegian output changes.
+
+The snapshot was regenerated from the engine after the previous GitHub object
+upload truncated that large generated file in transit; the repaired file now
+parses and replays all **2,976 reads** successfully. TypeScript and ESLint pass,
+the production build prerenders all 246 routes, and the local smoke suite
+finishes **44 passed, 0 failed** with two CDN-only checks skipped.
