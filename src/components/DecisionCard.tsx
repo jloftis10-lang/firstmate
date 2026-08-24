@@ -70,7 +70,7 @@ export function DecisionCard({
       {uncharted && (
         <p className="mt-2 text-[0.84rem] leading-[1.5] text-ink-3">
           Not a clean bill of health — nobody has checked it. Treat this part
-          of the booking the way you would without First Mate.
+          of the booking the way you would without CruiseRead.
         </p>
       )}
 

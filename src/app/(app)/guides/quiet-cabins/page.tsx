@@ -38,7 +38,12 @@ export default function QuietCabinsGuide() {
   return (
     <main className="flex-1">
       <div className="mx-auto w-full max-w-[1180px] px-5 pt-6 pb-20 sm:px-8">
-        <Breadcrumbs trail={[{ label: "Quiet cabins" }]} />
+        <Breadcrumbs
+          trail={[
+            { label: "Guides", href: "/guides" },
+            { label: "Quiet cabins" },
+          ]}
+        />
 
         <header className="mb-9 max-w-[62ch]">
           <h1 className="font-call text-[2rem] leading-[1.1] tracking-[-0.02em] text-ink sm:text-[2.4rem]">

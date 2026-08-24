@@ -24,7 +24,7 @@ import { blockStates, isCovered } from "@/lib/types";
  */
 
 export const alt =
-  "First Mate Cruise — a second set of eyes on every cruise booking";
+  "CruiseRead — cruise booking intelligence for travel advisors";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -46,16 +46,34 @@ export default async function Image() {
           color: "#0f2a3d",
         }}
       >
-        <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
           <div
             style={{
-              fontSize: 30,
-              letterSpacing: "-0.01em",
-              color: "#0b1d33",
-              fontWeight: 600,
+              width: 58,
+              height: 58,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              borderRadius: 12,
+              background: "#fcfdfd",
+              border: "1px solid #d2dcdf",
+              fontSize: 29,
+              fontWeight: 800,
+              color: "#2e6d6f",
             }}
           >
-            First Mate Cruise
+            CR
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+          <div
+            style={{
+              fontSize: 34,
+              letterSpacing: "-0.035em",
+              color: "#0b1d33",
+              fontWeight: 800,
+            }}
+          >
+            CruiseRead
           </div>
           <div
             style={{
@@ -64,7 +82,8 @@ export default async function Image() {
               color: "#6e869a",
             }}
           >
-            CRUISEREAD.COM
+            CRUISE BOOKING INTELLIGENCE
+          </div>
           </div>
         </div>
 
@@ -81,7 +100,7 @@ export default async function Image() {
                 more than one child, and JSX turns an entity into its own
                 text node — so this is one expression rather than three
                 children. */}
-            {"Before you book, know what you'd miss."}
+            {"Catch the booking problems before your client does."}
           </div>
           <div style={{ fontSize: 27, lineHeight: 1.4, color: "#3a5872", maxWidth: 820 }}>
             {"Cabin, money and the surprises that show up at the gangway — from deck plans and line policy, not marketing copy."}

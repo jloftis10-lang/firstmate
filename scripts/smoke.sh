@@ -43,7 +43,7 @@ echo "Smoke check: $BASE"
 echo
 
 echo "Routes"
-for p in / /check /ships /classes /cruise-lines /compare /methodology \
+for p in / /check /ships /classes /cruise-lines /compare /methodology /about /guides \
          /guides/quiet-cabins /guides/obstructed-balconies /guides/cruise-guarantee-cabins \
          /ships/radiance-of-the-seas /classes/royal-caribbean-radiance \
          /cruise-lines/royal-caribbean /sitemap.xml /robots.txt /opengraph-image; do
@@ -63,7 +63,7 @@ echo
 echo "Crawlability"
 SITEMAP="$(body /sitemap.xml)"
 URLS="$(printf '%s' "$SITEMAP" | grep -c '<loc>' || true)"
-check "sitemap lists 121 urls" "$URLS" "121"
+check "sitemap lists 123 urls" "$URLS" "123"
 if printf '%s' "$SITEMAP" | grep -q '/share'; then bad "sitemap must not list /share"; else ok "sitemap omits /share"; fi
 ROBOTS="$(body /robots.txt)"
 if printf '%s' "$ROBOTS" | grep -qi 'Disallow: /share'; then ok "robots disallows /share"; else bad "robots must disallow /share"; fi
@@ -100,7 +100,7 @@ SHARE='/share?ship=radiance-of-the-seas&who=family&seasick=no&sailed=first&itine
 SHARE_HTML="$(body "$SHARE")"
 if printf '%s' "$SHARE_HTML" | grep -q 'name="robots"[^>]*noindex'; then ok "share is noindex"; else bad "share must be noindex — it carries a client's booking"; fi
 if printf '%s' "$SHARE_HTML" | grep -q 'rel="canonical"'; then bad "share must not claim a canonical"; else ok "share claims no canonical"; fi
-if printf '%s' "$SHARE_HTML" | grep -q 'Your cruise plan — First Mate Cruise'; then ok "share title is not double-suffixed"; else bad "share title wrong"; fi
+if printf '%s' "$SHARE_HTML" | grep -q 'Your cruise plan — CruiseRead'; then ok "share title is not double-suffixed"; else bad "share title wrong"; fi
 
 echo
 echo "Payload"

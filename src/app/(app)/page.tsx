@@ -84,6 +84,100 @@ function Stat({ value, label, href }: { value: string; label: string; href: stri
   );
 }
 
+const HERO_INPUTS = ["Ship", "Party", "Motion", "Experience", "Sea days"];
+const HERO_OUTPUTS = [
+  { number: "01", label: "Cabin & deck", detail: "Placement, adjacency, obstruction" },
+  { number: "02", label: "Money", detail: "Gratuities, packages, inclusions" },
+  { number: "03", label: "Expectations", detail: "The surprises to explain before booking" },
+] as const;
+
+function HeroReadMap({
+  covered,
+  lines,
+  reads,
+}: {
+  covered: number;
+  lines: number;
+  reads: number;
+}) {
+  return (
+    <div className="relative overflow-hidden rounded-[18px] border border-brand-navy/15 bg-brand-navy p-5 text-white shadow-[0_18px_50px_rgba(11,29,51,.16)] sm:p-6">
+      <div
+        aria-hidden="true"
+        className="absolute -top-20 -right-20 h-56 w-56 rounded-full border border-white/8"
+      />
+      <div className="relative">
+        <div className="flex items-center justify-between gap-4 border-b border-white/12 pb-4">
+          <span className="font-readout text-[0.62rem] font-bold tracking-[0.1em] text-[#9EC4D4] uppercase">
+            Pre-booking read
+          </span>
+          <span className="rounded-full border border-go/70 bg-go/20 px-2.5 py-1 font-readout text-[0.58rem] tracking-[0.06em] text-[#D5ECE7] uppercase">
+            Deterministic
+          </span>
+        </div>
+
+        <div className="py-4">
+          <div className="mb-2 font-readout text-[0.58rem] tracking-[0.08em] text-[#9EC4D4] uppercase">
+            Five booking details in
+          </div>
+          <div className="flex flex-wrap gap-1.5">
+            {HERO_INPUTS.map((input) => (
+              <span
+                key={input}
+                className="rounded-[6px] border border-white/15 bg-white/8 px-2 py-1.5 text-[0.72rem] text-[#EAF2F5]"
+              >
+                {input}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="mb-3 flex items-center gap-2" aria-hidden="true">
+          <span className="h-px flex-1 bg-white/12" />
+          <span className="font-readout text-[0.62rem] text-brass">↓</span>
+          <span className="h-px flex-1 bg-white/12" />
+        </div>
+
+        <div className="space-y-2.5">
+          {HERO_OUTPUTS.map((output) => (
+            <div
+              key={output.number}
+              className="grid grid-cols-[1.6rem_minmax(0,1fr)] gap-2.5 rounded-[10px] border border-white/12 bg-white/6 p-3"
+            >
+              <span className="font-readout text-[0.6rem] text-[#9EC4D4]">
+                {output.number}
+              </span>
+              <span>
+                <span className="block text-[0.84rem] font-semibold text-white">
+                  {output.label}
+                </span>
+                <span className="mt-0.5 block text-[0.72rem] leading-[1.45] text-[#B7D0DB]">
+                  {output.detail}
+                </span>
+              </span>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-5 grid grid-cols-3 gap-2 border-t border-white/12 pt-4 text-center">
+          {[
+            [`${covered}`, "ships charted"],
+            [`${lines}`, "line records"],
+            [reads.toLocaleString("en-US"), "reads replayed"],
+          ].map(([value, label]) => (
+            <span key={label}>
+              <span className="block font-call text-[1.12rem] text-white">{value}</span>
+              <span className="mt-0.5 block font-readout text-[0.5rem] leading-[1.35] tracking-[0.04em] text-[#9EC4D4] uppercase">
+                {label}
+              </span>
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function HomePage() {
   const ship = demoShip();
   const read = getRead(ship, DEMO_PROFILE);
@@ -113,35 +207,47 @@ export default function HomePage() {
   return (
     <main className="flex-1">
       {/* ---- Hero ---------------------------------------------------- */}
-      <section className="mx-auto w-full max-w-[1180px] px-5 pt-12 pb-14 sm:px-8 sm:pt-16">
-        <h1 className="max-w-[19ch] font-call text-[2.3rem] leading-[1.08] tracking-[-0.025em] text-ink sm:text-[3.1rem]">
-          Before you book, know what you&apos;d{" "}
-          <em className="font-medium text-deep">miss</em>.
-        </h1>
-        <p className="mt-5 max-w-[54ch] text-[1.08rem] leading-[1.6] text-ink-2">
-          A second set of eyes on a cruise booking. Tell it the ship and
-          who&apos;s sailing, and it flags what bites this one — where to put
-          the cabin, what the money actually does, and the surprises that show
-          up at the gangway rather than on the booking page.
-        </p>
-        <p className="mt-3.5 max-w-[54ch] text-[1.08rem] leading-[1.6] text-ink-2">
-          It comes from deck plans and line policy, not marketing copy. Where
-          nobody has checked, it says so.
-        </p>
+      <section className="mx-auto w-full max-w-[1180px] px-5 pt-10 pb-14 sm:px-8 sm:pt-14">
+        <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_27rem] lg:gap-14">
+          <div>
+            <p className="mb-4 font-readout text-[0.66rem] font-bold tracking-[0.1em] text-brand-teal uppercase">
+              Cruise booking intelligence for travel advisors
+            </p>
+            <h1 className="max-w-[20ch] font-call text-[2.35rem] leading-[1.06] tracking-[-0.03em] text-ink sm:text-[3.25rem]">
+              Catch the booking problems before your client does.
+            </h1>
+            <p className="mt-5 max-w-[55ch] text-[1.08rem] leading-[1.6] text-ink-2">
+              CruiseRead turns five booking details into three clear calls:
+              cabin and deck, money, and expectation traps tied to this ship
+              and this client.
+            </p>
+            <p className="mt-3.5 max-w-[55ch] text-[1.02rem] leading-[1.6] text-ink-2">
+              The answer comes from deck plans, line policy and signed operator
+              records — never generated copy. Where nobody has checked, it
+              says so.
+            </p>
 
-        <div className="mt-8 flex flex-wrap items-center gap-3">
-          <Link
-            href="/check"
-            className="rounded-[11px] bg-go px-5 py-3 text-[1rem] font-semibold text-white no-underline transition-colors hover:bg-[#175A50]"
-          >
-            Run a Booking Check
-          </Link>
-          <Link
-            href="/ships"
-            className="rounded-[11px] border border-line px-5 py-3 text-[1rem] font-semibold text-ink-2 no-underline transition-colors hover:border-ink-3 hover:text-ink"
-          >
-            Browse the ships
-          </Link>
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <Link
+                href="/check"
+                className="rounded-[11px] bg-go px-5 py-3 text-[1rem] font-semibold text-white no-underline transition-colors hover:bg-[#175A50]"
+              >
+                Run a Booking Check
+              </Link>
+              <Link
+                href="/guides"
+                className="rounded-[11px] border border-line px-5 py-3 text-[1rem] font-semibold text-ink-2 no-underline transition-colors hover:border-ink-3 hover:text-ink"
+              >
+                Explore advisor guides
+              </Link>
+            </div>
+          </div>
+
+          <HeroReadMap
+            covered={covered}
+            lines={LINE_RECORDS.length}
+            reads={covered * 4 * 2 * 2 * 2}
+          />
         </div>
       </section>
 
@@ -149,7 +255,7 @@ export default function HomePage() {
       <section className="border-t border-line/70 bg-surface/40">
         <div className="mx-auto w-full max-w-[1180px] px-5 py-14 sm:px-8">
           <h2 className="font-call text-[1.7rem] leading-[1.15] tracking-[-0.015em] text-ink">
-            This is one, in full
+            See one real read, in full
           </h2>
           <p className="mt-3 max-w-[58ch] text-[0.98rem] leading-[1.6] text-ink-2">
             Not a mock-up. The three calls below came out of the engine at

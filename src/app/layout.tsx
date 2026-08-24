@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Archivo, Newsreader, Space_Mono } from "next/font/google";
+import { JsonLd } from "@/components/JsonLd";
 import "./globals.css";
 
 const archivo = Archivo({
@@ -25,21 +26,22 @@ export const metadata: Metadata = {
   // from this — keep it in step with the Vercel domain settings.
   metadataBase: new URL("https://cruiseread.com"),
   title: {
-    default: "First Mate Cruise — cabin intelligence for travel advisors",
-    template: "%s — First Mate Cruise",
+    default: "CruiseRead — cruise booking intelligence for travel advisors",
+    template: "%s — CruiseRead",
   },
   description:
-    "A second set of eyes on every cruise booking before your client pays.",
+    "Pre-booking cruise intelligence for travel advisors: cabin, money and expectation traps tied to the ship and client.",
   alternates: { canonical: "/" },
   icons: { icon: "/icon.svg" },
   openGraph: {
-    title: "First Mate Cruise",
+    title: "CruiseRead",
     description:
-      "A second set of eyes on every cruise booking before your client pays.",
+      "Pre-booking cruise intelligence for travel advisors: cabin, money and expectation traps tied to the ship and client.",
     url: "https://cruiseread.com",
-    siteName: "First Mate Cruise",
+    siteName: "CruiseRead",
     type: "website",
   },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -51,7 +53,36 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       {/* Root carries fonts and the stylesheet only. The advisor chrome
           lives in `(app)`; `(client)` stays bare on purpose — see the
           note in (app)/layout.tsx. */}
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <JsonLd
+          data={{
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "WebSite",
+                "@id": "https://cruiseread.com/#website",
+                name: "CruiseRead",
+                url: "https://cruiseread.com",
+                description:
+                  "Pre-booking cruise intelligence for travel advisors.",
+              },
+              {
+                "@type": "WebApplication",
+                "@id": "https://cruiseread.com/check#application",
+                name: "CruiseRead Booking Check",
+                url: "https://cruiseread.com/check",
+                applicationCategory: "BusinessApplication",
+                operatingSystem: "Web",
+                audience: {
+                  "@type": "Audience",
+                  audienceType: "Travel advisors",
+                },
+              },
+            ],
+          }}
+        />
+        {children}
+      </body>
     </html>
   );
 }

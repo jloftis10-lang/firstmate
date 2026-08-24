@@ -46,7 +46,7 @@ export function ReadCard({ number, category, read, lineName, provenance }: Props
         <p className="mt-3 text-[0.88rem] leading-[1.5] text-ink-3">
           An empty card is not a clean bill of health — it means nobody has
           checked this one yet. Treat this part of the booking the way you
-          would without First Mate.
+          would without CruiseRead.
         </p>
       </div>
     );

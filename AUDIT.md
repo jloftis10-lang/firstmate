@@ -805,3 +805,39 @@ JavaScript disabled.
 **One note for deployment:** `next start` does not compress the JSON
 route responses, so a record measures 16 KB locally. Vercel's CDN
 compresses them; expect roughly 3 KB over the wire.
+
+## Phase 12 — 2026-08-24 — CruiseRead brand and first growth pass
+
+### One name, one product
+
+The primary identity is now **CruiseRead** everywhere a user or crawler
+sees it: header, footer, favicon, client share page, summary email,
+metadata, Open Graph copy and generated page titles. The old lighthouse
+mark has been replaced by an open-chart mark whose centre line becomes a
+ship's bow. It is still inline SVG, so it adds no request, has explicit
+dimensions and stays sharp at favicon size.
+
+The homepage now names the audience and the transformation immediately:
+five booking details become the three existing output categories. Its
+instrument panel contains no sample cruise facts; the three counts are
+reduced from the catalog and the engine's existing profile matrix at
+build time.
+
+### The additions that can ship without invented content
+
+- `/guides` is now a real hub rather than three footer-only orphan links.
+  Its scope lines are derived from the same guide filters as the detail
+  pages, and each detail breadcrumb now returns through the hub.
+- `/about` states the audience, product boundary, provenance states and
+  current coverage without inventing a founder biography or credentials.
+- The root emits `WebSite` and `WebApplication` structured data, and the
+  social card, title template, descriptions and default sender all use
+  the CruiseRead identity.
+- The sitemap and smoke suite now carry **123** public URLs and explicitly
+  exercise the two new routes.
+
+No ship record, line policy, claim, price, booking input or engine rule
+changed. Lint and TypeScript pass, the engine snapshot still replays all
+2,528 reads unchanged, the production build generated all routes, and the
+local smoke suite finished **35 passed, 0 failed** with the two CDN-only
+checks skipped as designed.

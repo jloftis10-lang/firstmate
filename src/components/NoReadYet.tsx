@@ -86,7 +86,7 @@ export function NoReadYet({
           at it.
         </p>
         <p className="mt-4 text-[0.93rem] leading-[1.55] text-ink-2">
-          First Mate only returns a call where there&apos;s operator knowledge
+          CruiseRead only returns a call where there&apos;s operator knowledge
           behind it. Inventing a deck number for the {ship.name} would make this
           exactly the thing you were trying to avoid — a confident answer that
           turns out to be wrong at the gangway.

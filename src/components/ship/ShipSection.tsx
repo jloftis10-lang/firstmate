@@ -76,7 +76,7 @@ export function Uncharted({ note }: { note: string }) {
       <p className="font-call text-[1rem] leading-[1.4] text-ink-2">{note}</p>
       <p className="mt-2 max-w-[62ch] text-[0.86rem] leading-[1.55] text-ink-3">
         That is a gap in what we have looked at, not a clean bill of health.
-        Check this part of the booking the way you would without First Mate.
+        Check this part of the booking the way you would without CruiseRead.
       </p>
     </div>
   );

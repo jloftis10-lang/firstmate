@@ -1,5 +1,5 @@
 /**
- * The First Mate domain types.
+ * The CruiseRead domain types.
  *
  * The Confidence Read is produced by a deterministic engine over structured
  * ship data — never by an LLM. An LLM hallucinating a deck number is a

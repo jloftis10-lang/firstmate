@@ -17,5 +17,5 @@ export const OG_IMAGE = {
   url: "/opengraph-image",
   width: 1200,
   height: 630,
-  alt: "First Mate Cruise — a second set of eyes on every cruise booking",
+  alt: "CruiseRead — cruise booking intelligence for travel advisors",
 };

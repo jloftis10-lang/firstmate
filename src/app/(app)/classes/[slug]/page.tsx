@@ -72,7 +72,7 @@ export async function generateMetadata({
     description,
     alternates: { canonical: classPath(slug) },
     openGraph: {
-      title: `${record.line} ${record.name} class — First Mate Cruise`,
+      title: `${record.line} ${record.name} class — CruiseRead`,
       description,
       url: classPath(slug),
       type: "article",

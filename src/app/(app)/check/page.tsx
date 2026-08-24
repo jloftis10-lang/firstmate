@@ -23,7 +23,7 @@ import { checkCatalog } from "@/lib/check-catalog";
 export const metadata: Metadata = {
   title: "Booking Check",
   description:
-    "Tell First Mate the ship and who's sailing. It flags what bites this booking — cabin, money, and the surprises that show up at the gangway.",
+    "Tell CruiseRead the ship and who's sailing. It flags what bites this booking — cabin, money, and the surprises that show up at the gangway.",
   alternates: { canonical: "/check" },
 };
 

@@ -15,7 +15,7 @@ export function SiteFooter({ coveredCount, shipCount }: { coveredCount: number; 
     <footer className="mt-auto border-t border-line/70 bg-surface/50">
       <div className="mx-auto w-full max-w-[1180px] px-5 py-8 sm:px-8">
         <p className="max-w-[54ch] text-[0.86rem] leading-[1.6] text-ink-2">
-          First Mate is a second set of eyes on a cruise booking — cabin,
+          CruiseRead is a second set of eyes on a cruise booking — cabin,
           money and expectation traps, from deck plans and line policy rather
           than marketing copy.{" "}
           <span className="text-ink">
@@ -37,7 +37,12 @@ export function SiteFooter({ coveredCount, shipCount }: { coveredCount: number; 
           </nav>
         )}
 
-        <p className="mt-6 font-readout text-[0.66rem] leading-[1.7] tracking-[0.06em] text-ink-3">
+        <p className="mt-6 text-[0.78rem] text-ink-3">
+          CruiseRead is built for travel advisors. It does not replace cruise-line
+          terms, current deck plans or an advisor&apos;s own judgment.
+        </p>
+
+        <p className="mt-4 font-readout text-[0.66rem] leading-[1.7] tracking-[0.06em] text-ink-3">
           {coveredCount} OF {shipCount} SHIPS CARRY A READ &nbsp;·&nbsp; EVERY
           ONE SIGNED OFF BY AN OPERATOR
         </p>

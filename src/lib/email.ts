@@ -34,7 +34,7 @@ export function summaryEmail(ship: CoveredShip, client: ClientProfile) {
         ]),
     `View it any time: ${link}`,
     ``,
-    `Put together with First Mate — a second set of eyes on every cruise booking.`,
+    `Put together with CruiseRead — a second set of eyes on every cruise booking.`,
   ].join("\n");
 
   const caveat = allVerified
@@ -51,8 +51,8 @@ export function summaryEmail(ship: CoveredShip, client: ClientProfile) {
         <div style="height:3px;width:26px;border-radius:2px;background:#15516F;margin-bottom:3px;"></div>
         <div style="height:3px;width:16px;border-radius:2px;background:#B26A1C;"></div>
       </div>
-      <span style="font-weight:bold;font-size:17px;vertical-align:middle;">First Mate</span>
-      <span style="color:#6E869A;font-size:15px;vertical-align:middle;">&nbsp;&middot;&nbsp;cruise read</span>
+      <span style="font-weight:bold;font-size:17px;vertical-align:middle;color:#0B1D33;">CruiseRead</span>
+      <span style="color:#6E869A;font-size:12px;vertical-align:middle;letter-spacing:1px;">&nbsp;&middot;&nbsp;BOOKING INTELLIGENCE</span>
     </div>
 
     <div style="font-family:'Courier New',monospace;font-size:11px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;color:#1B6B5F;margin-bottom:8px;">From your travel advisor</div>
@@ -65,7 +65,7 @@ export function summaryEmail(ship: CoveredShip, client: ClientProfile) {
 
     <p style="margin:24px 0 0;font-size:14px;"><a href="${link}" style="color:#15516F;font-weight:bold;">View this plan online</a></p>
 
-    <p style="margin:36px 0 0;text-align:center;font-size:12px;color:#6E869A;line-height:1.6;">Put together with <a href="${BASE}" style="color:#15516F;font-weight:bold;text-decoration:none;">First Mate</a> — a second set of eyes on every cruise booking.</p>
+    <p style="margin:36px 0 0;text-align:center;font-size:12px;color:#6E869A;line-height:1.6;">Put together with <a href="${BASE}" style="color:#15516F;font-weight:bold;text-decoration:none;">CruiseRead</a> — a second set of eyes on every cruise booking.</p>
   </div>
 </body>
 </html>`;

@@ -1,4 +1,4 @@
-# First Mate Cruise
+# CruiseRead
 
 A second set of eyes on a cruise booking, for travel advisors. Tell it the
 ship and who's sailing; it flags what bites that booking — where to put the
@@ -17,7 +17,7 @@ gangway rather than on the booking page.
 
 ## What it is, technically
 
-Next 16, React 19, Tailwind v4, TypeScript. Statically generated — 121 pages
+Next 16, React 19, Tailwind v4, TypeScript. Statically generated — 123 pages
 plus 79 ship records as JSON. Two routes are server-rendered on demand
 (`/share`, `/compare`); everything else is prerendered.
 
@@ -85,7 +85,7 @@ worth knowing before you go looking for one:
 | Variable | Absent | Set |
 |---|---|---|
 | `RESEND_API_KEY` | The "email it to them" affordance is not offered at all | Advisors can email the client summary |
-| `RESEND_FROM` | `First Mate <notes@cruiseread.com>` | Overrides the sender |
+| `RESEND_FROM` | `CruiseRead <notes@cruiseread.com>` | Overrides the sender |
 | `NEXT_PUBLIC_ANALYTICS_ENDPOINT` | Nothing is sent anywhere, no third-party script loads | Events POST to that URL |
 
 The email affordance is hidden rather than broken when the key is missing —

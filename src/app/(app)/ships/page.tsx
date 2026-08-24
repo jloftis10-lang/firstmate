@@ -22,7 +22,7 @@ import { ShipsDirectory } from "@/components/ship/ShipsDirectory";
 export const metadata: Metadata = {
   title: "Ships",
   description:
-    "Every ship First Mate covers, and every ship it does not. Cabin placement, obstructed balconies, money and expectation traps, per hull.",
+    "Every ship CruiseRead covers, and every ship it does not. Cabin placement, obstructed balconies, money and expectation traps, per hull.",
   alternates: { canonical: "/ships" },
 };
 

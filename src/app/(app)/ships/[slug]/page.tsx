@@ -80,7 +80,7 @@ export async function generateMetadata({
     description: parts.join(" "),
     alternates: { canonical: `/ships/${ship.id}` },
     openGraph: {
-      title: `${ship.name} — First Mate Cruise`,
+      title: `${ship.name} — CruiseRead`,
       description: parts.join(" "),
       url: `/ships/${ship.id}`,
       type: "article",

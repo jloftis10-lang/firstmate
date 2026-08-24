@@ -206,7 +206,7 @@ export function ClientSummary({
               ? sendState.message
               : sendState.kind === "sent"
                 ? "On its way. It reads exactly like the link page."
-                : "Sends this note from First Mate, exactly as it reads above."}
+                : "Sends this note from CruiseRead, exactly as it reads above."}
           </p>
         </form>
       )}

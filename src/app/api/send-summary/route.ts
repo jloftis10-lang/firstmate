@@ -101,7 +101,7 @@ export async function POST(request: Request) {
 
   const { subject, text, html } = summaryEmail(ship, client);
   const resend = new Resend(apiKey);
-  const from = process.env.RESEND_FROM ?? "First Mate <notes@cruiseread.com>";
+  const from = process.env.RESEND_FROM ?? "CruiseRead <notes@cruiseread.com>";
 
   const { error } = await resend.emails.send({
     from,

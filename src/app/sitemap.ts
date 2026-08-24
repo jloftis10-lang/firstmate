@@ -81,6 +81,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/cruise-lines",
     "/compare",
     "/methodology",
+    "/about",
+    "/guides",
     "/guides/quiet-cabins",
     "/guides/obstructed-balconies",
     "/guides/cruise-guarantee-cabins",

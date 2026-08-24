@@ -61,7 +61,7 @@ export async function generateMetadata({
     description,
     alternates: { canonical: linePath(slug) },
     openGraph: {
-      title: `${record.name} — First Mate Cruise`,
+      title: `${record.name} — CruiseRead`,
       description,
       url: linePath(slug),
       type: "article",
