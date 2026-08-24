@@ -11,6 +11,9 @@ gangway rather than on the booking page.
   before changing anything about how a read is produced.
 - **`AUDIT.md`** is the running record: what each phase shipped, what it
   found, and what is still open.
+- **`docs/TODO.md`** is the handoff — open work, and the invariants to
+  read before touching any of it. Start there if you are picking this up
+  cold.
 
 ## What it is, technically
 
