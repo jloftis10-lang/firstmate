@@ -2,8 +2,9 @@
 
 **Research date:** 2026-08-24  
 **Status:** decisions 1–3, current-plan visual review and the two researched
-hull exceptions signed by Jimmy on 2026-08-24; Xcel full-deck transcription
-remains incomplete
+hull exceptions signed by Jimmy on 2026-08-24; Xcel Decision 4 cabin-risk
+research is ready for operator sign-off; its full-deck transcription remains
+incomplete
 **Scope:** 14 mainstream ocean ships; Galapagos excluded
 
 This phase deliberately adds only claims the current Celebrity pages support.
@@ -139,3 +140,60 @@ the audit record for the next freshness pass.
 - Capture the plan's sailing-date window and screenshots of decks 6 through
   12. If anything differs, update only that hull and return its wording for a
   new operator decision.
+
+## Decision 4 packet — Celebrity Xcel cabin risks
+
+The typed research is in
+`src/content/research/celebrity-xcel-cabin-risks.ts`. It remains outside the
+live ship record until Jimmy signs the wording below. The checked current plan
+window is **November 1, 2025–April 9, 2027**.
+
+### Evidence that is established
+
+- Celebrity's detailed plan presents an **Obstructed View** marker under decks
+  3 and 6 through 12. It also names Partial View Infinite Veranda and
+  Concierge categories. This establishes that the exact cabin/category must
+  be checked; it does not establish one common cause across all eight decks.
+- [Cruise Critic's Xcel cabin review](https://www.cruisecritic.com/cruise/celebrity/celebrity-xcel/cabins)
+  attributes many deck 6 obstructions to lifeboats hanging just below the
+  windows. That establishes `lifeboat-davit` for the deck 6 mechanism only.
+- The same editor stayed in **6155** and reports hearing The Club directly
+  below at night. The review separately warns about deck 12 below The Pool
+  Club or Oceanview Cafe.
+- Celebrity's official [deck 12 plan](https://tst1.celebritycruises.com/content/dam/celebrity/miscellaneous/deckplans/xcel/XC_2331_Deck_12.png)
+  and [deck 14 plan](https://tst1.celebritycruises.com/content/dam/celebrity/miscellaneous/deckplans/xcel/XC_2331_Deck_14.png)
+  confirm the physical adjacency: deck 14 is immediately above 12 because the
+  line skips deck 13; the pool area and Oceanview Cafe occupy deck 14.
+- Celebrity's official [deck 6](https://tst1.celebritycruises.com/content/dam/celebrity/miscellaneous/deckplans/xcel/XC_2331_Deck_06.png),
+  [deck 8](https://tst1.celebritycruises.com/content/dam/celebrity/miscellaneous/deckplans/xcel/XC_2331_Deck_08.png)
+  and deck 12 images each show two passenger elevator banks: one forward of
+  center and one aft of center. There is no central midship bank.
+
+### Proposed operator wording
+
+**Obstruction:** “Celebrity marks view limitations by cabin and sells Partial
+View categories on Xcel. Cruise Critic specifically identifies lifeboats just
+below many deck 6 windows; disclose that deck 6 mechanism, but do not call
+every marked cabin on decks 3 and 7–12 a lifeboat obstruction. Check the
+current plan symbol and category for the exact cabin.”
+
+**Noise:** “Cabin 6155 has a firsthand report of nighttime sound from The Club
+directly below. On deck 12, check the exact overhead footprint before booking:
+The Pool Club/pool area and Oceanview Cafe occupy deck 14 immediately above
+because Celebrity skips deck 13.”
+
+**Elevators:** “Xcel's cabin decks have one elevator bank forward of center
+and one aft of center, with no central midship bank. For a mobility booking,
+balance the midship motion advantage against the walk to a lift and check the
+specific cabin's route.”
+
+### Sign-off choices
+
+1. Approve the obstruction wording and `lifeboat-davit` mechanism for deck 6.
+2. Approve the three noise adjacencies: The Club below 6155, plus the pool
+   area and Oceanview Cafe above deck 12.
+3. Approve the two-bank elevator wording for mobility bookings.
+
+Operating status and refit history remain unknown. No source in this pass
+established a currently out-of-service experience, and absence of a report is
+not treated as proof that everything is operating.

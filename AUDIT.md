@@ -1042,3 +1042,25 @@ Jimmy also completed and signed the visual freshness review against the
 current 2026–27 plans on 2026-08-24. The operator packet keeps that checklist
 as the audit record for the next freshness pass rather than leaving a
 completed review in the remaining-work queue.
+
+## Phase 20 — 2026-08-24 — Celebrity Xcel cabin-risk research
+
+Decision 4 now has a typed, unsigned Xcel research layer covering obstruction,
+venue noise and elevator geometry without changing the live ship record.
+Celebrity's detailed plan identifies view-limited cabins and Partial View
+categories across multiple decks, while Cruise Critic establishes lifeboats
+as the mechanism for many deck 6 views. The cause of markers elsewhere stays
+unknown rather than being generalized from deck 6.
+
+Cruise Critic also supplies one cabin-specific firsthand report: cabin 6155
+heard The Club directly below at night. Its separate warning about deck 12
+below the pool area and Oceanview Cafe is corroborated by Celebrity's official
+deck 12 and 14 images. Those images preserve the skipped-deck arithmetic:
+deck 14 is physically adjacent to deck 12 because there is no deck 13.
+
+Official deck 6, 8 and 12 images independently show the same two passenger
+elevator banks, one forward of center and one aft of center, with no central
+midship bank. The operator packet turns that geometry into proposed mobility
+wording but leaves it unsigned. Current out-of-service experiences and refit
+history remain explicitly unknown. No engine field or snapshot output changes
+until the three Xcel decisions are approved.

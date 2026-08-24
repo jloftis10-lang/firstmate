@@ -223,8 +223,11 @@ mixed-use and deck 12 is cabins only. All five placement bands are live; four
 complete deck stacks are live, while Xcel's full deck table waits on the rest
 of its public-space transcription. Cruise Critic identifies Xcel deck 6's
 mixed-use space as The Bazaar's upper level. Jimmy completed and signed the current-plan
-visual review on 2026-08-24. **Next:** continue with obstruction, elevators,
-refits and availability.
+   visual review on 2026-08-24. Xcel's obstruction, noise and elevator
+   research is now prepared in `docs/celebrity-operator-review.md` and awaits
+   Decisions 4.1–4.3. Its operating status and refit history remain unknown.
+   **Next:** get those three Xcel cabin-risk decisions signed, then continue
+   hull by hull without inheriting Xcel's findings across the class.
 
 #### B4. Migrate Oasis, Icon and Quantum off `ROYAL_ATTRACTION_RULES`
 
