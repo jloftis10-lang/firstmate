@@ -1110,3 +1110,28 @@ midship bank. The current production page covers May 14, 2026 through April
 before the obstruction, noise and elevator wording can be signed. Availability
 and refit history remain explicitly unknown, and the engine snapshot must stay
 unchanged during this research-only phase.
+
+## Phase 23 — 2026-08-24 — Celebrity Edge cabin-risk sign-off
+
+Jimmy signed all three Celebrity Edge cabin-risk findings. The live Edge
+record now describes lifeboats below some solo cabins on decks 6 and 7 and the
+Magic Carpet support frame beside some starboard midship cabins without
+turning either mechanism into a deck-wide rule. Exact plan markers and Partial
+View categories still govern the cabin-level check.
+
+The signed noise wording keeps two different levels of certainty separate.
+Deck 3 carries a location check because its cabins sit below a mixed deck of
+casino, restaurant and shop space. Deck 12 carries both the cabin 12148 report
+and the shared `lido` mechanism for the deck 14 pool footprint immediately
+above. The rejected cabin 3143 venue attribution remains excluded because the
+official geometry does not support it.
+
+Edge's official plan images independently establish two passenger elevator
+banks, one forward of center and one aft of center, with no central midship
+bank. That wording is now live for multigenerational and mobility-sensitive
+bookings. Apex, Beyond, Ascent and Xcel inherit none of these Edge facts.
+
+The detailed official image set still predates the current production-plan
+window, so the freshness caveat remains in the research and operator record.
+Availability and refit history also remain unknown. This is an intentional
+one-ship engine-output change and requires a regenerated snapshot.

@@ -1,5 +1,6 @@
 import type { ShipContent, Source } from "@/lib/types";
 import { CELEBRITY_EDGE_PLACEMENT_RESEARCH } from "@/content/research/celebrity-edge-placement";
+import { CELEBRITY_EDGE_CABIN_RISK_RESEARCH } from "@/content/research/celebrity-edge-cabin-risks";
 import { CELEBRITY_XCEL_CABIN_RISK_RESEARCH } from "@/content/research/celebrity-xcel-cabin-risks";
 import { MOTION_RULE, VIBRATION_RULE } from "./operator-rules";
 import {
@@ -50,6 +51,11 @@ const XCEL_CABIN_RISK_SOURCES: Source[] = [
   },
 ];
 
+const EDGE_CABIN_RISK_SOURCES: Source[] =
+  CELEBRITY_EDGE_CABIN_RISK_RESEARCH.sources.map(
+    ({ label, url, checked }) => ({ label, url, checked }),
+  );
+
 const EDGE_CABIN: NonNullable<ShipContent["cabin"]> = {
   // Infinite Veranda tradeoff signed off by Jimmy, 2026-08-24. The imported
   // motion and vibration rules were already operator-confirmed.
@@ -92,6 +98,7 @@ const PLACEMENT = new Map(
 
 function edgeShip(ship: EdgeShip): ShipContent {
   const name = `Celebrity ${ship.charAt(0).toUpperCase()}${ship.slice(1)}`;
+  const isEdge = ship === "edge";
   const isXcel = ship === "xcel";
   const placement = PLACEMENT.get(ship);
   const placementRange = PLACEMENT_RANGE[ship];
@@ -109,6 +116,33 @@ function edgeShip(ship: EdgeShip): ShipContent {
       placementNote,
     };
     decks = placement.decks ?? undefined;
+  }
+  if (isEdge) {
+    // Jimmy signed all three Edge cabin-risk decisions on 2026-08-24.
+    // Edge's evidence was researched independently; no sister inherits its
+    // obstruction mechanisms, noise checks or elevator geometry.
+    cabin = {
+      ...cabin,
+      categoryWarnings: [
+        ...(cabin.categoryWarnings ?? []),
+        CELEBRITY_EDGE_CABIN_RISK_RESEARCH.noise.signedWording,
+      ],
+      hazardsAboveBelow: [
+        ...cabin.hazardsAboveBelow,
+        {
+          source: "lido",
+          where: "deck 12 below the deck 14 pool footprint",
+        },
+      ],
+      obstructedViewNotes:
+        CELEBRITY_EDGE_CABIN_RISK_RESEARCH.obstruction.signedWording,
+      obstructionKinds: [
+        ...CELEBRITY_EDGE_CABIN_RISK_RESEARCH.obstruction
+          .confirmedMechanisms,
+      ],
+      elevatorNote:
+        CELEBRITY_EDGE_CABIN_RISK_RESEARCH.elevators.signedWording,
+    };
   }
   if (isXcel) {
     // Jimmy signed all three Xcel cabin-risk decisions on 2026-08-24.
@@ -145,6 +179,7 @@ function edgeShip(ship: EdgeShip): ShipContent {
             },
           ]
         : []),
+      ...(isEdge ? EDGE_CABIN_RISK_SOURCES : []),
       ...(isXcel
         ? [
             XCEL_SOURCE,

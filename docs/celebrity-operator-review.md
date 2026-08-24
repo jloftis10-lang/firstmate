@@ -1,10 +1,10 @@
 # Celebrity coverage — operator review packet
 
 **Research date:** 2026-08-24  
-**Status:** decisions 1–4, current-plan visual review and the two researched
-hull exceptions signed by Jimmy on 2026-08-24; Decision 5 now contains an
-unsigned Celebrity Edge cabin-risk packet; Xcel's full-deck transcription and
-both ships' operating-status and refit checks remain incomplete
+**Status:** decisions 1–5, current-plan placement review and the two researched
+hull exceptions signed by Jimmy on 2026-08-24; Xcel's full-deck transcription,
+Edge's detailed-image freshness check and both ships' operating-status and
+refit checks remain incomplete
 **Scope:** 14 mainstream ocean ships; Galapagos excluded
 
 This phase deliberately adds only claims the current Celebrity pages support.
@@ -22,6 +22,8 @@ identical cabin stacks, obstruction mechanisms or venue layouts.
   Veranda and Deluxe Porthole View with Veranda named as Celebrity's
   conventional step-out alternatives.
 - **Celebrity Xcel only:** The Bazaar is kept as a hull-specific experience.
+- **Celebrity Edge only:** the independently researched obstruction, noise and
+  elevator findings signed in Decision 5.
 - **Celebrity Solstice only:** teen programming remains available, but
   Celebrity says there is currently no dedicated teen facility.
 
@@ -34,7 +36,7 @@ parity. Those facts therefore remain unknown rather than being inherited.
 
 | Class | Ship | Official plan checked | Sister result encoded |
 |---|---|---|---|
-| Edge | Celebrity Edge | [deck plan](https://www.celebritycruises.com/cruise-ships/celebrity-edge/deck-plans) | shared policy + Infinite Veranda tradeoff only |
+| Edge | Celebrity Edge | [deck plan](https://www.celebritycruises.com/cruise-ships/celebrity-edge/deck-plans) | shared policy + Infinite Veranda tradeoff + signed cabin risks |
 | Edge | Celebrity Apex | [deck plan](https://www.celebritycruises.com/cruise-ships/celebrity-apex/deck-plans) | shared policy + Infinite Veranda tradeoff only |
 | Edge | Celebrity Beyond | [deck plan](https://www.celebritycruises.com/cruise-ships/celebrity-beyond/deck-plans) | shared policy + Infinite Veranda tradeoff only |
 | Edge | Celebrity Ascent | [deck plan](https://www.celebritycruises.com/cruise-ships/celebrity-ascent/deck-plans) | shared policy + Infinite Veranda tradeoff only |
@@ -62,13 +64,15 @@ parity. Those facts therefore remain unknown rather than being inherited.
 4. **SIGNED FOR XCEL 2026-08-24:** lifeboat obstruction on deck 6, the three
    researched noise adjacencies and the forward/aft elevator-bank wording.
    Repeat the research per hull; Xcel's findings do not establish its sisters.
-5. **AWAITING SIGN-OFF FOR EDGE:** the independently researched obstruction,
-   noise and elevator wording below. Edge's operating-status and refit checks
-   remain incomplete; repeat the same research per remaining sister.
+5. **SIGNED FOR EDGE 2026-08-24:** the independently researched obstruction,
+   noise and elevator wording below. Edge's detailed-image freshness,
+   operating-status and refit checks remain incomplete; repeat the research
+   per remaining sister.
 
 The trap block is now verified on all 14 ships, including the two researched
 hull exceptions. All five Edge-series cabin blocks are verified for the signed
-Infinite Veranda tradeoff; their ship-specific quiet defaults remain absent.
+Infinite Veranda tradeoff. Ship-specific obstruction, noise and elevator
+findings are live on Edge and Xcel only.
 Solstice- and Millennium-class cabin sections and every Celebrity money
 section remain explicitly uncharted. No record claims that drinks or Wi-Fi
 are included without first knowing the fare selected.
@@ -200,21 +204,21 @@ Operating status and refit history remain unknown. No source in this pass
 established a currently out-of-service experience, and absence of a report is
 not treated as proof that everything is operating.
 
-## Decision 5 — Celebrity Edge cabin risks — awaiting sign-off
+## Decision 5 — Celebrity Edge cabin risks — signed 2026-08-24
 
 The typed research is in
-`src/content/research/celebrity-edge-cabin-risks.ts`. It remains outside the
-live Edge record. The production page's checked plan window is **May 14,
-2026–April 18, 2027**; the detailed official images are labeled for sailings
-beginning April 16, 2023. Before signing, confirm that the current plan retains
-the cited symbols and geometry.
+`src/content/research/celebrity-edge-cabin-risks.ts`. Jimmy signed all three
+findings on 2026-08-24, and they now feed the Edge record only. The production
+page's checked plan window is **May 14, 2026–April 18, 2027**; the detailed
+official images are labeled for sailings beginning April 16, 2023. That
+freshness caveat remains explicit rather than being erased by the sign-off.
 
 ### Evidence that is established
 
 - Celebrity's detailed plan presents an **Obstructed View** marker under decks
   3 and 6 through 12. It names Partial View Infinite Veranda and Concierge
   categories. The marker establishes a cabin-level check, not one common cause.
-- Two passenger reports supply candidate mechanisms. One reports lifeboats
+- Two passenger reports supply the signed mechanisms. One reports lifeboats
   below some solo cabins on decks 6 and 7. Another names the Magic Carpet
   support frame beside specific starboard midship cabins. Celebrity's official
   deck images corroborate the frame location, but neither mechanism should be
@@ -231,9 +235,9 @@ the cited symbols and geometry.
   central midship bank.
 - A cabin 3143 passenger report attributes noise to Le Grand Bistro, but the
   official images do not support that venue directly above the cabin. The
-  proposed wording excludes that report instead of guessing at a reconciliation.
+  signed wording excludes that report instead of guessing at a reconciliation.
 
-### Proposed operator wording
+### Signed operator wording
 
 **Obstruction:** “Celebrity marks view limitations by exact cabin and sells
 Partial View categories on Edge. Passenger reports identify two mechanisms:
@@ -253,14 +257,15 @@ and one aft of center, with no central midship bank. For a mobility booking,
 balance the midship motion advantage against the walk to a lift and check the
 specific cabin's route.”
 
-### Operator decisions needed
+### Sign-off record
 
-1. Sign or revise the obstruction wording and the two candidate mechanisms:
-   `lifeboat-davit` and `solid-structure`.
-2. Sign or revise the deck 3 mixed-public-space and deck 12 pool-overhead
-   noise wording.
-3. Sign or revise the two-bank elevator wording for mobility bookings.
+1. **SIGNED:** obstruction wording plus `lifeboat-davit` and
+   `solid-structure` as cabin-specific mechanisms.
+2. **SIGNED:** deck 3 mixed-public-space and deck 12 pool-overhead noise
+   wording.
+3. **SIGNED:** two-bank elevator wording for mobility bookings.
 
 Current operating status and refit history remain unknown. No Edge finding is
 inherited from Xcel, and no Edge finding should be inherited by Apex, Beyond,
-Ascent or Xcel.
+Ascent or Xcel. The detailed-image freshness check also remains open because
+operator sign-off does not make an older image set current.

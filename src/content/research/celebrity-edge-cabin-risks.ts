@@ -1,13 +1,14 @@
 import type { ObstructionKind } from "@/lib/obstruction";
 
 /**
- * CELEBRITY EDGE CABIN-RISK RESEARCH — AWAITING OPERATOR SIGN-OFF.
+ * CELEBRITY EDGE CABIN-RISK RESEARCH AND OPERATOR DECISION.
  *
  * This is deliberately separate from `ShipContent`. The official plan and
- * cabin reports establish candidate obstruction mechanisms, two noise checks
+ * cabin reports establish the signed obstruction mechanisms, two noise checks
  * and the lift-bank geometry, but the detailed image set predates the current
- * production-plan window. Nothing in this file reaches live advice until the
- * operator reviews the current plan and signs the proposed wording.
+ * production-plan window. Jimmy signed the obstruction, noise and elevator
+ * wording on 2026-08-24. Those findings now reach the Edge record only; the
+ * detailed-image freshness caveat, availability and refit history remain.
  */
 
 type ResearchSource = {
@@ -72,7 +73,7 @@ const DECK_12_REPORT: ResearchSource = {
 export const CELEBRITY_EDGE_CABIN_RISK_RESEARCH = {
   ship: "Celebrity Edge",
   checked: "2026-08-24",
-  operatorStatus: "awaiting-operator-sign-off",
+  operatorStatus: "signed-2026-08-24",
   currentPlanWindow: "May 14, 2026–April 18, 2027",
   detailedPlanWindow: "beginning April 16, 2023",
   freshnessNote:
@@ -97,13 +98,13 @@ export const CELEBRITY_EDGE_CABIN_RISK_RESEARCH = {
       "Edge Stateroom with Infinite Veranda (Partial View)",
       "Concierge Class (Partial View)",
     ],
-    candidateMechanisms: [
+    confirmedMechanisms: [
       "lifeboat-davit",
       "solid-structure",
     ] as ObstructionKind[],
     mechanismScope:
       "Member reports identify lifeboats below some solo cabins on decks 6 and 7, and the Magic Carpet support frame beside specific starboard midship cabins. The official deck images corroborate the frame's location but do not turn either mechanism into a deck-wide rule.",
-    proposedWording:
+    signedWording:
       "Celebrity marks view limitations by exact cabin and sells Partial View categories on Edge. Passenger reports identify two mechanisms: lifeboats below some solo cabins on decks 6 and 7, and the Magic Carpet support frame beside some starboard midship cabins. Treat both as cabin-specific checks, not deck-wide rules, and verify the current plan marker and category for the exact cabin.",
   },
   noise: {
@@ -111,17 +112,17 @@ export const CELEBRITY_EDGE_CABIN_RISK_RESEARCH = {
       "Cruise Critic's editor advises caution on deck 3 because cabins sit below casino, restaurant and shop space. Celebrity's deck 3 and 4 images confirm the mixed public-space adjacency, but not one common noise source for every cabin.",
     deckTwelveCaution:
       "A passenger in partial-view cabin 12148 reports nighttime chair movement from the pool deck above. Celebrity's deck 12 and 14 images confirm that deck 14 is physically above deck 12 because deck 13 is skipped and show the pool footprint overhead.",
-    proposedWording:
+    signedWording:
       "On deck 3, check the exact overhead footprint before booking: cabins sit below a mixed deck of casino, restaurant and shop space. On deck 12, check the deck 14 footprint immediately above; a cabin 12148 report describes nighttime chair movement under the pool deck. These are location checks, not warnings against every cabin on either deck.",
     excludedReport:
-      "A cabin 3143 report attributes noise to Le Grand Bistro, but the official deck images do not support that venue directly above the cabin. The report is therefore excluded from the proposed wording rather than reconciled by guesswork.",
+      "A cabin 3143 report attributes noise to Le Grand Bistro, but the official deck images do not support that venue directly above the cabin. The report is therefore excluded from the signed wording rather than reconciled by guesswork.",
   },
   elevators: {
     bankCount: 2,
     positions: ["forward of center", "aft of center"],
     evidence:
       "The official deck 3, 6, 8 and 12 images each show the same two passenger elevator banks and no central midship bank.",
-    proposedWording:
+    signedWording:
       "Edge's cabin decks have one elevator bank forward of center and one aft of center, with no central midship bank. For a mobility booking, balance the midship motion advantage against the walk to a lift and check the specific cabin's route.",
   },
   availability: {
