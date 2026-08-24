@@ -1135,3 +1135,35 @@ The detailed official image set still predates the current production-plan
 window, so the freshness caveat remains in the research and operator record.
 Availability and refit history also remain unknown. This is an intentional
 one-ship engine-output change and requires a regenerated snapshot.
+
+## Phase 24 — 2026-08-24 — Celebrity Apex cabin-risk research
+
+Decision 6 now has a typed, unsigned Celebrity Apex research layer covering
+obstruction mechanisms, venue-noise checks and elevator geometry without
+changing the live Apex record. The work is independent of Edge and Xcel: no
+sister fact was copied across the class.
+
+Celebrity's detailed official plan marks obstructed views on deck 3 and decks
+6 through 12 and names Partial View Infinite Veranda and Concierge categories.
+An Apex passenger reports a lifeboat immediately below the cabin window, while
+a secondary cabin-category guide identifies either structure or lifeboat as
+causes of partial views. The official deck images corroborate the ship's
+lifeboat and Magic Carpet frame geometry, but the proposed wording keeps both
+mechanisms cabin-specific rather than projecting either one across a deck.
+
+Two Apex passenger reports establish location-specific noise checks. One
+describes late-evening music and bass in a deck 7 cabin above Eden. The other
+describes all-day noise beginning around 4 a.m. in a deck 12 cabin below
+Oceanview Cafe. Official deck images corroborate both adjacencies and preserve
+the skipped-deck arithmetic: deck 14 is physically above deck 12 because there
+is no deck 13. Secondary guidance adds the pool footprint as a candidate check,
+not a whole-deck warning.
+
+Official deck 3, 6, 8 and 12 images independently show the same two passenger
+elevator banks, one forward of center and one aft of center, with no central
+midship bank. One-sailing Magic Carpet availability, condition-specific cabin
+rattles and weak deck 3 noise guidance are excluded rather than elevated into
+stable layout rules. The detailed image set begins March 7, 2025 while the
+production page covers April 24, 2026 through April 22, 2027, so the freshness
+check, current availability and refit history remain open. The engine snapshot
+must stay unchanged during this research-only phase.

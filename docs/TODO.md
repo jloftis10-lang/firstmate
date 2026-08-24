@@ -230,8 +230,11 @@ mixed-use space as The Bazaar's upper level. Jimmy completed and signed the curr
    independent Decision 5 packet on 2026-08-24: its cabin-level view warning,
    lifeboat and Magic Carpet-frame mechanisms, deck 3/deck 12 noise checks and
    two-bank elevator geometry are live on Edge only. The older detailed-image
-   set remains a documented freshness caveat. **Next:** research Apex cabin
-   risks independently; do not inherit Edge or Xcel findings across the class.
+   set remains a documented freshness caveat. Apex now has an independent,
+   unsigned Decision 6 packet covering cabin-specific obstruction mechanisms,
+   the aft deck 7 Eden and deck 12 pool/buffet noise footprints, and two-bank
+   elevator geometry. **Next:** operator sign or revise the three Apex
+   findings; do not inherit Edge or Xcel findings across the class.
 
 #### B4. Migrate Oasis, Icon and Quantum off `ROYAL_ATTRACTION_RULES`
 

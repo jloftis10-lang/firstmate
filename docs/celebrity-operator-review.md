@@ -2,9 +2,10 @@
 
 **Research date:** 2026-08-24  
 **Status:** decisions 1–5, current-plan placement review and the two researched
-hull exceptions signed by Jimmy on 2026-08-24; Xcel's full-deck transcription,
-Edge's detailed-image freshness check and both ships' operating-status and
-refit checks remain incomplete
+hull exceptions signed by Jimmy on 2026-08-24; Decision 6 for Apex is awaiting
+operator sign-off; Xcel's full-deck transcription, the detailed-image freshness
+checks and the researched ships' operating-status and refit checks remain
+incomplete
 **Scope:** 14 mainstream ocean ships; Galapagos excluded
 
 This phase deliberately adds only claims the current Celebrity pages support.
@@ -24,6 +25,8 @@ identical cabin stacks, obstruction mechanisms or venue layouts.
 - **Celebrity Xcel only:** The Bazaar is kept as a hull-specific experience.
 - **Celebrity Edge only:** the independently researched obstruction, noise and
   elevator findings signed in Decision 5.
+- **Celebrity Apex only:** an independent obstruction, noise and elevator
+  packet is ready for operator review in Decision 6; nothing from it is live.
 - **Celebrity Solstice only:** teen programming remains available, but
   Celebrity says there is currently no dedicated teen facility.
 
@@ -37,7 +40,7 @@ parity. Those facts therefore remain unknown rather than being inherited.
 | Class | Ship | Official plan checked | Sister result encoded |
 |---|---|---|---|
 | Edge | Celebrity Edge | [deck plan](https://www.celebritycruises.com/cruise-ships/celebrity-edge/deck-plans) | shared policy + Infinite Veranda tradeoff + signed cabin risks |
-| Edge | Celebrity Apex | [deck plan](https://www.celebritycruises.com/cruise-ships/celebrity-apex/deck-plans) | shared policy + Infinite Veranda tradeoff only |
+| Edge | Celebrity Apex | [deck plan](https://www.celebritycruises.com/cruise-ships/celebrity-apex/deck-plans) | shared policy + Infinite Veranda tradeoff only; cabin-risk packet unsigned |
 | Edge | Celebrity Beyond | [deck plan](https://www.celebritycruises.com/cruise-ships/celebrity-beyond/deck-plans) | shared policy + Infinite Veranda tradeoff only |
 | Edge | Celebrity Ascent | [deck plan](https://www.celebritycruises.com/cruise-ships/celebrity-ascent/deck-plans) | shared policy + Infinite Veranda tradeoff only |
 | Edge | Celebrity Xcel | [deck plan](https://www.celebritycruises.com/cruise-ships/celebrity-xcel/deck-plans) | differs: The Bazaar is Xcel-only |
@@ -68,6 +71,8 @@ parity. Those facts therefore remain unknown rather than being inherited.
    noise and elevator wording below. Edge's detailed-image freshness,
    operating-status and refit checks remain incomplete; repeat the research
    per remaining sister.
+6. **AWAITING SIGN-OFF FOR APEX:** the independently researched obstruction,
+   noise and elevator wording below. The packet does not alter live output.
 
 The trap block is now verified on all 14 ships, including the two researched
 hull exceptions. All five Edge-series cabin blocks are verified for the signed
@@ -269,3 +274,71 @@ Current operating status and refit history remain unknown. No Edge finding is
 inherited from Xcel, and no Edge finding should be inherited by Apex, Beyond,
 Ascent or Xcel. The detailed-image freshness check also remains open because
 operator sign-off does not make an older image set current.
+
+## Decision 6 — Celebrity Apex cabin risks — awaiting operator sign-off
+
+The typed research is in
+`src/content/research/celebrity-apex-cabin-risks.ts`. It is deliberately
+separate from the Apex ship record, so none of these candidates changes a live
+recommendation or the engine snapshot. The checked production-plan window is
+**April 24, 2026–April 22, 2027**. The detailed official plan and image set are
+labeled for sailings beginning March 7, 2025, so their symbols and geometry
+still require operator confirmation against the current plan before sign-off.
+
+### Evidence that is established
+
+- Celebrity's detailed plan presents an **Obstructed View** marker under deck
+  3 and decks 6 through 12 and names Partial View Infinite Veranda and
+  Concierge categories. The marker establishes an exact-cabin check, not one
+  common cause for every marked cabin.
+- An [Apex passenger report](https://www.cruisecritic.com/cruise/celebrity/celebrity-apex/reviews/720809)
+  describes a lifeboat below the cabin window. A secondary cabin-category
+  guide attributes partial views to either structure or lifeboat, and the
+  official plan images show the ship's lifeboat and Magic Carpet frame
+  geometry. The proposed mechanisms remain cabin-specific.
+- A [September 2025 Apex passenger report](https://www.cruisecritic.com/cruise/celebrity/celebrity-apex/reviews/732264)
+  describes late-evening music and bass in a deck 7 cabin above Eden.
+  Celebrity's official deck 6 and 7 images corroborate the aft adjacency.
+- A [January 2025 Apex passenger report](https://www.cruisecritic.com/cruise/celebrity/celebrity-apex/reviews/724738)
+  describes all-day noise beginning around 4 a.m. in a deck 12 cabin directly
+  below Oceanview Cafe. Celebrity's deck 12 and 14 images corroborate the
+  overhead footprint; deck 14 is physically above 12 because deck 13 is
+  skipped. Secondary cabin guidance separately warns about the pool footprint.
+- Celebrity's official deck 3, 6, 8 and 12 images each show two passenger
+  elevator banks: one forward of center and one aft of center. There is no
+  central midship bank.
+
+### Proposed operator wording
+
+**Obstruction:** “Celebrity marks view limitations by exact cabin and sells
+Partial View categories on Apex. An Apex passenger report establishes a
+lifeboat below at least one cabin, while cabin-category guidance identifies
+structure or lifeboat as cabin-specific causes. Treat both as exact-cabin
+checks, not deck-wide rules, and verify the current plan marker and category
+for the exact cabin.”
+
+**Noise:** “At the aft end of deck 7, check the exact footprint over Eden: an
+Apex passenger reports late-evening music and bass in a cabin above the venue.
+On deck 12, check the deck 14 footprint immediately above because Celebrity
+skips deck 13. One passenger reports all-day noise beginning around 4 a.m.
+below Oceanview Cafe, and secondary cabin guidance warns about the pool
+footprint. These are location checks, not warnings against every cabin on
+either deck.”
+
+**Elevators:** “Apex's cabin decks have one elevator bank forward of center
+and one aft of center, with no central midship bank. For a mobility booking,
+balance the midship motion advantage against the walk to a lift and check the
+specific cabin's route.”
+
+### Operator decision needed
+
+1. Sign or revise the obstruction wording and cabin-specific
+   `lifeboat-davit` / `solid-structure` mechanisms.
+2. Sign or revise the aft deck 7 Eden, deck 12 Oceanview Cafe and deck 12 pool
+   footprint noise checks.
+3. Sign or revise the two-bank elevator wording for mobility bookings.
+
+Excluded from the proposal: one-sailing Magic Carpet availability, cabin
+creak/rattle reports and weak or conflicting deck 3 noise guidance. Current
+operating status and refit history remain unknown. No Apex finding is inherited
+from Edge or Xcel, and none should be inherited by Beyond or Ascent.
