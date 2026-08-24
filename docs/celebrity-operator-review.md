@@ -1,10 +1,9 @@
 # Celebrity coverage — operator review packet
 
 **Research date:** 2026-08-24  
-**Status:** decisions 1–3, current-plan visual review and the two researched
-hull exceptions signed by Jimmy on 2026-08-24; Xcel Decision 4 cabin-risk
-research is ready for operator sign-off; its full-deck transcription remains
-incomplete
+**Status:** decisions 1–4, current-plan visual review and the two researched
+hull exceptions signed by Jimmy on 2026-08-24; Xcel's full-deck transcription,
+operating-status check and refit history remain incomplete
 **Scope:** 14 mainstream ocean ships; Galapagos excluded
 
 This phase deliberately adds only claims the current Celebrity pages support.
@@ -59,8 +58,9 @@ parity. Those facts therefore remain unknown rather than being inherited.
    candidate band; Beyond, Ascent and Xcel use midship decks 8–11. Xcel's
    range follows Jimmy's confirmation that deck 6 is mixed-use and deck 12
    is cabins only, not an inherited sister assumption.
-4. Identify any obstruction mechanism by hull. An “obstructed view” symbol
-   alone is not enough to label the cause.
+4. **SIGNED FOR XCEL 2026-08-24:** lifeboat obstruction on deck 6, the three
+   researched noise adjacencies and the forward/aft elevator-bank wording.
+   Repeat the research per hull; Xcel's findings do not establish its sisters.
 5. Confirm elevator-bank positions, current out-of-service experiences,
    refit differences and any cabin-category exceptions per sister.
 
@@ -141,12 +141,12 @@ the audit record for the next freshness pass.
   12. If anything differs, update only that hull and return its wording for a
   new operator decision.
 
-## Decision 4 packet — Celebrity Xcel cabin risks
+## Decision 4 — Celebrity Xcel cabin risks — signed 2026-08-24
 
 The typed research is in
-`src/content/research/celebrity-xcel-cabin-risks.ts`. It remains outside the
-live ship record until Jimmy signs the wording below. The checked current plan
-window is **November 1, 2025–April 9, 2027**.
+`src/content/research/celebrity-xcel-cabin-risks.ts`. Jimmy signed all three
+findings on 2026-08-24, and they now feed the Xcel record only. The checked
+current plan window is **November 1, 2025–April 9, 2027**.
 
 ### Evidence that is established
 
@@ -169,7 +169,7 @@ window is **November 1, 2025–April 9, 2027**.
   and deck 12 images each show two passenger elevator banks: one forward of
   center and one aft of center. There is no central midship bank.
 
-### Proposed operator wording
+### Signed operator wording
 
 **Obstruction:** “Celebrity marks view limitations by cabin and sells Partial
 View categories on Xcel. Cruise Critic specifically identifies lifeboats just
@@ -187,12 +187,12 @@ and one aft of center, with no central midship bank. For a mobility booking,
 balance the midship motion advantage against the walk to a lift and check the
 specific cabin's route.”
 
-### Sign-off choices
+### Sign-off record
 
-1. Approve the obstruction wording and `lifeboat-davit` mechanism for deck 6.
-2. Approve the three noise adjacencies: The Club below 6155, plus the pool
-   area and Oceanview Cafe above deck 12.
-3. Approve the two-bank elevator wording for mobility bookings.
+1. **SIGNED:** obstruction wording and `lifeboat-davit` mechanism for deck 6.
+2. **SIGNED:** The Club below 6155, plus the pool area and Oceanview Cafe
+   above deck 12.
+3. **SIGNED:** two-bank elevator wording for mobility bookings.
 
 Operating status and refit history remain unknown. No source in this pass
 established a currently out-of-service experience, and absence of a report is

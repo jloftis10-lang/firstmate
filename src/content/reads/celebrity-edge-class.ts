@@ -1,5 +1,6 @@
 import type { ShipContent, Source } from "@/lib/types";
 import { CELEBRITY_EDGE_PLACEMENT_RESEARCH } from "@/content/research/celebrity-edge-placement";
+import { CELEBRITY_XCEL_CABIN_RISK_RESEARCH } from "@/content/research/celebrity-xcel-cabin-risks";
 import { MOTION_RULE, VIBRATION_RULE } from "./operator-rules";
 import {
   CELEBRITY_TRAPS,
@@ -27,6 +28,27 @@ const XCEL_BAZAAR_DECK_SOURCE: Source = {
   url: "https://www.cruisecritic.com/articles/celebrity-xcel-photos-whats-new-sneak-peek-shipyard",
   checked: "2026-08-24",
 };
+
+const XCEL_CABIN_RISK_SOURCES: Source[] = [
+  {
+    label:
+      "Cruise Critic Celebrity Xcel cabin review — deck 6 obstruction and venue-noise reports",
+    url: "https://www.cruisecritic.com/cruise/celebrity/celebrity-xcel/cabins",
+    checked: "2026-08-24",
+  },
+  {
+    label:
+      "Celebrity Xcel official deck 8 image — forward and aft elevator banks",
+    url: "https://tst1.celebritycruises.com/content/dam/celebrity/miscellaneous/deckplans/xcel/XC_2331_Deck_08.png",
+    checked: "2026-08-24",
+  },
+  {
+    label:
+      "Celebrity Xcel official deck 14 image — pool and Oceanview Cafe overhead footprint",
+    url: "https://tst1.celebritycruises.com/content/dam/celebrity/miscellaneous/deckplans/xcel/XC_2331_Deck_14.png",
+    checked: "2026-08-24",
+  },
+];
 
 const EDGE_CABIN: NonNullable<ShipContent["cabin"]> = {
   // Infinite Veranda tradeoff signed off by Jimmy, 2026-08-24. The imported
@@ -88,6 +110,26 @@ function edgeShip(ship: EdgeShip): ShipContent {
     };
     decks = placement.decks ?? undefined;
   }
+  if (isXcel) {
+    // Jimmy signed all three Xcel cabin-risk decisions on 2026-08-24.
+    // These facts stay hull-specific: no sister inherits Xcel's obstruction
+    // mechanism, noise adjacencies or elevator geometry.
+    cabin = {
+      ...cabin,
+      hazardsAboveBelow:
+        CELEBRITY_XCEL_CABIN_RISK_RESEARCH.noise.candidates.map(
+          ({ source, where }) => ({ source, where }),
+        ),
+      obstructedViewNotes:
+        CELEBRITY_XCEL_CABIN_RISK_RESEARCH.obstruction.candidateNote,
+      obstructionKinds: [
+        ...CELEBRITY_XCEL_CABIN_RISK_RESEARCH.obstruction
+          .confirmedMechanisms,
+      ],
+      elevatorNote:
+        CELEBRITY_XCEL_CABIN_RISK_RESEARCH.elevators.candidateNote,
+    };
+  }
   const hasSignedPlacement = Boolean(placement && placementRange && placementNote);
 
   return {
@@ -103,7 +145,13 @@ function edgeShip(ship: EdgeShip): ShipContent {
             },
           ]
         : []),
-      ...(isXcel ? [XCEL_SOURCE, XCEL_BAZAAR_DECK_SOURCE] : []),
+      ...(isXcel
+        ? [
+            XCEL_SOURCE,
+            XCEL_BAZAAR_DECK_SOURCE,
+            ...XCEL_CABIN_RISK_SOURCES,
+          ]
+        : []),
     ],
     fareInclusions: { state: "not-researched" },
     decks,

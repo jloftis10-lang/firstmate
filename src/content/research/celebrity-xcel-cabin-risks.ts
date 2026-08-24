@@ -1,14 +1,15 @@
 import type { ObstructionKind } from "@/lib/obstruction";
 
 /**
- * CELEBRITY XCEL CABIN-RISK RESEARCH — AWAITING OPERATOR SIGN-OFF.
+ * CELEBRITY XCEL CABIN-RISK RESEARCH AND OPERATOR DECISION.
  *
  * This is deliberately separate from `ShipContent`. The sources establish
  * where the plan marks view limitations, one confirmed obstruction mechanism,
  * three noise adjacencies and the lift-bank geometry. They do not establish
  * every marked cabin's obstruction cause, current activity availability or a
- * refit history. Nothing in this file reaches the engine until Jimmy signs the
- * candidate wording in `docs/celebrity-operator-review.md`.
+ * refit history. Jimmy signed the obstruction, noise and elevator wording on
+ * 2026-08-24. Those three findings now reach the Xcel record only; availability
+ * and refit history remain unknown.
  */
 
 type ResearchSource = {
@@ -69,7 +70,7 @@ const CRUISE_CRITIC_CABINS: ResearchSource = {
 export const CELEBRITY_XCEL_CABIN_RISK_RESEARCH = {
   ship: "Celebrity Xcel",
   checked: "2026-08-24",
-  operatorStatus: "awaiting-operator-sign-off",
+  operatorStatus: "signed-2026-08-24",
   currentPlanWindow: "November 1, 2025–April 9, 2027",
   sources: [
     CURRENT_PLAN,

@@ -1064,3 +1064,17 @@ midship bank. The operator packet turns that geometry into proposed mobility
 wording but leaves it unsigned. Current out-of-service experiences and refit
 history remain explicitly unknown. No engine field or snapshot output changes
 until the three Xcel decisions are approved.
+
+## Phase 21 — 2026-08-24 — Celebrity Xcel cabin-risk sign-off
+
+Jimmy signed all three Xcel cabin-risk findings. The live Xcel record now
+describes the deck 6 lifeboat mechanism without projecting it onto obstructed
+markers elsewhere; warns about The Club directly below cabin 6155 and the
+pool/Oceanview Cafe overhead footprints above deck 12; and records the two
+forward/aft elevator banks with no central midship bank for mobility bookings.
+
+Every finding remains hull-specific. Edge, Apex, Beyond and Ascent inherit
+none of Xcel's obstruction, noise or elevator fields. Xcel's availability and
+refit history also remain unknown because the research did not establish
+either. This is an intentional one-ship engine-output change and requires a
+regenerated snapshot.
