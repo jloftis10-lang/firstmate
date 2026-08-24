@@ -841,3 +841,31 @@ changed. Lint and TypeScript pass, the engine snapshot still replays all
 2,528 reads unchanged, the production build generated all routes, and the
 local smoke suite finished **35 passed, 0 failed** with the two CDN-only
 checks skipped as designed.
+
+## Phase 13 — 2026-08-24 — advisor demand capture
+
+CruiseRead is now the business identity as well as the visible product
+name: the npm package is `cruiseread`, and the remaining `FirstMate`
+identifier is only the internal name of the established check component.
+No public copy or metadata uses the old brand.
+
+`/request-a-ship` gives an uncharted result somewhere useful to go. The
+ship and line are prefilled from the no-read screen; an advisor may leave
+their name, reply address and why the hull matters. The server sends only
+to the configured CruiseRead inbox — `jloftis10@gmail.com` by default,
+overridable with `REQUESTS_TO_EMAIL` — so it cannot be used as a public
+mail relay. Inputs are length-bounded and escaped, a honeypot drops basic
+bots, and the same best-effort per-IP throttle as summary email limits the
+route to five requests per warm instance per hour.
+
+When Resend is not configured, the form opens a prefilled message to the
+same inbox rather than walking an advisor into a broken submit button.
+The request is deliberately described as demand input, not a promise of
+coverage or timing.
+
+The sitemap and smoke suite now carry **124** public URLs. Lint,
+TypeScript, the unchanged 2,528-read engine snapshot and the production
+build pass. The local smoke suite finishes **36 passed, 0 failed**, and a
+separate runtime check confirms the request page prefills correctly and
+the unconfigured API fails closed with a 503 so the mail fallback can
+take over.

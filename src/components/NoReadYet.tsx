@@ -133,6 +133,12 @@ export function NoReadYet({
               </Link>{" "}
               is listed, charted or not.
             </p>
+            <Link
+              href={`/request-a-ship?ship=${encodeURIComponent(ship.name)}&line=${encodeURIComponent(ship.line)}`}
+              className="mt-4 inline-block rounded-[9px] bg-go px-4 py-2.5 text-[0.86rem] font-semibold text-white no-underline transition-colors hover:bg-[#175A50]"
+            >
+              Request the {ship.name}
+            </Link>
           </div>
         )}
       </div>

@@ -46,6 +46,7 @@ export const PRIMARY_CTA = { label: "Run a Booking Check", href: "/check" };
 
 export const FOOTER_NAV: NavItem[] = [
   ...NAV,
+  { label: "Request a ship", href: "/request-a-ship", available: true, footerOnly: true },
   { label: "About CruiseRead", href: "/about", available: true, footerOnly: true },
 ];
 

@@ -43,7 +43,7 @@ echo "Smoke check: $BASE"
 echo
 
 echo "Routes"
-for p in / /check /ships /classes /cruise-lines /compare /methodology /about /guides \
+for p in / /check /ships /classes /cruise-lines /compare /methodology /about /guides /request-a-ship \
          /guides/quiet-cabins /guides/obstructed-balconies /guides/cruise-guarantee-cabins \
          /ships/radiance-of-the-seas /classes/royal-caribbean-radiance \
          /cruise-lines/royal-caribbean /sitemap.xml /robots.txt /opengraph-image; do
@@ -63,7 +63,7 @@ echo
 echo "Crawlability"
 SITEMAP="$(body /sitemap.xml)"
 URLS="$(printf '%s' "$SITEMAP" | grep -c '<loc>' || true)"
-check "sitemap lists 123 urls" "$URLS" "123"
+check "sitemap lists 124 urls" "$URLS" "124"
 if printf '%s' "$SITEMAP" | grep -q '/share'; then bad "sitemap must not list /share"; else ok "sitemap omits /share"; fi
 ROBOTS="$(body /robots.txt)"
 if printf '%s' "$ROBOTS" | grep -qi 'Disallow: /share'; then ok "robots disallows /share"; else bad "robots must disallow /share"; fi

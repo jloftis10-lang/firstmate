@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { LINES, SHIPS } from "@/content/ships";
 import { LINE_RECORDS } from "@/content/lines/records";
 import { buildDirectory, directoryTotals } from "@/lib/directory";
@@ -50,6 +51,16 @@ export default function ShipsPage() {
           </p>
           <p className="mt-3 font-readout text-[0.66rem] leading-[1.7] tracking-[0.07em] uppercase text-ink-3">
             {totals.coveredLines} of {totals.lines} lines charted
+          </p>
+          <p className="mt-4 text-[0.9rem] leading-[1.55] text-ink-2">
+            Missing the hull you need?{" "}
+            <Link
+              href="/request-a-ship"
+              className="font-semibold text-deep underline decoration-line underline-offset-2"
+            >
+              Request a ship
+            </Link>{" "}
+            and help set the research order.
           </p>
         </header>
 
