@@ -2,7 +2,7 @@
 
 **Research date:** 2026-08-24  
 **Status:** decisions 1–2 and the two researched hull exceptions signed by
-Jimmy on 2026-08-24
+Jimmy on 2026-08-24; decision 3 researched and awaiting current-plan review
 **Scope:** 14 mainstream ocean ships; Galapagos excluded
 
 This phase deliberately adds only claims the current Celebrity pages support.
@@ -53,8 +53,8 @@ parity. Those facts therefore remain unknown rather than being inherited.
 2. **SIGNED 2026-08-24:** the Infinite Veranda tradeoff wording.
    **Also signed:** Xcel's Bazaar distinction and Celebrity Solstice's
    teen-programming-without-a-dedicated-facility exception.
-3. Supply a ship-specific quiet default only after checking cabins above and
-   below; no deck range is encoded in this phase.
+3. **RESEARCHED, NOT SIGNED:** ship-specific deck-stack arithmetic is below.
+   No range has been added to a live ship record.
 4. Identify any obstruction mechanism by hull. An “obstructed view” symbol
    alone is not enough to label the cause.
 5. Confirm elevator-bank positions, current out-of-service experiences,
@@ -66,3 +66,45 @@ Infinite Veranda tradeoff; their ship-specific quiet defaults remain absent.
 Solstice- and Millennium-class cabin sections and every Celebrity money
 section remain explicitly uncharted. No record claims that drinks or Wi-Fi
 are included without first knowing the fare selected.
+
+## Decision 3 packet — Edge-series cabin placement
+
+This is a proposal for operator review, not live CruiseRead advice. The typed
+research lives in `src/content/research/celebrity-edge-placement.ts` and is
+deliberately not imported by any ship record. Every plan was checked by hull;
+none of the later ships inherits the reference ship's result.
+
+The detailed official pages and the current production pages expose different
+sailing windows. That matters: the detailed pages allow the deck stack to be
+read, but for Edge, Apex, Beyond and Ascent they describe an earlier plan than
+the current 2026–27 production window. A current image-level comparison is
+therefore the last evidence check before any wording can be signed.
+
+| Ship | Detailed plan used | Current production window checked | Arithmetic result | Status |
+|---|---|---|---|---|
+| Celebrity Edge | [beginning Apr 16, 2023](https://tst1.celebritycruises.com/cruise-ships/celebrity-edge/deck-plan) | [May 14, 2026–Apr 18, 2027](https://www.celebritycruises.com/cruise-ships/celebrity-edge/deck-plans) | decks **8–10** | unsigned; current images must match |
+| Celebrity Apex | [beginning Mar 7, 2025](https://www.test1.celebritycruises.com/gb/cruise-ships/celebrity-apex/deck-plan) | [Apr 24, 2026–Apr 22, 2027](https://www.celebritycruises.com/cruise-ships/celebrity-apex/deck-plans) | decks **8–10** | unsigned; current images must match |
+| Celebrity Beyond | [beginning Apr 27, 2025](https://tst1.celebritycruises.com/int/cruise-ships/celebrity-beyond/deck-plan) | [Apr 25, 2026–Apr 23, 2027](https://www.celebritycruises.com/cruise-ships/celebrity-beyond/deck-plans) | decks **8–11** | unsigned; current images must match |
+| Celebrity Ascent | [beginning Apr 19, 2025](https://tst1.celebritycruises.com/int/cruise-ships/celebrity-ascent/deck-plan) | [Apr 16, 2026–Apr 17, 2027](https://www.celebritycruises.com/cruise-ships/celebrity-ascent/deck-plans) | decks **8–11** | unsigned; current images must match |
+| Celebrity Xcel | [beginning Nov 2025](https://tst1.celebritycruises.com/cruise-ships/celebrity-xcel/deck-plan) | [Nov 1, 2025–Apr 9, 2027](https://www.celebritycruises.com/cruise-ships/celebrity-xcel/deck-plans) | **not computed** | public-space overlay not exposed in accessible plan text |
+
+### Why the pairs differ
+
+- Deck 6 is mixed-use on the four readable detailed plans because cabins
+  share it with Eden. Deck 7 therefore fails the quiet sandwich below.
+- Decks 8, 9 and 10 have cabin decks directly above and below on all four.
+- On Edge and Apex, cabin deck 12 also carries Luminae, so deck 11 fails
+  above. On Beyond and Ascent, Luminae is listed on deck 16; deck 12 is shown
+  as cabins only, so deck 11 also passes the arithmetic.
+- Celebrity skips deck 13. Deck 14 is the physical deck above 12. The deck
+  evaluator now follows published deck order rather than adding one to the
+  deck number, so the skipped label no longer creates a false unknown gap.
+- A mixed cabin/public deck is now treated as a public neighbor for the
+  vertical test. Previously it could warn about the deck itself while still
+  allowing the cabin deck beside it to pass.
+
+An arithmetic pass is only a candidate, not the recommendation. It does not
+resolve motion, elevator distance, connecting doors, cabin category, a
+specific overhead footprint or the operator's preferred narrowing within the
+band. Xcel remains unresolved until its public-area overlay is read from a
+current plan; its Bazaar distinction is not enough to infer a deck location.

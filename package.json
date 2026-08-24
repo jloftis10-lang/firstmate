@@ -7,9 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "coverage": "tsx scripts/coverage.ts",
-    "snapshot": "tsx scripts/snapshot.ts",
-    "verify": "tsc --noEmit && tsx scripts/snapshot.ts --check",
+    "coverage": "node --import tsx scripts/coverage.ts",
+    "decks:check": "node --import tsx scripts/decks-check.ts",
+    "snapshot": "node --import tsx scripts/snapshot.ts",
+    "verify": "tsc --noEmit && node --import tsx scripts/decks-check.ts && node --import tsx scripts/snapshot.ts --check",
     "serve": "bash scripts/serve.sh"
   },
   "dependencies": {

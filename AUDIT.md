@@ -997,3 +997,27 @@ upload truncated that large generated file in transit; the repaired file now
 parses and replays all **2,976 reads** successfully. TypeScript and ESLint pass,
 the production build prerenders all 246 routes, and the local smoke suite
 finishes **44 passed, 0 failed** with two CDN-only checks skipped.
+
+## Phase 18 — 2026-08-24 — Edge-series placement research
+
+Decision 3 now has a typed, unsigned research layer for all five Celebrity
+Edge-series hulls without changing any live ship advice. Edge is the reference
+hull; Apex, Beyond, Ascent and Xcel were each checked independently. The
+detailed official plans compute provisional candidate decks **8–10** on Edge
+and Apex and **8–11** on Beyond and Ascent. The difference is real rather than
+cosmetic: Luminae shares cabin deck 12 on the first pair and is listed on deck
+16 on the later pair. Xcel's current plan confirms its cabin decks but does not
+expose the public-space overlay in accessible text, so no Xcel candidate band
+is asserted or inherited.
+
+The research remains outside `ShipContent`. The readable detailed plans for
+Edge, Apex, Beyond and Ascent precede the current 2026–27 production plan
+windows, so the operator packet requires an image-level current-plan check
+before sign-off. Existing verified Infinite Veranda wording and every engine
+output therefore stay untouched.
+
+The deck evaluator now follows physical published order instead of assuming
+consecutive deck numbers; deck 14 is correctly treated as the deck above 12
+when a line skips 13. It also treats a mixed cabin/public deck as a public
+neighbor for the sandwich test. A focused regression command covers both
+failures and is part of `npm run verify`.

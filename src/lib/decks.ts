@@ -66,8 +66,23 @@ export type DeckRow = {
   reason: string;
 };
 
+/**
+ * A mixed-use deck is a public neighbour for the sandwich test.
+ *
+ * `carriesCabins` used to win here, which made a cabin deck beside Eden,
+ * a pool or a buffet look exactly like a pure cabin deck. That contradicted
+ * the same-deck warning the row itself produced. For the vertical test the
+ * conservative, useful label is public whenever the neighbour carries a
+ * named public venue.
+ */
 const label = (d: Deck | undefined): "cabins" | "public" | "unknown" =>
-  d === undefined ? "unknown" : d.carriesCabins ? "cabins" : "public";
+  d === undefined
+    ? "unknown"
+    : d.publicSpace.length > 0
+      ? "public"
+      : d.carriesCabins
+        ? "cabins"
+        : "public";
 
 /**
  * One row per deck, in order, with the working shown.
@@ -82,11 +97,14 @@ const label = (d: Deck | undefined): "cabins" | "public" | "unknown" =>
  */
 export function deckRows(decks: Deck[]): DeckRow[] {
   const ordered = [...decks].sort((a, b) => a.deck - b.deck);
-  const byNumber = new Map(ordered.map((d) => [d.deck, d]));
 
-  return ordered.map((d) => {
-    const below = label(byNumber.get(d.deck - 1));
-    const above = label(byNumber.get(d.deck + 1));
+  return ordered.map((d, index) => {
+    // Deck numbers are labels, not arithmetic. Celebrity and Royal omit
+    // deck 13, so the physical neighbour above 12 can be 14. Walking the
+    // published order keeps the stack physical instead of manufacturing an
+    // unknown gap whenever a line skips a number.
+    const below = label(ordered[index - 1]);
+    const above = label(ordered[index + 1]);
     const mixed = d.carriesCabins && d.publicSpace.length > 0;
 
     if (!d.carriesCabins) {
