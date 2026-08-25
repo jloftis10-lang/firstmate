@@ -47,6 +47,12 @@ export function SiteFooter({ coveredCount, shipCount }: { coveredCount: number; 
           ONE SIGNED OFF BY AN OPERATOR
         </p>
       </div>
-    </footer>
+          <div style={{ marginTop: "1.5rem", borderTop: "1px solid rgba(212,175,55,.25)", paddingTop: "1rem", textAlign: "center" }}>
+        <a href="https://www.jimloftis.com/" rel="author" aria-label="A Jim Loftis Project" style={{ display: "inline-flex", alignItems: "center", gap: ".55rem", color: "inherit", textDecoration: "none", opacity: .78 }}>
+          <span aria-hidden="true" style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "1rem", fontWeight: 700, letterSpacing: "-.08em", color: "#D4AF37" }}>JL</span>
+          <span style={{ fontFamily: "Montserrat, Inter, sans-serif", fontSize: ".65rem", fontWeight: 600, letterSpacing: ".14em", textTransform: "uppercase" }}>A Jim Loftis Project</span>
+        </a>
+      </div>
+</footer>
   );
 }
